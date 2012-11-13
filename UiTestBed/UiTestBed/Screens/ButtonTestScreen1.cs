@@ -89,37 +89,33 @@ namespace UiTestBed.Screens
 
         private UiButton CreateButton()
         {
-            var onSelected = new ButtonEventHandler(delegate(object sender)
+            var onSelected = new ButtonEventHandler(delegate(UiButton sender)
             {
-                var btn = sender as UiButton;
-                if (btn != null)
+                if (sender != null)
                 {
-                    _currentButton = btn;
-                    btn.Text = "Selected";
-                    InstructionManager.MoveToAccurate(SpriteManager.Camera, btn.X, btn.Y, SpriteManager.Camera.Z, 0.25);
-                    FadeButtons(btn);
+                    _currentButton = sender;
+                    sender.Text = "Selected";
+                    InstructionManager.MoveToAccurate(SpriteManager.Camera, sender.X, sender.Y, SpriteManager.Camera.Z, 0.25);
+                    FadeButtons(sender);
                 }
             });
 
-            var onUnSelected = new ButtonEventHandler(delegate(object sender)
+            var onUnSelected = new ButtonEventHandler(delegate(UiButton sender)
             {
-                var btn = sender as UiButton;
-                if (btn != null)
-                    btn.Text = "Not Selected";
+                if (sender != null)
+                    sender.Text = "Not Selected";
             });
 
-            var onPressed = new ButtonEventHandler(delegate(object sender)
+            var onPressed = new ButtonEventHandler(delegate(UiButton sender)
             {
-                var btn = sender as UiButton;
-                if (btn != null)
-                    btn.Text = "Pressed";
+                if (sender != null)
+                    sender.Text = "Pressed";
             });
 
-            var onRelease = new ButtonEventHandler(delegate(object sender)
+            var onRelease = new ButtonEventHandler(delegate(UiButton sender)
             {
-                var btn = sender as UiButton;
-                if (btn != null)
-                    btn.Text = "Released";
+                if (sender != null)
+                    sender.Text = "Released";
             });
 
             var newBtn = new UiButton(ContentManagerName);

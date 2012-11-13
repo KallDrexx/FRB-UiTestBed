@@ -21,7 +21,7 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 
 namespace UiTestBed.Entities
 {
-    public delegate void ButtonEventHandler(object sender);
+    public delegate void ButtonEventHandler(UiButton sender);
 
     public enum ButtonDirection { Up, Down, Left, Right };
 
