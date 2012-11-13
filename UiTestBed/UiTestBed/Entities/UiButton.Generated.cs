@@ -20,6 +20,7 @@ using FlatRedBall.Gui;
 using UiTestBed.Entities;
 using FlatRedBall;
 using FlatRedBall.Screens;
+using FlatRedBall.ManagedSpriteGroups;
 using FlatRedBall.Graphics.Animation;
 
 #if XNA4 || WINDOWS_8
@@ -107,28 +108,17 @@ namespace UiTestBed.Entities
 		static List<string> LoadedContentManagers = new List<string>();
 		private static FlatRedBall.Graphics.Animation.AnimationChainList DefaultAnimations;
 		
-		private FlatRedBall.Sprite Sprite;
 		private FlatRedBall.Graphics.Text TextInstance;
+		private FlatRedBall.ManagedSpriteGroups.SpriteFrame SpriteFrameInstance;
 		public string SpriteCurrentChainName
 		{
 			get
 			{
-				return Sprite.CurrentChainName;
+				return SpriteFrameInstance.CurrentChainName;
 			}
 			set
 			{
-				Sprite.CurrentChainName = value;
-			}
-		}
-		public float SpriteAlpha
-		{
-			get
-			{
-				return Sprite.Alpha;
-			}
-			set
-			{
-				Sprite.Alpha = value;
+				SpriteFrameInstance.CurrentChainName = value;
 			}
 		}
 		public float TextInstanceAlpha
@@ -140,6 +130,17 @@ namespace UiTestBed.Entities
 			set
 			{
 				TextInstance.Alpha = value;
+			}
+		}
+		public float SpriteFrameInstanceAlpha
+		{
+			get
+			{
+				return SpriteFrameInstance.Alpha;
+			}
+			set
+			{
+				SpriteFrameInstance.Alpha = value;
 			}
 		}
 		public event Action StartPushed;
@@ -210,8 +211,8 @@ namespace UiTestBed.Entities
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			Sprite = new FlatRedBall.Sprite();
 			TextInstance = new FlatRedBall.Graphics.Text();
+			SpriteFrameInstance = new FlatRedBall.ManagedSpriteGroups.SpriteFrame();
 			this.RollOn += OnRollOn;
 			this.RollOff += OnRollOff;
 			this.StartPushed += OnStartPushed;
@@ -258,13 +259,13 @@ namespace UiTestBed.Entities
 			SpriteManager.RemovePositionedObject(this);
 			GuiManager.RemoveWindow(this);
 			
-			if (Sprite != null)
-			{
-				Sprite.Detach(); SpriteManager.RemoveSprite(Sprite);
-			}
 			if (TextInstance != null)
 			{
 				TextInstance.Detach(); TextManager.RemoveText(TextInstance);
+			}
+			if (SpriteFrameInstance != null)
+			{
+				SpriteFrameInstance.Detach(); SpriteManager.RemoveSpriteFrame(SpriteFrameInstance);
 			}
 
 
@@ -276,21 +277,21 @@ namespace UiTestBed.Entities
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			if (Sprite!= null && Sprite.Parent == null)
-			{
-				Sprite.CopyAbsoluteToRelative();
-				Sprite.AttachTo(this, false);
-			}
-			Sprite.AnimationChains = DefaultAnimations;
 			if (TextInstance!= null && TextInstance.Parent == null)
 			{
 				TextInstance.CopyAbsoluteToRelative();
 				TextInstance.AttachTo(this, false);
 			}
+			if (SpriteFrameInstance!= null && SpriteFrameInstance.Parent == null)
+			{
+				SpriteFrameInstance.CopyAbsoluteToRelative();
+				SpriteFrameInstance.AttachTo(this, false);
+			}
+			SpriteFrameInstance.AnimationChains = DefaultAnimations;
+			SpriteFrameInstance.PixelSize = 0.5f;
 			SpriteCurrentChainName = "Idle";
 			CurrentState = UiButton.VariableState.Idle;
-			Visible = true;
-			SpriteAlpha = 1f;
+			SpriteFrameInstanceAlpha = 1f;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -310,10 +311,11 @@ namespace UiTestBed.Entities
 			RotationX = 0;
 			RotationY = 0;
 			RotationZ = 0;
-			SpriteManager.AddToLayer(Sprite, layerToAddTo);
-			Sprite.AnimationChains = DefaultAnimations;
 			TextManager.AddToLayer(TextInstance, layerToAddTo);
 			TextInstance.SetPixelPerfectScale(layerToAddTo);
+			SpriteManager.AddToLayer(SpriteFrameInstance, layerToAddTo);
+			SpriteFrameInstance.AnimationChains = DefaultAnimations;
+			SpriteFrameInstance.PixelSize = 0.5f;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
@@ -325,7 +327,6 @@ namespace UiTestBed.Entities
 		{
 			this.ForceUpdateDependenciesDeep();
 			SpriteManager.ConvertToManuallyUpdated(this);
-			SpriteManager.ConvertToManuallyUpdated(Sprite);
 			TextManager.ConvertToManuallyUpdated(TextInstance);
 		}
 		public static void LoadStaticContent (string contentManagerName)
@@ -886,11 +887,11 @@ namespace UiTestBed.Entities
 			{
 				return false;
 			}
-			if (Sprite.AbsoluteVisible && cursor.IsOn3D(Sprite, LayerProvidedByContainer))
+			if (TextInstance.AbsoluteVisible && cursor.IsOn3D(TextInstance, LayerProvidedByContainer))
 			{
 				return true;
 			}
-			if (TextInstance.AbsoluteVisible && cursor.IsOn3D(TextInstance, LayerProvidedByContainer))
+			if (SpriteFrameInstance.AbsoluteVisible && cursor.IsOn3D(SpriteFrameInstance, LayerProvidedByContainer))
 			{
 				return true;
 			}
@@ -909,8 +910,8 @@ namespace UiTestBed.Entities
 		public virtual void SetToIgnorePausing ()
 		{
 			InstructionManager.IgnorePausingFor(this);
-			InstructionManager.IgnorePausingFor(Sprite);
 			InstructionManager.IgnorePausingFor(TextInstance);
+			InstructionManager.IgnorePausingFor(SpriteFrameInstance);
 		}
 
     }

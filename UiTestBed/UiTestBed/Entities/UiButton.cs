@@ -42,7 +42,7 @@ namespace UiTestBed.Entities
             get { return _overallAlpha; }
             set
             {
-                SpriteAlpha = value;
+                SpriteFrameInstanceAlpha = value;
                 TextInstanceAlpha = value;
                 _overallAlpha = value;
             }
