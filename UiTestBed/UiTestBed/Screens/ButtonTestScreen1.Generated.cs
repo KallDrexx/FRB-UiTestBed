@@ -33,6 +33,7 @@ using UiTestBed.Entities;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using FlatRedBall.Math;
+using FlatRedBall.Graphics;
 
 namespace UiTestBed.Screens
 {
@@ -44,6 +45,7 @@ namespace UiTestBed.Screens
 		#endif
 		
 		private PositionedObjectList<UiButton> UiButtonList;
+		private FlatRedBall.Graphics.Layer UiLayer;
 
 		public ButtonTestScreen1()
 			: base("ButtonTestScreen1")
@@ -55,6 +57,8 @@ namespace UiTestBed.Screens
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
 			UiButtonList = new PositionedObjectList<UiButton>();
+			UiLayer = new FlatRedBall.Graphics.Layer();
+			UiLayer.Name = "UiLayer";
 			
 			
 			PostInitialize();
@@ -69,6 +73,13 @@ namespace UiTestBed.Screens
 // Generated AddToManagers
 		public override void AddToManagers ()
 		{
+			SpriteManager.AddLayer(UiLayer);
+			UiLayer.UsePixelCoordinates();
+			if (SpriteManager.Camera.Orthogonal)
+			{
+				UiLayer.LayerCameraSettings.OrthogonalWidth = FlatRedBall.SpriteManager.Camera.OrthogonalWidth;
+				UiLayer.LayerCameraSettings.OrthogonalHeight = FlatRedBall.SpriteManager.Camera.OrthogonalHeight;
+			}
 			base.AddToManagers();
 			AddToManagersBottomUp();
 			CustomInitialize();
@@ -112,6 +123,10 @@ namespace UiTestBed.Screens
 			for (int i = UiButtonList.Count - 1; i > -1; i--)
 			{
 				UiButtonList[i].Destroy();
+			}
+			if (UiLayer != null)
+			{
+				SpriteManager.RemoveLayer(UiLayer);
 			}
 
 			base.Destroy();

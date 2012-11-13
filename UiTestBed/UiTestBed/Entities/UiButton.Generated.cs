@@ -143,6 +143,50 @@ namespace UiTestBed.Entities
 				SpriteFrameInstance.Alpha = value;
 			}
 		}
+		public float SpriteScaleX
+		{
+			get
+			{
+				return SpriteFrameInstance.ScaleX;
+			}
+			set
+			{
+				SpriteFrameInstance.ScaleX = value;
+			}
+		}
+		public float SpriteScaleY
+		{
+			get
+			{
+				return SpriteFrameInstance.ScaleY;
+			}
+			set
+			{
+				SpriteFrameInstance.ScaleY = value;
+			}
+		}
+		public float SpritePixelSize
+		{
+			get
+			{
+				return SpriteFrameInstance.PixelSize;
+			}
+			set
+			{
+				SpriteFrameInstance.PixelSize = value;
+			}
+		}
+		public Microsoft.Xna.Framework.Graphics.Texture2D SpriteTexture
+		{
+			get
+			{
+				return SpriteFrameInstance.Texture;
+			}
+			set
+			{
+				SpriteFrameInstance.Texture = value;
+			}
+		}
 		public event Action StartPushed;
 		public int Index { get; set; }
 		public bool Used { get; set; }
@@ -292,6 +336,9 @@ namespace UiTestBed.Entities
 			SpriteCurrentChainName = "Idle";
 			CurrentState = UiButton.VariableState.Idle;
 			SpriteFrameInstanceAlpha = 1f;
+			SpriteScaleX = 1f;
+			SpriteScaleY = 1f;
+			SpritePixelSize = 0.5f;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)

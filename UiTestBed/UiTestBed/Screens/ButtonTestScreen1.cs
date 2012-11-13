@@ -44,10 +44,11 @@ namespace UiTestBed.Screens
                 {
                     var newBtn = CreateButton();
                     _buttons[x, y] = newBtn;
-                    newBtn.X = (x * 5);
-                    newBtn.Y = (y * 5);
+                    newBtn.X = (x * 60);
+                    newBtn.Y = (y * 60);
                     newBtn.Text = string.Concat("(", x, ", ", y, ")");
                     newBtn.Alpha = 0;
+                    
 
                     // Add adjacent buttons
                     if (x > 0)
@@ -118,8 +119,11 @@ namespace UiTestBed.Screens
                     sender.Text = "Released";
             });
 
-            var newBtn = new UiButton(ContentManagerName);
+            var newBtn = new UiButton(ContentManagerName, false);
+            newBtn.AddToManagers(UiLayer);
             newBtn.Text = "Test 1234";
+            newBtn.SpriteScaleX = newBtn.SpriteTexture.Width * newBtn.SpritePixelSize;
+            newBtn.SpriteScaleY = newBtn.SpriteTexture.Height * newBtn.SpritePixelSize;
 
             newBtn.OnSelectedHandler += onSelected;
             newBtn.OnUnSelectedHandler += onUnSelected;

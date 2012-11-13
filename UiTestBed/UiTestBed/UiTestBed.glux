@@ -12,6 +12,36 @@
           <AttachToContainer>true</AttachToContainer>
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
+          <LayerOn>UiLayer</LayerOn>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <CustomProperty>
+            <Type>LayerCameraSettings</Type>
+            <Member>LayerCameraSettings</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>string</Type>
+            <Member>Name</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>bool</Type>
+            <Member>RelativeToCamera</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>SortType</Type>
+            <Member>SortType</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>bool</Type>
+            <Member>Visible</Member>
+          </CustomProperty>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceClassType>Layer</SourceClassType>
+          <InstanceName>UiLayer</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+          <Is2D>true</Is2D>
         </NamedObjectSave>
       </NamedObjects>
     </ScreenSave>
@@ -117,6 +147,57 @@
           <DefaultValue xsi:type="xsd:float">1</DefaultValue>
           <SourceObject>SpriteFrameInstance</SourceObject>
           <SourceObjectProperty>Alpha</SourceObjectProperty>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>SpriteScaleX</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">1</DefaultValue>
+          <SourceObject>SpriteFrameInstance</SourceObject>
+          <SourceObjectProperty>ScaleX</SourceObjectProperty>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>SpriteScaleY</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">1</DefaultValue>
+          <SourceObject>SpriteFrameInstance</SourceObject>
+          <SourceObjectProperty>ScaleY</SourceObjectProperty>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>SpritePixelSize</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">0.5</DefaultValue>
+          <SourceObject>SpriteFrameInstance</SourceObject>
+          <SourceObjectProperty>PixelSize</SourceObjectProperty>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>Texture2D</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>SpriteTexture</Name>
+          <Type>Texture2D</Type>
+          <SourceObject>SpriteFrameInstance</SourceObject>
+          <SourceObjectProperty>Texture</SourceObjectProperty>
         </CustomVariable>
       </CustomVariables>
       <ImplementsIVisible>true</ImplementsIVisible>
