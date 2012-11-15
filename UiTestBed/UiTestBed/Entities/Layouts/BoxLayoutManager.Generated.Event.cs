@@ -8,9 +8,9 @@ using FlatRedBall.Screens;
 using UiTestBed.Entities.Layouts;
 using UiTestBed.Entities;
 using UiTestBed.Screens;
-namespace UiTestBed.Entities
+namespace UiTestBed.Entities.Layouts
 {
-	public partial class UiButton
+	public partial class BoxLayoutManager
 	{
 	}
 }

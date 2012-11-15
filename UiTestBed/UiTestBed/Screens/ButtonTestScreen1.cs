@@ -23,38 +23,21 @@ using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 
 using UiTestBed.Entities;
 using FlatRedBall.Instructions;
+using UiTestBed.Entities.Layouts;
 
 namespace UiTestBed.Screens
 {
 	public partial class ButtonTestScreen1
 	{
-        private const int WIDTH = 5;
-        private const int HEIGHT = 5;
-
-        private UiButton _currentButton;
-        private UiButton[,] _buttons;
-
 		void CustomInitialize()
 		{
-            var rand = new Random();
-
-            // Create a 5 by 5 grid of buttons
-            _buttons = new UiButton[WIDTH, HEIGHT];
-            for (int x = 0; x < WIDTH; x++)
+            BoxLayoutManagerInstance.CurrentDirectionState = BoxLayoutManager.Direction.Right;
+            for (int x = 0; x < 5; x++)
             {
-                for (int y = 0; y < HEIGHT; y++)
-                {
-                    var newBtn = CreateButton();
-                    _buttons[x, y] = newBtn;
-                    newBtn.X = (x * 100);
-                    newBtn.Y = (y * 100);
-                    newBtn.Text = string.Concat("(", x, ", ", y, ")");
-                    newBtn.ResizeAroundText(5, 5);
-                }
+                var btn = CreateButton();
+                btn.ResizeAroundText(5, 5);
+                BoxLayoutManagerInstance.AddItem(btn);
             }
-
-            _currentButton = UiButtonList[0];
-            _currentButton.Select();
 		}
 
         void CustomActivity(bool firstTimeCalled)
@@ -80,7 +63,6 @@ namespace UiTestBed.Screens
                 var btn = sender as UiButton;
                 if (btn != null)
                 {
-                    _currentButton = btn;
                     btn.Text = "Selected";
                     //InstructionManager.MoveToAccurate(SpriteManager.Camera, sender.X, sender.Y, SpriteManager.Camera.Z, 0.25);
                 }

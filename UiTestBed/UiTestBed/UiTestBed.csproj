@@ -114,6 +114,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Interfaces\ILayoutable.cs" />
+    <Compile Include="Entities\Layouts\BoxLayoutManager.cs" />
+    <Compile Include="Entities\Layouts\BoxLayoutManager.Event.cs">
+      <DependentUpon>BoxLayoutManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Layouts\BoxLayoutManager.Generated.cs">
+      <DependentUpon>BoxLayoutManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Layouts\BoxLayoutManager.Generated.Event.cs">
+      <DependentUpon>BoxLayoutManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\UiButton.cs" />
     <Compile Include="Entities\UiButton.Event.cs">
       <DependentUpon>UiButton.cs</DependentUpon>

@@ -29,6 +29,7 @@ using Microsoft.Xna.Framework.Media;
 #endif
 
 // Generated Usings
+using UiTestBed.Entities.Layouts;
 using UiTestBed.Entities;
 using FlatRedBall;
 using FlatRedBall.Screens;
@@ -46,6 +47,7 @@ namespace UiTestBed.Screens
 		
 		private PositionedObjectList<UiButton> UiButtonList;
 		private FlatRedBall.Graphics.Layer UiLayer;
+		private UiTestBed.Entities.Layouts.BoxLayoutManager BoxLayoutManagerInstance;
 
 		public ButtonTestScreen1()
 			: base("ButtonTestScreen1")
@@ -59,6 +61,8 @@ namespace UiTestBed.Screens
 			UiButtonList = new PositionedObjectList<UiButton>();
 			UiLayer = new FlatRedBall.Graphics.Layer();
 			UiLayer.Name = "UiLayer";
+			BoxLayoutManagerInstance = new UiTestBed.Entities.Layouts.BoxLayoutManager(ContentManagerName, false);
+			BoxLayoutManagerInstance.Name = "BoxLayoutManagerInstance";
 			
 			
 			PostInitialize();
@@ -100,6 +104,7 @@ namespace UiTestBed.Screens
 						UiButtonList[i].Activity();
 					}
 				}
+				BoxLayoutManagerInstance.Activity();
 			}
 			else
 			{
@@ -128,6 +133,11 @@ namespace UiTestBed.Screens
 			{
 				SpriteManager.RemoveLayer(UiLayer);
 			}
+			if (BoxLayoutManagerInstance != null)
+			{
+				BoxLayoutManagerInstance.Destroy();
+				BoxLayoutManagerInstance.Detach();
+			}
 
 			base.Destroy();
 
@@ -144,6 +154,7 @@ namespace UiTestBed.Screens
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
+			BoxLayoutManagerInstance.AddToManagers(UiLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
@@ -151,6 +162,7 @@ namespace UiTestBed.Screens
 			{
 				UiButtonList[i].ConvertToManuallyUpdated();
 			}
+			BoxLayoutManagerInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -168,6 +180,7 @@ namespace UiTestBed.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
+			UiTestBed.Entities.Layouts.BoxLayoutManager.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]
