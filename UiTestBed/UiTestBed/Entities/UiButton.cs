@@ -22,14 +22,12 @@ using UiTestBed.Entities.Interfaces;
 
 namespace UiTestBed.Entities
 {
-    public delegate void ButtonEventHandler(UiButton sender);
-
 	public partial class UiButton : ILayoutable
 	{
-        public event ButtonEventHandler OnSelectedHandler;
-        public event ButtonEventHandler OnUnSelectedHandler;
-        public event ButtonEventHandler OnPressedHandler;
-        public event ButtonEventHandler OnReleasedHandler;
+        public event EventHandler OnSelectedHandler;
+        public event EventHandler OnUnSelectedHandler;
+        public event EventHandler OnPressedHandler;
+        public event EventHandler OnReleasedHandler;
 
         public string Text
         {
@@ -78,7 +76,7 @@ namespace UiTestBed.Entities
             {
                 CurrentState = VariableState.Selected;
                 if (OnSelectedHandler != null)
-                    OnSelectedHandler(this);
+                    OnSelectedHandler(this, new EventArgs());
             }
         }
 
@@ -88,7 +86,7 @@ namespace UiTestBed.Entities
             {
                 CurrentState = VariableState.Idle;
                 if (OnUnSelectedHandler != null)
-                    OnUnSelectedHandler(this);
+                    OnUnSelectedHandler(this, new EventArgs());
             }
         }
 
@@ -98,7 +96,7 @@ namespace UiTestBed.Entities
             {
                 CurrentState = VariableState.Pressed;
                 if (OnPressedHandler != null)
-                    OnPressedHandler(this);
+                    OnPressedHandler(this, new EventArgs());
             }
         }
 
@@ -108,7 +106,7 @@ namespace UiTestBed.Entities
             {
                 CurrentState = VariableState.Selected;
                 if (OnReleasedHandler != null)
-                    OnReleasedHandler(this);
+                    OnReleasedHandler(this, new EventArgs());
             }
         }
 
