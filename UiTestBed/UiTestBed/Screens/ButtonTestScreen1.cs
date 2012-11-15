@@ -36,6 +36,8 @@ namespace UiTestBed.Screens
 
 		void CustomInitialize()
 		{
+            var rand = new Random();
+
             // Create a 5 by 5 grid of buttons
             _buttons = new UiButton[WIDTH, HEIGHT];
             for (int x = 0; x < WIDTH; x++)
@@ -44,36 +46,19 @@ namespace UiTestBed.Screens
                 {
                     var newBtn = CreateButton();
                     _buttons[x, y] = newBtn;
-                    newBtn.X = (x * 60);
-                    newBtn.Y = (y * 60);
+                    newBtn.X = (x * 100);
+                    newBtn.Y = (y * 100);
                     newBtn.Text = string.Concat("(", x, ", ", y, ")");
-                    newBtn.Alpha = 0;
-                    
-
-                    // Add adjacent buttons
-                    if (x > 0)
-                        newBtn.SetAdjacentButton(_buttons[x - 1, y], ButtonDirection.Left);
-
-                    if (y > 0)
-                        newBtn.SetAdjacentButton(_buttons[x, y - 1], ButtonDirection.Down);
+                    newBtn.ResizeAroundText(5, 5);
                 }
             }
 
             _currentButton = UiButtonList[0];
             _currentButton.Select();
-            _currentButton.Alpha = 1;
 		}
 
         void CustomActivity(bool firstTimeCalled)
 		{
-            if (InputManager.Keyboard.KeyPushed(Keys.Right))
-                _currentButton.SelectAdjacentButton(ButtonDirection.Right);
-            else if (InputManager.Keyboard.KeyPushed(Keys.Left))
-                _currentButton.SelectAdjacentButton(ButtonDirection.Left);
-            else if (InputManager.Keyboard.KeyPushed(Keys.Up))
-                _currentButton.SelectAdjacentButton(ButtonDirection.Up);
-            else if (InputManager.Keyboard.KeyPushed(Keys.Down))
-                _currentButton.SelectAdjacentButton(ButtonDirection.Down);
 		}
 
 		void CustomDestroy()
@@ -96,15 +81,17 @@ namespace UiTestBed.Screens
                 {
                     _currentButton = sender;
                     sender.Text = "Selected";
-                    InstructionManager.MoveToAccurate(SpriteManager.Camera, sender.X, sender.Y, SpriteManager.Camera.Z, 0.25);
-                    FadeButtons(sender);
+                    //InstructionManager.MoveToAccurate(SpriteManager.Camera, sender.X, sender.Y, SpriteManager.Camera.Z, 0.25);
                 }
             });
 
             var onUnSelected = new ButtonEventHandler(delegate(UiButton sender)
             {
                 if (sender != null)
+                {
                     sender.Text = "Not Selected";
+                    sender.ResizeAroundText(5, 5);
+                }
             });
 
             var onPressed = new ButtonEventHandler(delegate(UiButton sender)
@@ -132,61 +119,6 @@ namespace UiTestBed.Screens
 
             UiButtonList.Add(newBtn);
             return newBtn;
-        }
-
-        private void FadeButtons(UiButton selectedButton)
-        {
-            if (selectedButton == null)
-                return;
-
-            // Get directional buttons
-            var up = selectedButton.GetAdjacentButton(ButtonDirection.Up);
-            var down = selectedButton.GetAdjacentButton(ButtonDirection.Down);
-            var left = selectedButton.GetAdjacentButton(ButtonDirection.Left);
-            var right = selectedButton.GetAdjacentButton(ButtonDirection.Right);
-
-            // Set all buttons adjacent to the selected button to fade in
-            FadeButtonIn(up);
-            FadeButtonIn(down);
-            FadeButtonIn(left);
-            FadeButtonIn(right);
-
-            // Make sure all other buttons are faded out
-            for (int x = 0; x < WIDTH; x++)
-            {
-                for (int y = 0; y < HEIGHT; y++)
-                {
-                    var curBtn = _buttons[x, y];
-                    if (curBtn != up && curBtn != down && curBtn != left && curBtn != right && curBtn != selectedButton)
-                        FadeButtonOut(curBtn);
-                }
-            }
-        }
-
-        private void FadeButtonIn(UiButton btn)
-        {
-            if (btn == null)
-                return;
-
-            // Check if this button is already visible
-            if (btn.Alpha == 1)
-                return;
-
-            btn.Alpha = 0;
-            new Instruction<UiButton, float>(btn, "Alpha", 1, TimeManager.CurrentTime + 1).Execute();
-        }
-
-        private void FadeButtonOut(UiButton btn)
-        {
-            if (btn == null)
-                return;
-
-            // Check if this button is already invisible
-            if (btn.Alpha == 0)
-                return;
-
-            btn.Alpha = 1;
-            new Instruction<UiButton, float>(btn, "Alpha", 0, TimeManager.CurrentTime + 1).Execute();
         }
 	}
 }

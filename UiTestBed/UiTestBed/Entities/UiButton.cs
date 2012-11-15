@@ -18,18 +18,18 @@ using FlatRedBall.Math.Splines;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
+using UiTestBed.Entities.Interfaces;
 
 namespace UiTestBed.Entities
 {
     public delegate void ButtonEventHandler(UiButton sender);
 
-    public enum ButtonDirection { Up, Down, Left, Right };
-
-	public partial class UiButton
+	public partial class UiButton : ILayoutable
 	{
-        private Dictionary<ButtonDirection, UiButton> _adjacentButtons;
-        private Dictionary<ButtonDirection, ButtonDirection> _oppositeDirections;
-        private float _overallAlpha; 
+        public event ButtonEventHandler OnSelectedHandler;
+        public event ButtonEventHandler OnUnSelectedHandler;
+        public event ButtonEventHandler OnPressedHandler;
+        public event ButtonEventHandler OnReleasedHandler;
 
         public string Text
         {
@@ -37,21 +37,40 @@ namespace UiTestBed.Entities
             set { TextInstance.DisplayText = value; }
         }
 
-        public float Alpha
+        public float ScaleX
         {
-            get { return _overallAlpha; }
+            get
+            {
+                return SpriteFrameInstance.ScaleX;
+            }
             set
             {
-                SpriteFrameInstanceAlpha = value;
-                TextInstanceAlpha = value;
-                _overallAlpha = value;
+                // Scale the spriteframe, since that's the core of the button
+                SpriteFrameInstance.ScaleX = value;
             }
         }
 
-        public event ButtonEventHandler OnSelectedHandler;
-        public event ButtonEventHandler OnUnSelectedHandler;
-        public event ButtonEventHandler OnPressedHandler;
-        public event ButtonEventHandler OnReleasedHandler;
+        public float ScaleXVelocity
+        {
+            get { return SpriteFrameInstance.ScaleXVelocity; } 
+            set { SpriteFrameInstance.ScaleXVelocity = value; }
+        }
+
+        public float ScaleY
+        {
+            get { return SpriteFrameInstance.ScaleY; }
+            set
+            {
+                // Scale the spriteframe, since that's the core of the button
+                SpriteFrameInstance.ScaleY = value;
+            }
+        }
+
+        public float ScaleYVelocity
+        {
+            get { return SpriteFrameInstance.ScaleYVelocity; }
+            set { SpriteFrameInstance.ScaleYVelocity = value; }
+        }
 
         public void Select()
         {
@@ -99,53 +118,18 @@ namespace UiTestBed.Entities
             ReleaseButton();
         }
 
-        public void SetAdjacentButton(UiButton button, ButtonDirection direction, bool setReverseDirection = true)
+        public void ResizeAroundText(float horizontalMargin, float verticalMargin)
         {
-            if (_adjacentButtons.ContainsKey(direction))
-                _adjacentButtons[direction] = button;
-            else
-                _adjacentButtons.Add(direction, button);
-
-            if (button != null && setReverseDirection)
-                button.SetAdjacentButton(this, _oppositeDirections[direction], false);
-                
-        }
-
-        public UiButton SelectAdjacentButton(ButtonDirection direction)
-        {
-            // Make sure a button is set as adjacent.  
-            //   If none is adjacent in the specified direction, keep this button selected
-            var btn = GetAdjacentButton(direction);
-            if (btn == null)
-                return this;
-
-            this.UnSelect();
-            btn.Select();
-            return btn;
-        }
-
-        public UiButton GetAdjacentButton(ButtonDirection direction)
-        {
-            if (!_adjacentButtons.ContainsKey(direction) || _adjacentButtons[direction] == null)
-                return null;
-
-            return _adjacentButtons[direction];
+            ScaleX = TextInstance.ScaleX + horizontalMargin;
+            ScaleY = TextInstance.ScaleY + verticalMargin;
         }
 
 		private void CustomInitialize()
 		{
-            _adjacentButtons = new Dictionary<ButtonDirection, UiButton>();
-            _oppositeDirections = new Dictionary<ButtonDirection, ButtonDirection>();
-            _oppositeDirections.Add(ButtonDirection.Right, ButtonDirection.Left);
-            _oppositeDirections.Add(ButtonDirection.Left, ButtonDirection.Right);
-            _oppositeDirections.Add(ButtonDirection.Up, ButtonDirection.Down);
-            _oppositeDirections.Add(ButtonDirection.Down, ButtonDirection.Up);
 		}
 
 		private void CustomActivity()
 		{
-
-
 		}
 
 		private void CustomDestroy()
@@ -159,5 +143,5 @@ namespace UiTestBed.Entities
 
 
         }
-	}
+    }
 }

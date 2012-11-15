@@ -326,6 +326,7 @@ namespace UiTestBed.Entities
 				TextInstance.CopyAbsoluteToRelative();
 				TextInstance.AttachTo(this, false);
 			}
+			TextInstance.HorizontalAlignment = FlatRedBall.Graphics.HorizontalAlignment.Center;
 			if (SpriteFrameInstance!= null && SpriteFrameInstance.Parent == null)
 			{
 				SpriteFrameInstance.CopyAbsoluteToRelative();
@@ -360,6 +361,7 @@ namespace UiTestBed.Entities
 			RotationZ = 0;
 			TextManager.AddToLayer(TextInstance, layerToAddTo);
 			TextInstance.SetPixelPerfectScale(layerToAddTo);
+			TextInstance.HorizontalAlignment = FlatRedBall.Graphics.HorizontalAlignment.Center;
 			SpriteManager.AddToLayer(SpriteFrameInstance, layerToAddTo);
 			SpriteFrameInstance.AnimationChains = DefaultAnimations;
 			SpriteFrameInstance.PixelSize = 0.5f;

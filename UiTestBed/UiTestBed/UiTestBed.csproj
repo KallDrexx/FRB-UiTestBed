@@ -113,6 +113,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Interfaces\ILayoutable.cs" />
     <Compile Include="Entities\UiButton.cs" />
     <Compile Include="Entities\UiButton.Event.cs">
       <DependentUpon>UiButton.cs</DependentUpon>
