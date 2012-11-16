@@ -20,7 +20,6 @@ using UiTestBed.Entities.Layouts;
 using UiTestBed.Entities;
 using FlatRedBall;
 using FlatRedBall.Screens;
-using FlatRedBall.ManagedSpriteGroups;
 
 #if XNA4 || WINDOWS_8
 using Color = Microsoft.Xna.Framework.Color;
@@ -102,10 +101,10 @@ namespace UiTestBed.Entities.Layouts
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
 		
-		private FlatRedBall.ManagedSpriteGroups.SpriteFrame SpriteFrameInstance;
+		private FlatRedBall.Sprite SpriteFrameInstance;
 		public event EventHandler BeforeSpacingSet;
 		public event EventHandler AfterSpacingSet;
-		float mSpacing = 4f;
+		float mSpacing = 2f;
 		public virtual float Spacing
 		{
 			set
@@ -236,7 +235,7 @@ namespace UiTestBed.Entities.Layouts
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			SpriteFrameInstance = new FlatRedBall.ManagedSpriteGroups.SpriteFrame();
+			SpriteFrameInstance = new FlatRedBall.Sprite();
 			this.AfterVisibleSet += OnAfterVisibleSet;
 			this.AfterSpacingSet += OnAfterSpacingSet;
 			this.AfterMarginSet += OnAfterMarginSet;
@@ -275,7 +274,7 @@ namespace UiTestBed.Entities.Layouts
 			
 			if (SpriteFrameInstance != null)
 			{
-				SpriteFrameInstance.Detach(); SpriteManager.RemoveSpriteFrame(SpriteFrameInstance);
+				SpriteFrameInstance.Detach(); SpriteManager.RemoveSprite(SpriteFrameInstance);
 			}
 
 
@@ -292,7 +291,22 @@ namespace UiTestBed.Entities.Layouts
 				SpriteFrameInstance.CopyAbsoluteToRelative();
 				SpriteFrameInstance.AttachTo(this, false);
 			}
+			SpriteFrameInstance.ColorOperation = FlatRedBall.Graphics.ColorOperation.Color;
 			SpriteFrameInstance.PixelSize = 0.5f;
+			SpriteFrameInstance.Red = 0f;
+			SpriteFrameInstance.ScaleX = 32f;
+			SpriteFrameInstance.ScaleY = 32f;
+			SpriteFrameInstance.Visible = false;
+			if (SpriteFrameInstance.Parent == null)
+			{
+				SpriteFrameInstance.X = 5f;
+			}
+			else
+			{
+				SpriteFrameInstance.RelativeX = 5f;
+			}
+			X = 0f;
+			Y = 0f;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -313,7 +327,20 @@ namespace UiTestBed.Entities.Layouts
 			RotationY = 0;
 			RotationZ = 0;
 			SpriteManager.AddToLayer(SpriteFrameInstance, layerToAddTo);
+			SpriteFrameInstance.ColorOperation = FlatRedBall.Graphics.ColorOperation.Color;
 			SpriteFrameInstance.PixelSize = 0.5f;
+			SpriteFrameInstance.Red = 0f;
+			SpriteFrameInstance.ScaleX = 32f;
+			SpriteFrameInstance.ScaleY = 32f;
+			SpriteFrameInstance.Visible = false;
+			if (SpriteFrameInstance.Parent == null)
+			{
+				SpriteFrameInstance.X = 5f;
+			}
+			else
+			{
+				SpriteFrameInstance.RelativeX = 5f;
+			}
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
@@ -325,6 +352,7 @@ namespace UiTestBed.Entities.Layouts
 		{
 			this.ForceUpdateDependenciesDeep();
 			SpriteManager.ConvertToManuallyUpdated(this);
+			SpriteManager.ConvertToManuallyUpdated(SpriteFrameInstance);
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{

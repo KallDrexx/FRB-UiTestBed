@@ -47,10 +47,12 @@
           <CustomProperty>
             <Type>float</Type>
             <Member>Spacing</Member>
+            <ValueAsFloat>5</ValueAsFloat>
           </CustomProperty>
           <CustomProperty>
             <Type>float</Type>
             <Member>Margin</Member>
+            <ValueAsFloat>10</ValueAsFloat>
           </CustomProperty>
           <CustomProperty>
             <Type>AnimationChainList</Type>
@@ -63,11 +65,152 @@
           <CustomProperty>
             <Type>Object</Type>
             <Member>CurrentDirectionState</Member>
+            <ValueAsString>Right</ValueAsString>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>X</Member>
+            <ValueAsFloat>-350</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Y</Member>
+            <ValueAsFloat>250</ValueAsFloat>
           </CustomProperty>
           <SourceType>Entity</SourceType>
           <SourceClassType>Entities\Layouts\BoxLayoutManager</SourceClassType>
-          <InstanceName>BoxLayoutManagerInstance</InstanceName>
+          <InstanceName>BoxLayoutRight</InstanceName>
           <AttachToContainer>true</AttachToContainer>
+          <AttachToCamera>true</AttachToCamera>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+          <LayerOn>UiLayer</LayerOn>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Spacing</Member>
+            <ValueAsFloat>5</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Margin</Member>
+            <ValueAsFloat>10</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>AnimationChainList</Type>
+            <Member>AnimationChains</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>string</Type>
+            <Member>CurrentChainName</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>Object</Type>
+            <Member>CurrentDirectionState</Member>
+            <ValueAsString>Left</ValueAsString>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>X</Member>
+            <ValueAsFloat>350</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Y</Member>
+            <ValueAsFloat>-250</ValueAsFloat>
+          </CustomProperty>
+          <SourceType>Entity</SourceType>
+          <SourceClassType>Entities\Layouts\BoxLayoutManager</SourceClassType>
+          <InstanceName>BoxLayoutLeft</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AttachToCamera>true</AttachToCamera>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+          <LayerOn>UiLayer</LayerOn>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Spacing</Member>
+            <ValueAsFloat>5</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Margin</Member>
+            <ValueAsFloat>0</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>AnimationChainList</Type>
+            <Member>AnimationChains</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>string</Type>
+            <Member>CurrentChainName</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>Object</Type>
+            <Member>CurrentDirectionState</Member>
+            <ValueAsString>Down</ValueAsString>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>X</Member>
+            <ValueAsFloat>350</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Y</Member>
+            <ValueAsFloat>250</ValueAsFloat>
+          </CustomProperty>
+          <SourceType>Entity</SourceType>
+          <SourceClassType>Entities\Layouts\BoxLayoutManager</SourceClassType>
+          <InstanceName>BoxLayoutDown</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AttachToCamera>true</AttachToCamera>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+          <LayerOn>UiLayer</LayerOn>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Spacing</Member>
+            <ValueAsFloat>5</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Margin</Member>
+            <ValueAsFloat>0</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>AnimationChainList</Type>
+            <Member>AnimationChains</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>string</Type>
+            <Member>CurrentChainName</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>Object</Type>
+            <Member>CurrentDirectionState</Member>
+            <ValueAsString>Up</ValueAsString>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>X</Member>
+            <ValueAsFloat>-350</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Y</Member>
+            <ValueAsFloat>-250</ValueAsFloat>
+          </CustomProperty>
+          <SourceType>Entity</SourceType>
+          <SourceClassType>Entities\Layouts\BoxLayoutManager</SourceClassType>
+          <InstanceName>BoxLayoutUp</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AttachToCamera>true</AttachToCamera>
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
           <LayerOn>UiLayer</LayerOn>
@@ -111,7 +254,7 @@
           </Properties>
           <Name>Spacing</Name>
           <Type>float</Type>
-          <DefaultValue xsi:type="xsd:float">4</DefaultValue>
+          <DefaultValue xsi:type="xsd:float">2</DefaultValue>
           <SetByDerived>true</SetByDerived>
           <CreatesEvent>true</CreatesEvent>
         </CustomVariable>
@@ -164,6 +307,28 @@
           <DefaultValue xsi:type="xsd:string">Right</DefaultValue>
           <SetByDerived>true</SetByDerived>
         </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>X</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">0</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>Y</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">0</DefaultValue>
+        </CustomVariable>
       </CustomVariables>
       <BaseEntity />
       <ImplementsIVisible>true</ImplementsIVisible>
@@ -203,12 +368,13 @@
             <Member>BlueRate</Member>
           </CustomProperty>
           <CustomProperty>
-            <Type>BorderSides</Type>
-            <Member>Borders</Member>
+            <Type>float</Type>
+            <Member>BottomTextureCoordinate</Member>
           </CustomProperty>
           <CustomProperty>
             <Type>ColorOperation</Type>
             <Member>ColorOperation</Member>
+            <ValueAsObject xsi:type="xsd:int">6</ValueAsObject>
           </CustomProperty>
           <CustomProperty>
             <Type>int</Type>
@@ -231,12 +397,24 @@
             <Member>Drag</Member>
           </CustomProperty>
           <CustomProperty>
+            <Type>bool</Type>
+            <Member>FlipHorizontal</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>bool</Type>
+            <Member>FlipVertical</Member>
+          </CustomProperty>
+          <CustomProperty>
             <Type>float</Type>
             <Member>Green</Member>
           </CustomProperty>
           <CustomProperty>
             <Type>float</Type>
             <Member>GreenRate</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>bool</Type>
+            <Member>IgnoreAnimationChainTextureFlip</Member>
           </CustomProperty>
           <CustomProperty>
             <Type>bool</Type>
@@ -249,6 +427,14 @@
           <CustomProperty>
             <Type>bool</Type>
             <Member>KeepTrackOfReal</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>LeftTextureCoordinate</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>double</Type>
+            <Member>mLastDependencyUpdate</Member>
           </CustomProperty>
           <CustomProperty>
             <Type>string</Type>
@@ -274,6 +460,7 @@
           <CustomProperty>
             <Type>float</Type>
             <Member>Red</Member>
+            <ValueAsFloat>0</ValueAsFloat>
           </CustomProperty>
           <CustomProperty>
             <Type>float</Type>
@@ -341,6 +528,10 @@
           </CustomProperty>
           <CustomProperty>
             <Type>float</Type>
+            <Member>RightTextureCoordinate</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
             <Member>RotationX</Member>
           </CustomProperty>
           <CustomProperty>
@@ -366,6 +557,7 @@
           <CustomProperty>
             <Type>float</Type>
             <Member>ScaleX</Member>
+            <ValueAsFloat>32</ValueAsFloat>
           </CustomProperty>
           <CustomProperty>
             <Type>float</Type>
@@ -374,22 +566,35 @@
           <CustomProperty>
             <Type>float</Type>
             <Member>ScaleY</Member>
+            <ValueAsFloat>32</ValueAsFloat>
           </CustomProperty>
           <CustomProperty>
             <Type>float</Type>
             <Member>ScaleYVelocity</Member>
           </CustomProperty>
           <CustomProperty>
-            <Type>float</Type>
-            <Member>SpriteBorderWidth</Member>
-          </CustomProperty>
-          <CustomProperty>
             <Type>Texture2D</Type>
             <Member>Texture</Member>
           </CustomProperty>
           <CustomProperty>
+            <Type>TextureAddressMode</Type>
+            <Member>TextureAddressMode</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>Object</Type>
+            <Member>TextureFilter</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>double</Type>
+            <Member>TimeCreated</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>double</Type>
+            <Member>TimeIntoAnimation</Member>
+          </CustomProperty>
+          <CustomProperty>
             <Type>float</Type>
-            <Member>TextureBorderWidth</Member>
+            <Member>TopTextureCoordinate</Member>
           </CustomProperty>
           <CustomProperty>
             <Type>bool</Type>
@@ -398,10 +603,12 @@
           <CustomProperty>
             <Type>bool</Type>
             <Member>Visible</Member>
+            <ValueAsBool>false</ValueAsBool>
           </CustomProperty>
           <CustomProperty>
             <Type>float</Type>
             <Member>X</Member>
+            <ValueAsFloat>5</ValueAsFloat>
           </CustomProperty>
           <CustomProperty>
             <Type>float</Type>
@@ -436,11 +643,19 @@
             <Member>ZVelocity</Member>
           </CustomProperty>
           <CustomProperty>
-            <Type>double</Type>
-            <Member>mLastDependencyUpdate</Member>
+            <Type>BorderSides</Type>
+            <Member>Borders</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>SpriteBorderWidth</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>TextureBorderWidth</Member>
           </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
-          <SourceClassType>SpriteFrame</SourceClassType>
+          <SourceClassType>Sprite</SourceClassType>
           <InstanceName>SpriteFrameInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <AddToManagers>true</AddToManagers>
@@ -714,6 +929,10 @@
             <Member>MaxWidthBehavior</Member>
           </CustomProperty>
           <CustomProperty>
+            <Type>double</Type>
+            <Member>mLastDependencyUpdate</Member>
+          </CustomProperty>
+          <CustomProperty>
             <Type>string</Type>
             <Member>Name</Member>
           </CustomProperty>
@@ -897,10 +1116,6 @@
             <Type>float</Type>
             <Member>ZVelocity</Member>
           </CustomProperty>
-          <CustomProperty>
-            <Type>double</Type>
-            <Member>mLastDependencyUpdate</Member>
-          </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>Text</SourceClassType>
           <InstanceName>TextInstance</InstanceName>
@@ -989,6 +1204,10 @@
           <CustomProperty>
             <Type>bool</Type>
             <Member>KeepTrackOfReal</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>double</Type>
+            <Member>mLastDependencyUpdate</Member>
           </CustomProperty>
           <CustomProperty>
             <Type>string</Type>
@@ -1175,10 +1394,6 @@
             <Type>float</Type>
             <Member>ZVelocity</Member>
           </CustomProperty>
-          <CustomProperty>
-            <Type>double</Type>
-            <Member>mLastDependencyUpdate</Member>
-          </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>SpriteFrame</SourceClassType>
           <InstanceName>SpriteFrameInstance</InstanceName>
@@ -1226,11 +1441,11 @@
   </GlobalContentSettingsSave>
   <SyncedProjects />
   <StartUpScreen>Screens\ButtonTestScreen1</StartUpScreen>
-  <In2D>false</In2D>
-  <SetResolution>false</SetResolution>
+  <In2D>true</In2D>
+  <SetResolution>true</SetResolution>
   <ResolutionWidth>800</ResolutionWidth>
   <ResolutionHeight>600</ResolutionHeight>
-  <SetOrthogonalResolution>false</SetOrthogonalResolution>
+  <SetOrthogonalResolution>true</SetOrthogonalResolution>
   <OrthogonalWidth>800</OrthogonalWidth>
   <OrthogonalHeight>600</OrthogonalHeight>
   <ResolutionPresets />

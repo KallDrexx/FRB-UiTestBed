@@ -85,6 +85,91 @@ namespace UiTestBed.Entities.Layouts
             _redoLayout = true;
         }
 
+        protected virtual void PerformLayout()
+        {
+            switch (CurrentDirectionState)
+            {
+                case Direction.Up:
+                    PerformVerticalLayout(true);
+                    break;
+
+                case Direction.Down:
+                    PerformVerticalLayout(false);
+                    break;
+
+                case Direction.Left:
+                    PerformHorizontalLayout(false);
+                    break;
+
+                case Direction.Right:
+                default:
+                    PerformHorizontalLayout(true);
+                    break;
+            }
+        }
+
+        protected virtual void PerformVerticalLayout(bool increasing)
+        {
+            float currentX = Margin;
+            float currentY = Margin;
+
+            if (!increasing)
+            {
+                currentX *= -1;
+                currentY *= -1;
+            }
+
+            foreach (var item in _layoutedItems)
+            {
+                // Since the x/y position will point to the center, we need to account for that
+                if (increasing)
+                {
+                    item.RelativeX = currentX + (item.ScaleX / 2);
+                    item.RelativeY = currentY + (item.ScaleY / 2) + Spacing;
+
+                    currentY = item.RelativeY + (item.ScaleY * 2) + Spacing;
+                }
+                else
+                {
+                    item.RelativeX = currentX - (item.ScaleX / 2);
+                    item.RelativeY = currentY - (item.ScaleY / 2) - Spacing;
+
+                    currentY = item.RelativeY - (item.ScaleY * 2) - Spacing;
+                }
+            }
+        }
+
+        protected virtual void PerformHorizontalLayout(bool increasing)
+        {
+            float currentX = Margin;
+            float currentY = Margin;
+
+            if (!increasing)
+            {
+                currentX *= -1;
+                currentY *= -1;
+            }
+
+            foreach (var item in _layoutedItems)
+            {
+                // Since the x/y position will point to the center, we need to account for that
+                if (increasing)
+                {
+                    item.RelativeX = currentX + (item.ScaleX / 2) + Spacing;
+                    item.RelativeY = currentY + (item.ScaleY / 2);
+
+                    currentX = item.RelativeX + (item.ScaleX * 2) + Spacing;
+                }
+                else
+                {
+                    item.RelativeX = currentX - (item.ScaleX / 2) - Spacing;
+                    item.RelativeY = currentY - (item.ScaleY / 2);
+
+                    currentX = item.RelativeX - (item.ScaleX * 2) - Spacing;
+                }
+            }
+        }
+
 		private void CustomInitialize()
 		{
             _layoutedItems = new List<ILayoutable>();
@@ -96,16 +181,7 @@ namespace UiTestBed.Entities.Layouts
             {
                 // Reset the flag
                 //_redoLayout = false;
-
-                float currentX = Margin;
-                float currentY = Margin;
-                foreach (var item in _layoutedItems)
-                {
-                    item.RelativeX = currentX + (item.ScaleX / 2);
-                    item.RelativeY = currentY;
-
-                    currentX = currentX + (item.ScaleX * 2) + Spacing;
-                }
+                PerformLayout();
             }
 		}
 
@@ -115,6 +191,6 @@ namespace UiTestBed.Entities.Layouts
 
         private static void CustomLoadStaticContent(string contentManagerName)
         {
-        }
+        } 
     }
 }

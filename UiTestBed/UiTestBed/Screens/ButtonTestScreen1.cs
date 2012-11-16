@@ -31,17 +31,26 @@ namespace UiTestBed.Screens
 	{
 		void CustomInitialize()
 		{
-            BoxLayoutManagerInstance.CurrentDirectionState = BoxLayoutManager.Direction.Right;
+            CreateButtonsForLayout(BoxLayoutRight);
+            CreateButtonsForLayout(BoxLayoutLeft);
+            CreateButtonsForLayout(BoxLayoutUp);
+            CreateButtonsForLayout(BoxLayoutDown);
+		}
+
+        private void CreateButtonsForLayout(BoxLayoutManager layout)
+        {
             for (int x = 0; x < 5; x++)
             {
                 var btn = CreateButton();
+                btn.Text = "Button # " + x;
                 btn.ResizeAroundText(5, 5);
-                BoxLayoutManagerInstance.AddItem(btn);
+                layout.AddItem(btn);
             }
-		}
+        }
 
         void CustomActivity(bool firstTimeCalled)
 		{
+            InputManager.Keyboard.ControlPositionedObject(SpriteManager.Camera);
 		}
 
 		void CustomDestroy()
@@ -63,7 +72,7 @@ namespace UiTestBed.Screens
                 var btn = sender as UiButton;
                 if (btn != null)
                 {
-                    btn.Text = "Selected";
+                    //btn.Text = "Selected";
                     //InstructionManager.MoveToAccurate(SpriteManager.Camera, sender.X, sender.Y, SpriteManager.Camera.Z, 0.25);
                 }
             });
@@ -73,7 +82,7 @@ namespace UiTestBed.Screens
                 var btn = sender as UiButton;
                 if (btn != null)
                 {
-                    btn.Text = "Not Selected";
+                    //btn.Text = "Not Selected";
                     btn.ResizeAroundText(5, 5);
                 }
             });
@@ -94,7 +103,6 @@ namespace UiTestBed.Screens
 
             var newBtn = new UiButton(ContentManagerName, false);
             newBtn.AddToManagers(UiLayer);
-            newBtn.Text = "Test 1234";
             newBtn.SpriteScaleX = newBtn.SpriteTexture.Width * newBtn.SpritePixelSize;
             newBtn.SpriteScaleY = newBtn.SpriteTexture.Height * newBtn.SpritePixelSize;
 
