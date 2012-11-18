@@ -24,6 +24,7 @@ using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 using UiTestBed.Entities;
 using FlatRedBall.Instructions;
 using UiTestBed.Entities.Layouts;
+using UiTestBed.Data;
 
 namespace UiTestBed.Screens
 {
@@ -31,10 +32,14 @@ namespace UiTestBed.Screens
 	{
 		void CustomInitialize()
 		{
-            CreateButtonsForLayout(BoxLayoutRight);
-            CreateButtonsForLayout(BoxLayoutLeft);
-            CreateButtonsForLayout(BoxLayoutUp);
-            CreateButtonsForLayout(BoxLayoutDown);
+            Layout.FullScreen = true;
+            Player1Score.Text = "Player 1: 5";
+            Player1Score.ResizeAroundText(2, 2);
+            Player2Score.Text = "Player 2: 7";
+            Player2Score.ResizeAroundText(2, 2);
+
+            Layout.AddItem(Player1Score, HorizontalPosition.PercentFromCenter(-25), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopRight);
+            Layout.AddItem(Player2Score, HorizontalPosition.PercentFromCenter(25), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopLeft);
 		}
 
         private void CreateButtonsForLayout(BoxLayoutManager layout)

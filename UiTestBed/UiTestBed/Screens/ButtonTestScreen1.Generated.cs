@@ -47,10 +47,9 @@ namespace UiTestBed.Screens
 		
 		private PositionedObjectList<UiButton> UiButtonList;
 		private FlatRedBall.Graphics.Layer UiLayer;
-		private UiTestBed.Entities.Layouts.BoxLayoutManager BoxLayoutRight;
-		private UiTestBed.Entities.Layouts.BoxLayoutManager BoxLayoutLeft;
-		private UiTestBed.Entities.Layouts.BoxLayoutManager BoxLayoutDown;
-		private UiTestBed.Entities.Layouts.BoxLayoutManager BoxLayoutUp;
+		private UiTestBed.Entities.Layouts.SimpleLayoutManager Layout;
+		private UiTestBed.Entities.UiButton Player1Score;
+		private UiTestBed.Entities.UiButton Player2Score;
 
 		public ButtonTestScreen1()
 			: base("ButtonTestScreen1")
@@ -64,14 +63,12 @@ namespace UiTestBed.Screens
 			UiButtonList = new PositionedObjectList<UiButton>();
 			UiLayer = new FlatRedBall.Graphics.Layer();
 			UiLayer.Name = "UiLayer";
-			BoxLayoutRight = new UiTestBed.Entities.Layouts.BoxLayoutManager(ContentManagerName, false);
-			BoxLayoutRight.Name = "BoxLayoutRight";
-			BoxLayoutLeft = new UiTestBed.Entities.Layouts.BoxLayoutManager(ContentManagerName, false);
-			BoxLayoutLeft.Name = "BoxLayoutLeft";
-			BoxLayoutDown = new UiTestBed.Entities.Layouts.BoxLayoutManager(ContentManagerName, false);
-			BoxLayoutDown.Name = "BoxLayoutDown";
-			BoxLayoutUp = new UiTestBed.Entities.Layouts.BoxLayoutManager(ContentManagerName, false);
-			BoxLayoutUp.Name = "BoxLayoutUp";
+			Layout = new UiTestBed.Entities.Layouts.SimpleLayoutManager(ContentManagerName, false);
+			Layout.Name = "Layout";
+			Player1Score = new UiTestBed.Entities.UiButton(ContentManagerName, false);
+			Player1Score.Name = "Player1Score";
+			Player2Score = new UiTestBed.Entities.UiButton(ContentManagerName, false);
+			Player2Score.Name = "Player2Score";
 			
 			
 			PostInitialize();
@@ -113,10 +110,9 @@ namespace UiTestBed.Screens
 						UiButtonList[i].Activity();
 					}
 				}
-				BoxLayoutRight.Activity();
-				BoxLayoutLeft.Activity();
-				BoxLayoutDown.Activity();
-				BoxLayoutUp.Activity();
+				Layout.Activity();
+				Player1Score.Activity();
+				Player2Score.Activity();
 			}
 			else
 			{
@@ -145,25 +141,20 @@ namespace UiTestBed.Screens
 			{
 				SpriteManager.RemoveLayer(UiLayer);
 			}
-			if (BoxLayoutRight != null)
+			if (Layout != null)
 			{
-				BoxLayoutRight.Destroy();
-				BoxLayoutRight.Detach();
+				Layout.Destroy();
+				Layout.Detach();
 			}
-			if (BoxLayoutLeft != null)
+			if (Player1Score != null)
 			{
-				BoxLayoutLeft.Destroy();
-				BoxLayoutLeft.Detach();
+				Player1Score.Destroy();
+				Player1Score.Detach();
 			}
-			if (BoxLayoutDown != null)
+			if (Player2Score != null)
 			{
-				BoxLayoutDown.Destroy();
-				BoxLayoutDown.Detach();
-			}
-			if (BoxLayoutUp != null)
-			{
-				BoxLayoutUp.Destroy();
-				BoxLayoutUp.Detach();
+				Player2Score.Destroy();
+				Player2Score.Detach();
 			}
 
 			base.Destroy();
@@ -177,211 +168,17 @@ namespace UiTestBed.Screens
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			if (BoxLayoutRight!= null && BoxLayoutRight.Parent == null)
-			{
-				BoxLayoutRight.CopyAbsoluteToRelative();
-				BoxLayoutRight.RelativeZ += -40;
-				BoxLayoutRight.AttachTo(SpriteManager.Camera, false);
-			}
-			BoxLayoutRight.Spacing = 5f;
-			BoxLayoutRight.Margin = 10f;
-			BoxLayoutRight.CurrentDirectionState = BoxLayoutManager.Direction.Right;
-			if (BoxLayoutRight.Parent == null)
-			{
-				BoxLayoutRight.X = -350f;
-			}
-			else
-			{
-				BoxLayoutRight.RelativeX = -350f;
-			}
-			if (BoxLayoutRight.Parent == null)
-			{
-				BoxLayoutRight.Y = 250f;
-			}
-			else
-			{
-				BoxLayoutRight.RelativeY = 250f;
-			}
-			if (BoxLayoutLeft!= null && BoxLayoutLeft.Parent == null)
-			{
-				BoxLayoutLeft.CopyAbsoluteToRelative();
-				BoxLayoutLeft.RelativeZ += -40;
-				BoxLayoutLeft.AttachTo(SpriteManager.Camera, false);
-			}
-			BoxLayoutLeft.Spacing = 5f;
-			BoxLayoutLeft.Margin = 10f;
-			BoxLayoutLeft.CurrentDirectionState = BoxLayoutManager.Direction.Left;
-			if (BoxLayoutLeft.Parent == null)
-			{
-				BoxLayoutLeft.X = 350f;
-			}
-			else
-			{
-				BoxLayoutLeft.RelativeX = 350f;
-			}
-			if (BoxLayoutLeft.Parent == null)
-			{
-				BoxLayoutLeft.Y = -250f;
-			}
-			else
-			{
-				BoxLayoutLeft.RelativeY = -250f;
-			}
-			if (BoxLayoutDown!= null && BoxLayoutDown.Parent == null)
-			{
-				BoxLayoutDown.CopyAbsoluteToRelative();
-				BoxLayoutDown.RelativeZ += -40;
-				BoxLayoutDown.AttachTo(SpriteManager.Camera, false);
-			}
-			BoxLayoutDown.Spacing = 5f;
-			BoxLayoutDown.Margin = 0f;
-			BoxLayoutDown.CurrentDirectionState = BoxLayoutManager.Direction.Down;
-			if (BoxLayoutDown.Parent == null)
-			{
-				BoxLayoutDown.X = 350f;
-			}
-			else
-			{
-				BoxLayoutDown.RelativeX = 350f;
-			}
-			if (BoxLayoutDown.Parent == null)
-			{
-				BoxLayoutDown.Y = 250f;
-			}
-			else
-			{
-				BoxLayoutDown.RelativeY = 250f;
-			}
-			if (BoxLayoutUp!= null && BoxLayoutUp.Parent == null)
-			{
-				BoxLayoutUp.CopyAbsoluteToRelative();
-				BoxLayoutUp.RelativeZ += -40;
-				BoxLayoutUp.AttachTo(SpriteManager.Camera, false);
-			}
-			BoxLayoutUp.Spacing = 5f;
-			BoxLayoutUp.Margin = 0f;
-			BoxLayoutUp.CurrentDirectionState = BoxLayoutManager.Direction.Up;
-			if (BoxLayoutUp.Parent == null)
-			{
-				BoxLayoutUp.X = -350f;
-			}
-			else
-			{
-				BoxLayoutUp.RelativeX = -350f;
-			}
-			if (BoxLayoutUp.Parent == null)
-			{
-				BoxLayoutUp.Y = -250f;
-			}
-			else
-			{
-				BoxLayoutUp.RelativeY = -250f;
-			}
+			Player1Score.SpriteCurrentChainName = "Idle";
+			Player1Score.TextInstanceAlpha = 1f;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
-			// We move the main Camera back to the origin and unrotate it so that anything attached to it can just use its absolute position
-			float oldCameraRotationX = SpriteManager.Camera.RotationX;
-			float oldCameraRotationY = SpriteManager.Camera.RotationY;
-			float oldCameraRotationZ = SpriteManager.Camera.RotationZ;
-			
-			float oldCameraX = SpriteManager.Camera.X;
-			float oldCameraY = SpriteManager.Camera.Y;
-			float oldCameraZ = SpriteManager.Camera.Z;
-			
-			SpriteManager.Camera.X = 0;
-			SpriteManager.Camera.Y = 0;
-			SpriteManager.Camera.Z = 40; // Move it to 40 so that things attach in front of the camera.
-			SpriteManager.Camera.RotationX = 0;
-			SpriteManager.Camera.RotationY = 0;
-			SpriteManager.Camera.RotationZ = 0;
-			BoxLayoutRight.AddToManagers(UiLayer);
-			BoxLayoutRight.Spacing = 5f;
-			BoxLayoutRight.Margin = 10f;
-			BoxLayoutRight.CurrentDirectionState = BoxLayoutManager.Direction.Right;
-			if (BoxLayoutRight.Parent == null)
-			{
-				BoxLayoutRight.X = -350f;
-			}
-			else
-			{
-				BoxLayoutRight.RelativeX = -350f;
-			}
-			if (BoxLayoutRight.Parent == null)
-			{
-				BoxLayoutRight.Y = 250f;
-			}
-			else
-			{
-				BoxLayoutRight.RelativeY = 250f;
-			}
-			BoxLayoutLeft.AddToManagers(UiLayer);
-			BoxLayoutLeft.Spacing = 5f;
-			BoxLayoutLeft.Margin = 10f;
-			BoxLayoutLeft.CurrentDirectionState = BoxLayoutManager.Direction.Left;
-			if (BoxLayoutLeft.Parent == null)
-			{
-				BoxLayoutLeft.X = 350f;
-			}
-			else
-			{
-				BoxLayoutLeft.RelativeX = 350f;
-			}
-			if (BoxLayoutLeft.Parent == null)
-			{
-				BoxLayoutLeft.Y = -250f;
-			}
-			else
-			{
-				BoxLayoutLeft.RelativeY = -250f;
-			}
-			BoxLayoutDown.AddToManagers(UiLayer);
-			BoxLayoutDown.Spacing = 5f;
-			BoxLayoutDown.Margin = 0f;
-			BoxLayoutDown.CurrentDirectionState = BoxLayoutManager.Direction.Down;
-			if (BoxLayoutDown.Parent == null)
-			{
-				BoxLayoutDown.X = 350f;
-			}
-			else
-			{
-				BoxLayoutDown.RelativeX = 350f;
-			}
-			if (BoxLayoutDown.Parent == null)
-			{
-				BoxLayoutDown.Y = 250f;
-			}
-			else
-			{
-				BoxLayoutDown.RelativeY = 250f;
-			}
-			BoxLayoutUp.AddToManagers(UiLayer);
-			BoxLayoutUp.Spacing = 5f;
-			BoxLayoutUp.Margin = 0f;
-			BoxLayoutUp.CurrentDirectionState = BoxLayoutManager.Direction.Up;
-			if (BoxLayoutUp.Parent == null)
-			{
-				BoxLayoutUp.X = -350f;
-			}
-			else
-			{
-				BoxLayoutUp.RelativeX = -350f;
-			}
-			if (BoxLayoutUp.Parent == null)
-			{
-				BoxLayoutUp.Y = -250f;
-			}
-			else
-			{
-				BoxLayoutUp.RelativeY = -250f;
-			}
-			SpriteManager.Camera.X = oldCameraX;
-			SpriteManager.Camera.Y = oldCameraY;
-			SpriteManager.Camera.Z = oldCameraZ;
-			SpriteManager.Camera.RotationX = oldCameraRotationX;
-			SpriteManager.Camera.RotationY = oldCameraRotationY;
-			SpriteManager.Camera.RotationZ = oldCameraRotationZ;
+			Layout.AddToManagers(UiLayer);
+			Player1Score.AddToManagers(UiLayer);
+			Player1Score.SpriteCurrentChainName = "Idle";
+			Player1Score.TextInstanceAlpha = 1f;
+			Player2Score.AddToManagers(UiLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
@@ -389,10 +186,9 @@ namespace UiTestBed.Screens
 			{
 				UiButtonList[i].ConvertToManuallyUpdated();
 			}
-			BoxLayoutRight.ConvertToManuallyUpdated();
-			BoxLayoutLeft.ConvertToManuallyUpdated();
-			BoxLayoutDown.ConvertToManuallyUpdated();
-			BoxLayoutUp.ConvertToManuallyUpdated();
+			Layout.ConvertToManuallyUpdated();
+			Player1Score.ConvertToManuallyUpdated();
+			Player2Score.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -410,7 +206,8 @@ namespace UiTestBed.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
-			UiTestBed.Entities.Layouts.BoxLayoutManager.LoadStaticContent(contentManagerName);
+			UiTestBed.Entities.Layouts.SimpleLayoutManager.LoadStaticContent(contentManagerName);
+			UiTestBed.Entities.UiButton.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]
