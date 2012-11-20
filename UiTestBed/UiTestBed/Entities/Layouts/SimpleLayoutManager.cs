@@ -129,23 +129,23 @@ namespace UiTestBed.Entities.Layouts
             switch (layoutFrom)
             {
                 case LayoutOrigin.TopLeft:
-                    posX -= item.ScaleX;
-                    posY += item.ScaleY;
+                    posX += item.ScaleX;
+                    posY -= item.ScaleY;
                     break;
 
                 case LayoutOrigin.TopRight:
-                    posX += item.ScaleX;
-                    posY += item.ScaleY;
-                    break;
-
-                case LayoutOrigin.BottomLeft:
                     posX -= item.ScaleX;
                     posY -= item.ScaleY;
                     break;
 
-                case LayoutOrigin.BottomRight:
+                case LayoutOrigin.BottomLeft:
                     posX += item.ScaleX;
-                    posY -= item.ScaleY;
+                    posY += item.ScaleY;
+                    break;
+
+                case LayoutOrigin.BottomRight:
+                    posX -= item.ScaleX;
+                    posY += item.ScaleY;
                     break;
 
                 case LayoutOrigin.Center:

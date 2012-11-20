@@ -55,8 +55,8 @@ namespace UiTestBed.Screens
                 outerLayout.AddItem(innerLayout);
             }
 
-            //MainLayout.FullScreen = true;
-            //MainLayout.AddItem(outerLayout, HorizontalPosition.PercentFromLeft(5), VerticalPosition.PercentFromTop(5), LayoutOrigin.TopLeft);
+            MainLayout.FullScreen = true;
+            MainLayout.AddItem(outerLayout, HorizontalPosition.PercentFromLeft(5), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopLeft);
 		}
 
         private void CreateButtonsForLayout(BoxLayoutManager layout)
