@@ -27,53 +27,13 @@ namespace UiTestBed.Entities.Layouts
         protected List<ILayoutable> _layoutedItems;
         protected bool _redoLayout;
 
-        public float ScaleX
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public float ScaleX { get; set; }
 
-        public float ScaleXVelocity
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public float ScaleXVelocity { get; set; }
 
-        public float ScaleY
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public float ScaleY { get; set; }
 
-        public float ScaleYVelocity
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public float ScaleYVelocity { get; set; }
 
         public void AddItem(ILayoutable item)
         {
@@ -82,7 +42,7 @@ namespace UiTestBed.Entities.Layouts
 
             _layoutedItems.Add(item);
             item.AttachTo(this, false);
-            _redoLayout = true;
+            PerformLayout();
         }
 
         protected virtual void PerformLayout()
@@ -110,62 +70,133 @@ namespace UiTestBed.Entities.Layouts
 
         protected virtual void PerformVerticalLayout(bool increasing)
         {
-            float currentX = Margin;
-            float currentY = Margin;
-
-            if (!increasing)
+            // Calculate the width and height
+            float width = 0;
+            float height = 0;
+            for (int x = 0; x < _layoutedItems.Count; x++)
             {
-                currentX *= -1;
-                currentY *= -1;
+                if (x > 0)
+                    height += Spacing;
+
+                height += (_layoutedItems[x].ScaleY * 2);
+                if (_layoutedItems[x].ScaleX * 2 > width)
+                    width = _layoutedItems[x].ScaleX * 2;
             }
 
-            foreach (var item in _layoutedItems)
+            // Add the margins
+            width += (Margin * 2);
+            height += (Margin * 2);
+
+            // Set the scales
+            ScaleX = (width / 2);
+            ScaleY = (height / 2);
+
+            // Compute the Scale properties
+            float currentX;
+            float currentY;
+
+            if (increasing)
             {
+                // bottom left corner
+                currentX = this.X - ScaleX + Margin;
+                currentY = this.Y - ScaleY + Margin;
+            }
+            else
+            {
+                // top left corner
+                currentX = this.X - ScaleX + Margin;
+                currentY = this.Y + ScaleY - Margin;
+            }
+
+            for (int x = 0; x < _layoutedItems.Count; x++)
+            {
+                if (x > 0)
+                {
+                    if (increasing)
+                        currentY += Spacing;
+                    else
+                        currentY -= Spacing;
+                }
+
                 // Since the x/y position will point to the center, we need to account for that
                 if (increasing)
                 {
-                    item.RelativeX = currentX + (item.ScaleX / 2);
-                    item.RelativeY = currentY + (item.ScaleY / 2) + Spacing;
+                    _layoutedItems[x].RelativeX = currentX + _layoutedItems[x].ScaleX;
+                    _layoutedItems[x].RelativeY = currentY - _layoutedItems[x].ScaleY;
 
-                    currentY = item.RelativeY + (item.ScaleY * 2) + Spacing;
+                    currentY += (_layoutedItems[x].ScaleX * 2);
                 }
                 else
                 {
-                    item.RelativeX = currentX - (item.ScaleX / 2);
-                    item.RelativeY = currentY - (item.ScaleY / 2) - Spacing;
+                    _layoutedItems[x].RelativeX = currentX + _layoutedItems[x].ScaleX;
+                    _layoutedItems[x].RelativeY = currentY - _layoutedItems[x].ScaleY;
 
-                    currentY = item.RelativeY - (item.ScaleY * 2) - Spacing;
+                    currentY -= (_layoutedItems[x].ScaleY * 2);
                 }
             }
         }
 
         protected virtual void PerformHorizontalLayout(bool increasing)
         {
-            float currentX = Margin;
-            float currentY = Margin;
-
-            if (!increasing)
+            // Calculate the width and height
+            float width = 0;
+            float height = 0;
+            for (int x = 0; x < _layoutedItems.Count; x++)
             {
-                currentX *= -1;
-                currentY *= -1;
+                width += (_layoutedItems[x].ScaleX * 2);
+                if (_layoutedItems[x].ScaleY * 2 > height)
+                    height = _layoutedItems[x].ScaleY * 2;
             }
 
-            foreach (var item in _layoutedItems)
+            // Add the margins
+            width += (Margin * 2);
+            height += (Margin * 2);
+
+            // Set the manager's Scale properties
+            ScaleX = (width / 2);
+            ScaleY = (height / 2);
+
+            // Calculate the positioning of all the controls
+            float currentX;
+            float currentY;
+
+            if (increasing)
             {
+                // Top left corner
+                currentX = this.X - ScaleX + Margin;
+                currentY = this.Y + ScaleY - Margin;
+            }
+            else
+            {
+                // Top right corner
+                currentX = this.X + ScaleX - Margin;
+                currentY = this.Y + ScaleY - Margin;
+            }
+
+            for (int x = 0; x < _layoutedItems.Count; x++)
+            {
+                if (x > 0)
+                {
+                    if (increasing)
+                        currentX += Spacing;
+                    else
+                        currentX -= Spacing;
+                }
+
                 // Since the x/y position will point to the center, we need to account for that
                 if (increasing)
                 {
-                    item.RelativeX = currentX + (item.ScaleX / 2) + Spacing;
-                    item.RelativeY = currentY + (item.ScaleY / 2);
+                    _layoutedItems[x].RelativeX = currentX + _layoutedItems[x].ScaleX;
+                    _layoutedItems[x].RelativeY = currentY - _layoutedItems[x].ScaleY;
 
-                    currentX = item.RelativeX + (item.ScaleX * 2) + Spacing;
+                    currentX += (_layoutedItems[x].ScaleX * 2);
                 }
                 else
                 {
-                    item.RelativeX = currentX - (item.ScaleX / 2) - Spacing;
-                    item.RelativeY = currentY - (item.ScaleY / 2);
+                    _layoutedItems[x].RelativeX = currentX - _layoutedItems[x].ScaleX;
+                    _layoutedItems[x].RelativeY = currentY - _layoutedItems[x].ScaleY;
 
-                    currentX = item.RelativeX - (item.ScaleX * 2) - Spacing;
+                    currentX -= (_layoutedItems[x].ScaleX * 2);
                 }
             }
         }

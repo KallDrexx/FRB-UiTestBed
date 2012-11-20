@@ -41,7 +41,7 @@ namespace UiTestBed.Entities.Layouts
                     AttachTo(SpriteManager.Camera, false);
                     RelativeX = 0;
                     RelativeY = 0;
-                    RelativeZ = -40;// tisk tisk - this puts the object "inside the lens" of the camera if its relative Z is 0 (this is why you can just attach in Glue and let it take care of the details for you)
+                    RelativeZ = -40;
                     ScaleX = LayerProvidedByContainer.LayerCameraSettings.OrthogonalWidth / 2;
                     ScaleY = LayerProvidedByContainer.LayerCameraSettings.OrthogonalHeight / 2;
                 }

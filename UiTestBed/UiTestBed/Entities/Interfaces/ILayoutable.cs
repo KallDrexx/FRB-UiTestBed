@@ -10,7 +10,7 @@ using FlatRedBall;
 
 namespace UiTestBed.Entities.Interfaces
 {
-    public interface ILayoutable : IVisible, IScalable
+    public interface ILayoutable : IVisible, IScalable, IPositionable
     {
         void AttachTo(PositionedObject obj, bool changeRelative);
         float RelativeX { get; set; }

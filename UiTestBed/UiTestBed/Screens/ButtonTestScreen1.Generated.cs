@@ -47,9 +47,7 @@ namespace UiTestBed.Screens
 		
 		private PositionedObjectList<UiButton> UiButtonList;
 		private FlatRedBall.Graphics.Layer UiLayer;
-		private UiTestBed.Entities.Layouts.SimpleLayoutManager Layout;
-		private UiTestBed.Entities.UiButton Player1Score;
-		private UiTestBed.Entities.UiButton Player2Score;
+		private UiTestBed.Entities.Layouts.SimpleLayoutManager MainLayout;
 
 		public ButtonTestScreen1()
 			: base("ButtonTestScreen1")
@@ -63,12 +61,8 @@ namespace UiTestBed.Screens
 			UiButtonList = new PositionedObjectList<UiButton>();
 			UiLayer = new FlatRedBall.Graphics.Layer();
 			UiLayer.Name = "UiLayer";
-			Layout = new UiTestBed.Entities.Layouts.SimpleLayoutManager(ContentManagerName, false);
-			Layout.Name = "Layout";
-			Player1Score = new UiTestBed.Entities.UiButton(ContentManagerName, false);
-			Player1Score.Name = "Player1Score";
-			Player2Score = new UiTestBed.Entities.UiButton(ContentManagerName, false);
-			Player2Score.Name = "Player2Score";
+			MainLayout = new UiTestBed.Entities.Layouts.SimpleLayoutManager(ContentManagerName, false);
+			MainLayout.Name = "MainLayout";
 			
 			
 			PostInitialize();
@@ -110,9 +104,7 @@ namespace UiTestBed.Screens
 						UiButtonList[i].Activity();
 					}
 				}
-				Layout.Activity();
-				Player1Score.Activity();
-				Player2Score.Activity();
+				MainLayout.Activity();
 			}
 			else
 			{
@@ -141,20 +133,10 @@ namespace UiTestBed.Screens
 			{
 				SpriteManager.RemoveLayer(UiLayer);
 			}
-			if (Layout != null)
+			if (MainLayout != null)
 			{
-				Layout.Destroy();
-				Layout.Detach();
-			}
-			if (Player1Score != null)
-			{
-				Player1Score.Destroy();
-				Player1Score.Detach();
-			}
-			if (Player2Score != null)
-			{
-				Player2Score.Destroy();
-				Player2Score.Detach();
+				MainLayout.Destroy();
+				MainLayout.Detach();
 			}
 
 			base.Destroy();
@@ -168,17 +150,11 @@ namespace UiTestBed.Screens
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			Player1Score.SpriteCurrentChainName = "Idle";
-			Player1Score.TextInstanceAlpha = 1f;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
-			Layout.AddToManagers(UiLayer);
-			Player1Score.AddToManagers(UiLayer);
-			Player1Score.SpriteCurrentChainName = "Idle";
-			Player1Score.TextInstanceAlpha = 1f;
-			Player2Score.AddToManagers(UiLayer);
+			MainLayout.AddToManagers(UiLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
@@ -186,9 +162,7 @@ namespace UiTestBed.Screens
 			{
 				UiButtonList[i].ConvertToManuallyUpdated();
 			}
-			Layout.ConvertToManuallyUpdated();
-			Player1Score.ConvertToManuallyUpdated();
-			Player2Score.ConvertToManuallyUpdated();
+			MainLayout.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -207,7 +181,6 @@ namespace UiTestBed.Screens
 			}
 			#endif
 			UiTestBed.Entities.Layouts.SimpleLayoutManager.LoadStaticContent(contentManagerName);
-			UiTestBed.Entities.UiButton.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

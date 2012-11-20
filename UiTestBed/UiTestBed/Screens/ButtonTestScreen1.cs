@@ -32,14 +32,31 @@ namespace UiTestBed.Screens
 	{
 		void CustomInitialize()
 		{
-            Layout.FullScreen = true;
-            Player1Score.Text = "Player 1: 5";
-            Player1Score.ResizeAroundText(2, 2);
-            Player2Score.Text = "Player 2: 7";
-            Player2Score.ResizeAroundText(2, 2);
+            var outerLayout = new BoxLayoutManager(ContentManagerName);
+            outerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Down;
+            outerLayout.Spacing = 5;
 
-            Layout.AddItem(Player1Score, HorizontalPosition.PercentFromCenter(-25), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopRight);
-            Layout.AddItem(Player2Score, HorizontalPosition.PercentFromCenter(25), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopLeft);
+            var rand = new Random();
+            for (int x = 0; x < 10; x++)
+            {
+                var innerLayout = new BoxLayoutManager(ContentManagerName);
+                innerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Right;
+                innerLayout.Spacing = 5;
+                int count = rand.Next(1, 10);
+                for (int y = 0; y <= count; y++)
+                {
+                    var btn = CreateButton();
+                    btn.Text = "Button # " + y;
+                    btn.ResizeAroundText(5, 5);
+
+                    innerLayout.AddItem(btn);
+                }
+
+                outerLayout.AddItem(innerLayout);
+            }
+
+            //MainLayout.FullScreen = true;
+            //MainLayout.AddItem(outerLayout, HorizontalPosition.PercentFromLeft(5), VerticalPosition.PercentFromTop(5), LayoutOrigin.TopLeft);
 		}
 
         private void CreateButtonsForLayout(BoxLayoutManager layout)
