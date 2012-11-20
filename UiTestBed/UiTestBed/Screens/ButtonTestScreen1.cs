@@ -40,7 +40,7 @@ namespace UiTestBed.Screens
             for (int x = 0; x < 10; x++)
             {
                 var innerLayout = new BoxLayoutManager(ContentManagerName);
-                innerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Right;
+                innerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Left;
                 innerLayout.Spacing = 5;
                 int count = rand.Next(1, 10);
                 for (int y = 0; y <= count; y++)

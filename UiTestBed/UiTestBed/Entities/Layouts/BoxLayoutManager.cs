@@ -143,6 +143,9 @@ namespace UiTestBed.Entities.Layouts
             float height = 0;
             for (int x = 0; x < _layoutedItems.Count; x++)
             {
+                if (x > 0)
+                    width += Spacing;
+
                 width += (_layoutedItems[x].ScaleX * 2);
                 if (_layoutedItems[x].ScaleY * 2 > height)
                     height = _layoutedItems[x].ScaleY * 2;
