@@ -33,14 +33,14 @@ namespace UiTestBed.Screens
 		void CustomInitialize()
 		{
             var outerLayout = new BoxLayoutManager(ContentManagerName);
-            outerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Down;
+            outerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Right;
             outerLayout.Spacing = 5;
 
             var rand = new Random();
             for (int x = 0; x < 10; x++)
             {
                 var innerLayout = new BoxLayoutManager(ContentManagerName);
-                innerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Left;
+                innerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Down;
                 innerLayout.Spacing = 5;
                 int count = rand.Next(1, 10);
                 for (int y = 0; y <= count; y++)
