@@ -35,7 +35,7 @@ namespace UiTestBed.Screens
 		{
             var outerLayout = new BoxLayoutManager(ContentManagerName);
             BoxLayouts.Add(outerLayout);
-            outerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Right;
+            outerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Down;
             outerLayout.Spacing = 5;
 
             var rand = new Random();
@@ -43,7 +43,7 @@ namespace UiTestBed.Screens
             {
                 var innerLayout = new BoxLayoutManager(ContentManagerName);
                 BoxLayouts.Add(innerLayout);
-                innerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Down;
+                innerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Right;
                 innerLayout.Spacing = 5;
 
                 int count = rand.Next(1, 10);
@@ -57,7 +57,7 @@ namespace UiTestBed.Screens
                     innerLayout.AddItem(btn);
                 }
 
-                outerLayout.AddItem(innerLayout);
+                outerLayout.AddItem(innerLayout, (x % 2 == 0));
             }
 
             MainLayout.FullScreen = true;

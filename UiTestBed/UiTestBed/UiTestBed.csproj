@@ -113,6 +113,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\AlignmentEnums.cs" />
     <Compile Include="Data\HorizontalPosition.cs" />
     <Compile Include="Data\LayoutOrigin.cs" />
     <Compile Include="Data\Positioning.cs" />
