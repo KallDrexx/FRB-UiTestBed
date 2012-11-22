@@ -203,8 +203,8 @@ namespace UiTestBed.Entities.Layouts
                     else
                         item.RelativeX = currentX + item.ScaleX;
 
-                    item.RelativeY = currentY - item.ScaleY;
-                    currentY += (item.ScaleX * 2);
+                    item.RelativeY = currentY + item.ScaleY;
+                    currentY += (item.ScaleY * 2);
                 }
                 else
                 {
