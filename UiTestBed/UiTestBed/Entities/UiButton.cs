@@ -24,6 +24,7 @@ namespace UiTestBed.Entities
 {
 	public partial class UiButton : ILayoutable
 	{
+        public event ILayoutableEvent OnSizeChange;
         public event EventHandler OnSelectedHandler;
         public event EventHandler OnUnSelectedHandler;
         public event EventHandler OnPressedHandler;
@@ -45,6 +46,9 @@ namespace UiTestBed.Entities
             {
                 // Scale the spriteframe, since that's the core of the button
                 SpriteFrameInstance.ScaleX = value;
+
+                if (OnSizeChange != null)
+                    OnSizeChange(this);
             }
         }
 
@@ -61,6 +65,9 @@ namespace UiTestBed.Entities
             {
                 // Scale the spriteframe, since that's the core of the button
                 SpriteFrameInstance.ScaleY = value;
+
+                if (OnSizeChange != null)
+                    OnSizeChange(this);
             }
         }
 

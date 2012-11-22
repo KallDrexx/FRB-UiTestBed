@@ -25,8 +25,12 @@ namespace UiTestBed.Entities.Layouts
 {
 	public partial class SimpleLayoutManager : ILayoutable
 	{
+        public event ILayoutableEvent OnSizeChange;
+
         protected Dictionary<ILayoutable, Positioning> _items;
         protected bool _isFullScreen;
+        private float _width;
+        private float _height;
 
         public bool FullScreen
         {
@@ -51,13 +55,31 @@ namespace UiTestBed.Entities.Layouts
                 }
             }
         }
-        public float ScaleX { get; set; }
 
         public float ScaleXVelocity { get; set; }
-
-        public float ScaleY { get; set; }
-
         public float ScaleYVelocity { get; set; }
+
+        public float ScaleX
+        {
+            get { return _width / 2; }
+            set
+            {
+                _width = value * 2;
+                if (OnSizeChange != null)
+                    OnSizeChange(this);
+            }
+        }
+
+        public float ScaleY
+        {
+            get { return _height / 2; }
+            set
+            {
+                _height = value * 2;
+                if (OnSizeChange != null)
+                    OnSizeChange(this);
+            }
+        }
 
         public void AddItem(ILayoutable item, HorizontalPosition horizontalPosition, VerticalPosition verticalPosition, LayoutOrigin layoutFrom = LayoutOrigin.Center)
         {
@@ -69,6 +91,9 @@ namespace UiTestBed.Entities.Layouts
             item.AttachTo(this, false);
 
             PositionItem(item, horizontalPosition, verticalPosition, layoutFrom);
+
+            // When the size changes, make sure to reposition the item so it's still in the same spot
+            item.OnSizeChange += new ILayoutableEvent(delegate(ILayoutable sender) { PositionItem(item, horizontalPosition, verticalPosition, layoutFrom); });
         }
 
         private void PositionItem(ILayoutable item, HorizontalPosition horizontalPosition, VerticalPosition verticalPosition, LayoutOrigin layoutFrom)

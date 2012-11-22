@@ -48,6 +48,8 @@ namespace UiTestBed.Screens
 		private PositionedObjectList<UiButton> UiButtonList;
 		private FlatRedBall.Graphics.Layer UiLayer;
 		private UiTestBed.Entities.Layouts.SimpleLayoutManager MainLayout;
+		private PositionedObjectList<BoxLayoutManager> BoxLayouts;
+		private PositionedObjectList<UiButton> Buttons;
 
 		public ButtonTestScreen1()
 			: base("ButtonTestScreen1")
@@ -63,6 +65,8 @@ namespace UiTestBed.Screens
 			UiLayer.Name = "UiLayer";
 			MainLayout = new UiTestBed.Entities.Layouts.SimpleLayoutManager(ContentManagerName, false);
 			MainLayout.Name = "MainLayout";
+			BoxLayouts = new PositionedObjectList<BoxLayoutManager>();
+			Buttons = new PositionedObjectList<UiButton>();
 			
 			
 			PostInitialize();
@@ -105,6 +109,22 @@ namespace UiTestBed.Screens
 					}
 				}
 				MainLayout.Activity();
+				for (int i = BoxLayouts.Count - 1; i > -1; i--)
+				{
+					if (i < BoxLayouts.Count)
+					{
+						// We do the extra if-check because activity could destroy any number of entities
+						BoxLayouts[i].Activity();
+					}
+				}
+				for (int i = Buttons.Count - 1; i > -1; i--)
+				{
+					if (i < Buttons.Count)
+					{
+						// We do the extra if-check because activity could destroy any number of entities
+						Buttons[i].Activity();
+					}
+				}
 			}
 			else
 			{
@@ -138,6 +158,14 @@ namespace UiTestBed.Screens
 				MainLayout.Destroy();
 				MainLayout.Detach();
 			}
+			for (int i = BoxLayouts.Count - 1; i > -1; i--)
+			{
+				BoxLayouts[i].Destroy();
+			}
+			for (int i = Buttons.Count - 1; i > -1; i--)
+			{
+				Buttons[i].Destroy();
+			}
 
 			base.Destroy();
 
@@ -163,6 +191,14 @@ namespace UiTestBed.Screens
 				UiButtonList[i].ConvertToManuallyUpdated();
 			}
 			MainLayout.ConvertToManuallyUpdated();
+			for (int i = 0; i < BoxLayouts.Count; i++)
+			{
+				BoxLayouts[i].ConvertToManuallyUpdated();
+			}
+			for (int i = 0; i < Buttons.Count; i++)
+			{
+				Buttons[i].ConvertToManuallyUpdated();
+			}
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{

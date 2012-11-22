@@ -25,6 +25,7 @@ using UiTestBed.Entities;
 using FlatRedBall.Instructions;
 using UiTestBed.Entities.Layouts;
 using UiTestBed.Data;
+using FlatRedBall.Graphics;
 
 namespace UiTestBed.Screens
 {
@@ -33,6 +34,7 @@ namespace UiTestBed.Screens
 		void CustomInitialize()
 		{
             var outerLayout = new BoxLayoutManager(ContentManagerName);
+            BoxLayouts.Add(outerLayout);
             outerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Right;
             outerLayout.Spacing = 5;
 
@@ -40,12 +42,15 @@ namespace UiTestBed.Screens
             for (int x = 0; x < 10; x++)
             {
                 var innerLayout = new BoxLayoutManager(ContentManagerName);
+                BoxLayouts.Add(innerLayout);
                 innerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Down;
                 innerLayout.Spacing = 5;
+
                 int count = rand.Next(1, 10);
                 for (int y = 0; y <= count; y++)
                 {
                     var btn = CreateButton();
+                    Buttons.Add(btn);
                     btn.Text = "Button # " + y;
                     btn.ResizeAroundText(5, 5);
 
@@ -94,8 +99,9 @@ namespace UiTestBed.Screens
                 var btn = sender as UiButton;
                 if (btn != null)
                 {
-                    //btn.Text = "Selected";
+                    btn.Text = "Selected";
                     //InstructionManager.MoveToAccurate(SpriteManager.Camera, sender.X, sender.Y, SpriteManager.Camera.Z, 0.25);
+                    btn.ResizeAroundText(20, 10);
                 }
             });
 
@@ -104,7 +110,7 @@ namespace UiTestBed.Screens
                 var btn = sender as UiButton;
                 if (btn != null)
                 {
-                    //btn.Text = "Not Selected";
+                    btn.Text = "Not Selected";
                     btn.ResizeAroundText(5, 5);
                 }
             });

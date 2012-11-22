@@ -52,6 +52,24 @@
           <IndependentOfCamera>true</IndependentOfCamera>
           <LayerOn>UiLayer</LayerOn>
         </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceClassType>PositionedObjectList&lt;T&gt;</SourceClassType>
+          <SourceClassGenericType>Entities\Layouts\BoxLayoutManager</SourceClassGenericType>
+          <InstanceName>BoxLayouts</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceClassType>PositionedObjectList&lt;T&gt;</SourceClassType>
+          <SourceClassGenericType>Entities\UiButton</SourceClassGenericType>
+          <InstanceName>Buttons</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
       </NamedObjects>
     </ScreenSave>
   </Screens>
@@ -270,10 +288,6 @@
             <Member>LeftTextureCoordinate</Member>
           </CustomProperty>
           <CustomProperty>
-            <Type>double</Type>
-            <Member>mLastDependencyUpdate</Member>
-          </CustomProperty>
-          <CustomProperty>
             <Type>string</Type>
             <Member>Name</Member>
           </CustomProperty>
@@ -478,6 +492,10 @@
           <CustomProperty>
             <Type>float</Type>
             <Member>ZVelocity</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>double</Type>
+            <Member>mLastDependencyUpdate</Member>
           </CustomProperty>
           <CustomProperty>
             <Type>BorderSides</Type>
@@ -771,10 +789,6 @@
             <Member>MaxWidthBehavior</Member>
           </CustomProperty>
           <CustomProperty>
-            <Type>double</Type>
-            <Member>mLastDependencyUpdate</Member>
-          </CustomProperty>
-          <CustomProperty>
             <Type>string</Type>
             <Member>Name</Member>
           </CustomProperty>
@@ -958,6 +972,10 @@
             <Type>float</Type>
             <Member>ZVelocity</Member>
           </CustomProperty>
+          <CustomProperty>
+            <Type>double</Type>
+            <Member>mLastDependencyUpdate</Member>
+          </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>Text</SourceClassType>
           <InstanceName>TextInstance</InstanceName>
@@ -1046,10 +1064,6 @@
           <CustomProperty>
             <Type>bool</Type>
             <Member>KeepTrackOfReal</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>double</Type>
-            <Member>mLastDependencyUpdate</Member>
           </CustomProperty>
           <CustomProperty>
             <Type>string</Type>
@@ -1235,6 +1249,10 @@
           <CustomProperty>
             <Type>float</Type>
             <Member>ZVelocity</Member>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>double</Type>
+            <Member>mLastDependencyUpdate</Member>
           </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>SpriteFrame</SourceClassType>
