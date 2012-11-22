@@ -64,8 +64,10 @@ namespace UiTestBed.Entities.Layouts
             get { return _width / 2; }
             set
             {
+                float oldWidth = _width;
                 _width = value * 2;
-                if (OnSizeChange != null)
+
+                if (OnSizeChange != null && oldWidth != _width)
                     OnSizeChange(this);
             }
         }
@@ -75,8 +77,10 @@ namespace UiTestBed.Entities.Layouts
             get { return _height / 2; }
             set
             {
+                float oldHeight = _height;
                 _height = value * 2;
-                if (OnSizeChange != null)
+
+                if (OnSizeChange != null && oldHeight != _height)
                     OnSizeChange(this);
             }
         }

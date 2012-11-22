@@ -88,6 +88,7 @@ namespace UiTestBed.Entities.Layouts
 
             _layoutedItems.Add(item);
             item.AttachTo(this, false);
+            _redoLayout = true;
             PerformLayout();
 
             item.OnSizeChange += new ILayoutableEvent(delegate(ILayoutable sender) 
@@ -96,8 +97,26 @@ namespace UiTestBed.Entities.Layouts
             });
         }
 
+        public override void UpdateDependencies(double currentTime)
+        {
+            PerformLayout();
+            base.UpdateDependencies(currentTime);
+        }
+
+        public override void ForceUpdateDependencies()
+        {
+            PerformLayout();
+            base.ForceUpdateDependencies();
+        }
+
         protected virtual void PerformLayout()
         {
+            if (!_redoLayout)
+                return; // Not flagged to actually reset the layout
+
+            // Reset the flag so we don't reset the layout again
+            _redoLayout = false;
+
             switch (CurrentDirectionState)
             {
                 case Direction.Up:
@@ -268,11 +287,6 @@ namespace UiTestBed.Entities.Layouts
 
 		private void CustomActivity()
 		{
-            if (_redoLayout)
-            {
-                _redoLayout = false; // Reset the flag
-                PerformLayout();
-            }
 		}
 
 		private void CustomDestroy()
