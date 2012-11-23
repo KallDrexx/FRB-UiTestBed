@@ -35,6 +35,7 @@ namespace UiTestBed.Screens
 		{
             var layout = new CircularLayoutManager(ContentManagerName);
             layout.Radius = 100;
+            layout.ShowBorder = true;
             Layouts.Add(layout);
 
             for (int x = 0; x < 4; x++)
@@ -45,7 +46,6 @@ namespace UiTestBed.Screens
 
                 layout.Add(btn, 0, (90 * x));
             }
-
 		}
 
         private void CreateButtonsForLayout(BoxLayoutManager layout)

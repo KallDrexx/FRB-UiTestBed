@@ -31,6 +31,7 @@ namespace UiTestBed.Entities.Layouts
         protected float _height;
         protected AxisAlignedRectangle _border;
         protected Dictionary<ILayoutable, CircularPosition> _items;
+        protected bool _recalculateLayout;
 
         public float ScaleXVelocity { get; set; }
         public float ScaleYVelocity { get; set; }
@@ -110,8 +111,22 @@ namespace UiTestBed.Entities.Layouts
 
             // Reposition the item
             PositionItem(item);
+            _recalculateLayout = true;
 
-            item.OnSizeChange += new ILayoutableEvent(delegate(ILayoutable sender) { PositionItem(sender); });
+            // Set the size to realculate when a control changes 
+            item.OnSizeChange += new ILayoutableEvent(delegate(ILayoutable sender) { _recalculateLayout = true; });
+        }
+
+        public override void UpdateDependencies(double currentTime)
+        {
+            RecalculateLayoutSize();
+            base.UpdateDependencies(currentTime);
+        }
+
+        public override void ForceUpdateDependencies()
+        {
+            RecalculateLayoutSize();
+            base.ForceUpdateDependencies();
         }
 
         protected void PositionItem(ILayoutable item)
@@ -125,6 +140,43 @@ namespace UiTestBed.Entities.Layouts
 
             item.RelativeX = xCoord;
             item.RelativeY = yCoord;
+        }
+
+        protected void RecalculateLayoutSize()
+        {
+            if (!_recalculateLayout)
+                return;
+
+            // Go through all the items and find the min and max positions of items
+            //   The origin is always 
+            float? minX = null, minY = null, maxX = null, maxY = null;
+
+            foreach (var item in _items.Keys)
+            {
+                float leftX = item.RelativeX - item.ScaleX;
+                float rightX = item.RelativeX + item.ScaleX;
+                float topY = item.RelativeY + item.ScaleY;
+                float bottomY = item.RelativeY - item.ScaleY;
+
+                // If the item has any bounds outside of the current min/max, 
+                //    set it as the new min/max
+                if (minX == null || minX > leftX)
+                    minX = leftX;
+
+                if (maxX == null || maxX < rightX)
+                    maxX = rightX;
+
+                if (minY == null || minY > bottomY)
+                    minY = bottomY;
+
+                if (maxY == null || maxY < topY)
+                    maxY = topY;
+            }
+
+            // Recalculate scale to whatever the maximum values are
+            ScaleX = (Math.Max(Math.Abs(minX.Value), Math.Abs(maxX.Value)));
+            ScaleY = (Math.Max(Math.Abs(minY.Value), Math.Abs(maxY.Value)));
+            _recalculateLayout = false;
         }
 
 		private void CustomInitialize()
