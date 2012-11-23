@@ -536,6 +536,10 @@
               <InstructionSaves />
               <Name>Manual</Name>
             </StateSave>
+            <StateSave>
+              <InstructionSaves />
+              <Name>CounterClockwise</Name>
+            </StateSave>
           </States>
           <Name>ArrangementMode</Name>
           <SharesVariablesWithOtherCategories>false</SharesVariablesWithOtherCategories>
@@ -586,6 +590,16 @@
           <Type>float</Type>
           <DefaultValue xsi:type="xsd:float">0</DefaultValue>
           <CreatesEvent>true</CreatesEvent>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>MinDegreeOffset</Name>
+          <Type>float</Type>
         </CustomVariable>
       </CustomVariables>
       <ImplementsIVisible>true</ImplementsIVisible>

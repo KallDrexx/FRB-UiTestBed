@@ -60,7 +60,8 @@ namespace UiTestBed.Entities.Layouts
 			Unknown = 1, //This exists so that if the entity is actually a child entity and has set a child state, you will get this
 			Clockwise = 2, 
 			EvenlySpaced = 3, 
-			Manual = 4
+			Manual = 4, 
+			CounterClockwise = 5
 		}
 		protected int mCurrentArrangementModeState = 0;
 		public ArrangementMode CurrentArrangementModeState
@@ -90,6 +91,8 @@ namespace UiTestBed.Entities.Layouts
 					case  ArrangementMode.EvenlySpaced:
 						break;
 					case  ArrangementMode.Manual:
+						break;
+					case  ArrangementMode.CounterClockwise:
 						break;
 				}
 			}
@@ -122,6 +125,7 @@ namespace UiTestBed.Entities.Layouts
 				return mStartingDegrees;
 			}
 		}
+		public float MinDegreeOffset;
 		public int Index { get; set; }
 		public bool Used { get; set; }
 		public event EventHandler BeforeVisibleSet;
@@ -336,6 +340,8 @@ namespace UiTestBed.Entities.Layouts
 					break;
 				case  ArrangementMode.Manual:
 					break;
+				case  ArrangementMode.CounterClockwise:
+					break;
 			}
 			var instruction = new DelegateInstruction<ArrangementMode>(StopStateInterpolation, stateToInterpolateTo);
 			instruction.TimeToExecute = TimeManager.CurrentTime + secondsToTake;
@@ -351,6 +357,8 @@ namespace UiTestBed.Entities.Layouts
 				case  ArrangementMode.EvenlySpaced:
 					break;
 				case  ArrangementMode.Manual:
+					break;
+				case  ArrangementMode.CounterClockwise:
 					break;
 			}
 			CurrentArrangementModeState = stateToStop;
@@ -371,6 +379,8 @@ namespace UiTestBed.Entities.Layouts
 					break;
 				case  ArrangementMode.Manual:
 					break;
+				case  ArrangementMode.CounterClockwise:
+					break;
 			}
 			switch(secondState)
 			{
@@ -379,6 +389,8 @@ namespace UiTestBed.Entities.Layouts
 				case  ArrangementMode.EvenlySpaced:
 					break;
 				case  ArrangementMode.Manual:
+					break;
+				case  ArrangementMode.CounterClockwise:
 					break;
 			}
 		}
@@ -393,6 +405,8 @@ namespace UiTestBed.Entities.Layouts
 				case  ArrangementMode.EvenlySpaced:
 					break;
 				case  ArrangementMode.Manual:
+					break;
+				case  ArrangementMode.CounterClockwise:
 					break;
 			}
 		}

@@ -38,14 +38,16 @@ namespace UiTestBed.Screens
             layout.ShowBorder = true;
             layout.Margin = 0;
             layout.StartingDegrees = 90;
-            layout.CurrentArrangementModeState = CircularLayoutManager.ArrangementMode.EvenlySpaced;
+            layout.MinDegreeOffset = 45;
+            layout.CurrentArrangementModeState = CircularLayoutManager.ArrangementMode.CounterClockwise;
             Layouts.Add(layout);
 
             for (int x = 0; x < 3; x++)
             {
                 var btn = CreateButton();
-                btn.Text = "Button # " + x;
-                btn.ResizeAroundText(5, 5);
+                //btn.Text = "Button # " + x;
+                btn.ScaleX = 5;
+                btn.ScaleY = 5;
 
                 layout.Add(btn);
             }

@@ -133,10 +133,39 @@ namespace UiTestBed.Entities.Layouts
             var position = _items[item];
             var lastPosition = (lastItem != null ? _items[lastItem] : (CircularPosition)null);
             float startingRadians = MathHelper.ToRadians(StartingDegrees);
+            float minRadianOffset = MathHelper.ToRadians(MinDegreeOffset);
             float absoluteRadians;
 
             switch (CurrentArrangementModeState)
             {
+                case ArrangementMode.Clockwise:
+                    // Position it min offset away from the previous
+                    //   if no last position (first item being laid out) lay it out on the starting degree
+                    if (lastPosition != null)
+                    {
+                        absoluteRadians = lastPosition.AbsoluteRadians - minRadianOffset - position.RadianOffset;
+                    }
+                    else
+                    {
+                        absoluteRadians = startingRadians - position.RadianOffset;
+                    }
+
+                    break;
+
+                case ArrangementMode.CounterClockwise:
+                    // Position it min offset away from the previous
+                    //   if no last position (first item being laid out) lay it out on the starting degree
+                    if (lastPosition != null)
+                    {
+                        absoluteRadians = lastPosition.AbsoluteRadians + minRadianOffset + position.RadianOffset;
+                    }
+                    else
+                    {
+                        absoluteRadians = startingRadians + position.RadianOffset;
+                    }
+
+                    break;
+
                 case ArrangementMode.EvenlySpaced:
                     if (lastPosition == null)
                     {
