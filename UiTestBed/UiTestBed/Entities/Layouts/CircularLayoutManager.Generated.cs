@@ -100,6 +100,28 @@ namespace UiTestBed.Entities.Layouts
 		
 		public float Radius = 100f;
 		public float Margin = 0f;
+		public event EventHandler BeforeStartingDegreesSet;
+		public event EventHandler AfterStartingDegreesSet;
+		float mStartingDegrees = 0f;
+		public float StartingDegrees
+		{
+			set
+			{
+				if (BeforeStartingDegreesSet != null)
+				{
+					BeforeStartingDegreesSet(this, null);
+				}
+				mStartingDegrees = value;
+				if (AfterStartingDegreesSet != null)
+				{
+					AfterStartingDegreesSet(this, null);
+				}
+			}
+			get
+			{
+				return mStartingDegrees;
+			}
+		}
 		public int Index { get; set; }
 		public bool Used { get; set; }
 		public event EventHandler BeforeVisibleSet;
@@ -167,6 +189,7 @@ namespace UiTestBed.Entities.Layouts
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
+			this.AfterStartingDegreesSet += OnAfterStartingDegreesSet;
 			
 			PostInitialize();
 			if (addToManagers)
@@ -213,6 +236,7 @@ namespace UiTestBed.Entities.Layouts
 			CurrentArrangementModeState = CircularLayoutManager.ArrangementMode.Manual;
 			Radius = 100f;
 			Margin = 0f;
+			StartingDegrees = 0f;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -235,6 +259,7 @@ namespace UiTestBed.Entities.Layouts
 			CurrentArrangementModeState = CircularLayoutManager.ArrangementMode.Manual;
 			Radius = 100f;
 			Margin = 0f;
+			StartingDegrees = 0f;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;

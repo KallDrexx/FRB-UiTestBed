@@ -575,9 +575,29 @@
           <Type>float</Type>
           <DefaultValue xsi:type="xsd:float">0</DefaultValue>
         </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>StartingDegrees</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">0</DefaultValue>
+          <CreatesEvent>true</CreatesEvent>
+        </CustomVariable>
       </CustomVariables>
       <ImplementsIVisible>true</ImplementsIVisible>
       <Name>Entities\Layouts\CircularLayoutManager</Name>
+      <Events>
+        <EventResponseSave>
+          <EventName>AfterStartingDegreesSet</EventName>
+          <SourceVariable>StartingDegrees</SourceVariable>
+          <BeforeOrAfter>After</BeforeOrAfter>
+          <DelegateType />
+        </EventResponseSave>
+      </Events>
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>

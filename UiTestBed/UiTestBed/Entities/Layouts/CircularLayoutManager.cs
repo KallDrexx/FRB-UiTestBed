@@ -91,7 +91,7 @@ namespace UiTestBed.Entities.Layouts
             }
         }
 
-        public void Add(ILayoutable item, float radiusOffset, float absoluteDegrees = -1)
+        public void Add(ILayoutable item, float radiusOffset = 0, float degreeOffset = 0)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
@@ -105,12 +105,9 @@ namespace UiTestBed.Entities.Layouts
 
             // Calculate the item's position
             _items[item].RadiusOffset = radiusOffset;
+            _items[item].RadianOffset = MathHelper.ToRadians(degreeOffset);
 
-            if (absoluteDegrees >= 0)
-                _items[item].Radians = MathHelper.ToRadians(absoluteDegrees);
-
-            // Reposition the item
-            PositionItem(item);
+            // Trigger a recalulation of the layout
             _recalculateLayout = true;
 
             // Set the size to realculate when a control changes 
@@ -119,13 +116,13 @@ namespace UiTestBed.Entities.Layouts
 
         public override void UpdateDependencies(double currentTime)
         {
-            RecalculateLayoutSize();
+            RecalculateLayout();
             base.UpdateDependencies(currentTime);
         }
 
         public override void ForceUpdateDependencies()
         {
-            RecalculateLayoutSize();
+            RecalculateLayout();
             base.ForceUpdateDependencies();
         }
 
@@ -134,15 +131,17 @@ namespace UiTestBed.Entities.Layouts
             if (!_items.ContainsKey(item))
                 return;
 
+            float startingRadians = MathHelper.ToRadians(StartingDegrees);
+
             var position = _items[item];
-            float xCoord = (float)Math.Cos(position.Radians) * (Radius + position.RadiusOffset);
-            float yCoord = (float)Math.Sin(position.Radians) * (Radius + position.RadiusOffset);
+            float xCoord = (float)Math.Cos(startingRadians + position.RadianOffset) * (Radius + position.RadiusOffset);
+            float yCoord = (float)Math.Sin(startingRadians + position.RadianOffset) * (Radius + position.RadiusOffset);
 
             item.RelativeX = xCoord;
             item.RelativeY = yCoord;
         }
 
-        protected void RecalculateLayoutSize()
+        protected void RecalculateLayout()
         {
             if (!_recalculateLayout)
                 return;
@@ -153,6 +152,9 @@ namespace UiTestBed.Entities.Layouts
 
             foreach (var item in _items.Keys)
             {
+                // Update the item's position
+                PositionItem(item);
+
                 float leftX = item.RelativeX - item.ScaleX;
                 float rightX = item.RelativeX + item.ScaleX;
                 float topY = item.RelativeY + item.ScaleY;
@@ -198,7 +200,7 @@ namespace UiTestBed.Entities.Layouts
 
         public class CircularPosition
         {
-            public float Radians { get; set; }
+            public float RadianOffset { get; set; }
             public float RadiusOffset { get; set; }
         }
     }

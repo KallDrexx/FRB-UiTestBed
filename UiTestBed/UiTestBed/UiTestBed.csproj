@@ -130,7 +130,13 @@
       <DependentUpon>BoxLayoutManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\Layouts\CircularLayoutManager.cs" />
+    <Compile Include="Entities\Layouts\CircularLayoutManager.Event.cs">
+      <DependentUpon>CircularLayoutManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Layouts\CircularLayoutManager.Generated.cs">
+      <DependentUpon>CircularLayoutManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Layouts\CircularLayoutManager.Generated.Event.cs">
       <DependentUpon>CircularLayoutManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\Layouts\SimpleLayoutManager.cs" />
