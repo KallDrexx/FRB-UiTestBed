@@ -93,7 +93,7 @@ namespace UiTestBed.Entities.Layouts
             }
         }
 
-        public void Add(ILayoutable item, float radiusOffset = 0, float degreeOffset = 0)
+        public void AddItem(ILayoutable item, float radiusOffset = 0, float degreeOffset = 0)
         {
             if (item == null)
                 throw new ArgumentNullException("item");

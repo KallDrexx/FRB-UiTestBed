@@ -67,7 +67,7 @@ namespace UiTestBed.Screens
                 var btn = CreateButton();
                 btn.Text = "Button # " + x;
                 btn.ResizeAroundText(5, 5);
-                circleLayout.Add(btn);
+                circleLayout.AddItem(btn);
             }
 
             var secondLayout = new BoxLayoutManager(ContentManagerName);
