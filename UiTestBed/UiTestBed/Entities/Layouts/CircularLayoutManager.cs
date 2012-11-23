@@ -133,51 +133,20 @@ namespace UiTestBed.Entities.Layouts
             var position = _items[item];
             var lastPosition = (lastItem != null ? _items[lastItem] : (CircularPosition)null);
             float startingRadians = MathHelper.ToRadians(StartingDegrees);
-            float minRadianOffset = MathHelper.ToRadians(MinDegreeOffset);
             float absoluteRadians;
 
             switch (CurrentArrangementModeState)
             {
                 case ArrangementMode.Clockwise:
-                    // Position it min offset away from the previous
-                    //   if no last position (first item being laid out) lay it out on the starting degree
-                    if (lastPosition != null)
-                    {
-                        absoluteRadians = lastPosition.AbsoluteRadians - minRadianOffset - position.RadianOffset;
-                    }
-                    else
-                    {
-                        absoluteRadians = startingRadians - position.RadianOffset;
-                    }
-
+                    absoluteRadians = CalculateClockwisePosition(position, lastPosition, startingRadians);
                     break;
 
                 case ArrangementMode.CounterClockwise:
-                    // Position it min offset away from the previous
-                    //   if no last position (first item being laid out) lay it out on the starting degree
-                    if (lastPosition != null)
-                    {
-                        absoluteRadians = lastPosition.AbsoluteRadians + minRadianOffset + position.RadianOffset;
-                    }
-                    else
-                    {
-                        absoluteRadians = startingRadians + position.RadianOffset;
-                    }
-
+                    absoluteRadians = CalculateClockwisePosition(position, lastPosition, startingRadians, true);
                     break;
 
                 case ArrangementMode.EvenlySpaced:
-                    if (lastPosition == null)
-                    {
-                        // If no last item provided, assume this is the first
-                        absoluteRadians = startingRadians + position.RadianOffset;
-                    }
-                    else
-                    {
-                        float spacing = FULL_CIRCLE / _items.Count;
-                        absoluteRadians = lastPosition.AbsoluteRadians + spacing + position.RadianOffset;
-                    }
-
+                    absoluteRadians = CalculateEvenlySpacedPosition(position, lastPosition, startingRadians);
                     break;
 
                 case ArrangementMode.Manual:
@@ -192,6 +161,49 @@ namespace UiTestBed.Entities.Layouts
 
             item.RelativeX = xCoord;
             item.RelativeY = yCoord;
+        }
+
+        protected float CalculateEvenlySpacedPosition(CircularPosition position, CircularPosition lastPosition, float startingRadians)
+        {
+            float absoluteRadians;
+
+            if (lastPosition == null)
+            {
+                // If no last item provided, assume this is the first
+                absoluteRadians = startingRadians + position.RadianOffset;
+            }
+            else
+            {
+                float spacing = FULL_CIRCLE / _items.Count;
+                absoluteRadians = lastPosition.AbsoluteRadians + spacing + position.RadianOffset;
+            }
+
+            return absoluteRadians;
+        }
+
+        protected float CalculateClockwisePosition(CircularPosition position, CircularPosition lastPosition, float startingRadians, bool reverse = false)
+        {
+            float absoluteRadians;
+            float minRadianOffset = MathHelper.ToRadians(MinDegreeOffset);
+
+            // Position it min offset away from the previous
+            //   if no last position (first item being laid out) lay it out on the starting degree
+            if (reverse)
+            {
+                if (lastPosition != null)
+                    absoluteRadians = lastPosition.AbsoluteRadians + minRadianOffset + position.RadianOffset;
+                else
+                    absoluteRadians = startingRadians + position.RadianOffset;
+            }
+            else
+            {
+                if (lastPosition != null)
+                    absoluteRadians = lastPosition.AbsoluteRadians - minRadianOffset - position.RadianOffset;
+                else
+                    absoluteRadians = startingRadians - position.RadianOffset;
+            }
+
+            return absoluteRadians;
         }
 
         protected void RecalculateLayout()
