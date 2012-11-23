@@ -5,16 +5,6 @@
       <Name>Screens\ButtonTestScreen1</Name>
       <NamedObjects>
         <NamedObjectSave>
-          <SourceType>FlatRedBallType</SourceType>
-          <SourceClassType>PositionedObjectList&lt;T&gt;</SourceClassType>
-          <SourceClassGenericType>Entities\UiButton</SourceClassGenericType>
-          <InstanceName>UiButtonList</InstanceName>
-          <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
-          <IndependentOfCamera>true</IndependentOfCamera>
-          <LayerOn>UiLayer</LayerOn>
-        </NamedObjectSave>
-        <NamedObjectSave>
           <CustomProperty>
             <Type>LayerCameraSettings</Type>
             <Member>LayerCameraSettings</Member>
@@ -44,28 +34,19 @@
           <Is2D>true</Is2D>
         </NamedObjectSave>
         <NamedObjectSave>
-          <SourceType>Entity</SourceType>
-          <SourceClassType>Entities\Layouts\SimpleLayoutManager</SourceClassType>
-          <InstanceName>MainLayout</InstanceName>
-          <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
-          <IndependentOfCamera>true</IndependentOfCamera>
-          <LayerOn>UiLayer</LayerOn>
-        </NamedObjectSave>
-        <NamedObjectSave>
-          <SourceType>FlatRedBallType</SourceType>
-          <SourceClassType>PositionedObjectList&lt;T&gt;</SourceClassType>
-          <SourceClassGenericType>Entities\Layouts\BoxLayoutManager</SourceClassGenericType>
-          <InstanceName>BoxLayouts</InstanceName>
-          <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
-          <IndependentOfCamera>true</IndependentOfCamera>
-        </NamedObjectSave>
-        <NamedObjectSave>
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>PositionedObjectList&lt;T&gt;</SourceClassType>
           <SourceClassGenericType>Entities\UiButton</SourceClassGenericType>
           <InstanceName>Buttons</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceClassType>PositionedObjectList&lt;T&gt;</SourceClassType>
+          <SourceClassGenericType>Entities\Layouts\CircularLayoutManager</SourceClassGenericType>
+          <InstanceName>Layouts</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
@@ -537,6 +518,55 @@
           <DelegateType />
         </EventResponseSave>
       </Events>
+      <Is2D>true</Is2D>
+    </EntitySave>
+    <EntitySave>
+      <StateCategoryList>
+        <StateSaveCategory>
+          <States>
+            <StateSave>
+              <InstructionSaves />
+              <Name>Clockwise</Name>
+            </StateSave>
+            <StateSave>
+              <InstructionSaves />
+              <Name>EvenlySpaced</Name>
+            </StateSave>
+            <StateSave>
+              <InstructionSaves />
+              <Name>Manual</Name>
+            </StateSave>
+          </States>
+          <Name>ArrangementMode</Name>
+          <SharesVariablesWithOtherCategories>false</SharesVariablesWithOtherCategories>
+        </StateSaveCategory>
+      </StateCategoryList>
+      <CustomVariables>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>ArrangementMode</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>CurrentArrangementModeState</Name>
+          <Type>ArrangementMode</Type>
+          <DefaultValue xsi:type="xsd:string">Manual</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>Radius</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">100</DefaultValue>
+        </CustomVariable>
+      </CustomVariables>
+      <ImplementsIVisible>true</ImplementsIVisible>
+      <Name>Entities\Layouts\CircularLayoutManager</Name>
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>

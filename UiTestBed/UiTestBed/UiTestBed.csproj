@@ -129,6 +129,10 @@
     <Compile Include="Entities\Layouts\BoxLayoutManager.Generated.Event.cs">
       <DependentUpon>BoxLayoutManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Layouts\CircularLayoutManager.cs" />
+    <Compile Include="Entities\Layouts\CircularLayoutManager.Generated.cs">
+      <DependentUpon>CircularLayoutManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Layouts\SimpleLayoutManager.cs" />
     <Compile Include="Entities\Layouts\SimpleLayoutManager.Generated.cs">
       <DependentUpon>SimpleLayoutManager.cs</DependentUpon>

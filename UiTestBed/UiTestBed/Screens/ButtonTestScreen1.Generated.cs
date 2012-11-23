@@ -33,8 +33,8 @@ using UiTestBed.Entities.Layouts;
 using UiTestBed.Entities;
 using FlatRedBall;
 using FlatRedBall.Screens;
-using FlatRedBall.Math;
 using FlatRedBall.Graphics;
+using FlatRedBall.Math;
 
 namespace UiTestBed.Screens
 {
@@ -45,11 +45,9 @@ namespace UiTestBed.Screens
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		
-		private PositionedObjectList<UiButton> UiButtonList;
 		private FlatRedBall.Graphics.Layer UiLayer;
-		private UiTestBed.Entities.Layouts.SimpleLayoutManager MainLayout;
-		private PositionedObjectList<BoxLayoutManager> BoxLayouts;
 		private PositionedObjectList<UiButton> Buttons;
+		private PositionedObjectList<CircularLayoutManager> Layouts;
 
 		public ButtonTestScreen1()
 			: base("ButtonTestScreen1")
@@ -60,13 +58,10 @@ namespace UiTestBed.Screens
         {
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			UiButtonList = new PositionedObjectList<UiButton>();
 			UiLayer = new FlatRedBall.Graphics.Layer();
 			UiLayer.Name = "UiLayer";
-			MainLayout = new UiTestBed.Entities.Layouts.SimpleLayoutManager(ContentManagerName, false);
-			MainLayout.Name = "MainLayout";
-			BoxLayouts = new PositionedObjectList<BoxLayoutManager>();
 			Buttons = new PositionedObjectList<UiButton>();
+			Layouts = new PositionedObjectList<CircularLayoutManager>();
 			
 			
 			PostInitialize();
@@ -100,29 +95,20 @@ namespace UiTestBed.Screens
 			if (!IsPaused)
 			{
 				
-				for (int i = UiButtonList.Count - 1; i > -1; i--)
-				{
-					if (i < UiButtonList.Count)
-					{
-						// We do the extra if-check because activity could destroy any number of entities
-						UiButtonList[i].Activity();
-					}
-				}
-				MainLayout.Activity();
-				for (int i = BoxLayouts.Count - 1; i > -1; i--)
-				{
-					if (i < BoxLayouts.Count)
-					{
-						// We do the extra if-check because activity could destroy any number of entities
-						BoxLayouts[i].Activity();
-					}
-				}
 				for (int i = Buttons.Count - 1; i > -1; i--)
 				{
 					if (i < Buttons.Count)
 					{
 						// We do the extra if-check because activity could destroy any number of entities
 						Buttons[i].Activity();
+					}
+				}
+				for (int i = Layouts.Count - 1; i > -1; i--)
+				{
+					if (i < Layouts.Count)
+					{
+						// We do the extra if-check because activity could destroy any number of entities
+						Layouts[i].Activity();
 					}
 				}
 			}
@@ -145,26 +131,17 @@ namespace UiTestBed.Screens
 		{
 			// Generated Destroy
 			
-			for (int i = UiButtonList.Count - 1; i > -1; i--)
-			{
-				UiButtonList[i].Destroy();
-			}
 			if (UiLayer != null)
 			{
 				SpriteManager.RemoveLayer(UiLayer);
 			}
-			if (MainLayout != null)
-			{
-				MainLayout.Destroy();
-				MainLayout.Detach();
-			}
-			for (int i = BoxLayouts.Count - 1; i > -1; i--)
-			{
-				BoxLayouts[i].Destroy();
-			}
 			for (int i = Buttons.Count - 1; i > -1; i--)
 			{
 				Buttons[i].Destroy();
+			}
+			for (int i = Layouts.Count - 1; i > -1; i--)
+			{
+				Layouts[i].Destroy();
 			}
 
 			base.Destroy();
@@ -182,22 +159,16 @@ namespace UiTestBed.Screens
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
-			MainLayout.AddToManagers(UiLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
-			for (int i = 0; i < UiButtonList.Count; i++)
-			{
-				UiButtonList[i].ConvertToManuallyUpdated();
-			}
-			MainLayout.ConvertToManuallyUpdated();
-			for (int i = 0; i < BoxLayouts.Count; i++)
-			{
-				BoxLayouts[i].ConvertToManuallyUpdated();
-			}
 			for (int i = 0; i < Buttons.Count; i++)
 			{
 				Buttons[i].ConvertToManuallyUpdated();
+			}
+			for (int i = 0; i < Layouts.Count; i++)
+			{
+				Layouts[i].ConvertToManuallyUpdated();
 			}
 		}
 		public static void LoadStaticContent (string contentManagerName)
@@ -216,7 +187,6 @@ namespace UiTestBed.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
-			UiTestBed.Entities.Layouts.SimpleLayoutManager.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

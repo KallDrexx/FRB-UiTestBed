@@ -322,13 +322,13 @@ namespace UiTestBed.Entities
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			if (TextInstance!= null && TextInstance.Parent == null)
+			if (TextInstance.Parent == null)
 			{
 				TextInstance.CopyAbsoluteToRelative();
 				TextInstance.AttachTo(this, false);
 			}
 			TextInstance.HorizontalAlignment = FlatRedBall.Graphics.HorizontalAlignment.Center;
-			if (SpriteFrameInstance!= null && SpriteFrameInstance.Parent == null)
+			if (SpriteFrameInstance.Parent == null)
 			{
 				SpriteFrameInstance.CopyAbsoluteToRelative();
 				SpriteFrameInstance.AttachTo(this, false);
@@ -366,6 +366,12 @@ namespace UiTestBed.Entities
 			SpriteManager.AddToLayer(SpriteFrameInstance, layerToAddTo);
 			SpriteFrameInstance.AnimationChains = DefaultAnimations;
 			SpriteFrameInstance.PixelSize = 0.5f;
+			SpriteCurrentChainName = "Idle";
+			CurrentState = UiButton.VariableState.Idle;
+			SpriteFrameInstanceAlpha = 1f;
+			SpriteScaleX = 1f;
+			SpriteScaleY = 1f;
+			SpritePixelSize = 0.5f;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;

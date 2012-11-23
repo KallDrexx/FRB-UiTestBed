@@ -33,35 +33,19 @@ namespace UiTestBed.Screens
 	{
 		void CustomInitialize()
 		{
-            var outerLayout = new BoxLayoutManager(ContentManagerName);
-            BoxLayouts.Add(outerLayout);
-            outerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Right;
-            outerLayout.Spacing = 5;
+            var layout = new CircularLayoutManager(ContentManagerName);
+            layout.Radius = 100;
+            Layouts.Add(layout);
 
-            var rand = new Random();
-            for (int x = 0; x < 10; x++)
+            for (int x = 0; x < 4; x++)
             {
-                var innerLayout = new BoxLayoutManager(ContentManagerName);
-                BoxLayouts.Add(innerLayout);
-                innerLayout.CurrentDirectionState = BoxLayoutManager.Direction.Up;
-                innerLayout.Spacing = 5;
+                var btn = CreateButton();
+                btn.Text = "Button # " + x;
+                btn.ResizeAroundText(5, 5);
 
-                int count = rand.Next(1, 10);
-                for (int y = 0; y <= count; y++)
-                {
-                    var btn = CreateButton();
-                    Buttons.Add(btn);
-                    btn.Text = "Button # " + y;
-                    btn.ResizeAroundText(5, 5);
-
-                    innerLayout.AddItem(btn);
-                }
-
-                outerLayout.AddItem(innerLayout);
+                layout.Add(btn, 0, (90 * x));
             }
 
-            MainLayout.FullScreen = true;
-            MainLayout.AddItem(outerLayout, HorizontalPosition.PercentFromLeft(5), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopLeft);
 		}
 
         private void CreateButtonsForLayout(BoxLayoutManager layout)
@@ -139,7 +123,7 @@ namespace UiTestBed.Screens
             newBtn.OnPressedHandler += onPressed;
             newBtn.OnReleasedHandler += onRelease;
 
-            UiButtonList.Add(newBtn);
+            Buttons.Add(newBtn);
             return newBtn;
         }
 	}
