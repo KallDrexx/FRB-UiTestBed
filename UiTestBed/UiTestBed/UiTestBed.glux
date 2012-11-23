@@ -46,10 +46,30 @@
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>PositionedObjectList&lt;T&gt;</SourceClassType>
           <SourceClassGenericType>Entities\Layouts\CircularLayoutManager</SourceClassGenericType>
-          <InstanceName>Layouts</InstanceName>
+          <InstanceName>CircularLayouts</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
+          <LayerOn>UiLayer</LayerOn>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceClassType>PositionedObjectList&lt;T&gt;</SourceClassType>
+          <SourceClassGenericType>Entities\Layouts\BoxLayoutManager</SourceClassGenericType>
+          <InstanceName>BoxLayouts</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+          <LayerOn>UiLayer</LayerOn>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>Entity</SourceType>
+          <SourceClassType>Entities\Layouts\SimpleLayoutManager</SourceClassType>
+          <InstanceName>MainLayout</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+          <LayerOn>UiLayer</LayerOn>
         </NamedObjectSave>
       </NamedObjects>
     </ScreenSave>

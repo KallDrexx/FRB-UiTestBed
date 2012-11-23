@@ -33,24 +33,60 @@ namespace UiTestBed.Screens
 	{
 		void CustomInitialize()
 		{
-            var layout = new CircularLayoutManager(ContentManagerName);
-            layout.Radius = 100;
-            layout.ShowBorder = true;
-            layout.Margin = 0;
-            layout.StartingDegrees = 90;
-            layout.MinDegreeOffset = 45;
-            layout.CurrentArrangementModeState = CircularLayoutManager.ArrangementMode.CounterClockwise;
-            Layouts.Add(layout);
+            var outterLayout = new BoxLayoutManager(ContentManagerName);
+            outterLayout.CurrentDirectionState = BoxLayoutManager.Direction.Down;
+            outterLayout.Spacing = 5;
+            BoxLayouts.Add(outterLayout);
 
-            for (int x = 0; x < 3; x++)
+            var firstLayout = new BoxLayoutManager(ContentManagerName);
+            firstLayout.CurrentDirectionState = BoxLayoutManager.Direction.Right;
+            firstLayout.Spacing = 3;
+            firstLayout.Margin = 5;
+            BoxLayouts.Add(firstLayout);
+            outterLayout.AddItem(firstLayout);
+
+            for (int x = 0; x < 5; x++)
             {
                 var btn = CreateButton();
-                //btn.Text = "Button # " + x;
-                btn.ScaleX = 5;
-                btn.ScaleY = 5;
-
-                layout.Add(btn);
+                btn.Text = "Button # " + x;
+                btn.ResizeAroundText(5, 5);
+                firstLayout.AddItem(btn);
             }
+
+            var circleLayout = new CircularLayoutManager(ContentManagerName);
+            circleLayout.Radius = 100;
+            circleLayout.Margin = 0;
+            circleLayout.StartingDegrees = 90;
+            circleLayout.MinDegreeOffset = 45;
+            circleLayout.CurrentArrangementModeState = CircularLayoutManager.ArrangementMode.EvenlySpaced;
+            CircularLayouts.Add(circleLayout);
+            outterLayout.AddItem(circleLayout);
+
+            for (int x = 0; x < 5; x++)
+            {
+                var btn = CreateButton();
+                btn.Text = "Button # " + x;
+                btn.ResizeAroundText(5, 5);
+                circleLayout.Add(btn);
+            }
+
+            var secondLayout = new BoxLayoutManager(ContentManagerName);
+            secondLayout.CurrentDirectionState = BoxLayoutManager.Direction.Right;
+            secondLayout.Spacing = 3;
+            secondLayout.Margin = 5;
+            BoxLayouts.Add(secondLayout);
+            outterLayout.AddItem(secondLayout);
+
+            for (int x = 0; x < 5; x++)
+            {
+                var btn = CreateButton();
+                btn.Text = "Button # " + x;
+                btn.ResizeAroundText(5, 5);
+                secondLayout.AddItem(btn);
+            }
+
+            MainLayout.FullScreen = true;
+            MainLayout.AddItem(outterLayout, HorizontalPosition.PercentFromLeft(5), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopLeft);
 		}
 
         private void CreateButtonsForLayout(BoxLayoutManager layout)

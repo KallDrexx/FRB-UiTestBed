@@ -47,7 +47,9 @@ namespace UiTestBed.Screens
 		
 		private FlatRedBall.Graphics.Layer UiLayer;
 		private PositionedObjectList<UiButton> Buttons;
-		private PositionedObjectList<CircularLayoutManager> Layouts;
+		private PositionedObjectList<CircularLayoutManager> CircularLayouts;
+		private PositionedObjectList<BoxLayoutManager> BoxLayouts;
+		private UiTestBed.Entities.Layouts.SimpleLayoutManager MainLayout;
 
 		public ButtonTestScreen1()
 			: base("ButtonTestScreen1")
@@ -61,7 +63,10 @@ namespace UiTestBed.Screens
 			UiLayer = new FlatRedBall.Graphics.Layer();
 			UiLayer.Name = "UiLayer";
 			Buttons = new PositionedObjectList<UiButton>();
-			Layouts = new PositionedObjectList<CircularLayoutManager>();
+			CircularLayouts = new PositionedObjectList<CircularLayoutManager>();
+			BoxLayouts = new PositionedObjectList<BoxLayoutManager>();
+			MainLayout = new UiTestBed.Entities.Layouts.SimpleLayoutManager(ContentManagerName, false);
+			MainLayout.Name = "MainLayout";
 			
 			
 			PostInitialize();
@@ -103,14 +108,23 @@ namespace UiTestBed.Screens
 						Buttons[i].Activity();
 					}
 				}
-				for (int i = Layouts.Count - 1; i > -1; i--)
+				for (int i = CircularLayouts.Count - 1; i > -1; i--)
 				{
-					if (i < Layouts.Count)
+					if (i < CircularLayouts.Count)
 					{
 						// We do the extra if-check because activity could destroy any number of entities
-						Layouts[i].Activity();
+						CircularLayouts[i].Activity();
 					}
 				}
+				for (int i = BoxLayouts.Count - 1; i > -1; i--)
+				{
+					if (i < BoxLayouts.Count)
+					{
+						// We do the extra if-check because activity could destroy any number of entities
+						BoxLayouts[i].Activity();
+					}
+				}
+				MainLayout.Activity();
 			}
 			else
 			{
@@ -139,9 +153,18 @@ namespace UiTestBed.Screens
 			{
 				Buttons[i].Destroy();
 			}
-			for (int i = Layouts.Count - 1; i > -1; i--)
+			for (int i = CircularLayouts.Count - 1; i > -1; i--)
 			{
-				Layouts[i].Destroy();
+				CircularLayouts[i].Destroy();
+			}
+			for (int i = BoxLayouts.Count - 1; i > -1; i--)
+			{
+				BoxLayouts[i].Destroy();
+			}
+			if (MainLayout != null)
+			{
+				MainLayout.Destroy();
+				MainLayout.Detach();
 			}
 
 			base.Destroy();
@@ -159,6 +182,7 @@ namespace UiTestBed.Screens
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
+			MainLayout.AddToManagers(UiLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
@@ -166,10 +190,15 @@ namespace UiTestBed.Screens
 			{
 				Buttons[i].ConvertToManuallyUpdated();
 			}
-			for (int i = 0; i < Layouts.Count; i++)
+			for (int i = 0; i < CircularLayouts.Count; i++)
 			{
-				Layouts[i].ConvertToManuallyUpdated();
+				CircularLayouts[i].ConvertToManuallyUpdated();
 			}
+			for (int i = 0; i < BoxLayouts.Count; i++)
+			{
+				BoxLayouts[i].ConvertToManuallyUpdated();
+			}
+			MainLayout.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -187,6 +216,7 @@ namespace UiTestBed.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
+			UiTestBed.Entities.Layouts.SimpleLayoutManager.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]
