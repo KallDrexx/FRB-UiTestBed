@@ -174,8 +174,8 @@ namespace UiTestBed.Entities.Layouts
             }
 
             // Recalculate scale to whatever the maximum values are
-            ScaleX = (Math.Max(Math.Abs(minX.Value), Math.Abs(maxX.Value)));
-            ScaleY = (Math.Max(Math.Abs(minY.Value), Math.Abs(maxY.Value)));
+            ScaleX = (Math.Max(Math.Abs(minX.Value), Math.Abs(maxX.Value))) + Margin;
+            ScaleY = (Math.Max(Math.Abs(minY.Value), Math.Abs(maxY.Value))) + Margin;
             _recalculateLayout = false;
         }
 

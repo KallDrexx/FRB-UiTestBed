@@ -36,9 +36,10 @@ namespace UiTestBed.Screens
             var layout = new CircularLayoutManager(ContentManagerName);
             layout.Radius = 100;
             layout.ShowBorder = true;
+            layout.Margin = 20;
             Layouts.Add(layout);
 
-            for (int x = 0; x < 4; x++)
+            for (int x = 0; x < 3; x++)
             {
                 var btn = CreateButton();
                 btn.Text = "Button # " + x;

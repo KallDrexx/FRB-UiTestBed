@@ -99,6 +99,7 @@ namespace UiTestBed.Entities.Layouts
 		static List<string> LoadedContentManagers = new List<string>();
 		
 		public float Radius = 100f;
+		public float Margin = 0f;
 		public int Index { get; set; }
 		public bool Used { get; set; }
 		public event EventHandler BeforeVisibleSet;
@@ -211,6 +212,7 @@ namespace UiTestBed.Entities.Layouts
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
 			CurrentArrangementModeState = CircularLayoutManager.ArrangementMode.Manual;
 			Radius = 100f;
+			Margin = 0f;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -232,6 +234,7 @@ namespace UiTestBed.Entities.Layouts
 			RotationZ = 0;
 			CurrentArrangementModeState = CircularLayoutManager.ArrangementMode.Manual;
 			Radius = 100f;
+			Margin = 0f;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
