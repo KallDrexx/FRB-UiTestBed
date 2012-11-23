@@ -38,15 +38,16 @@ namespace UiTestBed.Screens
             layout.ShowBorder = true;
             layout.Margin = 0;
             layout.StartingDegrees = 90;
+            layout.CurrentArrangementModeState = CircularLayoutManager.ArrangementMode.EvenlySpaced;
             Layouts.Add(layout);
 
-            for (int x = 0; x < 8; x++)
+            for (int x = 0; x < 3; x++)
             {
                 var btn = CreateButton();
                 btn.Text = "Button # " + x;
                 btn.ResizeAroundText(5, 5);
 
-                layout.Add(btn, 0, (45 * x));
+                layout.Add(btn);
             }
 		}
 
@@ -64,7 +65,6 @@ namespace UiTestBed.Screens
         void CustomActivity(bool firstTimeCalled)
 		{
             InputManager.Keyboard.ControlPositionedObject(SpriteManager.Camera);
-            Layouts[0].StartingDegrees += 0.1f;
 		}
 
 		void CustomDestroy()

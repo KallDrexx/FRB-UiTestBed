@@ -25,6 +25,8 @@ namespace UiTestBed.Entities.Layouts
 {
 	public partial class CircularLayoutManager : ILayoutable
 	{
+        protected const float FULL_CIRCLE = 2 * (float)Math.PI;
+
         public event ILayoutableEvent OnSizeChange;
 
         protected float _width;
@@ -126,16 +128,38 @@ namespace UiTestBed.Entities.Layouts
             base.ForceUpdateDependencies();
         }
 
-        protected void PositionItem(ILayoutable item)
+        protected void PositionItem(ILayoutable item, ILayoutable lastItem = null)
         {
-            if (!_items.ContainsKey(item))
-                return;
-
-            float startingRadians = MathHelper.ToRadians(StartingDegrees);
-
             var position = _items[item];
-            float xCoord = (float)Math.Cos(startingRadians + position.RadianOffset) * (Radius + position.RadiusOffset);
-            float yCoord = (float)Math.Sin(startingRadians + position.RadianOffset) * (Radius + position.RadiusOffset);
+            var lastPosition = (lastItem != null ? _items[lastItem] : (CircularPosition)null);
+            float startingRadians = MathHelper.ToRadians(StartingDegrees);
+            float absoluteRadians;
+
+            switch (CurrentArrangementModeState)
+            {
+                case ArrangementMode.EvenlySpaced:
+                    if (lastPosition == null)
+                    {
+                        // If no last item provided, assume this is the first
+                        absoluteRadians = startingRadians + position.RadianOffset;
+                    }
+                    else
+                    {
+                        float spacing = FULL_CIRCLE / _items.Count;
+                        absoluteRadians = lastPosition.AbsoluteRadians + spacing + position.RadianOffset;
+                    }
+
+                    break;
+
+                case ArrangementMode.Manual:
+                default:
+                    absoluteRadians = startingRadians + position.RadianOffset;
+                    break;
+            }
+
+            position.AbsoluteRadians = absoluteRadians;
+            float xCoord = (float)Math.Cos(absoluteRadians) * (Radius + position.RadiusOffset);
+            float yCoord = (float)Math.Sin(absoluteRadians) * (Radius + position.RadiusOffset);
 
             item.RelativeX = xCoord;
             item.RelativeY = yCoord;
@@ -146,6 +170,8 @@ namespace UiTestBed.Entities.Layouts
             if (!_recalculateLayout)
                 return;
 
+            var lastItem = (ILayoutable)null;
+
             // Go through all the items and find the min and max positions of items
             //   The origin is always 
             float? minX = null, minY = null, maxX = null, maxY = null;
@@ -153,7 +179,7 @@ namespace UiTestBed.Entities.Layouts
             foreach (var item in _items.Keys)
             {
                 // Update the item's position
-                PositionItem(item);
+                PositionItem(item, lastItem);
 
                 float leftX = item.RelativeX - item.ScaleX;
                 float rightX = item.RelativeX + item.ScaleX;
@@ -173,6 +199,8 @@ namespace UiTestBed.Entities.Layouts
 
                 if (maxY == null || maxY < topY)
                     maxY = topY;
+
+                lastItem = item;
             }
 
             // Recalculate scale to whatever the maximum values are
@@ -202,6 +230,7 @@ namespace UiTestBed.Entities.Layouts
         {
             public float RadianOffset { get; set; }
             public float RadiusOffset { get; set; }
+            public float AbsoluteRadians { get; set; }
         }
     }
 }
