@@ -29,8 +29,8 @@ namespace UiTestBed.Entities.Layouts
 
         public event ILayoutableEvent OnSizeChange;
 
-        protected Dictionary<ILayoutable, Alignment> _layoutedItems;
-        protected bool _redoLayout;
+        protected Dictionary<ILayoutable, Alignment> _items;
+        protected bool _recalculateLayout;
         protected AxisAlignedRectangle _border;
         private float _width;
         private float _height;
@@ -86,18 +86,18 @@ namespace UiTestBed.Entities.Layouts
 
         public void AddItem(ILayoutable item, bool inverseAlignment = false)
         {
-            if (_layoutedItems.ContainsKey(item))
+            if (_items.ContainsKey(item))
                 return;
 
             var alignment = (inverseAlignment ? Alignment.Inverse : Alignment.Default);
-            _layoutedItems.Add(item, alignment);
+            _items.Add(item, alignment);
             item.AttachTo(this, false);
-            _redoLayout = true;
+            _recalculateLayout = true;
             PerformLayout();
 
             item.OnSizeChange += new ILayoutableEvent(delegate(ILayoutable sender) 
             { 
-                _redoLayout = true; 
+                _recalculateLayout = true; 
             });
         }
 
@@ -116,21 +116,21 @@ namespace UiTestBed.Entities.Layouts
         protected virtual void PerformLayout()
         {
             // Remove any items that this is no longer the parent of
-            for (int x = _layoutedItems.Count - 1; x >= 0; x--)
+            for (int x = _items.Count - 1; x >= 0; x--)
             {
-                var item = _layoutedItems.Keys.ElementAt(x);
+                var item = _items.Keys.ElementAt(x);
                 if (item.Parent != this)
                 {
-                    _layoutedItems.Remove(item);
-                    _redoLayout = true;
+                    _items.Remove(item);
+                    _recalculateLayout = true;
                 }
             }
 
-            if (!_redoLayout)
+            if (!_recalculateLayout)
                 return; // Not flagged to actually reset the layout
 
             // Reset the flag so we don't reset the layout again
-            _redoLayout = false;
+            _recalculateLayout = false;
 
             switch (CurrentDirectionState)
             {
@@ -165,7 +165,7 @@ namespace UiTestBed.Entities.Layouts
             float width = 0;
             float height = 0;
 
-            foreach (var item in _layoutedItems.Keys)
+            foreach (var item in _items.Keys)
             {
                 height += (item.ScaleY);
                 if (item.ScaleX > width)
@@ -174,7 +174,7 @@ namespace UiTestBed.Entities.Layouts
 
             // Add the margins and spacings
             width += Margin;
-            height += (Margin + ((Spacing / 2) * _layoutedItems.Count - 1));
+            height += (Margin + ((Spacing / 2) * _items.Count - 1));
 
             // Set the scales
             ScaleX = (width);
@@ -197,7 +197,7 @@ namespace UiTestBed.Entities.Layouts
             }
 
             bool firstItem = true;
-            foreach (var item in _layoutedItems.Keys)
+            foreach (var item in _items.Keys)
             {
                 if (!firstItem)
                 {
@@ -210,7 +210,7 @@ namespace UiTestBed.Entities.Layouts
                 // Since the x/y position will point to the center, we need to account for that
                 if (increasing)
                 {
-                    if (_layoutedItems[item] == Alignment.Inverse)
+                    if (_items[item] == Alignment.Inverse)
                         item.RelativeX = (currentX * -1) - item.ScaleX;
                     else
                         item.RelativeX = currentX + item.ScaleX;
@@ -220,7 +220,7 @@ namespace UiTestBed.Entities.Layouts
                 }
                 else
                 {
-                    if (_layoutedItems[item] == Alignment.Inverse)
+                    if (_items[item] == Alignment.Inverse)
                         item.RelativeX = (currentX * -1) - item.ScaleX;
                     else
                         item.RelativeX = currentX + item.ScaleX;
@@ -238,7 +238,7 @@ namespace UiTestBed.Entities.Layouts
             // Calculate the width and height
             float halfWidth = 0;
             float halfHeight = 0;
-            foreach (var item in _layoutedItems.Keys)
+            foreach (var item in _items.Keys)
             {
                 halfWidth += (item.ScaleX);
                 if (item.ScaleY > halfHeight)
@@ -246,7 +246,7 @@ namespace UiTestBed.Entities.Layouts
             }
 
             // Add the margins
-            halfWidth += (Margin + ((Spacing / 2) * _layoutedItems.Count - 1));
+            halfWidth += (Margin + ((Spacing / 2) * _items.Count - 1));
             halfHeight += Margin;
 
             // Set the manager's Scale properties
@@ -270,7 +270,7 @@ namespace UiTestBed.Entities.Layouts
             }
 
             bool firstItem = true;
-            foreach (var item in _layoutedItems.Keys)
+            foreach (var item in _items.Keys)
             {
                 if (!firstItem)
                 {
@@ -283,7 +283,7 @@ namespace UiTestBed.Entities.Layouts
                 // Since the x/y position will point to the center, we need to account for that
                 if (increasing)
                 {
-                    if (_layoutedItems[item] == Alignment.Inverse)
+                    if (_items[item] == Alignment.Inverse)
                         item.RelativeY = (currentY * -1) + item.ScaleY;
                     else
                         item.RelativeY = currentY - item.ScaleY;
@@ -293,7 +293,7 @@ namespace UiTestBed.Entities.Layouts
                 }
                 else
                 {
-                    if (_layoutedItems[item] == Alignment.Inverse)
+                    if (_items[item] == Alignment.Inverse)
                         item.RelativeY = (currentY * -1) + item.ScaleY;
                     else
                         item.RelativeY = currentY - item.ScaleY;
@@ -308,7 +308,7 @@ namespace UiTestBed.Entities.Layouts
 
 		private void CustomInitialize()
 		{
-            _layoutedItems = new Dictionary<ILayoutable, Alignment>();
+            _items = new Dictionary<ILayoutable, Alignment>();
 		}
 
 		private void CustomActivity()
