@@ -25,8 +25,6 @@ namespace UiTestBed.Entities.Layouts
 {
 	public partial class SimpleLayoutManager : ILayoutable
 	{
-        public event ILayoutableEvent OnSizeChange;
-
         protected Dictionary<ILayoutable, Positioning> _items;
         protected bool _isFullScreen;
         private float _width;
@@ -56,6 +54,7 @@ namespace UiTestBed.Entities.Layouts
             }
         }
 
+        public ILayoutableEvent OnSizeChangeHandler { get; set; }
         public float ScaleXVelocity { get; set; }
         public float ScaleYVelocity { get; set; }
 
@@ -67,8 +66,8 @@ namespace UiTestBed.Entities.Layouts
                 float oldWidth = _width;
                 _width = value * 2;
 
-                if (OnSizeChange != null && oldWidth != _width)
-                    OnSizeChange(this);
+                if (OnSizeChangeHandler != null && oldWidth != _width)
+                    OnSizeChangeHandler(this);
             }
         }
 
@@ -80,8 +79,8 @@ namespace UiTestBed.Entities.Layouts
                 float oldHeight = _height;
                 _height = value * 2;
 
-                if (OnSizeChange != null && oldHeight != _height)
-                    OnSizeChange(this);
+                if (OnSizeChangeHandler != null && oldHeight != _height)
+                    OnSizeChangeHandler(this);
             }
         }
 
@@ -97,7 +96,7 @@ namespace UiTestBed.Entities.Layouts
             PositionItem(item, horizontalPosition, verticalPosition, layoutFrom);
 
             // When the size changes, make sure to reposition the item so it's still in the same spot
-            item.OnSizeChange += new ILayoutableEvent(delegate(ILayoutable sender) { PositionItem(item, horizontalPosition, verticalPosition, layoutFrom); });
+            item.OnSizeChangeHandler = new ILayoutableEvent(delegate(ILayoutable sender) { PositionItem(item, horizontalPosition, verticalPosition, layoutFrom); });
         }
 
         private void PositionItem(ILayoutable item, HorizontalPosition horizontalPosition, VerticalPosition verticalPosition, LayoutOrigin layoutFrom)

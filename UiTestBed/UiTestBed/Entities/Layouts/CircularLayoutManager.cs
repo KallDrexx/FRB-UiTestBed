@@ -28,14 +28,13 @@ namespace UiTestBed.Entities.Layouts
 	{
         protected const float FULL_CIRCLE = 2 * (float)Math.PI;
 
-        public event ILayoutableEvent OnSizeChange;
-
         protected float _width;
         protected float _height;
         protected AxisAlignedRectangle _border;
         protected Dictionary<ILayoutable, CircularPosition> _items;
         protected bool _recalculateLayout;
 
+        public ILayoutableEvent OnSizeChangeHandler { get; set; }
         public float ScaleXVelocity { get; set; }
         public float ScaleYVelocity { get; set; }
 
@@ -47,8 +46,8 @@ namespace UiTestBed.Entities.Layouts
                 float prevWidth = _width;
                 _width = value * 2;
 
-                if (OnSizeChange != null && _width != prevWidth)
-                    OnSizeChange(this);
+                if (OnSizeChangeHandler != null && _width != prevWidth)
+                    OnSizeChangeHandler(this);
 
                 if (_border != null)
                     _border.ScaleX = value;
@@ -63,8 +62,8 @@ namespace UiTestBed.Entities.Layouts
                 float prevHeight = _height;
                 _height = value * 2;
 
-                if (OnSizeChange != null && _height != prevHeight)
-                    OnSizeChange(this);
+                if (OnSizeChangeHandler != null && _height != prevHeight)
+                    OnSizeChangeHandler(this);
 
                 if (_border != null)
                     _border.ScaleY = value;
@@ -114,7 +113,7 @@ namespace UiTestBed.Entities.Layouts
             _recalculateLayout = true;
 
             // Set the size to realculate when a control changes 
-            item.OnSizeChange += new ILayoutableEvent(delegate(ILayoutable sender) { _recalculateLayout = true; });
+            item.OnSizeChangeHandler = new ILayoutableEvent(delegate(ILayoutable sender) { _recalculateLayout = true; });
         }
 
         public override void UpdateDependencies(double currentTime)

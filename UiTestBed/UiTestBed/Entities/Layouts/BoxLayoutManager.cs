@@ -27,8 +27,6 @@ namespace UiTestBed.Entities.Layouts
 	{
         public enum Alignment { Default, Inverse }
 
-        public event ILayoutableEvent OnSizeChange;
-
         protected Dictionary<ILayoutable, Alignment> _items;
         protected bool _recalculateLayout;
         protected AxisAlignedRectangle _border;
@@ -43,8 +41,8 @@ namespace UiTestBed.Entities.Layouts
                 float oldWidth = _width;
                 _width = value * 2;
 
-                if (OnSizeChange != null && oldWidth != _width)
-                    OnSizeChange(this);
+                if (OnSizeChangeHandler != null && oldWidth != _width)
+                    OnSizeChangeHandler(this);
             }
         }
 
@@ -56,8 +54,8 @@ namespace UiTestBed.Entities.Layouts
                 float oldHeight = _height;
                 _height = value * 2;
 
-                if (OnSizeChange != null && oldHeight != _height)
-                    OnSizeChange(this);
+                if (OnSizeChangeHandler != null && oldHeight != _height)
+                    OnSizeChangeHandler(this);
             }
         }
 
@@ -81,6 +79,7 @@ namespace UiTestBed.Entities.Layouts
             }
         }
 
+        public ILayoutableEvent OnSizeChangeHandler { get; set; }
         public float ScaleYVelocity { get; set; }
         public float ScaleXVelocity { get; set; }
 
@@ -95,7 +94,7 @@ namespace UiTestBed.Entities.Layouts
             _recalculateLayout = true;
             PerformLayout();
 
-            item.OnSizeChange += new ILayoutableEvent(delegate(ILayoutable sender) 
+            item.OnSizeChangeHandler = new ILayoutableEvent(delegate(ILayoutable sender) 
             { 
                 _recalculateLayout = true; 
             });

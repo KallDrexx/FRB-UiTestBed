@@ -14,7 +14,7 @@ namespace UiTestBed.Entities.Interfaces
 
     public interface ILayoutable : IVisible, IScalable, IPositionable
     {
-        event ILayoutableEvent OnSizeChange;
+        ILayoutableEvent OnSizeChangeHandler { get; set; }
 
         void AttachTo(PositionedObject obj, bool changeRelative);
         float RelativeX { get; set; }
