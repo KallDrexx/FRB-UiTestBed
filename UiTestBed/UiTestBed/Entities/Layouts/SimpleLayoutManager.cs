@@ -102,6 +102,15 @@ namespace UiTestBed.Entities.Layouts
 
         private void PositionItem(ILayoutable item, HorizontalPosition horizontalPosition, VerticalPosition verticalPosition, LayoutOrigin layoutFrom)
         {
+            // Make sure this is still the item's parent
+            if (item.Parent != this)
+            {
+                if (_items.ContainsKey(item))
+                    _items.Remove(item);
+
+                return;
+            }
+
             // Position the item correctly
             float posX;
             float posY;

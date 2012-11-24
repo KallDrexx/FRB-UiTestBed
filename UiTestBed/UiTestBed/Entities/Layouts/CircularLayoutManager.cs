@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using FlatRedBall;
 using FlatRedBall.Input;
 using FlatRedBall.AI.Pathfinding;
@@ -217,8 +218,17 @@ namespace UiTestBed.Entities.Layouts
             //   The origin is always 
             float? minX = null, minY = null, maxX = null, maxY = null;
 
-            foreach (var item in _items.Keys)
+            for (int x = _items.Count - 1; x >= 0; x--)
             {
+                var item = _items.Keys.ElementAt(x);
+
+                // Make sure the item still has this as its parent
+                if (item.Parent != this)
+                {
+                    _items.Remove(item);
+                    continue;
+                }
+
                 // Update the item's position
                 PositionItem(item, lastItem);
 

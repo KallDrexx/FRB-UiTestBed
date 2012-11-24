@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using FlatRedBall;
 using FlatRedBall.Input;
 using FlatRedBall.AI.Pathfinding;
@@ -114,6 +115,17 @@ namespace UiTestBed.Entities.Layouts
 
         protected virtual void PerformLayout()
         {
+            // Remove any items that this is no longer the parent of
+            for (int x = _layoutedItems.Count - 1; x >= 0; x--)
+            {
+                var item = _layoutedItems.Keys.ElementAt(x);
+                if (item.Parent != this)
+                {
+                    _layoutedItems.Remove(item);
+                    _redoLayout = true;
+                }
+            }
+
             if (!_redoLayout)
                 return; // Not flagged to actually reset the layout
 
