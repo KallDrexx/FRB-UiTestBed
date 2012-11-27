@@ -30,7 +30,6 @@ using Microsoft.Xna.Framework.Media;
 
 // Generated Usings
 using UiTestBed.Entities.Layouts;
-using UiTestBed.Entities;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using FlatRedBall.Graphics;
@@ -46,7 +45,6 @@ namespace UiTestBed.Screens
 		#endif
 		
 		private FlatRedBall.Graphics.Layer UiLayer;
-		private PositionedObjectList<UiButton> Buttons;
 		private PositionedObjectList<CircularLayoutManager> CircularLayouts;
 		private PositionedObjectList<BoxLayoutManager> BoxLayouts;
 		private UiTestBed.Entities.Layouts.SimpleLayoutManager MainLayout;
@@ -62,7 +60,6 @@ namespace UiTestBed.Screens
 			LoadStaticContent(ContentManagerName);
 			UiLayer = new FlatRedBall.Graphics.Layer();
 			UiLayer.Name = "UiLayer";
-			Buttons = new PositionedObjectList<UiButton>();
 			CircularLayouts = new PositionedObjectList<CircularLayoutManager>();
 			BoxLayouts = new PositionedObjectList<BoxLayoutManager>();
 			MainLayout = new UiTestBed.Entities.Layouts.SimpleLayoutManager(ContentManagerName, false);
@@ -100,14 +97,6 @@ namespace UiTestBed.Screens
 			if (!IsPaused)
 			{
 				
-				for (int i = Buttons.Count - 1; i > -1; i--)
-				{
-					if (i < Buttons.Count)
-					{
-						// We do the extra if-check because activity could destroy any number of entities
-						Buttons[i].Activity();
-					}
-				}
 				for (int i = CircularLayouts.Count - 1; i > -1; i--)
 				{
 					if (i < CircularLayouts.Count)
@@ -149,10 +138,6 @@ namespace UiTestBed.Screens
 			{
 				SpriteManager.RemoveLayer(UiLayer);
 			}
-			for (int i = Buttons.Count - 1; i > -1; i--)
-			{
-				Buttons[i].Destroy();
-			}
 			for (int i = CircularLayouts.Count - 1; i > -1; i--)
 			{
 				CircularLayouts[i].Destroy();
@@ -186,10 +171,6 @@ namespace UiTestBed.Screens
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
-			for (int i = 0; i < Buttons.Count; i++)
-			{
-				Buttons[i].ConvertToManuallyUpdated();
-			}
 			for (int i = 0; i < CircularLayouts.Count; i++)
 			{
 				CircularLayouts[i].ConvertToManuallyUpdated();

@@ -118,7 +118,6 @@
     <Compile Include="Data\LayoutOrigin.cs" />
     <Compile Include="Data\Positioning.cs" />
     <Compile Include="Data\VerticalPosition.cs" />
-    <Compile Include="Entities\Interfaces\ILayoutable.cs" />
     <Compile Include="Entities\Layouts\BoxLayoutManager.cs" />
     <Compile Include="Entities\Layouts\BoxLayoutManager.Event.cs">
       <DependentUpon>BoxLayoutManager.cs</DependentUpon>
@@ -142,16 +141,6 @@
     <Compile Include="Entities\Layouts\SimpleLayoutManager.cs" />
     <Compile Include="Entities\Layouts\SimpleLayoutManager.Generated.cs">
       <DependentUpon>SimpleLayoutManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\UiButton.cs" />
-    <Compile Include="Entities\UiButton.Event.cs">
-      <DependentUpon>UiButton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\UiButton.Generated.cs">
-      <DependentUpon>UiButton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\UiButton.Generated.Event.cs">
-      <DependentUpon>UiButton.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalContent.Generated.cs" />
     <Compile Include="Performance\IPoolable.Generated.cs" />
@@ -204,6 +193,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\FrbUi\FrbUi.csproj">
+      <Project>{7235175C-356E-4756-9D68-5889ABC79A24}</Project>
+      <Name>FrbUi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UiTestBedContent\UiTestBedContent.contentproj">
       <Project>{64B23BEF-DD26-4B81-AAA6-D9F46B0140B4}</Project>
       <Name>UiTestBedContent %28Content%29</Name>

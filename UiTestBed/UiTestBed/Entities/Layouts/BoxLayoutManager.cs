@@ -19,7 +19,8 @@ using FlatRedBall.Math.Splines;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
-using UiTestBed.Entities.Interfaces;
+using FrbUi;
+using FlatRedBall.Graphics;
 
 namespace UiTestBed.Entities.Layouts
 {
@@ -79,6 +80,7 @@ namespace UiTestBed.Entities.Layouts
             }
         }
 
+        public Layer Layer { get { return LayerProvidedByContainer; } }
         public ILayoutableEvent OnSizeChangeHandler { get; set; }
         public float ScaleYVelocity { get; set; }
         public float ScaleXVelocity { get; set; }

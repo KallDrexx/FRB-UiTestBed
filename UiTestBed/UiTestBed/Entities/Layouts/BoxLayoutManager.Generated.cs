@@ -17,7 +17,6 @@ using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
 using UiTestBed.Entities.Layouts;
-using UiTestBed.Entities;
 using FlatRedBall;
 using FlatRedBall.Screens;
 
@@ -513,6 +512,15 @@ namespace UiTestBed.Entities.Layouts
 		{
 			InstructionManager.IgnorePausingFor(this);
 			InstructionManager.IgnorePausingFor(SpriteFrameInstance);
+		}
+		public void MoveToLayer (Layer layerToMoveTo)
+		{
+			if (LayerProvidedByContainer != null)
+			{
+				LayerProvidedByContainer.Remove(SpriteFrameInstance);
+			}
+			SpriteManager.AddToLayer(SpriteFrameInstance, layerToMoveTo);
+			LayerProvidedByContainer = layerToMoveTo;
 		}
 
     }

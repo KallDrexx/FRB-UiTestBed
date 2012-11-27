@@ -15,13 +15,24 @@ namespace UiTestBed
 	public static class GlobalContent
 	{
 		
+		public static FlatRedBall.Graphics.Animation.AnimationChainList Button1 { get; set; }
 		[System.Obsolete("Use GetFile instead")]
 		public static object GetStaticMember (string memberName)
 		{
+			switch(memberName)
+			{
+				case  "Button1":
+					return Button1;
+			}
 			return null;
 		}
 		public static object GetFile (string memberName)
 		{
+			switch(memberName)
+			{
+				case  "Button1":
+					return Button1;
+			}
 			return null;
 		}
 		public static bool IsInitialized { get; private set; }
@@ -30,6 +41,7 @@ namespace UiTestBed
 		public static void Initialize ()
 		{
 			
+			Button1 = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/globalcontent/button1.achx", ContentManagerName);
 						IsInitialized = true;
 		}
 		

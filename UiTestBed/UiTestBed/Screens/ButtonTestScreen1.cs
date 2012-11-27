@@ -21,11 +21,12 @@ using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 #endif
 
-using UiTestBed.Entities;
 using FlatRedBall.Instructions;
 using UiTestBed.Entities.Layouts;
 using UiTestBed.Data;
 using FlatRedBall.Graphics;
+using FrbUi.Controls;
+using FrbUi;
 
 namespace UiTestBed.Screens
 {
@@ -119,7 +120,7 @@ namespace UiTestBed.Screens
 
         private UiButton CreateButton()
         {
-            var onSelected = new EventHandler(delegate(object sender, EventArgs e)
+            var onSelected = new ILayoutableEvent(delegate(ILayoutable sender)
             {
                 var btn = sender as UiButton;
                 if (btn != null)
@@ -130,7 +131,7 @@ namespace UiTestBed.Screens
                 }
             });
 
-            var onUnSelected = new EventHandler(delegate(object sender, EventArgs e)
+            var onUnSelected = new ILayoutableEvent(delegate(ILayoutable sender)
             {
                 var btn = sender as UiButton;
                 if (btn != null)
@@ -140,31 +141,34 @@ namespace UiTestBed.Screens
                 }
             });
 
-            var onPressed = new EventHandler(delegate(object sender, EventArgs e)
+            var onPressed = new ILayoutableEvent(delegate(ILayoutable sender)
             {
                 var btn = sender as UiButton;
                 if (btn != null)
                     btn.Text = "Pressed";
             });
 
-            var onRelease = new EventHandler(delegate(object sender, EventArgs e)
+            var onRelease = new ILayoutableEvent(delegate(ILayoutable sender)
             {
                 var btn = sender as UiButton;
                 if (btn != null)
                     btn.Text = "Released";
             });
 
-            var newBtn = new UiButton(ContentManagerName, false);
+            var newBtn = new UiButton();
+            //newBtn.AddToManagers(UiLayer);
+            newBtn.Text = "Button";
+            newBtn.ResizeAroundText(5, 5);
+
+            newBtn.AnimationChains = GlobalContent.Button1;
+            newBtn.CurrentChainName = "Available";
+
+            newBtn.OnFocused += onSelected;
+            newBtn.OnFocusLost += onUnSelected;
+            newBtn.OnPushed += onPressed;
+            newBtn.OnReleased += onRelease;
+
             newBtn.AddToManagers(UiLayer);
-            newBtn.SpriteScaleX = newBtn.SpriteTexture.Width * newBtn.SpritePixelSize;
-            newBtn.SpriteScaleY = newBtn.SpriteTexture.Height * newBtn.SpritePixelSize;
-
-            newBtn.OnSelectedHandler += onSelected;
-            newBtn.OnUnSelectedHandler += onUnSelected;
-            newBtn.OnPressedHandler += onPressed;
-            newBtn.OnReleasedHandler += onRelease;
-
-            Buttons.Add(newBtn);
             return newBtn;
         }
 	}

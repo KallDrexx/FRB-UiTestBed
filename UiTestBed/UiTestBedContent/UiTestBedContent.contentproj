@@ -48,25 +48,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Entities\UiButton\button-disabled.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>button-disabled</Name>
-    </None>
-    <None Include="Entities\UiButton\button-idle.png">
+    <None Include="GlobalContent\button-idle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>button-idle</Name>
     </None>
-    <None Include="Entities\UiButton\button-pressed.png">
+    <None Include="GlobalContent\Button1.achx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>button-pressed</Name>
-    </None>
-    <None Include="Entities\UiButton\button-selected.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>button-selected</Name>
-    </None>
-    <None Include="Entities\UiButton\DefaultAnimations.achx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>DefaultAnimations</Name>
+      <Name>Button1</Name>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
