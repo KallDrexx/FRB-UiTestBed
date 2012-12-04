@@ -5,26 +5,6 @@
       <Name>Screens\ButtonTestScreen1</Name>
       <NamedObjects>
         <NamedObjectSave>
-          <CustomProperty>
-            <Type>LayerCameraSettings</Type>
-            <Member>LayerCameraSettings</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>string</Type>
-            <Member>Name</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>RelativeToCamera</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>SortType</Type>
-            <Member>SortType</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>Visible</Member>
-          </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>Layer</SourceClassType>
           <InstanceName>UiLayer</InstanceName>
@@ -188,121 +168,14 @@
       </CustomVariables>
       <BaseEntity />
       <ImplementsIVisible>true</ImplementsIVisible>
+      <ImplementsIWindow>true</ImplementsIWindow>
       <Name>Entities\Layouts\BoxLayoutManager</Name>
       <NamedObjects>
         <NamedObjectSave>
           <CustomProperty>
-            <Type>float</Type>
-            <Member>Alpha</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>AlphaRate</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>Animate</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>AnimationChainList</Type>
-            <Member>AnimationChains</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>AnimationSpeed</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>BlendOperation</Type>
-            <Member>BlendOperation</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>Blue</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>BlueRate</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>BottomTextureCoordinate</Member>
-          </CustomProperty>
-          <CustomProperty>
             <Type>ColorOperation</Type>
             <Member>ColorOperation</Member>
             <ValueAsObject xsi:type="xsd:int">6</ValueAsObject>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>int</Type>
-            <Member>CurrentChainIndex</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>string</Type>
-            <Member>CurrentChainName</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>int</Type>
-            <Member>CurrentFrameIndex</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>CursorSelectable</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>Drag</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>FlipHorizontal</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>FlipVertical</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>Green</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>GreenRate</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>IgnoreAnimationChainTextureFlip</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>IgnoreParentPosition</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>IgnoresParentVisibility</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>KeepTrackOfReal</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>LeftTextureCoordinate</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>string</Type>
-            <Member>Name</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>string</Type>
-            <Member>ParentBone</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>ParentRotationChangesPosition</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>ParentRotationChangesRotation</Member>
           </CustomProperty>
           <CustomProperty>
             <Type>float</Type>
@@ -316,141 +189,13 @@
           </CustomProperty>
           <CustomProperty>
             <Type>float</Type>
-            <Member>RedRate</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeRotationX</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeRotationXVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeRotationY</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeRotationYVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeRotationZ</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeRotationZVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeX</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeXAcceleration</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeXVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeY</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeYAcceleration</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeYVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeZ</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeZAcceleration</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeZVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RightTextureCoordinate</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RotationX</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RotationXVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RotationY</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RotationYVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RotationZ</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RotationZVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
             <Member>ScaleX</Member>
             <ValueAsFloat>32</ValueAsFloat>
           </CustomProperty>
           <CustomProperty>
             <Type>float</Type>
-            <Member>ScaleXVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
             <Member>ScaleY</Member>
             <ValueAsFloat>32</ValueAsFloat>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>ScaleYVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>Texture2D</Type>
-            <Member>Texture</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>TextureAddressMode</Type>
-            <Member>TextureAddressMode</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>Object</Type>
-            <Member>TextureFilter</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>double</Type>
-            <Member>TimeCreated</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>double</Type>
-            <Member>TimeIntoAnimation</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>TopTextureCoordinate</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>bool</Type>
-            <Member>UseAnimationRelativePosition</Member>
           </CustomProperty>
           <CustomProperty>
             <Type>bool</Type>
@@ -461,54 +206,6 @@
             <Type>float</Type>
             <Member>X</Member>
             <ValueAsFloat>5</ValueAsFloat>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>XAcceleration</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>XVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>Y</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>YAcceleration</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>YVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>Z</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>ZAcceleration</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>ZVelocity</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>double</Type>
-            <Member>mLastDependencyUpdate</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>BorderSides</Type>
-            <Member>Borders</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>SpriteBorderWidth</Member>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>TextureBorderWidth</Member>
           </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>Sprite</SourceClassType>
@@ -637,6 +334,27 @@
     <EntitySave>
       <ImplementsIVisible>true</ImplementsIVisible>
       <Name>Entities\Layouts\SimpleLayoutManager</Name>
+      <Is2D>true</Is2D>
+    </EntitySave>
+    <EntitySave>
+      <ImplementsIVisible>true</ImplementsIVisible>
+      <ImplementsIWindow>true</ImplementsIWindow>
+      <Name>Entities\Test1</Name>
+      <NamedObjects>
+        <NamedObjectSave>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>PixelSize</Member>
+            <ValueAsFloat>0.5</ValueAsFloat>
+          </CustomProperty>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceClassType>SpriteFrame</SourceClassType>
+          <InstanceName>SpriteFrameInstance</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+      </NamedObjects>
       <Is2D>true</Is2D>
     </EntitySave>
   </Entities>

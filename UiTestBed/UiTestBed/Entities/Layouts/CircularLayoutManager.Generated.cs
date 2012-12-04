@@ -432,10 +432,6 @@ namespace UiTestBed.Entities.Layouts
 		{
 			InstructionManager.IgnorePausingFor(this);
 		}
-		public void MoveToLayer (Layer layerToMoveTo)
-		{
-			LayerProvidedByContainer = layerToMoveTo;
-		}
 
     }
 	

@@ -18,8 +18,10 @@ using FlatRedBall.Graphics;
 using FlatRedBall.Math;
 using FlatRedBall.Gui;
 using UiTestBed.Entities.Layouts;
+using UiTestBed.Entities;
 using FlatRedBall;
 using FlatRedBall.Screens;
+using FlatRedBall.ManagedSpriteGroups;
 
 #if XNA4 || WINDOWS_8
 using Color = Microsoft.Xna.Framework.Color;
@@ -39,9 +41,9 @@ using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 using Model = Microsoft.Xna.Framework.Graphics.Model;
 #endif
 
-namespace UiTestBed.Entities.Layouts
+namespace UiTestBed.Entities
 {
-	public partial class BoxLayoutManager : PositionedObject, IDestroyable, IVisible, IWindow
+	public partial class Test1 : PositionedObject, IDestroyable, IVisible, IWindow
 	{
         // This is made global so that static lazy-loaded content can access it.
         public static string ContentManagerName
@@ -54,120 +56,11 @@ namespace UiTestBed.Entities.Layouts
 		#if DEBUG
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
-		public enum Direction
-		{
-			Uninitialized = 0, //This exists so that the first set call actually does something
-			Unknown = 1, //This exists so that if the entity is actually a child entity and has set a child state, you will get this
-			Up = 2, 
-			Down = 3, 
-			Left = 4, 
-			Right = 5
-		}
-		protected int mCurrentDirectionState = 0;
-		public Direction CurrentDirectionState
-		{
-			get
-			{
-				if (Enum.IsDefined(typeof(Direction), mCurrentDirectionState))
-				{
-					return (Direction)mCurrentDirectionState;
-				}
-				else
-				{
-					return Direction.Unknown;
-				}
-			}
-			set
-			{
-				mCurrentDirectionState = (int)value;
-				switch(CurrentDirectionState)
-				{
-					case  Direction.Uninitialized:
-						break;
-					case  Direction.Unknown:
-						break;
-					case  Direction.Up:
-						break;
-					case  Direction.Down:
-						break;
-					case  Direction.Left:
-						break;
-					case  Direction.Right:
-						break;
-				}
-			}
-		}
 		static object mLockObject = new object();
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
 		
-		private FlatRedBall.Sprite SpriteFrameInstance;
-		public event EventHandler BeforeSpacingSet;
-		public event EventHandler AfterSpacingSet;
-		float mSpacing = 2f;
-		public virtual float Spacing
-		{
-			set
-			{
-				if (BeforeSpacingSet != null)
-				{
-					BeforeSpacingSet(this, null);
-				}
-				mSpacing = value;
-				if (AfterSpacingSet != null)
-				{
-					AfterSpacingSet(this, null);
-				}
-			}
-			get
-			{
-				return mSpacing;
-			}
-		}
-		public event EventHandler BeforeMarginSet;
-		public event EventHandler AfterMarginSet;
-		float mMargin = 0f;
-		public virtual float Margin
-		{
-			set
-			{
-				if (BeforeMarginSet != null)
-				{
-					BeforeMarginSet(this, null);
-				}
-				mMargin = value;
-				if (AfterMarginSet != null)
-				{
-					AfterMarginSet(this, null);
-				}
-			}
-			get
-			{
-				return mMargin;
-			}
-		}
-		public FlatRedBall.Graphics.Animation.AnimationChainList AnimationChains
-		{
-			get
-			{
-				return SpriteFrameInstance.AnimationChains;
-			}
-			set
-			{
-				SpriteFrameInstance.AnimationChains = value;
-			}
-		}
-		public string CurrentChainName
-		{
-			get
-			{
-				return SpriteFrameInstance.CurrentChainName;
-			}
-			set
-			{
-				SpriteFrameInstance.CurrentChainName = value;
-			}
-		}
+		private FlatRedBall.ManagedSpriteGroups.SpriteFrame SpriteFrameInstance;
 		public int Index { get; set; }
 		public bool Used { get; set; }
 		public event EventHandler BeforeVisibleSet;
@@ -216,13 +109,13 @@ namespace UiTestBed.Entities.Layouts
 		}
 		protected Layer LayerProvidedByContainer = null;
 
-        public BoxLayoutManager(string contentManagerName) :
+        public Test1(string contentManagerName) :
             this(contentManagerName, true)
         {
         }
 
 
-        public BoxLayoutManager(string contentManagerName, bool addToManagers) :
+        public Test1(string contentManagerName, bool addToManagers) :
 			base()
 		{
 			// Don't delete this:
@@ -235,10 +128,7 @@ namespace UiTestBed.Entities.Layouts
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			SpriteFrameInstance = new FlatRedBall.Sprite();
-			this.AfterVisibleSet += OnAfterVisibleSet;
-			this.AfterSpacingSet += OnAfterSpacingSet;
-			this.AfterMarginSet += OnAfterMarginSet;
+			SpriteFrameInstance = new FlatRedBall.ManagedSpriteGroups.SpriteFrame();
 			this.Click += CallLosePush;
 			this.RollOff += CallLosePush;
 			
@@ -279,7 +169,7 @@ namespace UiTestBed.Entities.Layouts
 			
 			if (SpriteFrameInstance != null)
 			{
-				SpriteFrameInstance.Detach(); SpriteManager.RemoveSprite(SpriteFrameInstance);
+				SpriteFrameInstance.Detach(); SpriteManager.RemoveSpriteFrame(SpriteFrameInstance);
 			}
 
 
@@ -296,22 +186,7 @@ namespace UiTestBed.Entities.Layouts
 				SpriteFrameInstance.CopyAbsoluteToRelative();
 				SpriteFrameInstance.AttachTo(this, false);
 			}
-			SpriteFrameInstance.ColorOperation = FlatRedBall.Graphics.ColorOperation.Color;
 			SpriteFrameInstance.PixelSize = 0.5f;
-			SpriteFrameInstance.Red = 0f;
-			SpriteFrameInstance.ScaleX = 32f;
-			SpriteFrameInstance.ScaleY = 32f;
-			SpriteFrameInstance.Visible = false;
-			if (SpriteFrameInstance.Parent == null)
-			{
-				SpriteFrameInstance.X = 5f;
-			}
-			else
-			{
-				SpriteFrameInstance.RelativeX = 5f;
-			}
-			X = 0f;
-			Y = 0f;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -332,22 +207,7 @@ namespace UiTestBed.Entities.Layouts
 			RotationY = 0;
 			RotationZ = 0;
 			SpriteManager.AddToLayer(SpriteFrameInstance, layerToAddTo);
-			SpriteFrameInstance.ColorOperation = FlatRedBall.Graphics.ColorOperation.Color;
 			SpriteFrameInstance.PixelSize = 0.5f;
-			SpriteFrameInstance.Red = 0f;
-			SpriteFrameInstance.ScaleX = 32f;
-			SpriteFrameInstance.ScaleY = 32f;
-			SpriteFrameInstance.Visible = false;
-			if (SpriteFrameInstance.Parent == null)
-			{
-				SpriteFrameInstance.X = 5f;
-			}
-			else
-			{
-				SpriteFrameInstance.RelativeX = 5f;
-			}
-			X = 0f;
-			Y = 0f;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
@@ -359,7 +219,6 @@ namespace UiTestBed.Entities.Layouts
 		{
 			this.ForceUpdateDependenciesDeep();
 			SpriteManager.ConvertToManuallyUpdated(this);
-			SpriteManager.ConvertToManuallyUpdated(SpriteFrameInstance);
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -386,7 +245,7 @@ namespace UiTestBed.Entities.Layouts
 				{
 					if (!mRegisteredUnloads.Contains(ContentManagerName) && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 					{
-						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("BoxLayoutManagerStaticUnload", UnloadStaticContent);
+						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("Test1StaticUnload", UnloadStaticContent);
 						mRegisteredUnloads.Add(ContentManagerName);
 					}
 				}
@@ -397,7 +256,7 @@ namespace UiTestBed.Entities.Layouts
 				{
 					if (!mRegisteredUnloads.Contains(ContentManagerName) && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 					{
-						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("BoxLayoutManagerStaticUnload", UnloadStaticContent);
+						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("Test1StaticUnload", UnloadStaticContent);
 						mRegisteredUnloads.Add(ContentManagerName);
 					}
 				}
@@ -413,86 +272,6 @@ namespace UiTestBed.Entities.Layouts
 			}
 			if (LoadedContentManagers.Count == 0)
 			{
-			}
-		}
-		public Instruction InterpolateToState (Direction stateToInterpolateTo, double secondsToTake)
-		{
-			switch(stateToInterpolateTo)
-			{
-				case  Direction.Up:
-					break;
-				case  Direction.Down:
-					break;
-				case  Direction.Left:
-					break;
-				case  Direction.Right:
-					break;
-			}
-			var instruction = new DelegateInstruction<Direction>(StopStateInterpolation, stateToInterpolateTo);
-			instruction.TimeToExecute = TimeManager.CurrentTime + secondsToTake;
-			this.Instructions.Add(instruction);
-			return instruction;
-		}
-		public void StopStateInterpolation (Direction stateToStop)
-		{
-			switch(stateToStop)
-			{
-				case  Direction.Up:
-					break;
-				case  Direction.Down:
-					break;
-				case  Direction.Left:
-					break;
-				case  Direction.Right:
-					break;
-			}
-			CurrentDirectionState = stateToStop;
-		}
-		public void InterpolateBetween (Direction firstState, Direction secondState, float interpolationValue)
-		{
-			#if DEBUG
-			if (float.IsNaN(interpolationValue))
-			{
-				throw new Exception("interpolationValue cannot be NaN");
-			}
-			#endif
-			switch(firstState)
-			{
-				case  Direction.Up:
-					break;
-				case  Direction.Down:
-					break;
-				case  Direction.Left:
-					break;
-				case  Direction.Right:
-					break;
-			}
-			switch(secondState)
-			{
-				case  Direction.Up:
-					break;
-				case  Direction.Down:
-					break;
-				case  Direction.Left:
-					break;
-				case  Direction.Right:
-					break;
-			}
-		}
-		public static void PreloadStateContent (Direction state, string contentManagerName)
-		{
-			ContentManagerName = contentManagerName;
-			object throwaway;
-			switch(state)
-			{
-				case  Direction.Up:
-					break;
-				case  Direction.Down:
-					break;
-				case  Direction.Left:
-					break;
-				case  Direction.Right:
-					break;
 			}
 		}
 		[System.Obsolete("Use GetFile instead")]
@@ -873,9 +652,9 @@ namespace UiTestBed.Entities.Layouts
 	
 	
 	// Extra classes
-	public static class BoxLayoutManagerExtensionMethods
+	public static class Test1ExtensionMethods
 	{
-		public static void SetVisible (this PositionedObjectList<BoxLayoutManager> list, bool value)
+		public static void SetVisible (this PositionedObjectList<Test1> list, bool value)
 		{
 			int count = list.Count;
 			for (int i = 0; i < count; i++)

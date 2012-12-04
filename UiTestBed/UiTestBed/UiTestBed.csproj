@@ -142,6 +142,10 @@
     <Compile Include="Entities\Layouts\SimpleLayoutManager.Generated.cs">
       <DependentUpon>SimpleLayoutManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Test1.cs" />
+    <Compile Include="Entities\Test1.Generated.cs">
+      <DependentUpon>Test1.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalContent.Generated.cs" />
     <Compile Include="Performance\IPoolable.Generated.cs" />
     <Compile Include="Performance\PoolList.Generated.cs" />

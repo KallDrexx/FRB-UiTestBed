@@ -32,8 +32,12 @@ namespace UiTestBed.Screens
 {
 	public partial class ButtonTestScreen1
 	{
+        private List<UiButton> _buttons;
+
 		void CustomInitialize()
 		{
+            _buttons = new List<UiButton>();
+
             var outterLayout = new BoxLayoutManager(ContentManagerName);
             outterLayout.CurrentDirectionState = BoxLayoutManager.Direction.Down;
             outterLayout.Spacing = 5;
@@ -104,6 +108,9 @@ namespace UiTestBed.Screens
         void CustomActivity(bool firstTimeCalled)
 		{
             InputManager.Keyboard.ControlPositionedObject(SpriteManager.Camera);
+
+            foreach (var btn in _buttons)
+                btn.Activity();
 		}
 
 		void CustomDestroy()
@@ -156,7 +163,6 @@ namespace UiTestBed.Screens
             });
 
             var newBtn = new UiButton();
-            //newBtn.AddToManagers(UiLayer);
             newBtn.Text = "Button";
             newBtn.ResizeAroundText(5, 5);
 
@@ -169,6 +175,7 @@ namespace UiTestBed.Screens
             newBtn.OnReleased += onRelease;
 
             newBtn.AddToManagers(UiLayer);
+            _buttons.Add(newBtn);
             return newBtn;
         }
 	}
