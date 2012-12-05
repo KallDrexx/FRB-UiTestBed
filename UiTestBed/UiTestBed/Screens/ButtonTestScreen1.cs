@@ -23,19 +23,23 @@ using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 
 using FlatRedBall.Instructions;
 using UiTestBed.Entities.Layouts;
-using UiTestBed.Data;
 using FlatRedBall.Graphics;
 using FrbUi.Controls;
 using FrbUi;
+using FrbUi.Positioning;
+using FrbUi.LayoutManagers;
 
 namespace UiTestBed.Screens
 {
 	public partial class ButtonTestScreen1
 	{
         private List<UiButton> _buttons;
+        private SimpleLayoutManager _mainLayout;
 
 		void CustomInitialize()
 		{
+            _mainLayout = new SimpleLayoutManager();
+            _mainLayout.AddToManagers(UiLayer);
             _buttons = new List<UiButton>();
 
             var outterLayout = new BoxLayoutManager(ContentManagerName);
@@ -90,8 +94,8 @@ namespace UiTestBed.Screens
                 secondLayout.AddItem(btn);
             }
 
-            MainLayout.FullScreen = true;
-            MainLayout.AddItem(outterLayout, HorizontalPosition.PercentFromLeft(5), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopLeft);
+            _mainLayout.FullScreen = true;
+            _mainLayout.AddItem(outterLayout, HorizontalPosition.PercentFromLeft(5), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopLeft);
 		}
 
         private void CreateButtonsForLayout(BoxLayoutManager layout)

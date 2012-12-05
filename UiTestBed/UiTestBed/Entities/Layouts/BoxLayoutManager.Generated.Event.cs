@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using FlatRedBall.Audio;
 using FlatRedBall.Screens;
 using UiTestBed.Entities.Layouts;
+using UiTestBed.Entities;
 using UiTestBed.Screens;
 namespace UiTestBed.Entities.Layouts
 {

@@ -33,15 +33,6 @@
           <IndependentOfCamera>true</IndependentOfCamera>
           <LayerOn>UiLayer</LayerOn>
         </NamedObjectSave>
-        <NamedObjectSave>
-          <SourceType>Entity</SourceType>
-          <SourceClassType>Entities\Layouts\SimpleLayoutManager</SourceClassType>
-          <InstanceName>MainLayout</InstanceName>
-          <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
-          <IndependentOfCamera>true</IndependentOfCamera>
-          <LayerOn>UiLayer</LayerOn>
-        </NamedObjectSave>
       </NamedObjects>
     </ScreenSave>
   </Screens>
@@ -329,11 +320,6 @@
           <DelegateType />
         </EventResponseSave>
       </Events>
-      <Is2D>true</Is2D>
-    </EntitySave>
-    <EntitySave>
-      <ImplementsIVisible>true</ImplementsIVisible>
-      <Name>Entities\Layouts\SimpleLayoutManager</Name>
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
