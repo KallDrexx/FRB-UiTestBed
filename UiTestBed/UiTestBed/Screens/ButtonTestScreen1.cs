@@ -22,7 +22,6 @@ using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 #endif
 
 using FlatRedBall.Instructions;
-using UiTestBed.Entities.Layouts;
 using FlatRedBall.Graphics;
 using FrbUi.Controls;
 using FrbUi;
@@ -34,24 +33,29 @@ namespace UiTestBed.Screens
 	public partial class ButtonTestScreen1
 	{
         private List<UiButton> _buttons;
+        private List<BoxLayoutManager> _boxLayouts;
+        private List<CircularLayoutManager> _circleLayouts;
         private SimpleLayoutManager _mainLayout;
 
 		void CustomInitialize()
 		{
+            _boxLayouts = new List<BoxLayoutManager>();
+            _circleLayouts = new List<CircularLayoutManager>();
+
             _mainLayout = new SimpleLayoutManager();
             _mainLayout.AddToManagers(UiLayer);
             _buttons = new List<UiButton>();
 
-            var outterLayout = new BoxLayoutManager(ContentManagerName);
-            outterLayout.CurrentDirectionState = BoxLayoutManager.Direction.Down;
+            var outterLayout = new BoxLayoutManager();
+            outterLayout.CurrentDirection = BoxLayoutManager.Direction.Down;
             outterLayout.Spacing = 5;
-            BoxLayouts.Add(outterLayout);
+            _boxLayouts.Add(outterLayout);
 
-            var firstLayout = new BoxLayoutManager(ContentManagerName);
-            firstLayout.CurrentDirectionState = BoxLayoutManager.Direction.Right;
+            var firstLayout = new BoxLayoutManager();
+            firstLayout.CurrentDirection = BoxLayoutManager.Direction.Right;
             firstLayout.Spacing = 3;
             firstLayout.Margin = 5;
-            BoxLayouts.Add(firstLayout);
+            _boxLayouts.Add(firstLayout);
             outterLayout.AddItem(firstLayout);
 
             for (int x = 0; x < 5; x++)
@@ -62,13 +66,13 @@ namespace UiTestBed.Screens
                 firstLayout.AddItem(btn);
             }
 
-            var circleLayout = new CircularLayoutManager(ContentManagerName);
+            var circleLayout = new CircularLayoutManager();
             circleLayout.Radius = 100;
             circleLayout.Margin = 0;
             circleLayout.StartingDegrees = 90;
             circleLayout.MinDegreeOffset = 45;
-            circleLayout.CurrentArrangementModeState = CircularLayoutManager.ArrangementMode.EvenlySpaced;
-            CircularLayouts.Add(circleLayout);
+            circleLayout.CurrentArrangementMode = CircularLayoutManager.ArrangementMode.EvenlySpaced;
+            _circleLayouts.Add(circleLayout);
             outterLayout.AddItem(circleLayout);
 
             for (int x = 0; x < 5; x++)
@@ -79,11 +83,11 @@ namespace UiTestBed.Screens
                 circleLayout.AddItem(btn);
             }
 
-            var secondLayout = new BoxLayoutManager(ContentManagerName);
-            secondLayout.CurrentDirectionState = BoxLayoutManager.Direction.Right;
+            var secondLayout = new BoxLayoutManager();
+            secondLayout.CurrentDirection = BoxLayoutManager.Direction.Right;
             secondLayout.Spacing = 3;
             secondLayout.Margin = 5;
-            BoxLayouts.Add(secondLayout);
+            _boxLayouts.Add(secondLayout);
             outterLayout.AddItem(secondLayout);
 
             for (int x = 0; x < 5; x++)
@@ -96,6 +100,9 @@ namespace UiTestBed.Screens
 
             _mainLayout.FullScreen = true;
             _mainLayout.AddItem(outterLayout, HorizontalPosition.PercentFromLeft(5), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopLeft);
+
+            foreach (var layout in _boxLayouts)
+                layout.AddToManagers(UiLayer);
 		}
 
         private void CreateButtonsForLayout(BoxLayoutManager layout)
@@ -115,6 +122,18 @@ namespace UiTestBed.Screens
 
             foreach (var btn in _buttons)
                 btn.Activity();
+
+            foreach (var layout in _boxLayouts)
+                layout.Activity();
+
+            foreach (var layout in _circleLayouts)
+                layout.Activity();
+
+            foreach (var layout in _boxLayouts)
+                layout.ForceUpdateDependencies();
+
+            foreach (var layout in _circleLayouts)
+                layout.ForceUpdateDependencies();
 		}
 
 		void CustomDestroy()

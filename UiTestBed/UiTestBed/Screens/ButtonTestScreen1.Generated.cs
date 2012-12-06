@@ -29,12 +29,10 @@ using Microsoft.Xna.Framework.Media;
 #endif
 
 // Generated Usings
-using UiTestBed.Entities.Layouts;
 using UiTestBed.Entities;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using FlatRedBall.Graphics;
-using FlatRedBall.Math;
 
 namespace UiTestBed.Screens
 {
@@ -46,8 +44,6 @@ namespace UiTestBed.Screens
 		#endif
 		
 		private FlatRedBall.Graphics.Layer UiLayer;
-		private PositionedObjectList<CircularLayoutManager> CircularLayouts;
-		private PositionedObjectList<BoxLayoutManager> BoxLayouts;
 
 		public ButtonTestScreen1()
 			: base("ButtonTestScreen1")
@@ -60,8 +56,6 @@ namespace UiTestBed.Screens
 			LoadStaticContent(ContentManagerName);
 			UiLayer = new FlatRedBall.Graphics.Layer();
 			UiLayer.Name = "UiLayer";
-			CircularLayouts = new PositionedObjectList<CircularLayoutManager>();
-			BoxLayouts = new PositionedObjectList<BoxLayoutManager>();
 			
 			
 			PostInitialize();
@@ -95,22 +89,6 @@ namespace UiTestBed.Screens
 			if (!IsPaused)
 			{
 				
-				for (int i = CircularLayouts.Count - 1; i > -1; i--)
-				{
-					if (i < CircularLayouts.Count)
-					{
-						// We do the extra if-check because activity could destroy any number of entities
-						CircularLayouts[i].Activity();
-					}
-				}
-				for (int i = BoxLayouts.Count - 1; i > -1; i--)
-				{
-					if (i < BoxLayouts.Count)
-					{
-						// We do the extra if-check because activity could destroy any number of entities
-						BoxLayouts[i].Activity();
-					}
-				}
 			}
 			else
 			{
@@ -135,14 +113,6 @@ namespace UiTestBed.Screens
 			{
 				SpriteManager.RemoveLayer(UiLayer);
 			}
-			for (int i = CircularLayouts.Count - 1; i > -1; i--)
-			{
-				CircularLayouts[i].Destroy();
-			}
-			for (int i = BoxLayouts.Count - 1; i > -1; i--)
-			{
-				BoxLayouts[i].Destroy();
-			}
 
 			base.Destroy();
 
@@ -162,14 +132,6 @@ namespace UiTestBed.Screens
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
-			for (int i = 0; i < CircularLayouts.Count; i++)
-			{
-				CircularLayouts[i].ConvertToManuallyUpdated();
-			}
-			for (int i = 0; i < BoxLayouts.Count; i++)
-			{
-				BoxLayouts[i].ConvertToManuallyUpdated();
-			}
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{

@@ -113,26 +113,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Layouts\BoxLayoutManager.cs" />
-    <Compile Include="Entities\Layouts\BoxLayoutManager.Event.cs">
-      <DependentUpon>BoxLayoutManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Layouts\BoxLayoutManager.Generated.cs">
-      <DependentUpon>BoxLayoutManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Layouts\BoxLayoutManager.Generated.Event.cs">
-      <DependentUpon>BoxLayoutManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Layouts\CircularLayoutManager.cs" />
-    <Compile Include="Entities\Layouts\CircularLayoutManager.Event.cs">
-      <DependentUpon>CircularLayoutManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Layouts\CircularLayoutManager.Generated.cs">
-      <DependentUpon>CircularLayoutManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Layouts\CircularLayoutManager.Generated.Event.cs">
-      <DependentUpon>CircularLayoutManager.cs</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Test1.cs" />
     <Compile Include="Entities\Test1.Generated.cs">
       <DependentUpon>Test1.cs</DependentUpon>
