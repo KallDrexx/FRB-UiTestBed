@@ -32,30 +32,24 @@ namespace UiTestBed.Screens
 {
 	public partial class ButtonTestScreen1
 	{
-        private List<UiButton> _buttons;
-        private List<BoxLayoutManager> _boxLayouts;
-        private List<CircularLayoutManager> _circleLayouts;
         private SimpleLayoutManager _mainLayout;
 
 		void CustomInitialize()
 		{
-            _boxLayouts = new List<BoxLayoutManager>();
-            _circleLayouts = new List<CircularLayoutManager>();
-
             _mainLayout = new SimpleLayoutManager();
-            _mainLayout.AddToManagers(UiLayer);
-            _buttons = new List<UiButton>();
+            UiControlManager.Instance.AddControl(_mainLayout);
 
             var outterLayout = new BoxLayoutManager();
             outterLayout.CurrentDirection = BoxLayoutManager.Direction.Down;
             outterLayout.Spacing = 5;
-            _boxLayouts.Add(outterLayout);
+            UiControlManager.Instance.AddControl(outterLayout);
 
             var firstLayout = new BoxLayoutManager();
             firstLayout.CurrentDirection = BoxLayoutManager.Direction.Right;
             firstLayout.Spacing = 3;
             firstLayout.Margin = 5;
-            _boxLayouts.Add(firstLayout);
+
+            UiControlManager.Instance.AddControl(firstLayout);
             outterLayout.AddItem(firstLayout);
 
             for (int x = 0; x < 5; x++)
@@ -72,7 +66,8 @@ namespace UiTestBed.Screens
             circleLayout.StartingDegrees = 90;
             circleLayout.MinDegreeOffset = 45;
             circleLayout.CurrentArrangementMode = CircularLayoutManager.ArrangementMode.EvenlySpaced;
-            _circleLayouts.Add(circleLayout);
+
+            UiControlManager.Instance.AddControl(circleLayout);
             outterLayout.AddItem(circleLayout);
 
             for (int x = 0; x < 5; x++)
@@ -87,7 +82,8 @@ namespace UiTestBed.Screens
             secondLayout.CurrentDirection = BoxLayoutManager.Direction.Right;
             secondLayout.Spacing = 3;
             secondLayout.Margin = 5;
-            _boxLayouts.Add(secondLayout);
+
+            UiControlManager.Instance.AddControl(secondLayout);
             outterLayout.AddItem(secondLayout);
 
             for (int x = 0; x < 5; x++)
@@ -100,9 +96,6 @@ namespace UiTestBed.Screens
 
             _mainLayout.FullScreen = true;
             _mainLayout.AddItem(outterLayout, HorizontalPosition.PercentFromLeft(5), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopLeft);
-
-            foreach (var layout in _boxLayouts)
-                layout.AddToManagers(UiLayer);
 		}
 
         private void CreateButtonsForLayout(BoxLayoutManager layout)
@@ -119,21 +112,6 @@ namespace UiTestBed.Screens
         void CustomActivity(bool firstTimeCalled)
 		{
             InputManager.Keyboard.ControlPositionedObject(SpriteManager.Camera);
-
-            foreach (var btn in _buttons)
-                btn.Activity();
-
-            foreach (var layout in _boxLayouts)
-                layout.Activity();
-
-            foreach (var layout in _circleLayouts)
-                layout.Activity();
-
-            foreach (var layout in _boxLayouts)
-                layout.ForceUpdateDependencies();
-
-            foreach (var layout in _circleLayouts)
-                layout.ForceUpdateDependencies();
 		}
 
 		void CustomDestroy()
@@ -197,8 +175,7 @@ namespace UiTestBed.Screens
             newBtn.OnPushed += onPressed;
             newBtn.OnReleased += onRelease;
 
-            newBtn.AddToManagers(UiLayer);
-            _buttons.Add(newBtn);
+            UiControlManager.Instance.AddControl(newBtn);
             return newBtn;
         }
 	}

@@ -17,6 +17,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 #endif
 using FlatRedBall.Screens;
+using FrbUi;
 
 namespace UiTestBed
 {
@@ -57,16 +58,16 @@ namespace UiTestBed
         protected override void Update(GameTime gameTime)
         {
             FlatRedBallServices.Update(gameTime);
-
             FlatRedBall.Screens.ScreenManager.Activity();
+            UiControlManager.Instance.RunActivities();
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
+            UiControlManager.Instance.UpdateDependencies();
             FlatRedBallServices.Draw();
-
             base.Draw(gameTime);
         }
     }
