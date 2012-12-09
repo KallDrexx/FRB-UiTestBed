@@ -126,11 +126,11 @@ namespace UiTestBed.Screens
 
         }
 
-        private UiButton CreateButton()
+        private Button CreateButton()
         {
             var onSelected = new ILayoutableEvent(delegate(ILayoutable sender)
             {
-                var btn = sender as UiButton;
+                var btn = sender as Button;
                 if (btn != null)
                 {
                     btn.Text = "Selected";
@@ -141,7 +141,7 @@ namespace UiTestBed.Screens
 
             var onUnSelected = new ILayoutableEvent(delegate(ILayoutable sender)
             {
-                var btn = sender as UiButton;
+                var btn = sender as Button;
                 if (btn != null)
                 {
                     btn.Text = "Not Selected";
@@ -151,19 +151,19 @@ namespace UiTestBed.Screens
 
             var onPressed = new ILayoutableEvent(delegate(ILayoutable sender)
             {
-                var btn = sender as UiButton;
+                var btn = sender as Button;
                 if (btn != null)
                     btn.Text = "Pressed";
             });
 
             var onRelease = new ILayoutableEvent(delegate(ILayoutable sender)
             {
-                var btn = sender as UiButton;
+                var btn = sender as Button;
                 if (btn != null)
                     btn.Text = "Released";
             });
 
-            var newBtn = new UiButton();
+            var newBtn = new Button();
             newBtn.Text = "Button";
             newBtn.ResizeAroundText(5, 5);
 
