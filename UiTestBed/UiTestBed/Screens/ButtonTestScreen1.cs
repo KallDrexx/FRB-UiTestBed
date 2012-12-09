@@ -168,12 +168,12 @@ namespace UiTestBed.Screens
             newBtn.ResizeAroundText(5, 5);
 
             newBtn.AnimationChains = GlobalContent.Button1;
-            newBtn.CurrentChainName = "Available";
+            newBtn.StandardAnimationChainName = "Available";
 
             newBtn.OnFocused = onSelected;
             newBtn.OnFocusLost = onUnSelected;
             newBtn.OnPushed = onPressed;
-            newBtn.OnReleased = onRelease;
+            newBtn.OnClicked = onRelease;
 
             UiControlManager.Instance.AddControl(newBtn);
             return newBtn;
