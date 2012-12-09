@@ -170,10 +170,10 @@ namespace UiTestBed.Screens
             newBtn.AnimationChains = GlobalContent.Button1;
             newBtn.CurrentChainName = "Available";
 
-            newBtn.OnFocused += onSelected;
-            newBtn.OnFocusLost += onUnSelected;
-            newBtn.OnPushed += onPressed;
-            newBtn.OnReleased += onRelease;
+            newBtn.OnFocused = onSelected;
+            newBtn.OnFocusLost = onUnSelected;
+            newBtn.OnPushed = onPressed;
+            newBtn.OnReleased = onRelease;
 
             UiControlManager.Instance.AddControl(newBtn);
             return newBtn;
