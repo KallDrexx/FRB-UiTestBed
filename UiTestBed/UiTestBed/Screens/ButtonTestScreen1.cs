@@ -33,69 +33,60 @@ namespace UiTestBed.Screens
 	public partial class ButtonTestScreen1
 	{
         private SimpleLayoutManager _mainLayout;
+        private UiSelectableControlGroup _topGroup;
+        private UiSelectableControlGroup _circleGroup;
+        private UiSelectableControlGroup _bottomGroup;
 
 		void CustomInitialize()
 		{
+            _topGroup = UiControlManager.Instance.CreateSelectableControlGroup();
+            _circleGroup = UiControlManager.Instance.CreateSelectableControlGroup();
+            _bottomGroup = UiControlManager.Instance.CreateSelectableControlGroup();
+
             _mainLayout = new SimpleLayoutManager();
             UiControlManager.Instance.AddControl(_mainLayout);
 
-            var outterLayout = new BoxLayoutManager();
-            outterLayout.CurrentDirection = BoxLayoutManager.Direction.Down;
-            outterLayout.Spacing = 5;
-            UiControlManager.Instance.AddControl(outterLayout);
+            var grid = new GridLayoutManager();
+            grid.Margin = 20;
+            grid.Spacing = 30;
+            UiControlManager.Instance.AddControl(grid);
 
-            var firstLayout = new BoxLayoutManager();
-            firstLayout.CurrentDirection = BoxLayoutManager.Direction.Right;
-            firstLayout.Spacing = 3;
-            firstLayout.Margin = 5;
-
-            UiControlManager.Instance.AddControl(firstLayout);
-            outterLayout.AddItem(firstLayout);
-
-            for (int x = 0; x < 5; x++)
+            int count = 0;
+            for (int row = 0; row < 5; row++)
             {
-                var btn = CreateButton();
-                btn.Text = "Button # " + x;
-                btn.ResizeAroundText(5, 5);
-                firstLayout.AddItem(btn);
-            }
+                for (int col = 0; col < 5; col++)
+                {
+                    if (col == 2 && row == 2)
+                    {
+                        var circle = new CircularLayoutManager();
+                        circle.StartingDegrees = 90;
+                        circle.Radius = 80;
+                        circle.CurrentArrangementMode = CircularLayoutManager.ArrangementMode.EvenlySpaced;
+                        circle.ShowBorder = false;
+                        UiControlManager.Instance.AddControl(circle);
 
-            var circleLayout = new CircularLayoutManager();
-            circleLayout.Radius = 100;
-            circleLayout.Margin = 0;
-            circleLayout.StartingDegrees = 90;
-            circleLayout.MinDegreeOffset = 45;
-            circleLayout.CurrentArrangementMode = CircularLayoutManager.ArrangementMode.EvenlySpaced;
+                        for (int x = 0; x < 5; x++)
+                        {
+                            var btn = CreateButton();
+                            btn.Text = "#" + x;
+                            btn.ResizeAroundText(5, 5);
+                            circle.AddItem(btn);
+                        }
 
-            UiControlManager.Instance.AddControl(circleLayout);
-            outterLayout.AddItem(circleLayout);
-
-            for (int x = 0; x < 5; x++)
-            {
-                var btn = CreateButton();
-                btn.Text = "Button # " + x;
-                btn.ResizeAroundText(5, 5);
-                circleLayout.AddItem(btn);
-            }
-
-            var secondLayout = new BoxLayoutManager();
-            secondLayout.CurrentDirection = BoxLayoutManager.Direction.Right;
-            secondLayout.Spacing = 3;
-            secondLayout.Margin = 5;
-
-            UiControlManager.Instance.AddControl(secondLayout);
-            outterLayout.AddItem(secondLayout);
-
-            for (int x = 0; x < 5; x++)
-            {
-                var btn = CreateButton();
-                btn.Text = "Button # " + x;
-                btn.ResizeAroundText(5, 5);
-                secondLayout.AddItem(btn);
+                        grid.AddItem(circle, col, row, GridLayoutManager.HorizontalAlignment.Center, GridLayoutManager.VerticalAlignment.Center);
+                    }
+                    else
+                    {
+                        var btn = CreateButton();
+                        btn.Text = string.Format("Button {0} - {1}", row, col);
+                        btn.ResizeAroundText(10, 10);
+                        grid.AddItem(btn, col, row, GridLayoutManager.HorizontalAlignment.Center, GridLayoutManager.VerticalAlignment.Center);
+                    }
+                }
             }
 
             _mainLayout.FullScreen = true;
-            _mainLayout.AddItem(outterLayout, HorizontalPosition.PercentFromLeft(5), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopLeft);
+            _mainLayout.AddItem(grid, HorizontalPosition.PercentFromLeft(5), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopLeft);
 		}
 
         private void CreateButtonsForLayout(BoxLayoutManager layout)
@@ -111,7 +102,27 @@ namespace UiTestBed.Screens
 
         void CustomActivity(bool firstTimeCalled)
 		{
-            InputManager.Keyboard.ControlPositionedObject(SpriteManager.Camera);
+            if (InputManager.Keyboard.KeyPushed(Keys.Right))
+                _topGroup.FocusNextControl();
+            else if (InputManager.Keyboard.KeyPushed(Keys.Left))
+                _topGroup.FocusPreviousControl();
+
+            else if (InputManager.Keyboard.KeyPushed(Keys.Up))
+                _circleGroup.FocusNextControl();
+            else if (InputManager.Keyboard.KeyPushed(Keys.Down))
+                _circleGroup.FocusPreviousControl();
+
+            else if (InputManager.Keyboard.KeyPushed(Keys.A))
+                _bottomGroup.FocusNextControl();
+            else if (InputManager.Keyboard.KeyPushed(Keys.Z))
+                _bottomGroup.FocusPreviousControl();
+
+            else if (InputManager.Keyboard.KeyPushed(Keys.D1))
+                _topGroup.ClickFocusedControl();
+            else if (InputManager.Keyboard.KeyPushed(Keys.D2))
+                _circleGroup.ClickFocusedControl();
+            else if (InputManager.Keyboard.KeyPushed(Keys.D3))
+                _bottomGroup.ClickFocusedControl();
 		}
 
 		void CustomDestroy()
@@ -160,7 +171,7 @@ namespace UiTestBed.Screens
             {
                 var btn = sender as Button;
                 if (btn != null)
-                    btn.Text = "Released";
+                    btn.Text = "Clicked";
             });
 
             var newBtn = new Button();
@@ -178,5 +189,5 @@ namespace UiTestBed.Screens
             UiControlManager.Instance.AddControl(newBtn);
             return newBtn;
         }
-	}
+    }
 }
