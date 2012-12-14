@@ -26,13 +26,13 @@ using FlatRedBall.Graphics;
 using FrbUi.Controls;
 using FrbUi;
 using FrbUi.Positioning;
-using FrbUi.LayoutManagers;
+using FrbUi.Layouts;
 
 namespace UiTestBed.Screens
 {
 	public partial class ButtonTestScreen1
 	{
-        private SimpleLayoutManager _mainLayout;
+        private SimpleLayout _mainLayout;
         private UiSelectableControlGroup _topGroup;
         private UiSelectableControlGroup _circleGroup;
         private UiSelectableControlGroup _bottomGroup;
@@ -43,10 +43,10 @@ namespace UiTestBed.Screens
             _circleGroup = UiControlManager.Instance.CreateSelectableControlGroup();
             _bottomGroup = UiControlManager.Instance.CreateSelectableControlGroup();
 
-            _mainLayout = new SimpleLayoutManager();
+            _mainLayout = new SimpleLayout();
             UiControlManager.Instance.AddControl(_mainLayout);
 
-            var grid = new GridLayoutManager();
+            var grid = new GridLayout();
             grid.Margin = 20;
             grid.Spacing = 30;
             UiControlManager.Instance.AddControl(grid);
@@ -58,10 +58,10 @@ namespace UiTestBed.Screens
                 {
                     if (col == 2 && row == 2)
                     {
-                        var circle = new CircularLayoutManager();
+                        var circle = new CircularLayout();
                         circle.StartingDegrees = 90;
                         circle.Radius = 80;
-                        circle.CurrentArrangementMode = CircularLayoutManager.ArrangementMode.EvenlySpaced;
+                        circle.CurrentArrangementMode = CircularLayout.ArrangementMode.EvenlySpaced;
                         circle.ShowBorder = false;
                         UiControlManager.Instance.AddControl(circle);
 
@@ -73,14 +73,14 @@ namespace UiTestBed.Screens
                             circle.AddItem(btn);
                         }
 
-                        grid.AddItem(circle, col, row, GridLayoutManager.HorizontalAlignment.Center, GridLayoutManager.VerticalAlignment.Center);
+                        grid.AddItem(circle, col, row, GridLayout.HorizontalAlignment.Center, GridLayout.VerticalAlignment.Center);
                     }
                     else
                     {
                         var btn = CreateButton();
                         btn.Text = string.Format("Button {0} - {1}", row, col);
                         btn.ResizeAroundText(10, 10);
-                        grid.AddItem(btn, col, row, GridLayoutManager.HorizontalAlignment.Center, GridLayoutManager.VerticalAlignment.Center);
+                        grid.AddItem(btn, col, row, GridLayout.HorizontalAlignment.Center, GridLayout.VerticalAlignment.Center);
                     }
                 }
             }
@@ -89,7 +89,7 @@ namespace UiTestBed.Screens
             _mainLayout.AddItem(grid, HorizontalPosition.PercentFromLeft(5), VerticalPosition.PercentFromTop(-5), LayoutOrigin.TopLeft);
 		}
 
-        private void CreateButtonsForLayout(BoxLayoutManager layout)
+        private void CreateButtonsForLayout(BoxLayout layout)
         {
             for (int x = 0; x < 5; x++)
             {
