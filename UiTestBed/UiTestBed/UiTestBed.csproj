@@ -113,6 +113,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTypes\Test.Generated.cs" />
     <Compile Include="Entities\Test1.cs" />
     <Compile Include="Entities\Test1.Generated.cs">
       <DependentUpon>Test1.cs</DependentUpon>
@@ -126,6 +127,10 @@
     <Compile Include="Screens\ButtonTestScreen1.cs" />
     <Compile Include="Screens\ButtonTestScreen1.Generated.cs">
       <DependentUpon>ButtonTestScreen1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Screen2.cs" />
+    <Compile Include="Screens\Screen2.Generated.cs">
+      <DependentUpon>Screen2.cs</DependentUpon>
     </Compile>
     <Compile Include="Setup\CameraSetup.cs" />
   </ItemGroup>

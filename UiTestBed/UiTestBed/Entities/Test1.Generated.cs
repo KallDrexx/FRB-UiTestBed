@@ -17,6 +17,7 @@ using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
 using FlatRedBall.Gui;
+using UiTestBed.Entities;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using FlatRedBall.ManagedSpriteGroups;

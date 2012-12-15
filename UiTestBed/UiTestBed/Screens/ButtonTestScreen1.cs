@@ -33,37 +33,26 @@ namespace UiTestBed.Screens
 	public partial class ButtonTestScreen1
 	{
         private SimpleLayout _mainLayout;
-        private UiSelectableControlGroup _topGroup;
-        private UiSelectableControlGroup _circleGroup;
-        private UiSelectableControlGroup _bottomGroup;
 
 		void CustomInitialize()
 		{
-            _topGroup = UiControlManager.Instance.CreateSelectableControlGroup();
-            _circleGroup = UiControlManager.Instance.CreateSelectableControlGroup();
-            _bottomGroup = UiControlManager.Instance.CreateSelectableControlGroup();
+            _mainLayout = UiControlManager.Instance.CreateControl<SimpleLayout>();
 
-            _mainLayout = new SimpleLayout();
-            UiControlManager.Instance.AddControl(_mainLayout);
-
-            var grid = new GridLayout();
+            var grid = UiControlManager.Instance.CreateControl<GridLayout>();
             grid.Margin = 20;
             grid.Spacing = 30;
-            UiControlManager.Instance.AddControl(grid);
 
-            int count = 0;
             for (int row = 0; row < 5; row++)
             {
                 for (int col = 0; col < 5; col++)
                 {
                     if (col == 2 && row == 2)
                     {
-                        var circle = new CircularLayout();
+                        var circle = UiControlManager.Instance.CreateControl<CircularLayout>();
                         circle.StartingDegrees = 90;
                         circle.Radius = 80;
                         circle.CurrentArrangementMode = CircularLayout.ArrangementMode.EvenlySpaced;
                         circle.ShowBorder = false;
-                        UiControlManager.Instance.AddControl(circle);
 
                         for (int x = 0; x < 5; x++)
                         {
@@ -102,27 +91,8 @@ namespace UiTestBed.Screens
 
         void CustomActivity(bool firstTimeCalled)
 		{
-            if (InputManager.Keyboard.KeyPushed(Keys.Right))
-                _topGroup.FocusNextControl();
-            else if (InputManager.Keyboard.KeyPushed(Keys.Left))
-                _topGroup.FocusPreviousControl();
-
-            else if (InputManager.Keyboard.KeyPushed(Keys.Up))
-                _circleGroup.FocusNextControl();
-            else if (InputManager.Keyboard.KeyPushed(Keys.Down))
-                _circleGroup.FocusPreviousControl();
-
-            else if (InputManager.Keyboard.KeyPushed(Keys.A))
-                _bottomGroup.FocusNextControl();
-            else if (InputManager.Keyboard.KeyPushed(Keys.Z))
-                _bottomGroup.FocusPreviousControl();
-
-            else if (InputManager.Keyboard.KeyPushed(Keys.D1))
-                _topGroup.ClickFocusedControl();
-            else if (InputManager.Keyboard.KeyPushed(Keys.D2))
-                _circleGroup.ClickFocusedControl();
-            else if (InputManager.Keyboard.KeyPushed(Keys.D3))
-                _bottomGroup.ClickFocusedControl();
+            if (InputManager.Keyboard.KeyPushed(Keys.F1))
+                MoveToScreen(typeof(Screen2));
 		}
 
 		void CustomDestroy()
@@ -174,7 +144,7 @@ namespace UiTestBed.Screens
                     btn.Text = "Clicked";
             });
 
-            var newBtn = new Button();
+            var newBtn = UiControlManager.Instance.CreateControl<Button>();
             newBtn.Text = "Button";
             newBtn.ResizeAroundText(5, 5);
 
@@ -186,7 +156,6 @@ namespace UiTestBed.Screens
             newBtn.OnPushed = onPressed;
             newBtn.OnClicked = onRelease;
 
-            UiControlManager.Instance.AddControl(newBtn);
             return newBtn;
         }
     }

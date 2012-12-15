@@ -15,6 +15,9 @@
         </NamedObjectSave>
       </NamedObjects>
     </ScreenSave>
+    <ScreenSave>
+      <Name>Screens\Screen2</Name>
+    </ScreenSave>
   </Screens>
   <Entities>
     <EntitySave>
@@ -42,6 +45,11 @@
   <GlobalFiles>
     <ReferencedFileSave>
       <Name>GlobalContent/Button1.achx</Name>
+      <IsSharedStatic>true</IsSharedStatic>
+      <HasPublicProperty>true</HasPublicProperty>
+    </ReferencedFileSave>
+    <ReferencedFileSave>
+      <Name>GlobalContent/Test.csv</Name>
       <IsSharedStatic>true</IsSharedStatic>
       <HasPublicProperty>true</HasPublicProperty>
     </ReferencedFileSave>
