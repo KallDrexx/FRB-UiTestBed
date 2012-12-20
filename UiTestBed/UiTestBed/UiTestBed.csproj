@@ -138,7 +138,7 @@
     </Compile>
     <Compile Include="Screens\MenuDemo.cs" />
     <Compile Include="Screens\MenuDemo.Generated.cs">
-      <DependentUpon>menudemo.cs</DependentUpon>
+      <DependentUpon>MenuDemo.cs</DependentUpon>
     </Compile>
     <Compile Include="Setup\CameraSetup.cs" />
   </ItemGroup>
@@ -181,7 +181,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FrbUi\FrbUi.csproj">
+    <ProjectReference Include="..\..\FrbUi\FrbUi.csproj">
       <Project>{7235175C-356E-4756-9D68-5889ABC79A24}</Project>
       <Name>FrbUi</Name>
     </ProjectReference>
