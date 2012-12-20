@@ -56,9 +56,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>Button1</Name>
     </None>
-    <None Include="GlobalContent\Test.csv">
+    <None Include="GlobalContent\MenuDemo\MenuButtonAnimations.achx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>Test</Name>
+      <Name>MenuButtonAnimations</Name>
+    </None>
+    <None Include="GlobalContent\MenuDemo\SelectedButton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>SelectedButton</Name>
+    </None>
+    <None Include="GlobalContent\MenuDemo\StandardButton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>StandardButton</Name>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

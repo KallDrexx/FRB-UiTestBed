@@ -118,6 +118,10 @@
     <Compile Include="Entities\Test1.Generated.cs">
       <DependentUpon>Test1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\XuiLikeDemo\MainMenu.cs" />
+    <Compile Include="Entities\XuiLikeDemo\MainMenu.Generated.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalContent.Generated.cs" />
     <Compile Include="Performance\IPoolable.Generated.cs" />
     <Compile Include="Performance\PoolList.Generated.cs" />
@@ -131,6 +135,10 @@
     <Compile Include="Screens\Screen2.cs" />
     <Compile Include="Screens\Screen2.Generated.cs">
       <DependentUpon>Screen2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\MenuDemo.cs" />
+    <Compile Include="Screens\MenuDemo.Generated.cs">
+      <DependentUpon>menudemo.cs</DependentUpon>
     </Compile>
     <Compile Include="Setup\CameraSetup.cs" />
   </ItemGroup>

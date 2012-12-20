@@ -9,8 +9,6 @@ using FlatRedBall.AI.Pathfinding;
 using FlatRedBall.Utilities;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using FlatRedBall.Localization;
-using UiTestBed.DataTypes;
-using FlatRedBall.IO.Csv;
 
 namespace UiTestBed
 {
@@ -18,7 +16,7 @@ namespace UiTestBed
 	{
 		
 		public static FlatRedBall.Graphics.Animation.AnimationChainList Button1 { get; set; }
-		public static List<Test> Test { get; set; }
+		public static FlatRedBall.Graphics.Animation.AnimationChainList MenuButtonAnimations { get; set; }
 		[System.Obsolete("Use GetFile instead")]
 		public static object GetStaticMember (string memberName)
 		{
@@ -26,8 +24,8 @@ namespace UiTestBed
 			{
 				case  "Button1":
 					return Button1;
-				case  "Test":
-					return Test;
+				case  "MenuButtonAnimations":
+					return MenuButtonAnimations;
 			}
 			return null;
 		}
@@ -37,8 +35,8 @@ namespace UiTestBed
 			{
 				case  "Button1":
 					return Button1;
-				case  "Test":
-					return Test;
+				case  "MenuButtonAnimations":
+					return MenuButtonAnimations;
 			}
 			return null;
 		}
@@ -49,18 +47,7 @@ namespace UiTestBed
 		{
 			
 			Button1 = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/globalcontent/button1.achx", ContentManagerName);
-			if (Test == null)
-			{
-				{
-					// We put the { and } to limit the scope of oldDelimiter
-					char oldDelimiter = CsvFileManager.Delimiter;
-					CsvFileManager.Delimiter = ',';
-					List<Test> temporaryCsvObject = new List<Test>();
-					CsvFileManager.CsvDeserializeList(typeof(Test), "content/globalcontent/test.csv", temporaryCsvObject);
-					CsvFileManager.Delimiter = oldDelimiter;
-					Test = temporaryCsvObject;
-				}
-			}
+			MenuButtonAnimations = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/globalcontent/menudemo/menubuttonanimations.achx", ContentManagerName);
 						IsInitialized = true;
 		}
 		

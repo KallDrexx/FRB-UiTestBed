@@ -18,6 +18,7 @@ using FlatRedBall.Graphics;
 using FlatRedBall.Math;
 using FlatRedBall.Gui;
 using UiTestBed.Entities;
+using UiTestBed.Entities.XuiLikeDemo;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using FlatRedBall.ManagedSpriteGroups;
@@ -625,7 +626,7 @@ namespace UiTestBed.Entities
 			{
 				return false;
 			}
-			if (SpriteFrameInstance.AbsoluteVisible && cursor.IsOn3D(SpriteFrameInstance, LayerProvidedByContainer))
+			if (SpriteFrameInstance.Alpha != 0 && SpriteFrameInstance.AbsoluteVisible && cursor.IsOn3D(SpriteFrameInstance, LayerProvidedByContainer))
 			{
 				return true;
 			}

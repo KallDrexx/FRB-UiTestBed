@@ -16,6 +16,19 @@
       </NamedObjects>
     </ScreenSave>
     <ScreenSave>
+      <Name>Screens\MenuDemo</Name>
+      <NamedObjects>
+        <NamedObjectSave>
+          <SourceType>Entity</SourceType>
+          <SourceClassType>Entities\XuiLikeDemo\MainMenu</SourceClassType>
+          <InstanceName>MainMenuInstance</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+      </NamedObjects>
+    </ScreenSave>
+    <ScreenSave>
       <Name>Screens\Screen2</Name>
     </ScreenSave>
   </Screens>
@@ -41,6 +54,23 @@
       </NamedObjects>
       <Is2D>true</Is2D>
     </EntitySave>
+    <EntitySave>
+      <CustomVariables>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>bool</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>IsActive</Name>
+          <Type>bool</Type>
+          <DefaultValue xsi:type="xsd:boolean">true</DefaultValue>
+        </CustomVariable>
+      </CustomVariables>
+      <Name>Entities\XuiLikeDemo\MainMenu</Name>
+      <Is2D>true</Is2D>
+    </EntitySave>
   </Entities>
   <GlobalFiles>
     <ReferencedFileSave>
@@ -49,7 +79,7 @@
       <HasPublicProperty>true</HasPublicProperty>
     </ReferencedFileSave>
     <ReferencedFileSave>
-      <Name>GlobalContent/Test.csv</Name>
+      <Name>GlobalContent/MenuDemo/MenuButtonAnimations.achx</Name>
       <IsSharedStatic>true</IsSharedStatic>
       <HasPublicProperty>true</HasPublicProperty>
     </ReferencedFileSave>
@@ -59,7 +89,7 @@
     <RecordLockContention>false</RecordLockContention>
   </GlobalContentSettingsSave>
   <SyncedProjects />
-  <StartUpScreen>Screens\ButtonTestScreen1</StartUpScreen>
+  <StartUpScreen>Screens\MenuDemo</StartUpScreen>
   <In2D>true</In2D>
   <SetResolution>true</SetResolution>
   <ResolutionWidth>800</ResolutionWidth>

@@ -30,6 +30,7 @@ using Microsoft.Xna.Framework.Media;
 
 // Generated Usings
 using UiTestBed.Entities;
+using UiTestBed.Entities.XuiLikeDemo;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using FlatRedBall.Graphics;

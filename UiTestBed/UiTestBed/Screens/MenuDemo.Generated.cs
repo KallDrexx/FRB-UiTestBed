@@ -36,16 +36,17 @@ using FlatRedBall.Screens;
 
 namespace UiTestBed.Screens
 {
-	public partial class Screen2 : Screen
+	public partial class MenuDemo : Screen
 	{
 		// Generated Fields
 		#if DEBUG
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		
+		private UiTestBed.Entities.XuiLikeDemo.MainMenu MainMenuInstance;
 
-		public Screen2()
-			: base("Screen2")
+		public MenuDemo()
+			: base("MenuDemo")
 		{
 		}
 
@@ -53,6 +54,8 @@ namespace UiTestBed.Screens
         {
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
+			MainMenuInstance = new UiTestBed.Entities.XuiLikeDemo.MainMenu(ContentManagerName, false);
+			MainMenuInstance.Name = "MainMenuInstance";
 			
 			
 			PostInitialize();
@@ -79,6 +82,7 @@ namespace UiTestBed.Screens
 			if (!IsPaused)
 			{
 				
+				MainMenuInstance.Activity();
 			}
 			else
 			{
@@ -99,6 +103,11 @@ namespace UiTestBed.Screens
 		{
 			// Generated Destroy
 			
+			if (MainMenuInstance != null)
+			{
+				MainMenuInstance.Destroy();
+				MainMenuInstance.Detach();
+			}
 
 			base.Destroy();
 
@@ -115,9 +124,11 @@ namespace UiTestBed.Screens
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
+			MainMenuInstance.AddToManagers(mLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
+			MainMenuInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -135,6 +146,7 @@ namespace UiTestBed.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
+			UiTestBed.Entities.XuiLikeDemo.MainMenu.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]
