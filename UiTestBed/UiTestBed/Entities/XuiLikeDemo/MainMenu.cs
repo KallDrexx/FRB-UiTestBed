@@ -29,6 +29,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 	{
         protected BoxLayout _layout;
         protected Button _levelSelectButton;
+        protected Button _optionsButton;
         protected Button _quitButton;
         protected SelectableControlGroup _mainGroup;
 
@@ -55,6 +56,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
                     _mainGroup.FocusNextControl();
                 else if (InputManager.Keyboard.KeyPushed(Keys.Up))
                     _mainGroup.FocusPreviousControl();
+                else if (InputManager.Keyboard.KeyPushed(Keys.Enter))
+                    _mainGroup.ClickFocusedControl();
             }
 		}
 
@@ -72,27 +75,27 @@ namespace UiTestBed.Entities.XuiLikeDemo
 
         protected void InitButtons()
         {
-            _levelSelectButton = UiControlManager.Instance.CreateControl<Button>();
-            _levelSelectButton.AnimationChains = GlobalContent.MenuButtonAnimations;
-            _levelSelectButton.StandardAnimationChainName = "Idle";
-            _levelSelectButton.FocusedAnimationChainName = "Selected";
-            _levelSelectButton.Text = "Select Level";
-            _levelSelectButton.ScaleX = 100;
-            _levelSelectButton.ScaleY = 19.7f;
-            _levelSelectButton.IgnoreCursorEvents = true;
-            _mainGroup.Add(_levelSelectButton);
-            _layout.AddItem(_levelSelectButton);
+            _levelSelectButton = SetupButton("Select Level");
+            _optionsButton = SetupButton("Options");
+            _quitButton = SetupButton("Quit");
 
-            _quitButton = UiControlManager.Instance.CreateControl<Button>();
-            _quitButton.AnimationChains = GlobalContent.MenuButtonAnimations;
-            _quitButton.StandardAnimationChainName = "Idle";
-            _quitButton.FocusedAnimationChainName = "Selected";
-            _quitButton.Text = "Quit";
-            _quitButton.ScaleX = 100;
-            _quitButton.ScaleY = 19.7f;
-            _quitButton.IgnoreCursorEvents = true;
-            _mainGroup.Add(_quitButton);
-            _layout.AddItem(_quitButton);
+            _quitButton.OnClicked += delegate(ILayoutable sender) { FlatRedBallServices.Game.Exit(); };
+        }
+
+        protected Button SetupButton(string label)
+        {
+            var btn = UiControlManager.Instance.CreateControl<Button>();
+            btn.AnimationChains = GlobalContent.MenuButtonAnimations;
+            btn.StandardAnimationChainName = "Idle";
+            btn.FocusedAnimationChainName = "Selected";
+            btn.Text = label;
+            btn.ScaleX = 100;
+            btn.ScaleY = 19.7f;
+            btn.IgnoreCursorEvents = true;
+            _mainGroup.Add(btn);
+            _layout.AddItem(btn);
+
+            return btn;
         }
 
         protected void ButtonFocused(ILayoutable sender)
