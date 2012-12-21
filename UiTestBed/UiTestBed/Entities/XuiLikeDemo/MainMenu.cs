@@ -22,6 +22,7 @@ using FlatRedBall.Math.Splines;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
+using FlatRedBall.Instructions;
 
 namespace UiTestBed.Entities.XuiLikeDemo
 {
