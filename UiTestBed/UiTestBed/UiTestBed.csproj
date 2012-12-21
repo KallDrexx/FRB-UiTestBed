@@ -119,7 +119,13 @@
       <DependentUpon>Test1.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\XuiLikeDemo\MainMenu.cs" />
+    <Compile Include="Entities\XuiLikeDemo\MainMenu.Event.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\XuiLikeDemo\MainMenu.Generated.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\XuiLikeDemo\MainMenu.Generated.Event.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalContent.Generated.cs" />

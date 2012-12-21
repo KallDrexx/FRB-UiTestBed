@@ -61,7 +61,51 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		private static Microsoft.Xna.Framework.Graphics.Texture2D arrow;
 		
 		private FlatRedBall.Sprite ArrowSprite;
-		public bool IsActive = true;
+		public event EventHandler BeforeIsActiveSet;
+		public event EventHandler AfterIsActiveSet;
+		bool mIsActive = false;
+		public bool IsActive
+		{
+			set
+			{
+				if (BeforeIsActiveSet != null)
+				{
+					BeforeIsActiveSet(this, null);
+				}
+				mIsActive = value;
+				if (AfterIsActiveSet != null)
+				{
+					AfterIsActiveSet(this, null);
+				}
+			}
+			get
+			{
+				return mIsActive;
+			}
+		}
+		public event EventHandler BeforeAlphaSet;
+		public event EventHandler AfterAlphaSet;
+		float mAlpha = 1f;
+		public float Alpha
+		{
+			set
+			{
+				if (BeforeAlphaSet != null)
+				{
+					BeforeAlphaSet(this, null);
+				}
+				mAlpha = value;
+				if (AfterAlphaSet != null)
+				{
+					AfterAlphaSet(this, null);
+				}
+			}
+			get
+			{
+				return mAlpha;
+			}
+		}
+		public float SecondsToFade = 1.5f;
 		public int Index { get; set; }
 		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
@@ -86,6 +130,9 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
 			ArrowSprite = new FlatRedBall.Sprite();
+			this.BeforeIsActiveSet += OnBeforeIsActiveSet;
+			this.AfterIsActiveSet += OnAfterIsActiveSet;
+			this.AfterAlphaSet += OnAfterAlphaSet;
 			
 			PostInitialize();
 			if (addToManagers)
@@ -141,7 +188,9 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			ArrowSprite.PixelSize = 0.5f;
 			ArrowSprite.Texture = arrow;
 			ArrowSprite.Visible = false;
-			IsActive = true;
+			IsActive = false;
+			Alpha = 1f;
+			SecondsToFade = 1.5f;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -165,7 +214,9 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			ArrowSprite.PixelSize = 0.5f;
 			ArrowSprite.Texture = arrow;
 			ArrowSprite.Visible = false;
-			IsActive = true;
+			IsActive = false;
+			Alpha = 1f;
+			SecondsToFade = 1.5f;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;

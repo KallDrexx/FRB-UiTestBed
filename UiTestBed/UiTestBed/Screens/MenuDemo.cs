@@ -20,6 +20,7 @@ using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 using FrbUi.Layouts;
+using FlatRedBall.Instructions;
 #endif
 
 namespace UiTestBed.Screens
@@ -28,14 +29,12 @@ namespace UiTestBed.Screens
 	{
 		void CustomInitialize()
 		{
-            
-
 		}
 
 		void CustomActivity(bool firstTimeCalled)
 		{
-
-
+            if (firstTimeCalled)
+                MainMenuInstance.Activate();
 		}
 
 		void CustomDestroy()

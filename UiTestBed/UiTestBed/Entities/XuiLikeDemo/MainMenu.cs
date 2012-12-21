@@ -7,12 +7,6 @@ using FlatRedBall.AI.Pathfinding;
 using FlatRedBall.Graphics.Animation;
 using FlatRedBall.Graphics.Particle;
 
-using FlatRedBall.Math.Geometry;
-using FlatRedBall.Math.Splines;
-using BitmapFont = FlatRedBall.Graphics.BitmapFont;
-using Cursor = FlatRedBall.Gui.Cursor;
-using GuiManager = FlatRedBall.Gui.GuiManager;
-
 #if FRB_XNA || SILVERLIGHT
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
@@ -23,6 +17,12 @@ using FrbUi;
 
 #endif
 
+using FlatRedBall.Math.Geometry;
+using FlatRedBall.Math.Splines;
+using BitmapFont = FlatRedBall.Graphics.BitmapFont;
+using Cursor = FlatRedBall.Gui.Cursor;
+using GuiManager = FlatRedBall.Gui.GuiManager;
+
 namespace UiTestBed.Entities.XuiLikeDemo
 {
 	public partial class MainMenu
@@ -32,6 +32,33 @@ namespace UiTestBed.Entities.XuiLikeDemo
         protected Button _optionsButton;
         protected Button _quitButton;
         protected SelectableControlGroup _mainGroup;
+        protected double? _activationStartTime;
+        protected bool _isActivating;
+        protected Action _activationCallback;
+
+        public void Activate(Action activationCallback = null)
+        {
+            // If we are already active, or in the process of activation, ignore
+            if (IsActive || _activationStartTime != null)
+                return;
+
+            _activationStartTime = TimeManager.CurrentTime;
+            _isActivating = true;
+            _activationCallback = activationCallback;
+        }
+
+        public void Deactivate(Action deactivationCallback = null)
+        {
+            // If we are already deactivated or in the process of activation/deactivation
+            if (!IsActive || _activationStartTime != null)
+                return;
+
+            _activationStartTime = TimeManager.CurrentTime;
+            _isActivating = false;
+            IsActive = false;
+            _activationCallback = deactivationCallback;
+            _mainGroup.UnfocusCurrentControl();
+        }
 
 		private void CustomInitialize()
 		{
@@ -44,12 +71,32 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _layout.AttachTo(this, false);
 
             InitButtons();
-
-            _mainGroup.FocusNextControl();
 		}
 
 		private void CustomActivity()
 		{
+            if (_activationStartTime != null)
+            {
+                double pctDone = (TimeManager.CurrentTime - _activationStartTime.Value) / SecondsToFade;
+                if (pctDone >= 1)
+                {
+                    _activationStartTime = null;
+                    if (_isActivating)
+                        IsActive = true;
+
+                    if (_activationCallback != null)
+                    {
+                        _activationCallback();
+                        _activationCallback = null;
+                    }
+                }
+
+                if (_isActivating)
+                    Alpha = (float)pctDone;
+                else
+                    Alpha = (float)Math.Max(0, (1 - pctDone));
+            }
+
             if (IsActive)
             {
                 if (InputManager.Keyboard.KeyPushed(Keys.Down))
@@ -79,7 +126,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _optionsButton = SetupButton("Options");
             _quitButton = SetupButton("Quit");
 
-            _quitButton.OnClicked += delegate(ILayoutable sender) { FlatRedBallServices.Game.Exit(); };
+            _quitButton.OnClicked += delegate(ILayoutable sender)  { Deactivate(() => FlatRedBallServices.Game.Exit()); };
         }
 
         protected Button SetupButton(string label)
@@ -93,6 +140,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
             btn.ScaleY = 19.7f;
             btn.IgnoreCursorEvents = true;
             btn.OnFocused = ButtonFocused;
+            btn.OnFocusLost = ButtonLostFocused;
             _mainGroup.Add(btn);
             _layout.AddItem(btn);
 
@@ -116,6 +164,11 @@ namespace UiTestBed.Entities.XuiLikeDemo
                 ArrowSprite.RelativeX = (sender.RelativeX + sender.ScaleX + SPACING);
                 ArrowSprite.RelativeRotationZ = (float)(Math.PI * 1.5);
             }
+        }
+
+        protected void ButtonLostFocused(ILayoutable sender)
+        {
+            ArrowSprite.Visible = false;
         }
 	}
 }
