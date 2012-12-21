@@ -55,6 +55,45 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		#if DEBUG
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
+		public enum VariableState
+		{
+			Uninitialized = 0, //This exists so that the first set call actually does something
+			Unknown = 1, //This exists so that if the entity is actually a child entity and has set a child state, you will get this
+			Activated = 2, 
+			Deactivated = 3
+		}
+		protected int mCurrentState = 0;
+		public VariableState CurrentState
+		{
+			get
+			{
+				if (Enum.IsDefined(typeof(VariableState), mCurrentState))
+				{
+					return (VariableState)mCurrentState;
+				}
+				else
+				{
+					return VariableState.Unknown;
+				}
+			}
+			set
+			{
+				mCurrentState = (int)value;
+				switch(CurrentState)
+				{
+					case  VariableState.Uninitialized:
+						break;
+					case  VariableState.Unknown:
+						break;
+					case  VariableState.Activated:
+						OverallAlpha = 1f;
+						break;
+					case  VariableState.Deactivated:
+						OverallAlpha = 0f;
+						break;
+				}
+			}
+		}
 		static object mLockObject = new object();
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
@@ -83,28 +122,29 @@ namespace UiTestBed.Entities.XuiLikeDemo
 				return mIsActive;
 			}
 		}
-		public event EventHandler BeforeAlphaSet;
-		public event EventHandler AfterAlphaSet;
-		float mAlpha = 1f;
-		public float Alpha
+		public event EventHandler BeforeOverallAlphaSet;
+		public event EventHandler AfterOverallAlphaSet;
+		float mOverallAlpha = 1f;
+		public float OverallAlpha
 		{
 			set
 			{
-				if (BeforeAlphaSet != null)
+				if (BeforeOverallAlphaSet != null)
 				{
-					BeforeAlphaSet(this, null);
+					BeforeOverallAlphaSet(this, null);
 				}
-				mAlpha = value;
-				if (AfterAlphaSet != null)
+				mOverallAlpha = value;
+				if (AfterOverallAlphaSet != null)
 				{
-					AfterAlphaSet(this, null);
+					AfterOverallAlphaSet(this, null);
 				}
 			}
 			get
 			{
-				return mAlpha;
+				return mOverallAlpha;
 			}
 		}
+		public float OverallAlphaVelocity = 0;
 		public float SecondsToFade = 1.5f;
 		public int Index { get; set; }
 		public bool Used { get; set; }
@@ -132,7 +172,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			ArrowSprite = new FlatRedBall.Sprite();
 			this.BeforeIsActiveSet += OnBeforeIsActiveSet;
 			this.AfterIsActiveSet += OnAfterIsActiveSet;
-			this.AfterAlphaSet += OnAfterAlphaSet;
+			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			
 			PostInitialize();
 			if (addToManagers)
@@ -156,6 +196,10 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			// Generated Activity
 			
+			if (OverallAlphaVelocity!= 0)
+			{
+				OverallAlpha += OverallAlphaVelocity * TimeManager.SecondDifference;
+			}
 			CustomActivity();
 			
 			// After Custom Activity
@@ -189,8 +233,9 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			ArrowSprite.Texture = arrow;
 			ArrowSprite.Visible = false;
 			IsActive = false;
-			Alpha = 1f;
+			OverallAlpha = 1f;
 			SecondsToFade = 1.5f;
+			CurrentState = MainMenu.VariableState.Deactivated;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -215,8 +260,9 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			ArrowSprite.Texture = arrow;
 			ArrowSprite.Visible = false;
 			IsActive = false;
-			Alpha = 1f;
+			OverallAlpha = 1f;
 			SecondsToFade = 1.5f;
+			CurrentState = MainMenu.VariableState.Deactivated;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
@@ -291,6 +337,93 @@ namespace UiTestBed.Entities.XuiLikeDemo
 				{
 					arrow= null;
 				}
+			}
+		}
+		static VariableState mLoadingState = VariableState.Uninitialized;
+		public static VariableState LoadingState
+		{
+			get
+			{
+				return mLoadingState;
+			}
+			set
+			{
+				mLoadingState = value;
+			}
+		}
+		public Instruction InterpolateToState (VariableState stateToInterpolateTo, double secondsToTake)
+		{
+			switch(stateToInterpolateTo)
+			{
+				case  VariableState.Activated:
+					OverallAlphaVelocity = (1f - OverallAlpha) / (float)secondsToTake;
+					break;
+				case  VariableState.Deactivated:
+					OverallAlphaVelocity = (0f - OverallAlpha) / (float)secondsToTake;
+					break;
+			}
+			var instruction = new DelegateInstruction<VariableState>(StopStateInterpolation, stateToInterpolateTo);
+			instruction.TimeToExecute = TimeManager.CurrentTime + secondsToTake;
+			this.Instructions.Add(instruction);
+			return instruction;
+		}
+		public void StopStateInterpolation (VariableState stateToStop)
+		{
+			switch(stateToStop)
+			{
+				case  VariableState.Activated:
+					OverallAlphaVelocity =  0;
+					break;
+				case  VariableState.Deactivated:
+					OverallAlphaVelocity =  0;
+					break;
+			}
+			CurrentState = stateToStop;
+		}
+		public void InterpolateBetween (VariableState firstState, VariableState secondState, float interpolationValue)
+		{
+			#if DEBUG
+			if (float.IsNaN(interpolationValue))
+			{
+				throw new Exception("interpolationValue cannot be NaN");
+			}
+			#endif
+			bool setOverallAlpha = true;
+			float OverallAlphaFirstValue= 0;
+			float OverallAlphaSecondValue= 0;
+			switch(firstState)
+			{
+				case  VariableState.Activated:
+					OverallAlphaFirstValue = 1f;
+					break;
+				case  VariableState.Deactivated:
+					OverallAlphaFirstValue = 0f;
+					break;
+			}
+			switch(secondState)
+			{
+				case  VariableState.Activated:
+					OverallAlphaSecondValue = 1f;
+					break;
+				case  VariableState.Deactivated:
+					OverallAlphaSecondValue = 0f;
+					break;
+			}
+			if (setOverallAlpha)
+			{
+				OverallAlpha = OverallAlphaFirstValue * (1 - interpolationValue) + OverallAlphaSecondValue * interpolationValue;
+			}
+		}
+		public static void PreloadStateContent (VariableState state, string contentManagerName)
+		{
+			ContentManagerName = contentManagerName;
+			object throwaway;
+			switch(state)
+			{
+				case  VariableState.Activated:
+					break;
+				case  VariableState.Deactivated:
+					break;
 			}
 		}
 		[System.Obsolete("Use GetFile instead")]

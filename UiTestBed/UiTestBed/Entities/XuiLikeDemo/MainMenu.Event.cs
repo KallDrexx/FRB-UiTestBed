@@ -33,10 +33,11 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _previousActiveState = IsActive;
         }
 
-        void OnAfterAlphaSet (object sender, EventArgs e)
+        void OnAfterOverallAlphaSet (object sender, EventArgs e)
         {
             if (_layout != null)
-                _layout.Alpha = Alpha;
+                _layout.Alpha = OverallAlpha;
+            
         }
 	}
 }

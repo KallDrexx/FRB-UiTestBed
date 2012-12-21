@@ -55,6 +55,28 @@
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
+      <States>
+        <StateSave>
+          <InstructionSaves>
+            <InstructionSave>
+              <Type>Single</Type>
+              <Member>OverallAlpha</Member>
+              <ValueAsFloat>1</ValueAsFloat>
+            </InstructionSave>
+          </InstructionSaves>
+          <Name>Activated</Name>
+        </StateSave>
+        <StateSave>
+          <InstructionSaves>
+            <InstructionSave>
+              <Type>Single</Type>
+              <Member>OverallAlpha</Member>
+              <ValueAsFloat>0</ValueAsFloat>
+            </InstructionSave>
+          </InstructionSaves>
+          <Name>Deactivated</Name>
+        </StateSave>
+      </States>
       <CustomVariables>
         <CustomVariable>
           <Properties>
@@ -74,8 +96,12 @@
               <Name>Type</Name>
               <ValueAsString>float</ValueAsString>
             </PropertySave>
+            <PropertySave>
+              <Name>HasAccompanyingVelocityProperty</Name>
+              <ValueAsBool>true</ValueAsBool>
+            </PropertySave>
           </Properties>
-          <Name>Alpha</Name>
+          <Name>OverallAlpha</Name>
           <Type>float</Type>
           <DefaultValue xsi:type="xsd:float">1</DefaultValue>
           <CreatesEvent>true</CreatesEvent>
@@ -90,6 +116,17 @@
           <Name>SecondsToFade</Name>
           <Type>float</Type>
           <DefaultValue xsi:type="xsd:float">1.5</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>VariableState</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>CurrentState</Name>
+          <Type>VariableState</Type>
+          <DefaultValue xsi:type="xsd:string">Deactivated</DefaultValue>
         </CustomVariable>
       </CustomVariables>
       <Name>Entities\XuiLikeDemo\MainMenu</Name>
@@ -139,8 +176,8 @@
           <DelegateType />
         </EventResponseSave>
         <EventResponseSave>
-          <EventName>AfterAlphaSet</EventName>
-          <SourceVariable>Alpha</SourceVariable>
+          <EventName>AfterOverallAlphaSet</EventName>
+          <SourceVariable>OverallAlpha</SourceVariable>
           <BeforeOrAfter>After</BeforeOrAfter>
           <DelegateType />
         </EventResponseSave>

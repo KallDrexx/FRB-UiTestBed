@@ -1,64 +1,60 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using FlatRedBall;
 using FlatRedBall.Input;
-using FlatRedBall.AI.Pathfinding;
-using FlatRedBall.Graphics.Animation;
-using FlatRedBall.Graphics.Particle;
-
 #if FRB_XNA || SILVERLIGHT
 using Keys = Microsoft.Xna.Framework.Input.Keys;
-using Vector3 = Microsoft.Xna.Framework.Vector3;
-using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 using FrbUi.Layouts;
 using FrbUi.Controls;
 using FrbUi;
 
 #endif
-
-using FlatRedBall.Math.Geometry;
-using FlatRedBall.Math.Splines;
-using BitmapFont = FlatRedBall.Graphics.BitmapFont;
-using Cursor = FlatRedBall.Gui.Cursor;
-using GuiManager = FlatRedBall.Gui.GuiManager;
 using FlatRedBall.Instructions;
 
 namespace UiTestBed.Entities.XuiLikeDemo
 {
 	public partial class MainMenu
 	{
-        protected BoxLayout _layout;
-        protected Button _levelSelectButton;
-        protected Button _optionsButton;
-        protected Button _quitButton;
-        protected SelectableControlGroup _mainGroup;
-        protected double? _activationStartTime;
-        protected bool _isActivating;
-        protected Action _activationCallback;
+	    private BoxLayout _layout;
+	    private Button _levelSelectButton;
+	    private Button _optionsButton;
+	    private Button _quitButton;
+	    private SelectableControlGroup _mainGroup;
+	    private bool _activationStateChanging;
 
         public void Activate(Action activationCallback = null)
         {
             // If we are already active, or in the process of activation, ignore
-            if (IsActive || _activationStartTime != null)
+            if (CurrentState == VariableState.Activated || _activationStateChanging)
                 return;
 
-            _activationStartTime = TimeManager.CurrentTime;
-            _isActivating = true;
-            _activationCallback = activationCallback;
+            _activationStateChanging = true;
+            InterpolateToState(VariableState.Activated, SecondsToFade);
+            this.Call(() => 
+                {
+                    IsActive = true;
+                    CurrentState = VariableState.Activated;
+                    _activationStateChanging = false;
+                    if (activationCallback != null)
+                        activationCallback();
+                })
+                .After(SecondsToFade);
         }
 
         public void Deactivate(Action deactivationCallback = null)
         {
             // If we are already deactivated or in the process of activation/deactivation
-            if (!IsActive || _activationStartTime != null)
+            if (CurrentState == VariableState.Deactivated || _activationStateChanging)
                 return;
 
-            _activationStartTime = TimeManager.CurrentTime;
-            _isActivating = false;
             IsActive = false;
-            _activationCallback = deactivationCallback;
-            _mainGroup.UnfocusCurrentControl();
+            InterpolateToState(VariableState.Deactivated, SecondsToFade);
+            this.Call(() =>
+                {
+                    _activationStateChanging = false;
+                    if (deactivationCallback != null)
+                        deactivationCallback();
+                })
+                .After(SecondsToFade);
         }
 
 		private void CustomInitialize()
@@ -76,28 +72,6 @@ namespace UiTestBed.Entities.XuiLikeDemo
 
 		private void CustomActivity()
 		{
-            if (_activationStartTime != null)
-            {
-                double pctDone = (TimeManager.CurrentTime - _activationStartTime.Value) / SecondsToFade;
-                if (pctDone >= 1)
-                {
-                    _activationStartTime = null;
-                    if (_isActivating)
-                        IsActive = true;
-
-                    if (_activationCallback != null)
-                    {
-                        _activationCallback();
-                        _activationCallback = null;
-                    }
-                }
-
-                if (_isActivating)
-                    Alpha = (float)pctDone;
-                else
-                    Alpha = (float)Math.Max(0, (1 - pctDone));
-            }
-
             if (IsActive)
             {
                 if (InputManager.Keyboard.KeyPushed(Keys.Down))
@@ -121,7 +95,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 
         }
 
-        protected void InitButtons()
+	    private void InitButtons()
         {
             _levelSelectButton = SetupButton("Select Level");
             _optionsButton = SetupButton("Options");
@@ -130,7 +104,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _quitButton.OnClicked += delegate(ILayoutable sender)  { Deactivate(() => FlatRedBallServices.Game.Exit()); };
         }
 
-        protected Button SetupButton(string label)
+	    private Button SetupButton(string label)
         {
             var btn = UiControlManager.Instance.CreateControl<Button>();
             btn.AnimationChains = GlobalContent.MenuButtonAnimations;
@@ -148,7 +122,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
             return btn;
         }
 
-        protected void ButtonFocused(ILayoutable sender)
+	    private void ButtonFocused(ILayoutable sender)
         {
             const float SPACING = 25;
 
@@ -167,7 +141,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
             }
         }
 
-        protected void ButtonLostFocused(ILayoutable sender)
+	    private void ButtonLostFocused(ILayoutable sender)
         {
             ArrowSprite.Visible = false;
         }
