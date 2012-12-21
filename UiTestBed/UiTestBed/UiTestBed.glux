@@ -69,6 +69,38 @@
         </CustomVariable>
       </CustomVariables>
       <Name>Entities\XuiLikeDemo\MainMenu</Name>
+      <NamedObjects>
+        <NamedObjectSave>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>PixelSize</Member>
+            <ValueAsFloat>0.5</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>Texture2D</Type>
+            <Member>Texture</Member>
+            <ValueAsString>arrow</ValueAsString>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>bool</Type>
+            <Member>Visible</Member>
+            <ValueAsBool>false</ValueAsBool>
+          </CustomProperty>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceClassType>Sprite</SourceClassType>
+          <InstanceName>ArrowSprite</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+      </NamedObjects>
+      <ReferencedFiles>
+        <ReferencedFileSave>
+          <Name>Entities/XuiLikeDemo/MainMenu/arrow.png</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <RuntimeType>Microsoft.Xna.Framework.Graphics.Texture2D</RuntimeType>
+        </ReferencedFileSave>
+      </ReferencedFiles>
       <Is2D>true</Is2D>
     </EntitySave>
   </Entities>

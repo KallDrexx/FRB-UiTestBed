@@ -48,6 +48,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Entities\XuiLikeDemo\MainMenu\arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>arrow</Name>
+    </None>
     <None Include="GlobalContent\button-idle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>button-idle</Name>

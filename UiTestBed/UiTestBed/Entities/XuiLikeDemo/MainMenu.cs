@@ -92,6 +92,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
             btn.ScaleX = 100;
             btn.ScaleY = 19.7f;
             btn.IgnoreCursorEvents = true;
+            btn.OnFocused = ButtonFocused;
             _mainGroup.Add(btn);
             _layout.AddItem(btn);
 
@@ -100,6 +101,21 @@ namespace UiTestBed.Entities.XuiLikeDemo
 
         protected void ButtonFocused(ILayoutable sender)
         {
+            const float SPACING = 25;
+
+            ArrowSprite.RelativeY = sender.RelativeY;
+            ArrowSprite.Visible = true;
+
+            if (sender != _optionsButton)
+            {
+                ArrowSprite.RelativeX = (sender.RelativeX - sender.ScaleX - SPACING);
+                ArrowSprite.RelativeRotationZ = (float)(Math.PI * 0.5);
+            }
+            else
+            {
+                ArrowSprite.RelativeX = (sender.RelativeX + sender.ScaleX + SPACING);
+                ArrowSprite.RelativeRotationZ = (float)(Math.PI * 1.5);
+            }
         }
 	}
 }

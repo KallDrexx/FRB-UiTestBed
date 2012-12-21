@@ -20,6 +20,7 @@ using UiTestBed.Entities;
 using UiTestBed.Entities.XuiLikeDemo;
 using FlatRedBall;
 using FlatRedBall.Screens;
+using Microsoft.Xna.Framework.Graphics;
 
 #if XNA4 || WINDOWS_8
 using Color = Microsoft.Xna.Framework.Color;
@@ -57,7 +58,9 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		static object mLockObject = new object();
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
+		private static Microsoft.Xna.Framework.Graphics.Texture2D arrow;
 		
+		private FlatRedBall.Sprite ArrowSprite;
 		public bool IsActive = true;
 		public int Index { get; set; }
 		public bool Used { get; set; }
@@ -82,6 +85,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
+			ArrowSprite = new FlatRedBall.Sprite();
 			
 			PostInitialize();
 			if (addToManagers)
@@ -115,6 +119,10 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			// Generated Destroy
 			SpriteManager.RemovePositionedObject(this);
 			
+			if (ArrowSprite != null)
+			{
+				ArrowSprite.Detach(); SpriteManager.RemoveSprite(ArrowSprite);
+			}
 
 
 			CustomDestroy();
@@ -125,6 +133,14 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
+			if (ArrowSprite.Parent == null)
+			{
+				ArrowSprite.CopyAbsoluteToRelative();
+				ArrowSprite.AttachTo(this, false);
+			}
+			ArrowSprite.PixelSize = 0.5f;
+			ArrowSprite.Texture = arrow;
+			ArrowSprite.Visible = false;
 			IsActive = true;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
@@ -145,6 +161,10 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			RotationX = 0;
 			RotationY = 0;
 			RotationZ = 0;
+			SpriteManager.AddToLayer(ArrowSprite, layerToAddTo);
+			ArrowSprite.PixelSize = 0.5f;
+			ArrowSprite.Texture = arrow;
+			ArrowSprite.Visible = false;
 			IsActive = true;
 			X = oldX;
 			Y = oldY;
@@ -157,6 +177,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			this.ForceUpdateDependenciesDeep();
 			SpriteManager.ConvertToManuallyUpdated(this);
+			SpriteManager.ConvertToManuallyUpdated(ArrowSprite);
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -187,6 +208,11 @@ namespace UiTestBed.Entities.XuiLikeDemo
 						mRegisteredUnloads.Add(ContentManagerName);
 					}
 				}
+				if (!FlatRedBallServices.IsLoaded<Microsoft.Xna.Framework.Graphics.Texture2D>(@"content/entities/xuilikedemo/mainmenu/arrow.png", ContentManagerName))
+				{
+					registerUnload = true;
+				}
+				arrow = FlatRedBallServices.Load<Microsoft.Xna.Framework.Graphics.Texture2D>(@"content/entities/xuilikedemo/mainmenu/arrow.png", ContentManagerName);
 			}
 			if (registerUnload && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 			{
@@ -210,19 +236,38 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			}
 			if (LoadedContentManagers.Count == 0)
 			{
+				if (arrow != null)
+				{
+					arrow= null;
+				}
 			}
 		}
 		[System.Obsolete("Use GetFile instead")]
 		public static object GetStaticMember (string memberName)
 		{
+			switch(memberName)
+			{
+				case  "arrow":
+					return arrow;
+			}
 			return null;
 		}
 		public static object GetFile (string memberName)
 		{
+			switch(memberName)
+			{
+				case  "arrow":
+					return arrow;
+			}
 			return null;
 		}
 		object GetMember (string memberName)
 		{
+			switch(memberName)
+			{
+				case  "arrow":
+					return arrow;
+			}
 			return null;
 		}
 		protected bool mIsPaused;
@@ -234,6 +279,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		public virtual void SetToIgnorePausing ()
 		{
 			InstructionManager.IgnorePausingFor(this);
+			InstructionManager.IgnorePausingFor(ArrowSprite);
 		}
 
     }
