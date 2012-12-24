@@ -43,7 +43,7 @@ namespace UiTestBed.Screens
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		
-		private UiTestBed.Entities.XuiLikeDemo.MainMenu MainMenuInstance;
+		private UiTestBed.Entities.XuiLikeDemo.OptionsMenu OptionsMenuInstance;
 
 		public MenuDemo()
 			: base("MenuDemo")
@@ -54,8 +54,8 @@ namespace UiTestBed.Screens
         {
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			MainMenuInstance = new UiTestBed.Entities.XuiLikeDemo.MainMenu(ContentManagerName, false);
-			MainMenuInstance.Name = "MainMenuInstance";
+			OptionsMenuInstance = new UiTestBed.Entities.XuiLikeDemo.OptionsMenu(ContentManagerName, false);
+			OptionsMenuInstance.Name = "OptionsMenuInstance";
 			
 			
 			PostInitialize();
@@ -82,7 +82,7 @@ namespace UiTestBed.Screens
 			if (!IsPaused)
 			{
 				
-				MainMenuInstance.Activity();
+				OptionsMenuInstance.Activity();
 			}
 			else
 			{
@@ -103,10 +103,10 @@ namespace UiTestBed.Screens
 		{
 			// Generated Destroy
 			
-			if (MainMenuInstance != null)
+			if (OptionsMenuInstance != null)
 			{
-				MainMenuInstance.Destroy();
-				MainMenuInstance.Detach();
+				OptionsMenuInstance.Destroy();
+				OptionsMenuInstance.Detach();
 			}
 
 			base.Destroy();
@@ -124,11 +124,11 @@ namespace UiTestBed.Screens
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
-			MainMenuInstance.AddToManagers(mLayer);
+			OptionsMenuInstance.AddToManagers(mLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
-			MainMenuInstance.ConvertToManuallyUpdated();
+			OptionsMenuInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -146,7 +146,7 @@ namespace UiTestBed.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
-			UiTestBed.Entities.XuiLikeDemo.MainMenu.LoadStaticContent(contentManagerName);
+			UiTestBed.Entities.XuiLikeDemo.OptionsMenu.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

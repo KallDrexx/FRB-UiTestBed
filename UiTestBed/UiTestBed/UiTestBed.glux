@@ -20,8 +20,8 @@
       <NamedObjects>
         <NamedObjectSave>
           <SourceType>Entity</SourceType>
-          <SourceClassType>Entities\XuiLikeDemo\MainMenu</SourceClassType>
-          <InstanceName>MainMenuInstance</InstanceName>
+          <SourceClassType>Entities\XuiLikeDemo\OptionsMenu</SourceClassType>
+          <InstanceName>OptionsMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
@@ -184,6 +184,148 @@
       </Events>
       <Is2D>true</Is2D>
     </EntitySave>
+    <EntitySave>
+      <States>
+        <StateSave>
+          <InstructionSaves>
+            <InstructionSave>
+              <Type>Single</Type>
+              <Member>OverallAlpha</Member>
+              <ValueAsFloat>1</ValueAsFloat>
+            </InstructionSave>
+          </InstructionSaves>
+          <Name>Activated</Name>
+        </StateSave>
+        <StateSave>
+          <InstructionSaves>
+            <InstructionSave>
+              <Type>Single</Type>
+              <Member>OverallAlpha</Member>
+              <ValueAsFloat>0</ValueAsFloat>
+            </InstructionSave>
+          </InstructionSaves>
+          <Name>Deactivated</Name>
+        </StateSave>
+      </States>
+      <StateCategoryList>
+        <StateSaveCategory>
+          <States>
+            <StateSave>
+              <InstructionSaves />
+              <Name>Easy</Name>
+            </StateSave>
+            <StateSave>
+              <InstructionSaves />
+              <Name>Normal</Name>
+            </StateSave>
+            <StateSave>
+              <InstructionSaves />
+              <Name>Hard</Name>
+            </StateSave>
+          </States>
+          <Name>Difficulty</Name>
+          <SharesVariablesWithOtherCategories>false</SharesVariablesWithOtherCategories>
+        </StateSaveCategory>
+      </StateCategoryList>
+      <CustomVariables>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+            <PropertySave>
+              <Name>HasAccompanyingVelocityProperty</Name>
+              <ValueAsBool>true</ValueAsBool>
+            </PropertySave>
+          </Properties>
+          <Name>OverallAlpha</Name>
+          <Type>float</Type>
+          <CreatesEvent>true</CreatesEvent>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>VariableState</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>CurrentState</Name>
+          <Type>VariableState</Type>
+          <DefaultValue xsi:type="xsd:string">Activated</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>Difficulty</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>CurrentDifficultyState</Name>
+          <Type>Difficulty</Type>
+          <DefaultValue xsi:type="xsd:string">Easy</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>int</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>VolumeLevel</Name>
+          <Type>int</Type>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>bool</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>IsActive</Name>
+          <Type>bool</Type>
+          <DefaultValue xsi:type="xsd:boolean">true</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>SecondsToFade</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">1.5</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>bool</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>MenuExited</Name>
+          <Type>bool</Type>
+          <DefaultValue xsi:type="xsd:boolean">false</DefaultValue>
+        </CustomVariable>
+      </CustomVariables>
+      <Name>Entities\XuiLikeDemo\OptionsMenu</Name>
+      <Events>
+        <EventResponseSave>
+          <EventName>BeforeOverallAlphaSet</EventName>
+          <SourceVariable>OverallAlpha</SourceVariable>
+          <BeforeOrAfter>Before</BeforeOrAfter>
+          <DelegateType />
+        </EventResponseSave>
+        <EventResponseSave>
+          <EventName>AfterOverallAlphaSet</EventName>
+          <SourceVariable>OverallAlpha</SourceVariable>
+          <BeforeOrAfter>After</BeforeOrAfter>
+          <DelegateType />
+        </EventResponseSave>
+      </Events>
+      <Is2D>true</Is2D>
+    </EntitySave>
   </Entities>
   <GlobalFiles>
     <ReferencedFileSave>
@@ -193,6 +335,21 @@
     </ReferencedFileSave>
     <ReferencedFileSave>
       <Name>GlobalContent/MenuDemo/MenuButtonAnimations.achx</Name>
+      <IsSharedStatic>true</IsSharedStatic>
+      <HasPublicProperty>true</HasPublicProperty>
+    </ReferencedFileSave>
+    <ReferencedFileSave>
+      <Name>GlobalContent/MenuDemo/MenuBackground.achx</Name>
+      <IsSharedStatic>true</IsSharedStatic>
+      <HasPublicProperty>true</HasPublicProperty>
+    </ReferencedFileSave>
+    <ReferencedFileSave>
+      <Name>GlobalContent/MenuDemo/MenuArrow.achx</Name>
+      <IsSharedStatic>true</IsSharedStatic>
+      <HasPublicProperty>true</HasPublicProperty>
+    </ReferencedFileSave>
+    <ReferencedFileSave>
+      <Name>GlobalContent/MenuDemo/MenuVolumeBar.achx</Name>
       <IsSharedStatic>true</IsSharedStatic>
       <HasPublicProperty>true</HasPublicProperty>
     </ReferencedFileSave>

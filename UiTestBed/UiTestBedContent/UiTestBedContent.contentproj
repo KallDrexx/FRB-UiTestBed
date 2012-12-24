@@ -60,9 +60,33 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>Button1</Name>
     </None>
+    <None Include="GlobalContent\MenuDemo\arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>arrow</Name>
+    </None>
+    <None Include="GlobalContent\MenuDemo\button_x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>button_x</Name>
+    </None>
+    <None Include="GlobalContent\MenuDemo\dialog_box.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>dialog_box</Name>
+    </None>
+    <None Include="GlobalContent\MenuDemo\MenuArrow.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>MenuArrow</Name>
+    </None>
+    <None Include="GlobalContent\MenuDemo\MenuBackground.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>MenuBackground</Name>
+    </None>
     <None Include="GlobalContent\MenuDemo\MenuButtonAnimations.achx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>MenuButtonAnimations</Name>
+    </None>
+    <None Include="GlobalContent\MenuDemo\MenuVolumeBar.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>MenuVolumeBar</Name>
     </None>
     <None Include="GlobalContent\MenuDemo\SelectedButton.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -71,6 +95,10 @@
     <None Include="GlobalContent\MenuDemo\StandardButton.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>StandardButton</Name>
+    </None>
+    <None Include="GlobalContent\MenuDemo\VolumeBar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>VolumeBar</Name>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

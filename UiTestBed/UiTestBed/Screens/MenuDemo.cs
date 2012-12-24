@@ -29,12 +29,13 @@ namespace UiTestBed.Screens
 	{
 		void CustomInitialize()
 		{
+		    //OptionsMenuInstance.X = -100;
 		}
 
 		void CustomActivity(bool firstTimeCalled)
 		{
-            if (firstTimeCalled)
-                MainMenuInstance.Activate();
+            //if (firstTimeCalled)
+            //    OptionsMenuInstance.Activate();
 		}
 
 		void CustomDestroy()

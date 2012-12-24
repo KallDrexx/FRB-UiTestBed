@@ -1,7 +1,14 @@
 Content\Entities\XuiLikeDemo\MainMenu\arrow.png
 Content\GlobalContent\button-idle.png
 Content\GlobalContent\Button1.achx
+Content\GlobalContent\MenuDemo\arrow.png
+Content\GlobalContent\MenuDemo\button_x.png
+Content\GlobalContent\MenuDemo\dialog_box.png
+Content\GlobalContent\MenuDemo\MenuArrow.achx
+Content\GlobalContent\MenuDemo\MenuBackground.achx
 Content\GlobalContent\MenuDemo\MenuButtonAnimations.achx
+Content\GlobalContent\MenuDemo\MenuVolumeBar.achx
 Content\GlobalContent\MenuDemo\SelectedButton.png
 Content\GlobalContent\MenuDemo\StandardButton.png
+Content\GlobalContent\MenuDemo\VolumeBar.png
 redball.BMP

@@ -17,6 +17,9 @@ namespace UiTestBed
 		
 		public static FlatRedBall.Graphics.Animation.AnimationChainList Button1 { get; set; }
 		public static FlatRedBall.Graphics.Animation.AnimationChainList MenuButtonAnimations { get; set; }
+		public static FlatRedBall.Graphics.Animation.AnimationChainList MenuBackground { get; set; }
+		public static FlatRedBall.Graphics.Animation.AnimationChainList MenuArrow { get; set; }
+		public static FlatRedBall.Graphics.Animation.AnimationChainList MenuVolumeBar { get; set; }
 		[System.Obsolete("Use GetFile instead")]
 		public static object GetStaticMember (string memberName)
 		{
@@ -26,6 +29,12 @@ namespace UiTestBed
 					return Button1;
 				case  "MenuButtonAnimations":
 					return MenuButtonAnimations;
+				case  "MenuBackground":
+					return MenuBackground;
+				case  "MenuArrow":
+					return MenuArrow;
+				case  "MenuVolumeBar":
+					return MenuVolumeBar;
 			}
 			return null;
 		}
@@ -37,6 +46,12 @@ namespace UiTestBed
 					return Button1;
 				case  "MenuButtonAnimations":
 					return MenuButtonAnimations;
+				case  "MenuBackground":
+					return MenuBackground;
+				case  "MenuArrow":
+					return MenuArrow;
+				case  "MenuVolumeBar":
+					return MenuVolumeBar;
 			}
 			return null;
 		}
@@ -48,6 +63,9 @@ namespace UiTestBed
 			
 			Button1 = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/globalcontent/button1.achx", ContentManagerName);
 			MenuButtonAnimations = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/globalcontent/menudemo/menubuttonanimations.achx", ContentManagerName);
+			MenuBackground = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/globalcontent/menudemo/menubackground.achx", ContentManagerName);
+			MenuArrow = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/globalcontent/menudemo/menuarrow.achx", ContentManagerName);
+			MenuVolumeBar = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/globalcontent/menudemo/menuvolumebar.achx", ContentManagerName);
 						IsInitialized = true;
 		}
 		

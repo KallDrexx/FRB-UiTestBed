@@ -64,6 +64,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _layout = UiControlManager.Instance.CreateControl<BoxLayout>();
             _layout.CurrentDirection = BoxLayout.Direction.Down;
             _layout.Spacing = 40;
+		    //_layout.BackgroundAnimationChains = GlobalContent.MenuBackground;
+		    //_layout.CurrentBackgroundAnimationChainName = "Idle";
 
             _layout.AttachTo(this, false);
 
@@ -101,7 +103,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _optionsButton = SetupButton("Options");
             _quitButton = SetupButton("Quit");
 
-            _quitButton.OnClicked += delegate(ILayoutable sender)  { Deactivate(() => FlatRedBallServices.Game.Exit()); };
+            _quitButton.OnClicked += sender => Deactivate(() => FlatRedBallServices.Game.Exit());
         }
 
 	    private Button SetupButton(string label)
