@@ -34,8 +34,8 @@ namespace UiTestBed.Screens
 
 		void CustomActivity(bool firstTimeCalled)
 		{
-            //if (firstTimeCalled)
-            //    OptionsMenuInstance.Activate();
+            if (firstTimeCalled)
+                OptionsMenuInstance.Activate();
 		}
 
 		void CustomDestroy()

@@ -252,7 +252,7 @@
           </Properties>
           <Name>CurrentState</Name>
           <Type>VariableState</Type>
-          <DefaultValue xsi:type="xsd:string">Activated</DefaultValue>
+          <DefaultValue xsi:type="xsd:string">Deactivated</DefaultValue>
         </CustomVariable>
         <CustomVariable>
           <Properties>
@@ -284,7 +284,7 @@
           </Properties>
           <Name>IsActive</Name>
           <Type>bool</Type>
-          <DefaultValue xsi:type="xsd:boolean">true</DefaultValue>
+          <DefaultValue xsi:type="xsd:boolean">false</DefaultValue>
         </CustomVariable>
         <CustomVariable>
           <Properties>

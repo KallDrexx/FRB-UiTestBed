@@ -52,10 +52,10 @@ namespace UiTestBed.Entities.XuiLikeDemo
                 IsActive = true;
                 CurrentState = VariableState.Activated;
                 _activationStateChanging = false;
+                _selectGroup.FocusNextControl();
                 if (activationCallback != null)
                     activationCallback();
-            })
-                .After(SecondsToFade);
+            }).After(SecondsToFade);
         }
 
         public void Deactivate(Action deactivationCallback = null)
@@ -73,6 +73,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
                 if (deactivationCallback != null)
                     deactivationCallback();
             }).After(SecondsToFade);
+
+            _selectGroup.UnfocusCurrentControl();
         }
 
 		private void CustomInitialize()
@@ -89,6 +91,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
                     _selectGroup.FocusNextControl();
                 else if (InputManager.Keyboard.KeyPushed(Keys.Up))
                     _selectGroup.FocusPreviousControl();
+                else if (InputManager.Keyboard.KeyPushed(Keys.Enter))
+                    _selectGroup.ClickFocusedControl();
                 else if (InputManager.Keyboard.KeyPushed(Keys.Right))
                     ProcessOptionKeyPress(true);
                 else if (InputManager.Keyboard.KeyPushed(Keys.Left))
@@ -162,7 +166,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _mainLayout = UiControlManager.Instance.CreateControl<BoxLayout>();
             _mainLayout.CurrentDirection = BoxLayout.Direction.Down;
             _mainLayout.Spacing = 20;
-            //_mainLayout.Alpha = OverallAlpha;
+            _mainLayout.Alpha = OverallAlpha;
 
             // Create the inner layouts and buttons
             CreateDifficultySection();

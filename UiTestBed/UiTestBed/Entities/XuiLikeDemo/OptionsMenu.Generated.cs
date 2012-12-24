@@ -161,7 +161,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		}
 		public float OverallAlphaVelocity = 0;
 		public int VolumeLevel;
-		public bool IsActive = true;
+		public bool IsActive = false;
 		public float SecondsToFade = 1.5f;
 		public bool MenuExited = false;
 		public int Index { get; set; }
@@ -236,9 +236,9 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			CurrentState = OptionsMenu.VariableState.Activated;
+			CurrentState = OptionsMenu.VariableState.Deactivated;
 			CurrentDifficultyState = OptionsMenu.Difficulty.Easy;
-			IsActive = true;
+			IsActive = false;
 			SecondsToFade = 1.5f;
 			MenuExited = false;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
@@ -260,9 +260,9 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			RotationX = 0;
 			RotationY = 0;
 			RotationZ = 0;
-			CurrentState = OptionsMenu.VariableState.Activated;
+			CurrentState = OptionsMenu.VariableState.Deactivated;
 			CurrentDifficultyState = OptionsMenu.Difficulty.Easy;
-			IsActive = true;
+			IsActive = false;
 			SecondsToFade = 1.5f;
 			MenuExited = false;
 			X = oldX;
