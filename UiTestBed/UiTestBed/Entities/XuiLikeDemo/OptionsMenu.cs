@@ -28,7 +28,6 @@ namespace UiTestBed.Entities.XuiLikeDemo
 {
 	public partial class OptionsMenu
 	{
-	    private const int MAX_VOLUME_LEVELS = 10;
 	    private const float MAX_BAR_HEIGHT = 15;
 
         private BoxLayout _mainLayout;
@@ -120,8 +119,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
                 VolumeLevel = (increasing ? VolumeLevel + 1 : VolumeLevel - 1);
                 if (VolumeLevel < 1)
                     VolumeLevel = 1;
-                else if (VolumeLevel > MAX_VOLUME_LEVELS)
-                    VolumeLevel = MAX_VOLUME_LEVELS;
+                else if (VolumeLevel > MaximumVolumeLevel)
+                    VolumeLevel = MaximumVolumeLevel;
 
                 // Refresh the bars
                 for (int x = 0; x < _volumeBars.Count; x++)
@@ -237,15 +236,15 @@ namespace UiTestBed.Entities.XuiLikeDemo
             volumeLayout.AddItem(barLayout);
             _volumeBars.Clear();
 
-            for (int x = 0; x < MAX_VOLUME_LEVELS; x++)
+            for (int x = 0; x < MaximumVolumeLevel; x++)
             {
                 var bar = UiControlManager.Instance.CreateControl<LayoutableSprite>();
                 bar.AnimationChains = GlobalContent.MenuVolumeBar;
                 bar.CurrentAnimationChainName = "Idle";
-                //bar.Visible = (VolumeLevel > x);
+                bar.Visible = (VolumeLevel > x);
                 
                 // Scale the bar vertical size to be proportional to the total
-                var percent = ((float)(x + 1)/ (float)MAX_VOLUME_LEVELS);
+                var percent = ((float)(x + 1) / (float)MaximumVolumeLevel);
                 bar.ScaleY = (percent * MAX_BAR_HEIGHT);
 
                 barLayout.AddItem(bar, true);

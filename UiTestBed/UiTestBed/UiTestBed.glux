@@ -26,6 +26,14 @@
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>Entity</SourceType>
+          <SourceClassType>Entities\XuiLikeDemo\MainMenu</SourceClassType>
+          <InstanceName>MainMenuInstance</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
       </NamedObjects>
     </ScreenSave>
     <ScreenSave>
@@ -115,7 +123,7 @@
           </Properties>
           <Name>SecondsToFade</Name>
           <Type>float</Type>
-          <DefaultValue xsi:type="xsd:float">1.5</DefaultValue>
+          <DefaultValue xsi:type="xsd:float">1</DefaultValue>
         </CustomVariable>
         <CustomVariable>
           <Properties>
@@ -127,6 +135,16 @@
           <Name>CurrentState</Name>
           <Type>VariableState</Type>
           <DefaultValue xsi:type="xsd:string">Deactivated</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>bool</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>OptionsSelected</Name>
+          <Type>bool</Type>
         </CustomVariable>
       </CustomVariables>
       <Name>Entities\XuiLikeDemo\MainMenu</Name>
@@ -274,6 +292,7 @@
           </Properties>
           <Name>VolumeLevel</Name>
           <Type>int</Type>
+          <DefaultValue xsi:type="xsd:int">3</DefaultValue>
         </CustomVariable>
         <CustomVariable>
           <Properties>
@@ -295,7 +314,7 @@
           </Properties>
           <Name>SecondsToFade</Name>
           <Type>float</Type>
-          <DefaultValue xsi:type="xsd:float">1.5</DefaultValue>
+          <DefaultValue xsi:type="xsd:float">1</DefaultValue>
         </CustomVariable>
         <CustomVariable>
           <Properties>
@@ -307,6 +326,17 @@
           <Name>MenuExited</Name>
           <Type>bool</Type>
           <DefaultValue xsi:type="xsd:boolean">false</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>int</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>MaximumVolumeLevel</Name>
+          <Type>int</Type>
+          <DefaultValue xsi:type="xsd:int">10</DefaultValue>
         </CustomVariable>
       </CustomVariables>
       <Name>Entities\XuiLikeDemo\OptionsMenu</Name>

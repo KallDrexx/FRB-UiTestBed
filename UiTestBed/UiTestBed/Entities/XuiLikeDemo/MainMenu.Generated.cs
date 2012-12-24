@@ -145,7 +145,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			}
 		}
 		public float OverallAlphaVelocity = 0;
-		public float SecondsToFade = 1.5f;
+		public float SecondsToFade = 1f;
+		public bool OptionsSelected;
 		public int Index { get; set; }
 		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
@@ -234,7 +235,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			ArrowSprite.Visible = false;
 			IsActive = false;
 			OverallAlpha = 1f;
-			SecondsToFade = 1.5f;
+			SecondsToFade = 1f;
 			CurrentState = MainMenu.VariableState.Deactivated;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
@@ -261,7 +262,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			ArrowSprite.Visible = false;
 			IsActive = false;
 			OverallAlpha = 1f;
-			SecondsToFade = 1.5f;
+			SecondsToFade = 1f;
 			CurrentState = MainMenu.VariableState.Deactivated;
 			X = oldX;
 			Y = oldY;

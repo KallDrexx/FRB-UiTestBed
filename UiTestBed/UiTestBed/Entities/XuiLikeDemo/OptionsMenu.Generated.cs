@@ -160,10 +160,11 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			}
 		}
 		public float OverallAlphaVelocity = 0;
-		public int VolumeLevel;
+		public int VolumeLevel = 3;
 		public bool IsActive = false;
-		public float SecondsToFade = 1.5f;
+		public float SecondsToFade = 1f;
 		public bool MenuExited = false;
+		public int MaximumVolumeLevel = 10;
 		public int Index { get; set; }
 		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
@@ -238,9 +239,11 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
 			CurrentState = OptionsMenu.VariableState.Deactivated;
 			CurrentDifficultyState = OptionsMenu.Difficulty.Easy;
+			VolumeLevel = 3;
 			IsActive = false;
-			SecondsToFade = 1.5f;
+			SecondsToFade = 1f;
 			MenuExited = false;
+			MaximumVolumeLevel = 10;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -262,9 +265,11 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			RotationZ = 0;
 			CurrentState = OptionsMenu.VariableState.Deactivated;
 			CurrentDifficultyState = OptionsMenu.Difficulty.Easy;
+			VolumeLevel = 3;
 			IsActive = false;
-			SecondsToFade = 1.5f;
+			SecondsToFade = 1f;
 			MenuExited = false;
+			MaximumVolumeLevel = 10;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;

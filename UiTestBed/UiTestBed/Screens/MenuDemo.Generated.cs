@@ -44,6 +44,7 @@ namespace UiTestBed.Screens
 		#endif
 		
 		private UiTestBed.Entities.XuiLikeDemo.OptionsMenu OptionsMenuInstance;
+		private UiTestBed.Entities.XuiLikeDemo.MainMenu MainMenuInstance;
 
 		public MenuDemo()
 			: base("MenuDemo")
@@ -56,6 +57,8 @@ namespace UiTestBed.Screens
 			LoadStaticContent(ContentManagerName);
 			OptionsMenuInstance = new UiTestBed.Entities.XuiLikeDemo.OptionsMenu(ContentManagerName, false);
 			OptionsMenuInstance.Name = "OptionsMenuInstance";
+			MainMenuInstance = new UiTestBed.Entities.XuiLikeDemo.MainMenu(ContentManagerName, false);
+			MainMenuInstance.Name = "MainMenuInstance";
 			
 			
 			PostInitialize();
@@ -83,6 +86,7 @@ namespace UiTestBed.Screens
 			{
 				
 				OptionsMenuInstance.Activity();
+				MainMenuInstance.Activity();
 			}
 			else
 			{
@@ -108,6 +112,11 @@ namespace UiTestBed.Screens
 				OptionsMenuInstance.Destroy();
 				OptionsMenuInstance.Detach();
 			}
+			if (MainMenuInstance != null)
+			{
+				MainMenuInstance.Destroy();
+				MainMenuInstance.Detach();
+			}
 
 			base.Destroy();
 
@@ -125,10 +134,12 @@ namespace UiTestBed.Screens
 		public virtual void AddToManagersBottomUp ()
 		{
 			OptionsMenuInstance.AddToManagers(mLayer);
+			MainMenuInstance.AddToManagers(mLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
 			OptionsMenuInstance.ConvertToManuallyUpdated();
+			MainMenuInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -147,6 +158,7 @@ namespace UiTestBed.Screens
 			}
 			#endif
 			UiTestBed.Entities.XuiLikeDemo.OptionsMenu.LoadStaticContent(contentManagerName);
+			UiTestBed.Entities.XuiLikeDemo.MainMenu.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

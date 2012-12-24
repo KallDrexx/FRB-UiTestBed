@@ -103,7 +103,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _optionsButton = SetupButton("Options");
             _quitButton = SetupButton("Quit");
 
-            _quitButton.OnClicked += sender => Deactivate(() => FlatRedBallServices.Game.Exit());
+            _quitButton.OnClicked = sender => Deactivate(() => FlatRedBallServices.Game.Exit());
+	        _optionsButton.OnClicked = sender => Deactivate(() => OptionsSelected = true);
         }
 
 	    private Button SetupButton(string label)
