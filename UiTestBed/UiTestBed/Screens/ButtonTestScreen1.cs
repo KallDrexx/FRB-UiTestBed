@@ -107,7 +107,7 @@ namespace UiTestBed.Screens
 
         }
 
-        private Button CreateButton()
+        private static Button CreateButton()
         {
             var onSelected = new LayoutableEvent(delegate(ILayoutable sender)
             {

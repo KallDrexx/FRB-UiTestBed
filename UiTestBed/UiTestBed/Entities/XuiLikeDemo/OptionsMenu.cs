@@ -169,19 +169,19 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _difficultyButton = CreateButton();
 	        _difficultyButton.Text = "Difficulty";
 	        _selectGroup.Add(_difficultyButton);
-	        difficultyLayout.AddItem(_difficultyButton);
+	        difficultyLayout.AddItem(_difficultyButton, BoxLayout.Alignment.Centered);
 
 	        var arrow1 = CreateArrow();
-	        difficultyLayout.AddItem(arrow1);
+            difficultyLayout.AddItem(arrow1, BoxLayout.Alignment.Centered);
 	        arrow1.RelativeRotationZ = (float) (Math.PI*1.5);
 	        arrow1.Visible = false;
 
             _difficultyText = UiControlManager.Instance.CreateControl<LayoutableText>();
 	        _difficultyText.DisplayText = CurrentDifficultyState.ToString();
-	        difficultyLayout.AddItem(_difficultyText);
+	        difficultyLayout.AddItem(_difficultyText, BoxLayout.Alignment.Centered);
 
 	        var arrow2 = CreateArrow();
-	        difficultyLayout.AddItem(arrow2);
+	        difficultyLayout.AddItem(arrow2, BoxLayout.Alignment.Centered);
 	        arrow2.RelativeRotationZ = (float) (Math.PI*0.5);
 	        arrow2.Visible = false;
 
@@ -209,17 +209,17 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _volumeButton = CreateButton();
             _volumeButton.Text = "Volume";
             _selectGroup.Add(_volumeButton);
-            volumeLayout.AddItem(_volumeButton);
+            volumeLayout.AddItem(_volumeButton, BoxLayout.Alignment.Centered);
 
             var arrow1 = CreateArrow();
-            volumeLayout.AddItem(arrow1);
+            volumeLayout.AddItem(arrow1, BoxLayout.Alignment.Centered);
             arrow1.RelativeRotationZ = (float)(Math.PI * 1.5);
             arrow1.Visible = false;
 
             // Create the volume bars
             var barLayout = UiControlManager.Instance.CreateControl<BoxLayout>();
             barLayout.CurrentDirection = BoxLayout.Direction.Right;
-            volumeLayout.AddItem(barLayout);
+            volumeLayout.AddItem(barLayout, BoxLayout.Alignment.Centered);
             _volumeBars.Clear();
 
             for (int x = 0; x < MaximumVolumeLevel; x++)
@@ -230,15 +230,15 @@ namespace UiTestBed.Entities.XuiLikeDemo
                 bar.Visible = (VolumeLevel > x);
                 
                 // Scale the bar vertical size to be proportional to the total
-                var percent = ((float)(x + 1) / (float)MaximumVolumeLevel);
+                var percent = ((x + 1) / (float)MaximumVolumeLevel);
                 bar.ScaleY = (percent * MAX_BAR_HEIGHT);
 
-                barLayout.AddItem(bar, true);
+                barLayout.AddItem(bar, BoxLayout.Alignment.Inverse);
                 _volumeBars.Add(bar);
             }
 
             var arrow2 = CreateArrow();
-            volumeLayout.AddItem(arrow2);
+            volumeLayout.AddItem(arrow2, BoxLayout.Alignment.Centered);
             arrow2.RelativeRotationZ = (float)(Math.PI * 0.5);
             arrow2.Visible = false;
 

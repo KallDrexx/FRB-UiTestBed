@@ -16,6 +16,9 @@
       </NamedObjects>
     </ScreenSave>
     <ScreenSave>
+      <Name>Screens\CenteredBoxLayoutTest</Name>
+    </ScreenSave>
+    <ScreenSave>
       <Name>Screens\MenuDemo</Name>
       <NamedObjects>
         <NamedObjectSave>
