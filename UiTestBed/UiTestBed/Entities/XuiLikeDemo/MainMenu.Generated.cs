@@ -231,6 +231,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 				ArrowSprite.AttachTo(this, false);
 			}
 			ArrowSprite.PixelSize = 0.5f;
+			ArrowSprite.RelativeZ = 0.1f;
 			ArrowSprite.Texture = arrow;
 			ArrowSprite.Visible = false;
 			IsActive = false;
@@ -258,6 +259,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			RotationZ = 0;
 			SpriteManager.AddToLayer(ArrowSprite, layerToAddTo);
 			ArrowSprite.PixelSize = 0.5f;
+			ArrowSprite.RelativeZ = 0.1f;
 			ArrowSprite.Texture = arrow;
 			ArrowSprite.Visible = false;
 			IsActive = false;

@@ -6,9 +6,9 @@ using Keys = Microsoft.Xna.Framework.Input.Keys;
 using FrbUi.Layouts;
 using FrbUi.Controls;
 using FrbUi;
-
 #endif
 using FlatRedBall.Instructions;
+using Microsoft.Xna.Framework;
 
 namespace UiTestBed.Entities.XuiLikeDemo
 {
@@ -64,15 +64,15 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _layout = UiControlManager.Instance.CreateControl<BoxLayout>();
             _layout.CurrentDirection = BoxLayout.Direction.Down;
             _layout.Spacing = 40;
-		    //_layout.BackgroundAnimationChains = GlobalContent.MenuBackground;
-		    //_layout.CurrentBackgroundAnimationChainName = "Idle";
-
+		    _layout.Margin = 50;
+		    _layout.BackgroundAnimationChains = GlobalContent.MenuBackground;
+		    _layout.CurrentBackgroundAnimationChainName = "Idle";
             _layout.AttachTo(this, false);
 
             InitButtons();
 		}
 
-		private void CustomActivity()
+		private void CustomActivity() 
 		{
             if (IsActive)
             {

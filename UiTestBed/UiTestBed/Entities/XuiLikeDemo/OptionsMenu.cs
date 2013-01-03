@@ -151,6 +151,9 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _mainLayout = UiControlManager.Instance.CreateControl<BoxLayout>();
             _mainLayout.CurrentDirection = BoxLayout.Direction.Down;
             _mainLayout.Spacing = 20;
+	        _mainLayout.Margin = 40;
+            _mainLayout.BackgroundAnimationChains = GlobalContent.MenuBackground;
+            _mainLayout.CurrentBackgroundAnimationChainName = "Idle";
             _mainLayout.Alpha = OverallAlpha;
 
             // Create the inner layouts and buttons

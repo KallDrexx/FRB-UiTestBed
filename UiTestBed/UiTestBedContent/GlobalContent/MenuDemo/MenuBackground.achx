@@ -10,8 +10,8 @@
       <FlipVertical>false</FlipVertical>
       <TextureName>dialog_box.png</TextureName>
       <FrameLength>0.1</FrameLength>
-      <LeftCoordinate>0.04375</LeftCoordinate>
-      <RightCoordinate>0.953125</RightCoordinate>
+      <LeftCoordinate>-0.00173010386</LeftCoordinate>
+      <RightCoordinate>1.00346017</RightCoordinate>
       <TopCoordinate>-0.010416667</TopCoordinate>
       <BottomCoordinate>1.02083337</BottomCoordinate>
       <RelativeX>0</RelativeX>

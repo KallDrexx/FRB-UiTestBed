@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UiTestBed", "UiTestBed\UiTestBed\UiTestBed.csproj", "{649DE040-99C6-4838-ADA3-533D0DBD4325}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UiTestBedContent", "UiTestBed\UiTestBedContent\UiTestBedContent.contentproj", "{64B23BEF-DD26-4B81-AAA6-D9F46B0140B4}"

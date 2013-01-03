@@ -23,16 +23,16 @@
       <NamedObjects>
         <NamedObjectSave>
           <SourceType>Entity</SourceType>
-          <SourceClassType>Entities\XuiLikeDemo\OptionsMenu</SourceClassType>
-          <InstanceName>OptionsMenuInstance</InstanceName>
+          <SourceClassType>Entities\XuiLikeDemo\MainMenu</SourceClassType>
+          <InstanceName>MainMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
         <NamedObjectSave>
           <SourceType>Entity</SourceType>
-          <SourceClassType>Entities\XuiLikeDemo\MainMenu</SourceClassType>
-          <InstanceName>MainMenuInstance</InstanceName>
+          <SourceClassType>Entities\XuiLikeDemo\OptionsMenu</SourceClassType>
+          <InstanceName>OptionsMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
@@ -167,6 +167,11 @@
             <Type>bool</Type>
             <Member>Visible</Member>
             <ValueAsBool>false</ValueAsBool>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>RelativeZ</Member>
+            <ValueAsFloat>0.1</ValueAsFloat>
           </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>Sprite</SourceClassType>

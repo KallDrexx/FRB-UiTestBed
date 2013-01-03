@@ -61,7 +61,7 @@
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FlatRedBall, Version=2011.11.13.868, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="FlatRedBall, Version=2012.12.16.1319, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\Xna4Pc\FlatRedBall.dll</HintPath>
     </Reference>
