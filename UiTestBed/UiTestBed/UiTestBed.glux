@@ -159,6 +159,11 @@
             <ValueAsFloat>0.5</ValueAsFloat>
           </CustomProperty>
           <CustomProperty>
+            <Type>float</Type>
+            <Member>RelativeZ</Member>
+            <ValueAsFloat>0.1</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
             <Type>Texture2D</Type>
             <Member>Texture</Member>
             <ValueAsString>arrow</ValueAsString>
@@ -167,11 +172,6 @@
             <Type>bool</Type>
             <Member>Visible</Member>
             <ValueAsBool>false</ValueAsBool>
-          </CustomProperty>
-          <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeZ</Member>
-            <ValueAsFloat>0.1</ValueAsFloat>
           </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>Sprite</SourceClassType>
