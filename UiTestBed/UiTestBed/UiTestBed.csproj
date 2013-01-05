@@ -117,6 +117,10 @@
     <Compile Include="Entities\Test1.Generated.cs">
       <DependentUpon>Test1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\XuiLikeDemo\LevelSelectMenu.cs" />
+    <Compile Include="Entities\XuiLikeDemo\LevelSelectMenu.Generated.cs">
+      <DependentUpon>LevelSelectMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\XuiLikeDemo\MainMenu.cs" />
     <Compile Include="Entities\XuiLikeDemo\MainMenu.Event.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>

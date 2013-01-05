@@ -187,6 +187,14 @@ namespace UiTestBed.Entities
 				SpriteFrameInstance.AttachTo(this, false);
 			}
 			SpriteFrameInstance.PixelSize = 0.5f;
+			if (SpriteFrameInstance.Parent == null)
+			{
+				SpriteFrameInstance.Z = 0.2f;
+			}
+			else
+			{
+				SpriteFrameInstance.RelativeZ = 0.2f;
+			}
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -208,6 +216,14 @@ namespace UiTestBed.Entities
 			RotationZ = 0;
 			SpriteManager.AddToLayer(SpriteFrameInstance, layerToAddTo);
 			SpriteFrameInstance.PixelSize = 0.5f;
+			if (SpriteFrameInstance.Parent == null)
+			{
+				SpriteFrameInstance.Z = 0.2f;
+			}
+			else
+			{
+				SpriteFrameInstance.RelativeZ = 0.2f;
+			}
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;

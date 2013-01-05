@@ -4,6 +4,7 @@ using System.Linq;
 using FlatRedBall.Input;
 #if FRB_XNA || SILVERLIGHT
 using FlatRedBall.Instructions;
+using FrbUi.SelectableGroupings;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 #endif
 using FrbUi.Layouts;
@@ -17,7 +18,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 	    private const float MAX_BAR_HEIGHT = 15;
 
         private BoxLayout _mainLayout;
-	    private SelectableControlGroup _selectGroup;
+        private SequentialSelectableGroup _selectGroup;
 	    private List<LayoutableSprite> _volumeBars;
 	    private Button _difficultyButton;
         private LayoutableText _difficultyText;
@@ -146,7 +147,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 
 	    private void InitLayouts()
         {
-            _selectGroup = UiControlManager.Instance.CreateSelectableControlGroup();
+            _selectGroup = UiControlManager.Instance.CreateSelectableControlGroup<SequentialSelectableGroup>();
 
             _mainLayout = UiControlManager.Instance.CreateControl<BoxLayout>();
             _mainLayout.CurrentDirection = BoxLayout.Direction.Down;

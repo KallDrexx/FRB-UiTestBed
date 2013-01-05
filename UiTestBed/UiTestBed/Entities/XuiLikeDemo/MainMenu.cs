@@ -2,13 +2,13 @@ using System;
 using FlatRedBall;
 using FlatRedBall.Input;
 #if FRB_XNA || SILVERLIGHT
+using FrbUi.SelectableGroupings;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using FrbUi.Layouts;
 using FrbUi.Controls;
 using FrbUi;
 #endif
 using FlatRedBall.Instructions;
-using Microsoft.Xna.Framework;
 
 namespace UiTestBed.Entities.XuiLikeDemo
 {
@@ -18,7 +18,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 	    private Button _levelSelectButton;
 	    private Button _optionsButton;
 	    private Button _quitButton;
-	    private SelectableControlGroup _mainGroup;
+        private SequentialSelectableGroup _mainGroup;
 	    private bool _activationStateChanging;
 
         public void Activate(Action activationCallback = null)
@@ -59,7 +59,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 
 		private void CustomInitialize()
 		{
-            _mainGroup = UiControlManager.Instance.CreateSelectableControlGroup();
+            _mainGroup = UiControlManager.Instance.CreateSelectableControlGroup<SequentialSelectableGroup>();
 
             _layout = UiControlManager.Instance.CreateControl<BoxLayout>();
             _layout.CurrentDirection = BoxLayout.Direction.Down;

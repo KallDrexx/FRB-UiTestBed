@@ -23,8 +23,8 @@
       <NamedObjects>
         <NamedObjectSave>
           <SourceType>Entity</SourceType>
-          <SourceClassType>Entities\XuiLikeDemo\MainMenu</SourceClassType>
-          <InstanceName>MainMenuInstance</InstanceName>
+          <SourceClassType>Entities\XuiLikeDemo\LevelSelectMenu</SourceClassType>
+          <InstanceName>LevelSelectMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
@@ -33,6 +33,14 @@
           <SourceType>Entity</SourceType>
           <SourceClassType>Entities\XuiLikeDemo\OptionsMenu</SourceClassType>
           <InstanceName>OptionsMenuInstance</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>Entity</SourceType>
+          <SourceClassType>Entities\XuiLikeDemo\MainMenu</SourceClassType>
+          <InstanceName>MainMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
@@ -55,6 +63,11 @@
             <Member>PixelSize</Member>
             <ValueAsFloat>0.5</ValueAsFloat>
           </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Z</Member>
+            <ValueAsFloat>0.2</ValueAsFloat>
+          </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>SpriteFrame</SourceClassType>
           <InstanceName>SpriteFrameInstance</InstanceName>
@@ -63,6 +76,10 @@
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
+      <Is2D>true</Is2D>
+    </EntitySave>
+    <EntitySave>
+      <Name>Entities\XuiLikeDemo\LevelSelectMenu</Name>
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>

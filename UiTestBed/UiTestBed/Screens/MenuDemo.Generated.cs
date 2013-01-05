@@ -43,8 +43,9 @@ namespace UiTestBed.Screens
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		
-		private UiTestBed.Entities.XuiLikeDemo.MainMenu MainMenuInstance;
+		private UiTestBed.Entities.XuiLikeDemo.LevelSelectMenu LevelSelectMenuInstance;
 		private UiTestBed.Entities.XuiLikeDemo.OptionsMenu OptionsMenuInstance;
+		private UiTestBed.Entities.XuiLikeDemo.MainMenu MainMenuInstance;
 
 		public MenuDemo()
 			: base("MenuDemo")
@@ -55,10 +56,12 @@ namespace UiTestBed.Screens
         {
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			MainMenuInstance = new UiTestBed.Entities.XuiLikeDemo.MainMenu(ContentManagerName, false);
-			MainMenuInstance.Name = "MainMenuInstance";
+			LevelSelectMenuInstance = new UiTestBed.Entities.XuiLikeDemo.LevelSelectMenu(ContentManagerName, false);
+			LevelSelectMenuInstance.Name = "LevelSelectMenuInstance";
 			OptionsMenuInstance = new UiTestBed.Entities.XuiLikeDemo.OptionsMenu(ContentManagerName, false);
 			OptionsMenuInstance.Name = "OptionsMenuInstance";
+			MainMenuInstance = new UiTestBed.Entities.XuiLikeDemo.MainMenu(ContentManagerName, false);
+			MainMenuInstance.Name = "MainMenuInstance";
 			
 			
 			PostInitialize();
@@ -85,8 +88,9 @@ namespace UiTestBed.Screens
 			if (!IsPaused)
 			{
 				
-				MainMenuInstance.Activity();
+				LevelSelectMenuInstance.Activity();
 				OptionsMenuInstance.Activity();
+				MainMenuInstance.Activity();
 			}
 			else
 			{
@@ -107,15 +111,20 @@ namespace UiTestBed.Screens
 		{
 			// Generated Destroy
 			
-			if (MainMenuInstance != null)
+			if (LevelSelectMenuInstance != null)
 			{
-				MainMenuInstance.Destroy();
-				MainMenuInstance.Detach();
+				LevelSelectMenuInstance.Destroy();
+				LevelSelectMenuInstance.Detach();
 			}
 			if (OptionsMenuInstance != null)
 			{
 				OptionsMenuInstance.Destroy();
 				OptionsMenuInstance.Detach();
+			}
+			if (MainMenuInstance != null)
+			{
+				MainMenuInstance.Destroy();
+				MainMenuInstance.Detach();
 			}
 
 			base.Destroy();
@@ -133,13 +142,15 @@ namespace UiTestBed.Screens
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
-			MainMenuInstance.AddToManagers(mLayer);
+			LevelSelectMenuInstance.AddToManagers(mLayer);
 			OptionsMenuInstance.AddToManagers(mLayer);
+			MainMenuInstance.AddToManagers(mLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
-			MainMenuInstance.ConvertToManuallyUpdated();
+			LevelSelectMenuInstance.ConvertToManuallyUpdated();
 			OptionsMenuInstance.ConvertToManuallyUpdated();
+			MainMenuInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -157,8 +168,9 @@ namespace UiTestBed.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
-			UiTestBed.Entities.XuiLikeDemo.MainMenu.LoadStaticContent(contentManagerName);
+			UiTestBed.Entities.XuiLikeDemo.LevelSelectMenu.LoadStaticContent(contentManagerName);
 			UiTestBed.Entities.XuiLikeDemo.OptionsMenu.LoadStaticContent(contentManagerName);
+			UiTestBed.Entities.XuiLikeDemo.MainMenu.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]
