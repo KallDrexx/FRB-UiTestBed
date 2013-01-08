@@ -155,6 +155,10 @@
     <Compile Include="Screens\CenteredBoxLayoutTest.Generated.cs">
       <DependentUpon>CenteredBoxLayoutTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Screens\GridButtons.cs" />
+    <Compile Include="Screens\GridButtons.Generated.cs">
+      <DependentUpon>GridButtons.cs</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Screen2.cs" />
     <Compile Include="Screens\Screen2.Generated.cs">
       <DependentUpon>Screen2.cs</DependentUpon>

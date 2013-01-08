@@ -19,6 +19,9 @@
       <Name>Screens\CenteredBoxLayoutTest</Name>
     </ScreenSave>
     <ScreenSave>
+      <Name>Screens\GridButtons</Name>
+    </ScreenSave>
+    <ScreenSave>
       <Name>Screens\MenuDemo</Name>
       <NamedObjects>
         <NamedObjectSave>
@@ -414,7 +417,7 @@
     <RecordLockContention>false</RecordLockContention>
   </GlobalContentSettingsSave>
   <SyncedProjects />
-  <StartUpScreen>Screens\MenuDemo</StartUpScreen>
+  <StartUpScreen>Screens\GridButtons</StartUpScreen>
   <In2D>true</In2D>
   <SetResolution>true</SetResolution>
   <ResolutionWidth>800</ResolutionWidth>
