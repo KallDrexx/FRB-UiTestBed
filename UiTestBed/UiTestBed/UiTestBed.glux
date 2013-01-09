@@ -224,6 +224,16 @@
           <Type>float</Type>
           <DefaultValue xsi:type="xsd:float">1</DefaultValue>
         </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>bool</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>MenuExited</Name>
+          <Type>bool</Type>
+        </CustomVariable>
       </CustomVariables>
       <Name>Entities\XuiLikeDemo\LevelSelectMenu</Name>
       <Events>
@@ -240,6 +250,10 @@
           <DelegateType />
         </EventResponseSave>
       </Events>
+      <Is2D>true</Is2D>
+    </EntitySave>
+    <EntitySave>
+      <Name>Entities\XuiLikeDemo\LoadingScreen</Name>
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
@@ -265,6 +279,30 @@
           <Name>Deactivated</Name>
         </StateSave>
       </States>
+      <StateCategoryList>
+        <StateSaveCategory>
+          <States>
+            <StateSave>
+              <InstructionSaves />
+              <Name>Quit</Name>
+            </StateSave>
+            <StateSave>
+              <InstructionSaves />
+              <Name>Options</Name>
+            </StateSave>
+            <StateSave>
+              <InstructionSaves />
+              <Name>LevelSelect</Name>
+            </StateSave>
+            <StateSave>
+              <InstructionSaves />
+              <Name>None</Name>
+            </StateSave>
+          </States>
+          <Name>ChosenMenuOption</Name>
+          <SharesVariablesWithOtherCategories>false</SharesVariablesWithOtherCategories>
+        </StateSaveCategory>
+      </StateCategoryList>
       <CustomVariables>
         <CustomVariable>
           <Properties>
@@ -320,11 +358,12 @@
           <Properties>
             <PropertySave>
               <Name>Type</Name>
-              <ValueAsString>bool</ValueAsString>
+              <ValueAsString>ChosenMenuOption</ValueAsString>
             </PropertySave>
           </Properties>
-          <Name>OptionsSelected</Name>
-          <Type>bool</Type>
+          <Name>CurrentChosenMenuOptionState</Name>
+          <Type>ChosenMenuOption</Type>
+          <DefaultValue xsi:type="xsd:string">None</DefaultValue>
         </CustomVariable>
       </CustomVariables>
       <Name>Entities\XuiLikeDemo\MainMenu</Name>

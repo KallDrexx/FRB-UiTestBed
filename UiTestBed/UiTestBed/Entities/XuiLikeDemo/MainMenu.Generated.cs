@@ -94,6 +94,49 @@ namespace UiTestBed.Entities.XuiLikeDemo
 				}
 			}
 		}
+		public enum ChosenMenuOption
+		{
+			Uninitialized = 0, //This exists so that the first set call actually does something
+			Unknown = 1, //This exists so that if the entity is actually a child entity and has set a child state, you will get this
+			Quit = 2, 
+			Options = 3, 
+			LevelSelect = 4, 
+			None = 5
+		}
+		protected int mCurrentChosenMenuOptionState = 0;
+		public ChosenMenuOption CurrentChosenMenuOptionState
+		{
+			get
+			{
+				if (Enum.IsDefined(typeof(ChosenMenuOption), mCurrentChosenMenuOptionState))
+				{
+					return (ChosenMenuOption)mCurrentChosenMenuOptionState;
+				}
+				else
+				{
+					return ChosenMenuOption.Unknown;
+				}
+			}
+			set
+			{
+				mCurrentChosenMenuOptionState = (int)value;
+				switch(CurrentChosenMenuOptionState)
+				{
+					case  ChosenMenuOption.Uninitialized:
+						break;
+					case  ChosenMenuOption.Unknown:
+						break;
+					case  ChosenMenuOption.Quit:
+						break;
+					case  ChosenMenuOption.Options:
+						break;
+					case  ChosenMenuOption.LevelSelect:
+						break;
+					case  ChosenMenuOption.None:
+						break;
+				}
+			}
+		}
 		static object mLockObject = new object();
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
@@ -146,7 +189,6 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		}
 		public float OverallAlphaVelocity = 0;
 		public float SecondsToFade = 1f;
-		public bool OptionsSelected;
 		public int Index { get; set; }
 		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
@@ -238,6 +280,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			OverallAlpha = 1f;
 			SecondsToFade = 1f;
 			CurrentState = MainMenu.VariableState.Deactivated;
+			CurrentChosenMenuOptionState = MainMenu.ChosenMenuOption.None;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -266,6 +309,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			OverallAlpha = 1f;
 			SecondsToFade = 1f;
 			CurrentState = MainMenu.VariableState.Deactivated;
+			CurrentChosenMenuOptionState = MainMenu.ChosenMenuOption.None;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
@@ -417,6 +461,70 @@ namespace UiTestBed.Entities.XuiLikeDemo
 				OverallAlpha = OverallAlphaFirstValue * (1 - interpolationValue) + OverallAlphaSecondValue * interpolationValue;
 			}
 		}
+		public Instruction InterpolateToState (ChosenMenuOption stateToInterpolateTo, double secondsToTake)
+		{
+			switch(stateToInterpolateTo)
+			{
+				case  ChosenMenuOption.Quit:
+					break;
+				case  ChosenMenuOption.Options:
+					break;
+				case  ChosenMenuOption.LevelSelect:
+					break;
+				case  ChosenMenuOption.None:
+					break;
+			}
+			var instruction = new DelegateInstruction<ChosenMenuOption>(StopStateInterpolation, stateToInterpolateTo);
+			instruction.TimeToExecute = TimeManager.CurrentTime + secondsToTake;
+			this.Instructions.Add(instruction);
+			return instruction;
+		}
+		public void StopStateInterpolation (ChosenMenuOption stateToStop)
+		{
+			switch(stateToStop)
+			{
+				case  ChosenMenuOption.Quit:
+					break;
+				case  ChosenMenuOption.Options:
+					break;
+				case  ChosenMenuOption.LevelSelect:
+					break;
+				case  ChosenMenuOption.None:
+					break;
+			}
+			CurrentChosenMenuOptionState = stateToStop;
+		}
+		public void InterpolateBetween (ChosenMenuOption firstState, ChosenMenuOption secondState, float interpolationValue)
+		{
+			#if DEBUG
+			if (float.IsNaN(interpolationValue))
+			{
+				throw new Exception("interpolationValue cannot be NaN");
+			}
+			#endif
+			switch(firstState)
+			{
+				case  ChosenMenuOption.Quit:
+					break;
+				case  ChosenMenuOption.Options:
+					break;
+				case  ChosenMenuOption.LevelSelect:
+					break;
+				case  ChosenMenuOption.None:
+					break;
+			}
+			switch(secondState)
+			{
+				case  ChosenMenuOption.Quit:
+					break;
+				case  ChosenMenuOption.Options:
+					break;
+				case  ChosenMenuOption.LevelSelect:
+					break;
+				case  ChosenMenuOption.None:
+					break;
+			}
+		}
 		public static void PreloadStateContent (VariableState state, string contentManagerName)
 		{
 			ContentManagerName = contentManagerName;
@@ -426,6 +534,22 @@ namespace UiTestBed.Entities.XuiLikeDemo
 				case  VariableState.Activated:
 					break;
 				case  VariableState.Deactivated:
+					break;
+			}
+		}
+		public static void PreloadStateContent (ChosenMenuOption state, string contentManagerName)
+		{
+			ContentManagerName = contentManagerName;
+			object throwaway;
+			switch(state)
+			{
+				case  ChosenMenuOption.Quit:
+					break;
+				case  ChosenMenuOption.Options:
+					break;
+				case  ChosenMenuOption.LevelSelect:
+					break;
+				case  ChosenMenuOption.None:
 					break;
 			}
 		}

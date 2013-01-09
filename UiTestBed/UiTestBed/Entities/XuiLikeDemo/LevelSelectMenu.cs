@@ -35,7 +35,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 	    private bool _inTransition;
         private bool _activationStateChanging;
 
-        public void Activate()
+        public void Activate(Action activationCallback = null)
         {
             // If we are already active, or in the process of activation, ignore
             if (CurrentState != VariableState.Inactive || _activationStateChanging)
@@ -44,11 +44,38 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _activationStateChanging = true;
             _mainGroup.FocusNextControl();
             InterpolateToState(VariableState.WorldUnSelected, SecondsToFade);
-
             this.Call(() =>
             {
                 IsActive = true;
                 _activationStateChanging = false;
+
+                if (activationCallback != null)
+                    activationCallback();
+            })
+                .After(SecondsToFade);
+        }
+
+        public void Deactivate(Action deactivationCallback = null)
+        {
+            // If we are already deactivated or in the process of activation/deactivation
+            if (CurrentState == VariableState.Inactive || _activationStateChanging)
+                return;
+
+            IsActive = false;
+            InterpolateToState(VariableState.Inactive, SecondsToFade);
+            _mainGroup.UnfocusCurrentControl();
+
+            this.Call(() =>
+            {
+                _activationStateChanging = false;
+                MenuExited = true;
+                
+                // Move the camera back to 0,0 for the main UI
+                SpriteManager.Camera.X = 0;
+                SpriteManager.Camera.Y = 0;
+
+                if (deactivationCallback != null)
+                    deactivationCallback();
             })
                 .After(SecondsToFade);
         }
@@ -68,7 +95,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 
 		private void CustomActivity()
 		{
-            if (_inTransition)
+            if (_inTransition || !IsActive || _activationStateChanging)
                 return;
 
             if (_gridSelected)
@@ -106,6 +133,9 @@ namespace UiTestBed.Entities.XuiLikeDemo
                     _mainGroup.FocusPreviousControl();
                 else if (InputManager.Keyboard.KeyPushed(Keys.Enter))
                     _mainGroup.ClickFocusedControl();
+
+                else if (InputManager.Keyboard.KeyPushed(Keys.Escape))
+                    Deactivate();
             }
 		}
 

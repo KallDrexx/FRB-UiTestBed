@@ -155,6 +155,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		}
 		public float OverallAlphaVelocity = 0;
 		public float SecondsToFade = 1f;
+		public bool MenuExited;
 		public int Index { get; set; }
 		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;

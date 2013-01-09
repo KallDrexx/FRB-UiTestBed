@@ -10,7 +10,7 @@ using FlatRedBall.Graphics.Particle;
 using FlatRedBall.Graphics.Model;
 using FlatRedBall.Math.Geometry;
 using FlatRedBall.Math.Splines;
-
+using UiTestBed.Entities.XuiLikeDemo;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
 using FlatRedBall.Localization;
@@ -33,19 +33,37 @@ namespace UiTestBed.Screens
 
 		void CustomActivity(bool firstTimeCalled)
 		{
-            if (firstTimeCalled)
-                LevelSelectMenuInstance.Activate();
-
-            //if (OptionsMenuInstance.MenuExited)
-            //{
-            //    OptionsMenuInstance.MenuExited = false;
+            //if (firstTimeCalled)
             //    MainMenuInstance.Activate();
-            //}
-            //else if (MainMenuInstance.OptionsSelected)
-            //{
-            //    MainMenuInstance.OptionsSelected = false;
-            //    OptionsMenuInstance.Activate();
-            //}
+
+            if (OptionsMenuInstance.MenuExited)
+            {
+                OptionsMenuInstance.MenuExited = false;
+                MainMenuInstance.Activate();
+            }
+
+            if (LevelSelectMenuInstance.MenuExited)
+            {
+                LevelSelectMenuInstance.MenuExited = false;
+                MainMenuInstance.Activate();
+            }
+
+            else switch (MainMenuInstance.CurrentChosenMenuOptionState)
+            {
+                case MainMenu.ChosenMenuOption.Options:
+                    MainMenuInstance.CurrentChosenMenuOptionState = MainMenu.ChosenMenuOption.None;
+                    OptionsMenuInstance.Activate();
+                    break;
+
+                case MainMenu.ChosenMenuOption.LevelSelect:
+                    MainMenuInstance.CurrentChosenMenuOptionState = MainMenu.ChosenMenuOption.None;
+                    LevelSelectMenuInstance.Activate();
+                    break;
+
+                case MainMenu.ChosenMenuOption.Quit:
+                    FlatRedBallServices.Game.Exit();
+                    break;
+            }
 		}
 
 		void CustomDestroy()
