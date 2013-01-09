@@ -663,6 +663,15 @@ namespace UiTestBed.Entities
 			InstructionManager.IgnorePausingFor(this);
 			InstructionManager.IgnorePausingFor(SpriteFrameInstance);
 		}
+		public void MoveToLayer (Layer layerToMoveTo)
+		{
+			if (LayerProvidedByContainer != null)
+			{
+				LayerProvidedByContainer.Remove(SpriteFrameInstance);
+			}
+			SpriteManager.AddToLayer(SpriteFrameInstance, layerToMoveTo);
+			LayerProvidedByContainer = layerToMoveTo;
+		}
 
     }
 	

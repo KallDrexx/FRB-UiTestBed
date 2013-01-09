@@ -62,14 +62,14 @@ namespace UiTestBed.Screens
                             circle.AddItem(btn);
                         }
 
-                        grid.AddItem(circle, col, row, GridLayout.HorizontalAlignment.Center, GridLayout.VerticalAlignment.Center);
+                        grid.AddItem(circle, row, col, horizontalAlignment: GridLayout.HorizontalAlignment.Center, verticalAlignment: GridLayout.VerticalAlignment.Center);
                     }
                     else
                     {
                         var btn = CreateButton();
                         btn.Text = string.Format("Button {0} - {1}", row, col);
                         btn.ResizeAroundText(10, 10);
-                        grid.AddItem(btn, col, row, GridLayout.HorizontalAlignment.Center, GridLayout.VerticalAlignment.Center);
+                        grid.AddItem(btn, row, col, horizontalAlignment: GridLayout.HorizontalAlignment.Center, verticalAlignment: GridLayout.VerticalAlignment.Center);
                     }
                 }
             }

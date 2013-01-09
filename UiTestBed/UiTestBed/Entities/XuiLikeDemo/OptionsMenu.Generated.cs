@@ -516,6 +516,10 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			InstructionManager.IgnorePausingFor(this);
 		}
+		public void MoveToLayer (Layer layerToMoveTo)
+		{
+			LayerProvidedByContainer = layerToMoveTo;
+		}
 
     }
 	

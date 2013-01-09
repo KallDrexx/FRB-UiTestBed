@@ -44,8 +44,8 @@ namespace UiTestBed.Screens
 		#endif
 		
 		private UiTestBed.Entities.XuiLikeDemo.LevelSelectMenu LevelSelectMenuInstance;
-		private UiTestBed.Entities.XuiLikeDemo.OptionsMenu OptionsMenuInstance;
 		private UiTestBed.Entities.XuiLikeDemo.MainMenu MainMenuInstance;
+		private UiTestBed.Entities.XuiLikeDemo.OptionsMenu OptionsMenuInstance;
 
 		public MenuDemo()
 			: base("MenuDemo")
@@ -58,10 +58,10 @@ namespace UiTestBed.Screens
 			LoadStaticContent(ContentManagerName);
 			LevelSelectMenuInstance = new UiTestBed.Entities.XuiLikeDemo.LevelSelectMenu(ContentManagerName, false);
 			LevelSelectMenuInstance.Name = "LevelSelectMenuInstance";
-			OptionsMenuInstance = new UiTestBed.Entities.XuiLikeDemo.OptionsMenu(ContentManagerName, false);
-			OptionsMenuInstance.Name = "OptionsMenuInstance";
 			MainMenuInstance = new UiTestBed.Entities.XuiLikeDemo.MainMenu(ContentManagerName, false);
 			MainMenuInstance.Name = "MainMenuInstance";
+			OptionsMenuInstance = new UiTestBed.Entities.XuiLikeDemo.OptionsMenu(ContentManagerName, false);
+			OptionsMenuInstance.Name = "OptionsMenuInstance";
 			
 			
 			PostInitialize();
@@ -89,8 +89,8 @@ namespace UiTestBed.Screens
 			{
 				
 				LevelSelectMenuInstance.Activity();
-				OptionsMenuInstance.Activity();
 				MainMenuInstance.Activity();
+				OptionsMenuInstance.Activity();
 			}
 			else
 			{
@@ -116,15 +116,15 @@ namespace UiTestBed.Screens
 				LevelSelectMenuInstance.Destroy();
 				LevelSelectMenuInstance.Detach();
 			}
-			if (OptionsMenuInstance != null)
-			{
-				OptionsMenuInstance.Destroy();
-				OptionsMenuInstance.Detach();
-			}
 			if (MainMenuInstance != null)
 			{
 				MainMenuInstance.Destroy();
 				MainMenuInstance.Detach();
+			}
+			if (OptionsMenuInstance != null)
+			{
+				OptionsMenuInstance.Destroy();
+				OptionsMenuInstance.Detach();
 			}
 
 			base.Destroy();
@@ -138,19 +138,25 @@ namespace UiTestBed.Screens
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
+			LevelSelectMenuInstance.CurrentState = LevelSelectMenu.VariableState.Inactive;
+			MainMenuInstance.CurrentState = MainMenu.VariableState.Deactivated;
+			OptionsMenuInstance.CurrentState = OptionsMenu.VariableState.Deactivated;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
 			LevelSelectMenuInstance.AddToManagers(mLayer);
-			OptionsMenuInstance.AddToManagers(mLayer);
+			LevelSelectMenuInstance.CurrentState = LevelSelectMenu.VariableState.Inactive;
 			MainMenuInstance.AddToManagers(mLayer);
+			MainMenuInstance.CurrentState = MainMenu.VariableState.Deactivated;
+			OptionsMenuInstance.AddToManagers(mLayer);
+			OptionsMenuInstance.CurrentState = OptionsMenu.VariableState.Deactivated;
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
 			LevelSelectMenuInstance.ConvertToManuallyUpdated();
-			OptionsMenuInstance.ConvertToManuallyUpdated();
 			MainMenuInstance.ConvertToManuallyUpdated();
+			OptionsMenuInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -169,8 +175,8 @@ namespace UiTestBed.Screens
 			}
 			#endif
 			UiTestBed.Entities.XuiLikeDemo.LevelSelectMenu.LoadStaticContent(contentManagerName);
-			UiTestBed.Entities.XuiLikeDemo.OptionsMenu.LoadStaticContent(contentManagerName);
 			UiTestBed.Entities.XuiLikeDemo.MainMenu.LoadStaticContent(contentManagerName);
+			UiTestBed.Entities.XuiLikeDemo.OptionsMenu.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

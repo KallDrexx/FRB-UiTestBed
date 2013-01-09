@@ -25,6 +25,11 @@
       <Name>Screens\MenuDemo</Name>
       <NamedObjects>
         <NamedObjectSave>
+          <CustomProperty>
+            <Type>Object</Type>
+            <Member>CurrentState</Member>
+            <ValueAsString>Inactive</ValueAsString>
+          </CustomProperty>
           <SourceType>Entity</SourceType>
           <SourceClassType>Entities\XuiLikeDemo\LevelSelectMenu</SourceClassType>
           <InstanceName>LevelSelectMenuInstance</InstanceName>
@@ -33,17 +38,27 @@
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
         <NamedObjectSave>
+          <CustomProperty>
+            <Type>Object</Type>
+            <Member>CurrentState</Member>
+            <ValueAsString>Deactivated</ValueAsString>
+          </CustomProperty>
           <SourceType>Entity</SourceType>
-          <SourceClassType>Entities\XuiLikeDemo\OptionsMenu</SourceClassType>
-          <InstanceName>OptionsMenuInstance</InstanceName>
+          <SourceClassType>Entities\XuiLikeDemo\MainMenu</SourceClassType>
+          <InstanceName>MainMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
         <NamedObjectSave>
+          <CustomProperty>
+            <Type>Object</Type>
+            <Member>CurrentState</Member>
+            <ValueAsString>Deactivated</ValueAsString>
+          </CustomProperty>
           <SourceType>Entity</SourceType>
-          <SourceClassType>Entities\XuiLikeDemo\MainMenu</SourceClassType>
-          <InstanceName>MainMenuInstance</InstanceName>
+          <SourceClassType>Entities\XuiLikeDemo\OptionsMenu</SourceClassType>
+          <InstanceName>OptionsMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
@@ -82,7 +97,149 @@
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
+      <States>
+        <StateSave>
+          <InstructionSaves>
+            <InstructionSave>
+              <Type>Single</Type>
+              <Member>SelectedGridSpacing</Member>
+              <ValueAsFloat>20</ValueAsFloat>
+            </InstructionSave>
+            <InstructionSave>
+              <Type>Boolean</Type>
+              <Member>IsActive</Member>
+              <ValueAsBool>true</ValueAsBool>
+            </InstructionSave>
+            <InstructionSave>
+              <Type>Single</Type>
+              <Member>OverallAlpha</Member>
+              <ValueAsFloat>1</ValueAsFloat>
+            </InstructionSave>
+          </InstructionSaves>
+          <Name>WorldSelected</Name>
+        </StateSave>
+        <StateSave>
+          <InstructionSaves>
+            <InstructionSave>
+              <Type>Single</Type>
+              <Member>SelectedGridSpacing</Member>
+              <ValueAsFloat>0</ValueAsFloat>
+            </InstructionSave>
+            <InstructionSave>
+              <Type>Boolean</Type>
+              <Member>IsActive</Member>
+              <ValueAsBool>true</ValueAsBool>
+            </InstructionSave>
+            <InstructionSave>
+              <Type>Single</Type>
+              <Member>OverallAlpha</Member>
+              <ValueAsFloat>1</ValueAsFloat>
+            </InstructionSave>
+          </InstructionSaves>
+          <Name>WorldUnSelected</Name>
+        </StateSave>
+        <StateSave>
+          <InstructionSaves>
+            <InstructionSave>
+              <Type>Single</Type>
+              <Member>SelectedGridSpacing</Member>
+              <ValueAsFloat>0</ValueAsFloat>
+            </InstructionSave>
+            <InstructionSave>
+              <Type>Boolean</Type>
+              <Member>IsActive</Member>
+              <ValueAsBool>false</ValueAsBool>
+            </InstructionSave>
+            <InstructionSave>
+              <Type>Single</Type>
+              <Member>OverallAlpha</Member>
+              <ValueAsFloat>0</ValueAsFloat>
+            </InstructionSave>
+          </InstructionSaves>
+          <Name>Inactive</Name>
+        </StateSave>
+      </States>
+      <CustomVariables>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>VariableState</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>CurrentState</Name>
+          <Type>VariableState</Type>
+          <DefaultValue xsi:type="xsd:string">Inactive</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+            <PropertySave>
+              <Name>HasAccompanyingVelocityProperty</Name>
+              <ValueAsBool>true</ValueAsBool>
+            </PropertySave>
+          </Properties>
+          <Name>SelectedGridSpacing</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">0</DefaultValue>
+          <CreatesEvent>true</CreatesEvent>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>bool</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>IsActive</Name>
+          <Type>bool</Type>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+            <PropertySave>
+              <Name>HasAccompanyingVelocityProperty</Name>
+              <ValueAsBool>true</ValueAsBool>
+            </PropertySave>
+          </Properties>
+          <Name>OverallAlpha</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">0</DefaultValue>
+          <CreatesEvent>true</CreatesEvent>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>SecondsToFade</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">1</DefaultValue>
+        </CustomVariable>
+      </CustomVariables>
       <Name>Entities\XuiLikeDemo\LevelSelectMenu</Name>
+      <Events>
+        <EventResponseSave>
+          <EventName>AfterSelectedGridSpacingSet</EventName>
+          <SourceVariable>SelectedGridSpacing</SourceVariable>
+          <BeforeOrAfter>After</BeforeOrAfter>
+          <DelegateType />
+        </EventResponseSave>
+        <EventResponseSave>
+          <EventName>AfterOverallAlphaSet</EventName>
+          <SourceVariable>OverallAlpha</SourceVariable>
+          <BeforeOrAfter>After</BeforeOrAfter>
+          <DelegateType />
+        </EventResponseSave>
+      </Events>
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
@@ -417,7 +574,7 @@
     <RecordLockContention>false</RecordLockContention>
   </GlobalContentSettingsSave>
   <SyncedProjects />
-  <StartUpScreen>Screens\GridButtons</StartUpScreen>
+  <StartUpScreen>Screens\MenuDemo</StartUpScreen>
   <In2D>true</In2D>
   <SetResolution>true</SetResolution>
   <ResolutionWidth>800</ResolutionWidth>

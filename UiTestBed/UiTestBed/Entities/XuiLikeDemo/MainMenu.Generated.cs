@@ -468,6 +468,15 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			InstructionManager.IgnorePausingFor(this);
 			InstructionManager.IgnorePausingFor(ArrowSprite);
 		}
+		public void MoveToLayer (Layer layerToMoveTo)
+		{
+			if (LayerProvidedByContainer != null)
+			{
+				LayerProvidedByContainer.Remove(ArrowSprite);
+			}
+			SpriteManager.AddToLayer(ArrowSprite, layerToMoveTo);
+			LayerProvidedByContainer = layerToMoveTo;
+		}
 
     }
 	

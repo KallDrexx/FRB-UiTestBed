@@ -34,18 +34,18 @@ namespace UiTestBed.Screens
 		void CustomActivity(bool firstTimeCalled)
 		{
             if (firstTimeCalled)
-                MainMenuInstance.Activate();
+                LevelSelectMenuInstance.Activate();
 
-            if (OptionsMenuInstance.MenuExited)
-            {
-                OptionsMenuInstance.MenuExited = false;
-                MainMenuInstance.Activate();
-            }
-            else if (MainMenuInstance.OptionsSelected)
-            {
-                MainMenuInstance.OptionsSelected = false;
-                OptionsMenuInstance.Activate();
-            }
+            //if (OptionsMenuInstance.MenuExited)
+            //{
+            //    OptionsMenuInstance.MenuExited = false;
+            //    MainMenuInstance.Activate();
+            //}
+            //else if (MainMenuInstance.OptionsSelected)
+            //{
+            //    MainMenuInstance.OptionsSelected = false;
+            //    OptionsMenuInstance.Activate();
+            //}
 		}
 
 		void CustomDestroy()
