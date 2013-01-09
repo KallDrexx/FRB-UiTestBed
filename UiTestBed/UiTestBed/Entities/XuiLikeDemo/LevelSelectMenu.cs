@@ -112,6 +112,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
                         _gridSelectableGroups[currentGrid].FocusNextControlInRow();
                     else if (InputManager.Keyboard.KeyPushed(Keys.Left))
                         _gridSelectableGroups[currentGrid].FocusPreviousControlInRow();
+                    else if (InputManager.Keyboard.KeyPushed(Keys.Enter))
+                        _gridSelectableGroups[currentGrid].ClickFocusedControl();
 
                     else if (InputManager.Keyboard.KeyPushed(Keys.Escape))
                     {
@@ -215,6 +217,11 @@ namespace UiTestBed.Entities.XuiLikeDemo
 
             btn.OnFocused = sender => btn.Text = "Play " + levelTitle;
             btn.OnFocusLost = sender => btn.Text = levelTitle;
+	        btn.OnClicked = sender =>
+	        {
+	            LevelToLoad = levelTitle;
+	            Deactivate(() => MenuExited = true );
+	        };
 
             return btn;
         }

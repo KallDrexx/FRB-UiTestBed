@@ -20,6 +20,7 @@ namespace UiTestBed
 		public static FlatRedBall.Graphics.Animation.AnimationChainList MenuBackground { get; set; }
 		public static FlatRedBall.Graphics.Animation.AnimationChainList MenuArrow { get; set; }
 		public static FlatRedBall.Graphics.Animation.AnimationChainList MenuVolumeBar { get; set; }
+		public static FlatRedBall.Graphics.Animation.AnimationChainList LoadingAnimation { get; set; }
 		[System.Obsolete("Use GetFile instead")]
 		public static object GetStaticMember (string memberName)
 		{
@@ -35,6 +36,8 @@ namespace UiTestBed
 					return MenuArrow;
 				case  "MenuVolumeBar":
 					return MenuVolumeBar;
+				case  "LoadingAnimation":
+					return LoadingAnimation;
 			}
 			return null;
 		}
@@ -52,6 +55,8 @@ namespace UiTestBed
 					return MenuArrow;
 				case  "MenuVolumeBar":
 					return MenuVolumeBar;
+				case  "LoadingAnimation":
+					return LoadingAnimation;
 			}
 			return null;
 		}
@@ -66,6 +71,7 @@ namespace UiTestBed
 			MenuBackground = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/globalcontent/menudemo/menubackground.achx", ContentManagerName);
 			MenuArrow = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/globalcontent/menudemo/menuarrow.achx", ContentManagerName);
 			MenuVolumeBar = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/globalcontent/menudemo/menuvolumebar.achx", ContentManagerName);
+			LoadingAnimation = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/globalcontent/menudemo/loadinganimation.achx", ContentManagerName);
 						IsInitialized = true;
 		}
 		

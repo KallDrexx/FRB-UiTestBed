@@ -72,6 +72,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>dialog_box</Name>
     </None>
+    <None Include="GlobalContent\MenuDemo\LoadingAnimation.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>LoadingAnimation</Name>
+    </None>
     <None Include="GlobalContent\MenuDemo\MenuArrow.achx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>MenuArrow</Name>
@@ -87,6 +91,10 @@
     <None Include="GlobalContent\MenuDemo\MenuVolumeBar.achx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>MenuVolumeBar</Name>
+    </None>
+    <None Include="GlobalContent\MenuDemo\qubodup-loading1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>qubodup-loading1</Name>
     </None>
     <None Include="GlobalContent\MenuDemo\SelectedButton.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -33,8 +33,8 @@ namespace UiTestBed.Screens
 
 		void CustomActivity(bool firstTimeCalled)
 		{
-            //if (firstTimeCalled)
-            //    MainMenuInstance.Activate();
+            if (firstTimeCalled)
+                MainMenuInstance.Activate();
 
             if (OptionsMenuInstance.MenuExited)
             {
@@ -45,7 +45,16 @@ namespace UiTestBed.Screens
             if (LevelSelectMenuInstance.MenuExited)
             {
                 LevelSelectMenuInstance.MenuExited = false;
-                MainMenuInstance.Activate();
+
+                if (string.IsNullOrWhiteSpace(LevelSelectMenuInstance.LevelToLoad))
+                {
+                    MainMenuInstance.Activate();
+                }
+                else
+                {
+                    LoadingScreenInstance.LoadingText = "Loading Level: " + LevelSelectMenuInstance.LevelToLoad;
+                    LoadingScreenInstance.Activate();
+                }
             }
 
             else switch (MainMenuInstance.CurrentChosenMenuOptionState)

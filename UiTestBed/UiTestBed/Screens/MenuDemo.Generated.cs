@@ -46,6 +46,7 @@ namespace UiTestBed.Screens
 		private UiTestBed.Entities.XuiLikeDemo.LevelSelectMenu LevelSelectMenuInstance;
 		private UiTestBed.Entities.XuiLikeDemo.MainMenu MainMenuInstance;
 		private UiTestBed.Entities.XuiLikeDemo.OptionsMenu OptionsMenuInstance;
+		private UiTestBed.Entities.XuiLikeDemo.LoadingScreen LoadingScreenInstance;
 
 		public MenuDemo()
 			: base("MenuDemo")
@@ -62,6 +63,8 @@ namespace UiTestBed.Screens
 			MainMenuInstance.Name = "MainMenuInstance";
 			OptionsMenuInstance = new UiTestBed.Entities.XuiLikeDemo.OptionsMenu(ContentManagerName, false);
 			OptionsMenuInstance.Name = "OptionsMenuInstance";
+			LoadingScreenInstance = new UiTestBed.Entities.XuiLikeDemo.LoadingScreen(ContentManagerName, false);
+			LoadingScreenInstance.Name = "LoadingScreenInstance";
 			
 			
 			PostInitialize();
@@ -91,6 +94,7 @@ namespace UiTestBed.Screens
 				LevelSelectMenuInstance.Activity();
 				MainMenuInstance.Activity();
 				OptionsMenuInstance.Activity();
+				LoadingScreenInstance.Activity();
 			}
 			else
 			{
@@ -126,6 +130,11 @@ namespace UiTestBed.Screens
 				OptionsMenuInstance.Destroy();
 				OptionsMenuInstance.Detach();
 			}
+			if (LoadingScreenInstance != null)
+			{
+				LoadingScreenInstance.Destroy();
+				LoadingScreenInstance.Detach();
+			}
 
 			base.Destroy();
 
@@ -141,6 +150,7 @@ namespace UiTestBed.Screens
 			LevelSelectMenuInstance.CurrentState = LevelSelectMenu.VariableState.Inactive;
 			MainMenuInstance.CurrentState = MainMenu.VariableState.Deactivated;
 			OptionsMenuInstance.CurrentState = OptionsMenu.VariableState.Deactivated;
+			LoadingScreenInstance.CurrentState = LoadingScreen.VariableState.Deactivated;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp ()
@@ -151,12 +161,15 @@ namespace UiTestBed.Screens
 			MainMenuInstance.CurrentState = MainMenu.VariableState.Deactivated;
 			OptionsMenuInstance.AddToManagers(mLayer);
 			OptionsMenuInstance.CurrentState = OptionsMenu.VariableState.Deactivated;
+			LoadingScreenInstance.AddToManagers(mLayer);
+			LoadingScreenInstance.CurrentState = LoadingScreen.VariableState.Deactivated;
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
 			LevelSelectMenuInstance.ConvertToManuallyUpdated();
 			MainMenuInstance.ConvertToManuallyUpdated();
 			OptionsMenuInstance.ConvertToManuallyUpdated();
+			LoadingScreenInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -177,6 +190,7 @@ namespace UiTestBed.Screens
 			UiTestBed.Entities.XuiLikeDemo.LevelSelectMenu.LoadStaticContent(contentManagerName);
 			UiTestBed.Entities.XuiLikeDemo.MainMenu.LoadStaticContent(contentManagerName);
 			UiTestBed.Entities.XuiLikeDemo.OptionsMenu.LoadStaticContent(contentManagerName);
+			UiTestBed.Entities.XuiLikeDemo.LoadingScreen.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

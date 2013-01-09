@@ -128,7 +128,13 @@
       <DependentUpon>LevelSelectMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\XuiLikeDemo\LoadingScreen.cs" />
+    <Compile Include="Entities\XuiLikeDemo\LoadingScreen.Event.cs">
+      <DependentUpon>LoadingScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\XuiLikeDemo\LoadingScreen.Generated.cs">
+      <DependentUpon>LoadingScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\XuiLikeDemo\LoadingScreen.Generated.Event.cs">
       <DependentUpon>LoadingScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\XuiLikeDemo\MainMenu.cs" />

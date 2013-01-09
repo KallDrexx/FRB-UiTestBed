@@ -54,10 +54,96 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		#if DEBUG
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
+		public enum VariableState
+		{
+			Uninitialized = 0, //This exists so that the first set call actually does something
+			Unknown = 1, //This exists so that if the entity is actually a child entity and has set a child state, you will get this
+			Activated = 2, 
+			Deactivated = 3
+		}
+		protected int mCurrentState = 0;
+		public VariableState CurrentState
+		{
+			get
+			{
+				if (Enum.IsDefined(typeof(VariableState), mCurrentState))
+				{
+					return (VariableState)mCurrentState;
+				}
+				else
+				{
+					return VariableState.Unknown;
+				}
+			}
+			set
+			{
+				mCurrentState = (int)value;
+				switch(CurrentState)
+				{
+					case  VariableState.Uninitialized:
+						break;
+					case  VariableState.Unknown:
+						break;
+					case  VariableState.Activated:
+						OverallAlpha = 1f;
+						break;
+					case  VariableState.Deactivated:
+						OverallAlpha = 0f;
+						break;
+				}
+			}
+		}
 		static object mLockObject = new object();
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
 		
+		public bool IsActive;
+		public event EventHandler BeforeOverallAlphaSet;
+		public event EventHandler AfterOverallAlphaSet;
+		float mOverallAlpha;
+		public float OverallAlpha
+		{
+			set
+			{
+				if (BeforeOverallAlphaSet != null)
+				{
+					BeforeOverallAlphaSet(this, null);
+				}
+				mOverallAlpha = value;
+				if (AfterOverallAlphaSet != null)
+				{
+					AfterOverallAlphaSet(this, null);
+				}
+			}
+			get
+			{
+				return mOverallAlpha;
+			}
+		}
+		public float OverallAlphaVelocity = 0;
+		public float SecondsToFade = 1f;
+		public event EventHandler BeforeLoadingTextSet;
+		public event EventHandler AfterLoadingTextSet;
+		string mLoadingText;
+		public string LoadingText
+		{
+			set
+			{
+				if (BeforeLoadingTextSet != null)
+				{
+					BeforeLoadingTextSet(this, null);
+				}
+				mLoadingText = value;
+				if (AfterLoadingTextSet != null)
+				{
+					AfterLoadingTextSet(this, null);
+				}
+			}
+			get
+			{
+				return mLoadingText;
+			}
+		}
 		public int Index { get; set; }
 		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
@@ -81,6 +167,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
+			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
+			this.AfterLoadingTextSet += OnAfterLoadingTextSet;
 			
 			PostInitialize();
 			if (addToManagers)
@@ -104,6 +192,10 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			// Generated Activity
 			
+			if (OverallAlphaVelocity!= 0)
+			{
+				OverallAlpha += OverallAlphaVelocity * TimeManager.SecondDifference;
+			}
 			CustomActivity();
 			
 			// After Custom Activity
@@ -124,6 +216,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
+			SecondsToFade = 1f;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -143,6 +236,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			RotationX = 0;
 			RotationY = 0;
 			RotationZ = 0;
+			SecondsToFade = 1f;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
@@ -207,6 +301,93 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			}
 			if (LoadedContentManagers.Count == 0)
 			{
+			}
+		}
+		static VariableState mLoadingState = VariableState.Uninitialized;
+		public static VariableState LoadingState
+		{
+			get
+			{
+				return mLoadingState;
+			}
+			set
+			{
+				mLoadingState = value;
+			}
+		}
+		public Instruction InterpolateToState (VariableState stateToInterpolateTo, double secondsToTake)
+		{
+			switch(stateToInterpolateTo)
+			{
+				case  VariableState.Activated:
+					OverallAlphaVelocity = (1f - OverallAlpha) / (float)secondsToTake;
+					break;
+				case  VariableState.Deactivated:
+					OverallAlphaVelocity = (0f - OverallAlpha) / (float)secondsToTake;
+					break;
+			}
+			var instruction = new DelegateInstruction<VariableState>(StopStateInterpolation, stateToInterpolateTo);
+			instruction.TimeToExecute = TimeManager.CurrentTime + secondsToTake;
+			this.Instructions.Add(instruction);
+			return instruction;
+		}
+		public void StopStateInterpolation (VariableState stateToStop)
+		{
+			switch(stateToStop)
+			{
+				case  VariableState.Activated:
+					OverallAlphaVelocity =  0;
+					break;
+				case  VariableState.Deactivated:
+					OverallAlphaVelocity =  0;
+					break;
+			}
+			CurrentState = stateToStop;
+		}
+		public void InterpolateBetween (VariableState firstState, VariableState secondState, float interpolationValue)
+		{
+			#if DEBUG
+			if (float.IsNaN(interpolationValue))
+			{
+				throw new Exception("interpolationValue cannot be NaN");
+			}
+			#endif
+			bool setOverallAlpha = true;
+			float OverallAlphaFirstValue= 0;
+			float OverallAlphaSecondValue= 0;
+			switch(firstState)
+			{
+				case  VariableState.Activated:
+					OverallAlphaFirstValue = 1f;
+					break;
+				case  VariableState.Deactivated:
+					OverallAlphaFirstValue = 0f;
+					break;
+			}
+			switch(secondState)
+			{
+				case  VariableState.Activated:
+					OverallAlphaSecondValue = 1f;
+					break;
+				case  VariableState.Deactivated:
+					OverallAlphaSecondValue = 0f;
+					break;
+			}
+			if (setOverallAlpha)
+			{
+				OverallAlpha = OverallAlphaFirstValue * (1 - interpolationValue) + OverallAlphaSecondValue * interpolationValue;
+			}
+		}
+		public static void PreloadStateContent (VariableState state, string contentManagerName)
+		{
+			ContentManagerName = contentManagerName;
+			object throwaway;
+			switch(state)
+			{
+				case  VariableState.Activated:
+					break;
+				case  VariableState.Deactivated:
+					break;
 			}
 		}
 		[System.Obsolete("Use GetFile instead")]
