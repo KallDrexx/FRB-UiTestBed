@@ -65,8 +65,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
             _layout.CurrentDirection = BoxLayout.Direction.Down;
             _layout.Spacing = 40;
 		    _layout.Margin = 50;
-		    _layout.BackgroundAnimationChains = GlobalContent.MenuBackground;
-		    _layout.CurrentBackgroundAnimationChainName = "Idle";
+		    //_layout.BackgroundAnimationChains = GlobalContent.MenuBackground;
+		    //_layout.CurrentBackgroundAnimationChainName = "Idle";
             _layout.AttachTo(this, false);
 
             InitButtons();
@@ -132,6 +132,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 
             ArrowSprite.RelativeY = sender.RelativeY;
             ArrowSprite.Visible = true;
+	        ArrowSprite.Z = sender.Z;
 
             if (sender != _optionsButton)
             {
