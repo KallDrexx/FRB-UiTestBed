@@ -117,6 +117,16 @@
     <Compile Include="Entities\Test1.Generated.cs">
       <DependentUpon>Test1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Tutorial\TutMainMenu.cs" />
+    <Compile Include="Entities\Tutorial\TutMainMenu.Event.cs">
+      <DependentUpon>TutMainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Tutorial\TutMainMenu.Generated.cs">
+      <DependentUpon>TutMainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Tutorial\TutMainMenu.Generated.Event.cs">
+      <DependentUpon>TutMainMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\XuiLikeDemo\LevelSelectMenu.cs" />
     <Compile Include="Entities\XuiLikeDemo\LevelSelectMenu.Event.cs">
       <DependentUpon>LevelSelectMenu.cs</DependentUpon>
@@ -182,6 +192,10 @@
     <Compile Include="Screens\MenuDemo.cs" />
     <Compile Include="Screens\MenuDemo.Generated.cs">
       <DependentUpon>MenuDemo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Tutorial.cs" />
+    <Compile Include="Screens\Tutorial.Generated.cs">
+      <DependentUpon>Tutorial.cs</DependentUpon>
     </Compile>
     <Compile Include="Setup\CameraSetup.cs" />
   </ItemGroup>

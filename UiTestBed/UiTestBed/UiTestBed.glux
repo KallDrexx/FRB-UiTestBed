@@ -81,6 +81,24 @@
     <ScreenSave>
       <Name>Screens\Screen2</Name>
     </ScreenSave>
+    <ScreenSave>
+      <Name>Screens\Tutorial</Name>
+      <NamedObjects>
+        <NamedObjectSave>
+          <CustomProperty>
+            <Type>Object</Type>
+            <Member>CurrentState</Member>
+            <ValueAsString>Deactivated</ValueAsString>
+          </CustomProperty>
+          <SourceType>Entity</SourceType>
+          <SourceClassType>Entities\Tutorial\TutMainMenu</SourceClassType>
+          <InstanceName>TutMainMenuInstance</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+      </NamedObjects>
+    </ScreenSave>
   </Screens>
   <Entities>
     <EntitySave>
@@ -107,6 +125,106 @@
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
+      <Is2D>true</Is2D>
+    </EntitySave>
+    <EntitySave>
+      <States>
+        <StateSave>
+          <InstructionSaves>
+            <InstructionSave>
+              <Type>Single</Type>
+              <Member>OverallAlpha</Member>
+              <ValueAsFloat>1</ValueAsFloat>
+            </InstructionSave>
+          </InstructionSaves>
+          <Name>Activated</Name>
+        </StateSave>
+        <StateSave>
+          <InstructionSaves>
+            <InstructionSave>
+              <Type>Single</Type>
+              <Member>OverallAlpha</Member>
+              <ValueAsFloat>0</ValueAsFloat>
+            </InstructionSave>
+          </InstructionSaves>
+          <Name>Deactivated</Name>
+        </StateSave>
+      </States>
+      <CustomVariables>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+            <PropertySave>
+              <Name>HasAccompanyingVelocityProperty</Name>
+              <ValueAsBool>true</ValueAsBool>
+            </PropertySave>
+          </Properties>
+          <Name>OverallAlpha</Name>
+          <Type>float</Type>
+          <CreatesEvent>true</CreatesEvent>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>VariableState</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>CurrentState</Name>
+          <Type>VariableState</Type>
+          <DefaultValue xsi:type="xsd:string">Activated</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>SecondsToFade</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">1</DefaultValue>
+        </CustomVariable>
+      </CustomVariables>
+      <Name>Entities\Tutorial\TutMainMenu</Name>
+      <NamedObjects>
+        <NamedObjectSave>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>PixelSize</Member>
+            <ValueAsFloat>0.5</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>Texture2D</Type>
+            <Member>Texture</Member>
+            <ValueAsString>arrow</ValueAsString>
+          </CustomProperty>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceClassType>Sprite</SourceClassType>
+          <InstanceName>MenuArrow</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+      </NamedObjects>
+      <ReferencedFiles>
+        <ReferencedFileSave>
+          <Name>GlobalContent/MenuDemo/arrow.png</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <RuntimeType>Microsoft.Xna.Framework.Graphics.Texture2D</RuntimeType>
+        </ReferencedFileSave>
+      </ReferencedFiles>
+      <Events>
+        <EventResponseSave>
+          <EventName>AfterOverallAlphaSet</EventName>
+          <SourceVariable>OverallAlpha</SourceVariable>
+          <BeforeOrAfter>After</BeforeOrAfter>
+          <DelegateType />
+        </EventResponseSave>
+      </Events>
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
@@ -495,7 +613,6 @@
           <CustomProperty>
             <Type>float</Type>
             <Member>RelativeZ</Member>
-            <ValueAsFloat>0.1</ValueAsFloat>
           </CustomProperty>
           <CustomProperty>
             <Type>Texture2D</Type>
@@ -510,7 +627,7 @@
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>Sprite</SourceClassType>
           <InstanceName>ArrowSprite</InstanceName>
-          <AttachToContainer>true</AttachToContainer>
+          <AttachToContainer>false</AttachToContainer>
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
@@ -736,7 +853,7 @@
     <RecordLockContention>false</RecordLockContention>
   </GlobalContentSettingsSave>
   <SyncedProjects />
-  <StartUpScreen>Screens\MenuDemo</StartUpScreen>
+  <StartUpScreen />
   <In2D>true</In2D>
   <SetResolution>true</SetResolution>
   <ResolutionWidth>800</ResolutionWidth>

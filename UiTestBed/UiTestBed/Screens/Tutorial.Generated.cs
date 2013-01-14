@@ -34,21 +34,20 @@ using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
 using FlatRedBall;
 using FlatRedBall.Screens;
-using FlatRedBall.Graphics;
 
 namespace UiTestBed.Screens
 {
-	public partial class ButtonTestScreen1 : Screen
+	public partial class Tutorial : Screen
 	{
 		// Generated Fields
 		#if DEBUG
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		
-		private FlatRedBall.Graphics.Layer UiLayer;
+		private UiTestBed.Entities.Tutorial.TutMainMenu TutMainMenuInstance;
 
-		public ButtonTestScreen1()
-			: base("ButtonTestScreen1")
+		public Tutorial()
+			: base("Tutorial")
 		{
 		}
 
@@ -56,8 +55,8 @@ namespace UiTestBed.Screens
         {
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			UiLayer = new FlatRedBall.Graphics.Layer();
-			UiLayer.Name = "UiLayer";
+			TutMainMenuInstance = new UiTestBed.Entities.Tutorial.TutMainMenu(ContentManagerName, false);
+			TutMainMenuInstance.Name = "TutMainMenuInstance";
 			
 			
 			PostInitialize();
@@ -72,13 +71,6 @@ namespace UiTestBed.Screens
 // Generated AddToManagers
 		public override void AddToManagers ()
 		{
-			SpriteManager.AddLayer(UiLayer);
-			UiLayer.UsePixelCoordinates();
-			if (SpriteManager.Camera.Orthogonal)
-			{
-				UiLayer.LayerCameraSettings.OrthogonalWidth = FlatRedBall.SpriteManager.Camera.OrthogonalWidth;
-				UiLayer.LayerCameraSettings.OrthogonalHeight = FlatRedBall.SpriteManager.Camera.OrthogonalHeight;
-			}
 			base.AddToManagers();
 			AddToManagersBottomUp();
 			CustomInitialize();
@@ -91,6 +83,7 @@ namespace UiTestBed.Screens
 			if (!IsPaused)
 			{
 				
+				TutMainMenuInstance.Activity();
 			}
 			else
 			{
@@ -111,9 +104,10 @@ namespace UiTestBed.Screens
 		{
 			// Generated Destroy
 			
-			if (UiLayer != null)
+			if (TutMainMenuInstance != null)
 			{
-				SpriteManager.RemoveLayer(UiLayer);
+				TutMainMenuInstance.Destroy();
+				TutMainMenuInstance.Detach();
 			}
 
 			base.Destroy();
@@ -127,13 +121,17 @@ namespace UiTestBed.Screens
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
+			TutMainMenuInstance.CurrentState = TutMainMenu.VariableState.Deactivated;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
+			TutMainMenuInstance.AddToManagers(mLayer);
+			TutMainMenuInstance.CurrentState = TutMainMenu.VariableState.Deactivated;
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
+			TutMainMenuInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -151,6 +149,7 @@ namespace UiTestBed.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
+			UiTestBed.Entities.Tutorial.TutMainMenu.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]
