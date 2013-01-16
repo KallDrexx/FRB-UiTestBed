@@ -98,6 +98,19 @@
       <Name>Screens\Screen2</Name>
     </ScreenSave>
     <ScreenSave>
+      <Name>Screens\SlidePuzzleScreen</Name>
+      <NamedObjects>
+        <NamedObjectSave>
+          <SourceType>Entity</SourceType>
+          <SourceClassType>Entities\Games\SlidePuzzle\SlidePuzzleGrid</SourceClassType>
+          <InstanceName>SlidePuzzleGridInstance</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+      </NamedObjects>
+    </ScreenSave>
+    <ScreenSave>
       <Name>Screens\Tutorial</Name>
       <NamedObjects>
         <NamedObjectSave>
@@ -117,6 +130,67 @@
     </ScreenSave>
   </Screens>
   <Entities>
+    <EntitySave>
+      <CustomVariables>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>int</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>GridSize</Name>
+          <Type>int</Type>
+          <DefaultValue xsi:type="xsd:int">8</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>ButtonSize</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">25</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>SlideSeconds</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">0.5</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>int</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>MoveCount</Name>
+          <Type>int</Type>
+          <DefaultValue xsi:type="xsd:int">0</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>bool</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>HasWon</Name>
+          <Type>bool</Type>
+          <DefaultValue xsi:type="xsd:boolean">false</DefaultValue>
+        </CustomVariable>
+      </CustomVariables>
+      <Name>Entities\Games\SlidePuzzle\SlidePuzzleGrid</Name>
+      <Is2D>true</Is2D>
+    </EntitySave>
     <EntitySave>
       <ImplementsIVisible>true</ImplementsIVisible>
       <ImplementsIWindow>true</ImplementsIWindow>
@@ -863,15 +937,27 @@
       <IsSharedStatic>true</IsSharedStatic>
       <HasPublicProperty>true</HasPublicProperty>
     </ReferencedFileSave>
+    <ReferencedFileSave>
+      <Name>GlobalContent/GameContent/Slider/SliderButton.achx</Name>
+      <IsSharedStatic>true</IsSharedStatic>
+      <IncludeDirectoryRelativeToContainer>true</IncludeDirectoryRelativeToContainer>
+      <HasPublicProperty>true</HasPublicProperty>
+    </ReferencedFileSave>
+    <ReferencedFileSave>
+      <Name>GlobalContent/GameContent/Slider/GridBackground.achx</Name>
+      <IsSharedStatic>true</IsSharedStatic>
+      <IncludeDirectoryRelativeToContainer>true</IncludeDirectoryRelativeToContainer>
+      <HasPublicProperty>true</HasPublicProperty>
+    </ReferencedFileSave>
   </GlobalFiles>
   <GlobalContentSettingsSave>
     <LoadAsynchronously>false</LoadAsynchronously>
     <RecordLockContention>false</RecordLockContention>
   </GlobalContentSettingsSave>
   <SyncedProjects />
-  <StartUpScreen>Screens\DebugScratchpad</StartUpScreen>
-  <In2D>true</In2D>
-  <SetResolution>true</SetResolution>
+  <StartUpScreen>Screens\SlidePuzzleScreen</StartUpScreen>
+  <In2D>false</In2D>
+  <SetResolution>false</SetResolution>
   <ResolutionWidth>800</ResolutionWidth>
   <ResolutionHeight>600</ResolutionHeight>
   <SetOrthogonalResolution>true</SetOrthogonalResolution>

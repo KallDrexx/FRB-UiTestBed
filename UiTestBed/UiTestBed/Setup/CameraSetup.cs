@@ -14,11 +14,6 @@ namespace UiTestBed
 	{
 		internal static void SetupCamera(Camera cameraToSetUp, GraphicsDeviceManager graphicsDeviceManager)
 		{
-			FlatRedBallServices.GraphicsOptions.SetResolution(800, 600);
-			#if WINDOWS_PHONE || WINDOWS_8
-			graphicsDeviceManager.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
-			#endif
-			cameraToSetUp.UsePixelCoordinates(false, 800, 600);
 
 
 

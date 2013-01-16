@@ -46,10 +46,11 @@ namespace UiTestBed
         {
             Renderer.UseRenderTargets = false;
             FlatRedBallServices.InitializeFlatRedBall(this, graphics);
+			//CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
 			CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
 			GlobalContent.Initialize();
 
-			FlatRedBall.Screens.ScreenManager.Start(typeof(UiTestBed.Screens.DebugScratchpad));
+			FlatRedBall.Screens.ScreenManager.Start(typeof(UiTestBed.Screens.SlidePuzzleScreen));
             IsMouseVisible = true;
 
             base.Initialize();

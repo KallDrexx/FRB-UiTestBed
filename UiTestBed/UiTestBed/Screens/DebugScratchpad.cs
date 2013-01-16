@@ -1,5 +1,6 @@
 using FlatRedBall;
 using FrbUi;
+using FrbUi.Controls;
 using FrbUi.Layouts;
 #if FRB_XNA || SILVERLIGHT
 
@@ -17,6 +18,11 @@ namespace UiTestBed.Screens
             _grid.Margin = 40;
             _grid.BackgroundAnimationChains = GlobalContent.MenuBackground;
             _grid.CurrentAnimationChainName = "Idle";
+
+		    var btn = UiControlManager.Instance.CreateControl<Button>();
+		    btn.AnimationChains = GlobalContent.MenuButtonAnimations;
+		    btn.StandardAnimationChainName = "Idle";
+		    _grid.AddItem(btn, 1, 1);
 
 		}
 

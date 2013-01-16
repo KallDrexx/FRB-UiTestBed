@@ -113,6 +113,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Games\SlidePuzzle\SlidePuzzleGrid.cs" />
+    <Compile Include="Entities\Games\SlidePuzzle\SlidePuzzleGrid.Generated.cs">
+      <DependentUpon>SlidePuzzleGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Test1.cs" />
     <Compile Include="Entities\Test1.Generated.cs">
       <DependentUpon>Test1.cs</DependentUpon>
@@ -204,6 +208,10 @@
     <Compile Include="Screens\MenuDemo.cs" />
     <Compile Include="Screens\MenuDemo.Generated.cs">
       <DependentUpon>MenuDemo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\SlidePuzzleScreen.cs" />
+    <Compile Include="Screens\SlidePuzzleScreen.Generated.cs">
+      <DependentUpon>SlidePuzzleScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\Tutorial.cs" />
     <Compile Include="Screens\Tutorial.Generated.cs">

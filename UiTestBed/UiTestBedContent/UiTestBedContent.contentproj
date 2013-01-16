@@ -60,6 +60,26 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>Button1</Name>
     </None>
+    <None Include="GlobalContent\GameContent\Slider\dialog_box.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>dialog_box</Name>
+    </None>
+    <None Include="GlobalContent\GameContent\Slider\GridBackground.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>GridBackground</Name>
+    </None>
+    <None Include="GlobalContent\GameContent\Slider\SelectedButton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>SelectedButton</Name>
+    </None>
+    <None Include="GlobalContent\GameContent\Slider\SliderButton.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>SliderButton</Name>
+    </None>
+    <None Include="GlobalContent\GameContent\Slider\StandardButton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>StandardButton</Name>
+    </None>
     <None Include="GlobalContent\MenuDemo\arrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>arrow</Name>
