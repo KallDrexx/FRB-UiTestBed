@@ -2,6 +2,19 @@
 <GlueProjectSave xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Screens>
     <ScreenSave>
+      <Name>Screens\BeefBallHud</Name>
+      <NamedObjects>
+        <NamedObjectSave>
+          <SourceType>Entity</SourceType>
+          <SourceClassType>Entities\Tutorial\BeefBallScoreHud</SourceClassType>
+          <InstanceName>BeefBallScoreHudInstance</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+      </NamedObjects>
+    </ScreenSave>
+    <ScreenSave>
       <Name>Screens\ButtonTestScreen1</Name>
       <NamedObjects>
         <NamedObjectSave>
@@ -17,6 +30,9 @@
     </ScreenSave>
     <ScreenSave>
       <Name>Screens\CenteredBoxLayoutTest</Name>
+    </ScreenSave>
+    <ScreenSave>
+      <Name>Screens\DebugScratchpad</Name>
     </ScreenSave>
     <ScreenSave>
       <Name>Screens\GridButtons</Name>
@@ -125,6 +141,10 @@
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
+      <Is2D>true</Is2D>
+    </EntitySave>
+    <EntitySave>
+      <Name>Entities\Tutorial\BeefBallScoreHud</Name>
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
@@ -611,10 +631,6 @@
             <ValueAsFloat>0.5</ValueAsFloat>
           </CustomProperty>
           <CustomProperty>
-            <Type>float</Type>
-            <Member>RelativeZ</Member>
-          </CustomProperty>
-          <CustomProperty>
             <Type>Texture2D</Type>
             <Member>Texture</Member>
             <ValueAsString>arrow</ValueAsString>
@@ -853,7 +869,7 @@
     <RecordLockContention>false</RecordLockContention>
   </GlobalContentSettingsSave>
   <SyncedProjects />
-  <StartUpScreen />
+  <StartUpScreen>Screens\DebugScratchpad</StartUpScreen>
   <In2D>true</In2D>
   <SetResolution>true</SetResolution>
   <ResolutionWidth>800</ResolutionWidth>

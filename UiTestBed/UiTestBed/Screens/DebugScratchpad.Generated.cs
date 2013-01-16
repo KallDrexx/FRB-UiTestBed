@@ -37,7 +37,7 @@ using FlatRedBall.Screens;
 
 namespace UiTestBed.Screens
 {
-	public partial class Screen2 : Screen
+	public partial class DebugScratchpad : Screen
 	{
 		// Generated Fields
 		#if DEBUG
@@ -45,8 +45,8 @@ namespace UiTestBed.Screens
 		#endif
 		
 
-		public Screen2()
-			: base("Screen2")
+		public DebugScratchpad()
+			: base("DebugScratchpad")
 		{
 		}
 

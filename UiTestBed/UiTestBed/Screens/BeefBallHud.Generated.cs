@@ -37,16 +37,17 @@ using FlatRedBall.Screens;
 
 namespace UiTestBed.Screens
 {
-	public partial class Screen2 : Screen
+	public partial class BeefBallHud : Screen
 	{
 		// Generated Fields
 		#if DEBUG
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		
+		private UiTestBed.Entities.Tutorial.BeefBallScoreHud BeefBallScoreHudInstance;
 
-		public Screen2()
-			: base("Screen2")
+		public BeefBallHud()
+			: base("BeefBallHud")
 		{
 		}
 
@@ -54,6 +55,8 @@ namespace UiTestBed.Screens
         {
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
+			BeefBallScoreHudInstance = new UiTestBed.Entities.Tutorial.BeefBallScoreHud(ContentManagerName, false);
+			BeefBallScoreHudInstance.Name = "BeefBallScoreHudInstance";
 			
 			
 			PostInitialize();
@@ -80,6 +83,7 @@ namespace UiTestBed.Screens
 			if (!IsPaused)
 			{
 				
+				BeefBallScoreHudInstance.Activity();
 			}
 			else
 			{
@@ -100,6 +104,11 @@ namespace UiTestBed.Screens
 		{
 			// Generated Destroy
 			
+			if (BeefBallScoreHudInstance != null)
+			{
+				BeefBallScoreHudInstance.Destroy();
+				BeefBallScoreHudInstance.Detach();
+			}
 
 			base.Destroy();
 
@@ -116,9 +125,11 @@ namespace UiTestBed.Screens
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
+			BeefBallScoreHudInstance.AddToManagers(mLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
+			BeefBallScoreHudInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -136,6 +147,7 @@ namespace UiTestBed.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
+			UiTestBed.Entities.Tutorial.BeefBallScoreHud.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

@@ -49,7 +49,7 @@ namespace UiTestBed
 			CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
 			GlobalContent.Initialize();
 
-			//FlatRedBall.Screens.ScreenManager.Start(typeof(YourScreenClass));
+			FlatRedBall.Screens.ScreenManager.Start(typeof(UiTestBed.Screens.DebugScratchpad));
             IsMouseVisible = true;
 
             base.Initialize();

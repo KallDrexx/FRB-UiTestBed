@@ -7,6 +7,7 @@ using FlatRedBall.Audio;
 using FlatRedBall.Screens;
 using FlatRedBall.Instructions;
 using UiTestBed.Entities;
+using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
 using UiTestBed.Screens;
 namespace UiTestBed.Entities.XuiLikeDemo
