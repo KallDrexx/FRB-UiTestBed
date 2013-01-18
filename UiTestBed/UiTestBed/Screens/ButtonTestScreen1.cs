@@ -39,6 +39,7 @@ namespace UiTestBed.Screens
             _mainLayout = UiControlManager.Instance.CreateControl<SimpleLayout>();
 
             var grid = UiControlManager.Instance.CreateControl<GridLayout>();
+            grid.ShowBorder = true;
             grid.Margin = 20;
             grid.Spacing = 30;
 

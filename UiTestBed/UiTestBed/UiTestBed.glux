@@ -141,7 +141,7 @@
           </Properties>
           <Name>GridSize</Name>
           <Type>int</Type>
-          <DefaultValue xsi:type="xsd:int">8</DefaultValue>
+          <DefaultValue xsi:type="xsd:int">4</DefaultValue>
         </CustomVariable>
         <CustomVariable>
           <Properties>
@@ -955,7 +955,7 @@
     <RecordLockContention>false</RecordLockContention>
   </GlobalContentSettingsSave>
   <SyncedProjects />
-  <StartUpScreen>Screens\SlidePuzzleScreen</StartUpScreen>
+  <StartUpScreen>Screens\ButtonTestScreen1</StartUpScreen>
   <In2D>false</In2D>
   <SetResolution>false</SetResolution>
   <ResolutionWidth>800</ResolutionWidth>

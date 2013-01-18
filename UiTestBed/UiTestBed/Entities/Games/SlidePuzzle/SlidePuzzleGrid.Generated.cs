@@ -60,7 +60,7 @@ namespace UiTestBed.Entities.Games.SlidePuzzle
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
 		
-		public int GridSize = 8;
+		public int GridSize = 4;
 		public float ButtonSize = 25f;
 		public float SlideSeconds = 0.5f;
 		public int MoveCount = 0;
@@ -131,7 +131,7 @@ namespace UiTestBed.Entities.Games.SlidePuzzle
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			GridSize = 8;
+			GridSize = 4;
 			ButtonSize = 25f;
 			SlideSeconds = 0.5f;
 			MoveCount = 0;
@@ -155,7 +155,7 @@ namespace UiTestBed.Entities.Games.SlidePuzzle
 			RotationX = 0;
 			RotationY = 0;
 			RotationZ = 0;
-			GridSize = 8;
+			GridSize = 4;
 			ButtonSize = 25f;
 			SlideSeconds = 0.5f;
 			MoveCount = 0;

@@ -1,5 +1,4 @@
 using System;
-using FlatRedBall;
 using FlatRedBall.Input;
 #if FRB_XNA || SILVERLIGHT
 using FrbUi.SelectableGroupings;

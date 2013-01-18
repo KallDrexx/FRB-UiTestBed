@@ -189,7 +189,6 @@ namespace UiTestBed.Entities.Games.SlidePuzzle
 
             // Immediately put the empty tile in position
             _grid.AddItem(emptyTile, rowIndex, columnIndex);
-            emptyTile.Alpha = 0;
 
             MoveCount++;
         }
@@ -203,8 +202,7 @@ namespace UiTestBed.Entities.Games.SlidePuzzle
                 {
                     index++;
                     var item = _grid.GetItemAt(row, col) as Button;
-                    if (item == null ||
-                        (item.Text != index.ToString() && item != _sliderButtons[_sliderButtons.Count - 1]))
+                    if (item != _sliderButtons[index - 1])
                     {
                         HasWon = false;
                         return;
@@ -212,7 +210,7 @@ namespace UiTestBed.Entities.Games.SlidePuzzle
                 }
             }
 
-            // if we got here, all the 
+            // if we got here, all the tils are correctly positioned
             HasWon = true;
         }
 	}
