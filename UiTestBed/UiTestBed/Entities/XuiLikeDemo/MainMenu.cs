@@ -1,4 +1,5 @@
 using System;
+using FlatRedBall;
 using FlatRedBall.Input;
 #if FRB_XNA || SILVERLIGHT
 using FrbUi.SelectableGroupings;
@@ -71,6 +72,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
 
             // Attach the layout to this entity so if we move the entity it moves the layout as well
             _layout.AttachTo(this, false);
+
+		    SpriteManager.AddToLayer(ArrowSprite, UiControlManager.Instance.Layer);
 
             InitButtons();
 		}

@@ -126,6 +126,14 @@
           <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>Entity</SourceType>
+          <SourceClassType>Entities\Tutorial\TutOptionsMenu</SourceClassType>
+          <InstanceName>TutOptionsMenuInstance</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
       </NamedObjects>
     </ScreenSave>
   </Screens>
@@ -315,6 +323,92 @@
         <EventResponseSave>
           <EventName>AfterOverallAlphaSet</EventName>
           <SourceVariable>OverallAlpha</SourceVariable>
+          <BeforeOrAfter>After</BeforeOrAfter>
+          <DelegateType />
+        </EventResponseSave>
+      </Events>
+      <Is2D>true</Is2D>
+    </EntitySave>
+    <EntitySave>
+      <StateCategoryList>
+        <StateSaveCategory>
+          <States>
+            <StateSave>
+              <InstructionSaves />
+              <Name>Easy</Name>
+            </StateSave>
+            <StateSave>
+              <InstructionSaves />
+              <Name>Normal</Name>
+            </StateSave>
+            <StateSave>
+              <InstructionSaves />
+              <Name>Hard</Name>
+            </StateSave>
+          </States>
+          <Name>Difficulty</Name>
+          <SharesVariablesWithOtherCategories>false</SharesVariablesWithOtherCategories>
+        </StateSaveCategory>
+      </StateCategoryList>
+      <CustomVariables>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>Difficulty</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>CurrentDifficultyState</Name>
+          <Type>Difficulty</Type>
+          <DefaultValue xsi:type="xsd:string">Easy</DefaultValue>
+          <CreatesEvent>true</CreatesEvent>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>int</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>VolumeLevel</Name>
+          <Type>int</Type>
+          <DefaultValue xsi:type="xsd:int">3</DefaultValue>
+          <CreatesEvent>true</CreatesEvent>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>int</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>MaxVolumeLevel</Name>
+          <Type>int</Type>
+          <DefaultValue xsi:type="xsd:int">10</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>MaxVolumeBarHeight</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">15</DefaultValue>
+        </CustomVariable>
+      </CustomVariables>
+      <Name>Entities\Tutorial\TutOptionsMenu</Name>
+      <Events>
+        <EventResponseSave>
+          <EventName>AfterVolumeLevelSet</EventName>
+          <SourceVariable>VolumeLevel</SourceVariable>
+          <BeforeOrAfter>After</BeforeOrAfter>
+          <DelegateType />
+        </EventResponseSave>
+        <EventResponseSave>
+          <EventName>AfterCurrentDifficultyStateSet</EventName>
+          <SourceVariable>CurrentDifficultyState</SourceVariable>
           <BeforeOrAfter>After</BeforeOrAfter>
           <DelegateType />
         </EventResponseSave>
@@ -955,7 +1049,7 @@
     <RecordLockContention>false</RecordLockContention>
   </GlobalContentSettingsSave>
   <SyncedProjects />
-  <StartUpScreen>Screens\ButtonTestScreen1</StartUpScreen>
+  <StartUpScreen>Screens\Tutorial</StartUpScreen>
   <In2D>false</In2D>
   <SetResolution>false</SetResolution>
   <ResolutionWidth>800</ResolutionWidth>

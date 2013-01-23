@@ -34,8 +34,8 @@ namespace UiTestBed.Screens
 
 		void CustomActivity(bool firstTimeCalled)
 		{
-		    if (firstTimeCalled)
-		        TutMainMenuInstance.Activate();
+            //if (firstTimeCalled)
+            //    TutMainMenuInstance.Activate();
 
 		}
 

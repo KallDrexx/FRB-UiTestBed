@@ -103,17 +103,22 @@ namespace UiTestBed.Entities.XuiLikeDemo
             }
             else if (_volumeButton.CurrentSelectableState == SelectableState.Focused)
             {
-                VolumeLevel = (increasing ? VolumeLevel + 1 : VolumeLevel - 1);
-                if (VolumeLevel < 1)
-                    VolumeLevel = 1;
-                else if (VolumeLevel > MaximumVolumeLevel)
-                    VolumeLevel = MaximumVolumeLevel;
-
-                // Refresh the bars
-                for (int x = 0; x < _volumeBars.Count; x++)
-                    _volumeBars[x].Visible = (x < VolumeLevel);
+                ProcessVolumeChange(increasing);
             }
         }
+
+	    private void ProcessVolumeChange(bool increasing)
+	    {
+	        VolumeLevel = (increasing ? VolumeLevel + 1 : VolumeLevel - 1);
+	        if (VolumeLevel < 1)
+	            VolumeLevel = 1;
+	        else if (VolumeLevel > MaximumVolumeLevel)
+	            VolumeLevel = MaximumVolumeLevel;
+
+	        // Refresh the bars
+	        for (int x = 0; x < _volumeBars.Count; x++)
+	            _volumeBars[x].Visible = (x < VolumeLevel);
+	    }
 
 	    private void ProcessDifficultyChange(bool increasing)
 	    {
@@ -165,25 +170,30 @@ namespace UiTestBed.Entities.XuiLikeDemo
 
 	    private void CreateDifficultySection()
 	    {
+            // Create the inner layout
 	        var difficultyLayout = UiControlManager.Instance.CreateControl<BoxLayout>();
 	        difficultyLayout.CurrentDirection = BoxLayout.Direction.Right;
 	        difficultyLayout.Spacing = 20;
 	        _mainLayout.AddItem(difficultyLayout);
 
+            // Create the difficulty selection button
             _difficultyButton = CreateButton();
 	        _difficultyButton.Text = "Difficulty";
 	        _selectGroup.Add(_difficultyButton);
 	        difficultyLayout.AddItem(_difficultyButton, BoxLayout.Alignment.Centered);
 
+            // Create the left arrow
 	        var arrow1 = CreateArrow();
             difficultyLayout.AddItem(arrow1, BoxLayout.Alignment.Centered);
 	        arrow1.RelativeRotationZ = (float) (Math.PI*1.5);
 	        arrow1.Visible = false;
 
+            // Create the difficulty text display
             _difficultyText = UiControlManager.Instance.CreateControl<LayoutableText>();
 	        _difficultyText.DisplayText = CurrentDifficultyState.ToString();
 	        difficultyLayout.AddItem(_difficultyText, BoxLayout.Alignment.Centered);
 
+            // Create the right arrow
 	        var arrow2 = CreateArrow();
 	        difficultyLayout.AddItem(arrow2, BoxLayout.Alignment.Centered);
 	        arrow2.RelativeRotationZ = (float) (Math.PI*0.5);

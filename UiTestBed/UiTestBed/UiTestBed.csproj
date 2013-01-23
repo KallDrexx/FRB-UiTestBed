@@ -135,6 +135,16 @@
     <Compile Include="Entities\Tutorial\TutMainMenu.Generated.Event.cs">
       <DependentUpon>TutMainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Tutorial\TutOptionsMenu.cs" />
+    <Compile Include="Entities\Tutorial\TutOptionsMenu.Event.cs">
+      <DependentUpon>TutOptionsMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Tutorial\TutOptionsMenu.Generated.cs">
+      <DependentUpon>TutOptionsMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Tutorial\TutOptionsMenu.Generated.Event.cs">
+      <DependentUpon>TutOptionsMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\XuiLikeDemo\LevelSelectMenu.cs" />
     <Compile Include="Entities\XuiLikeDemo\LevelSelectMenu.Event.cs">
       <DependentUpon>LevelSelectMenu.cs</DependentUpon>

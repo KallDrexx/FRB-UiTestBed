@@ -29,6 +29,7 @@ using Microsoft.Xna.Framework.Media;
 #endif
 
 // Generated Usings
+using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
@@ -45,6 +46,7 @@ namespace UiTestBed.Screens
 		#endif
 		
 		private UiTestBed.Entities.Tutorial.TutMainMenu TutMainMenuInstance;
+		private UiTestBed.Entities.Tutorial.TutOptionsMenu TutOptionsMenuInstance;
 
 		public Tutorial()
 			: base("Tutorial")
@@ -57,6 +59,8 @@ namespace UiTestBed.Screens
 			LoadStaticContent(ContentManagerName);
 			TutMainMenuInstance = new UiTestBed.Entities.Tutorial.TutMainMenu(ContentManagerName, false);
 			TutMainMenuInstance.Name = "TutMainMenuInstance";
+			TutOptionsMenuInstance = new UiTestBed.Entities.Tutorial.TutOptionsMenu(ContentManagerName, false);
+			TutOptionsMenuInstance.Name = "TutOptionsMenuInstance";
 			
 			
 			PostInitialize();
@@ -84,6 +88,7 @@ namespace UiTestBed.Screens
 			{
 				
 				TutMainMenuInstance.Activity();
+				TutOptionsMenuInstance.Activity();
 			}
 			else
 			{
@@ -109,6 +114,11 @@ namespace UiTestBed.Screens
 				TutMainMenuInstance.Destroy();
 				TutMainMenuInstance.Detach();
 			}
+			if (TutOptionsMenuInstance != null)
+			{
+				TutOptionsMenuInstance.Destroy();
+				TutOptionsMenuInstance.Detach();
+			}
 
 			base.Destroy();
 
@@ -128,10 +138,12 @@ namespace UiTestBed.Screens
 		{
 			TutMainMenuInstance.AddToManagers(mLayer);
 			TutMainMenuInstance.CurrentState = TutMainMenu.VariableState.Deactivated;
+			TutOptionsMenuInstance.AddToManagers(mLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
 			TutMainMenuInstance.ConvertToManuallyUpdated();
+			TutOptionsMenuInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -150,6 +162,7 @@ namespace UiTestBed.Screens
 			}
 			#endif
 			UiTestBed.Entities.Tutorial.TutMainMenu.LoadStaticContent(contentManagerName);
+			UiTestBed.Entities.Tutorial.TutOptionsMenu.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]
