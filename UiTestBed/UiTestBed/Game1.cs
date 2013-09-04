@@ -50,7 +50,7 @@ namespace UiTestBed
 			CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
 			GlobalContent.Initialize();
 
-			FlatRedBall.Screens.ScreenManager.Start(typeof(UiTestBed.Screens.Tutorial));
+			FlatRedBall.Screens.ScreenManager.Start(typeof(UiTestBed.Screens.RpgDemo));
             IsMouseVisible = true;
 
             base.Initialize();

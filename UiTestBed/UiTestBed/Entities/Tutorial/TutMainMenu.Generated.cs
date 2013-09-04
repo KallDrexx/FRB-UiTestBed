@@ -16,6 +16,8 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
+using UiTestBed.Entities.Games.RpgDemo;
+using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
@@ -149,7 +151,6 @@ namespace UiTestBed.Entities.Tutorial
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
 			MenuArrow = new FlatRedBall.Sprite();
-			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			
 			PostInitialize();
 			if (addToManagers)
@@ -201,6 +202,7 @@ namespace UiTestBed.Entities.Tutorial
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
+			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			if (MenuArrow.Parent == null)
 			{
 				MenuArrow.CopyAbsoluteToRelative();
@@ -383,6 +385,14 @@ namespace UiTestBed.Entities.Tutorial
 			if (setOverallAlpha)
 			{
 				OverallAlpha = OverallAlphaFirstValue * (1 - interpolationValue) + OverallAlphaSecondValue * interpolationValue;
+			}
+			if (interpolationValue < 1)
+			{
+				mCurrentState = (int)firstState;
+			}
+			else
+			{
+				mCurrentState = (int)secondState;
 			}
 		}
 		public static void PreloadStateContent (VariableState state, string contentManagerName)

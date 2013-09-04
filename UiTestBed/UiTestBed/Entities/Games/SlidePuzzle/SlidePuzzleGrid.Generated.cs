@@ -16,6 +16,7 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
+using UiTestBed.Entities.Games.RpgDemo;
 using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;

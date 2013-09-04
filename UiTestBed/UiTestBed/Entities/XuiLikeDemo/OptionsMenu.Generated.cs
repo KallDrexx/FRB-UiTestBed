@@ -16,6 +16,8 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
+using UiTestBed.Entities.Games.RpgDemo;
+using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
@@ -189,8 +191,6 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			this.BeforeOverallAlphaSet += OnBeforeOverallAlphaSet;
-			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			
 			PostInitialize();
 			if (addToManagers)
@@ -238,6 +238,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
+			this.BeforeOverallAlphaSet += OnBeforeOverallAlphaSet;
+			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			CurrentState = OptionsMenu.VariableState.Deactivated;
 			CurrentDifficultyState = OptionsMenu.Difficulty.Easy;
 			VolumeLevel = 3;
@@ -411,6 +413,14 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			{
 				OverallAlpha = OverallAlphaFirstValue * (1 - interpolationValue) + OverallAlphaSecondValue * interpolationValue;
 			}
+			if (interpolationValue < 1)
+			{
+				mCurrentState = (int)firstState;
+			}
+			else
+			{
+				mCurrentState = (int)secondState;
+			}
 		}
 		public Instruction InterpolateToState (Difficulty stateToInterpolateTo, double secondsToTake)
 		{
@@ -466,6 +476,14 @@ namespace UiTestBed.Entities.XuiLikeDemo
 					break;
 				case  Difficulty.Hard:
 					break;
+			}
+			if (interpolationValue < 1)
+			{
+				mCurrentDifficultyState = (int)firstState;
+			}
+			else
+			{
+				mCurrentDifficultyState = (int)secondState;
 			}
 		}
 		public static void PreloadStateContent (VariableState state, string contentManagerName)

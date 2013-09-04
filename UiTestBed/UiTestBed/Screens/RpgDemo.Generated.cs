@@ -39,16 +39,17 @@ using FlatRedBall.Screens;
 
 namespace UiTestBed.Screens
 {
-	public partial class GridButtons : Screen
+	public partial class RpgDemo : Screen
 	{
 		// Generated Fields
 		#if DEBUG
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		
+		private UiTestBed.Entities.Games.RpgDemo.HealthIndicator HealthIndicatorInstance;
 
-		public GridButtons()
-			: base("GridButtons")
+		public RpgDemo()
+			: base("RpgDemo")
 		{
 		}
 
@@ -56,6 +57,8 @@ namespace UiTestBed.Screens
         {
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
+			HealthIndicatorInstance = new UiTestBed.Entities.Games.RpgDemo.HealthIndicator(ContentManagerName, false);
+			HealthIndicatorInstance.Name = "HealthIndicatorInstance";
 			
 			
 			PostInitialize();
@@ -82,6 +85,7 @@ namespace UiTestBed.Screens
 			if (!IsPaused)
 			{
 				
+				HealthIndicatorInstance.Activity();
 			}
 			else
 			{
@@ -102,6 +106,11 @@ namespace UiTestBed.Screens
 		{
 			// Generated Destroy
 			
+			if (HealthIndicatorInstance != null)
+			{
+				HealthIndicatorInstance.Destroy();
+				HealthIndicatorInstance.Detach();
+			}
 
 			base.Destroy();
 
@@ -118,9 +127,11 @@ namespace UiTestBed.Screens
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
+			HealthIndicatorInstance.AddToManagers(mLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
+			HealthIndicatorInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -138,6 +149,7 @@ namespace UiTestBed.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
+			UiTestBed.Entities.Games.RpgDemo.HealthIndicator.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

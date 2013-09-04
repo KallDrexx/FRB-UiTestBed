@@ -95,6 +95,19 @@
       </NamedObjects>
     </ScreenSave>
     <ScreenSave>
+      <Name>Screens\RpgDemo</Name>
+      <NamedObjects>
+        <NamedObjectSave>
+          <SourceType>Entity</SourceType>
+          <SourceClassType>Entities\Games\RpgDemo\HealthIndicator</SourceClassType>
+          <InstanceName>HealthIndicatorInstance</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <AddToManagers>true</AddToManagers>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+      </NamedObjects>
+    </ScreenSave>
+    <ScreenSave>
       <Name>Screens\Screen2</Name>
     </ScreenSave>
     <ScreenSave>
@@ -138,6 +151,17 @@
     </ScreenSave>
   </Screens>
   <Entities>
+    <EntitySave>
+      <Name>Entities\Games\RpgDemo\HealthIndicator</Name>
+      <ReferencedFiles>
+        <ReferencedFileSave>
+          <Name>Entities/Games/RpgDemo/HealthIndicator/Animations.achx</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <RuntimeType>FlatRedBall.Graphics.Animation.AnimationChainList</RuntimeType>
+        </ReferencedFileSave>
+      </ReferencedFiles>
+      <Is2D>true</Is2D>
+    </EntitySave>
     <EntitySave>
       <CustomVariables>
         <CustomVariable>
@@ -1049,7 +1073,7 @@
     <RecordLockContention>false</RecordLockContention>
   </GlobalContentSettingsSave>
   <SyncedProjects />
-  <StartUpScreen>Screens\Tutorial</StartUpScreen>
+  <StartUpScreen>Screens\RpgDemo</StartUpScreen>
   <In2D>false</In2D>
   <SetResolution>false</SetResolution>
   <ResolutionWidth>800</ResolutionWidth>

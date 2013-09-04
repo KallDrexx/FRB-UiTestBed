@@ -29,6 +29,7 @@ using Microsoft.Xna.Framework.Media;
 #endif
 
 // Generated Usings
+using UiTestBed.Entities.Games.RpgDemo;
 using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;

@@ -16,6 +16,7 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
+using UiTestBed.Entities.Games.RpgDemo;
 using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
@@ -157,8 +158,6 @@ namespace UiTestBed.Entities.Tutorial
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			this.AfterVolumeLevelSet += OnAfterVolumeLevelSet;
-			this.AfterCurrentDifficultyStateSet += OnAfterCurrentDifficultyStateSet;
 			
 			PostInitialize();
 			if (addToManagers)
@@ -202,6 +201,8 @@ namespace UiTestBed.Entities.Tutorial
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
+			this.AfterVolumeLevelSet += OnAfterVolumeLevelSet;
+			this.AfterCurrentDifficultyStateSet += OnAfterCurrentDifficultyStateSet;
 			CurrentDifficultyState = TutOptionsMenu.Difficulty.Easy;
 			VolumeLevel = 3;
 			MaxVolumeLevel = 10;
@@ -349,6 +350,14 @@ namespace UiTestBed.Entities.Tutorial
 					break;
 				case  Difficulty.Hard:
 					break;
+			}
+			if (interpolationValue < 1)
+			{
+				mCurrentDifficultyState = (int)firstState;
+			}
+			else
+			{
+				mCurrentDifficultyState = (int)secondState;
 			}
 		}
 		public static void PreloadStateContent (Difficulty state, string contentManagerName)

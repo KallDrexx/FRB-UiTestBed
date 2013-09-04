@@ -17,6 +17,8 @@ using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
 using FlatRedBall.Gui;
+using UiTestBed.Entities.Games.RpgDemo;
+using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
@@ -236,6 +238,7 @@ namespace UiTestBed.Entities
 		{
 			this.ForceUpdateDependenciesDeep();
 			SpriteManager.ConvertToManuallyUpdated(this);
+			SpriteManager.ConvertToManuallyUpdated(SpriteFrameInstance);
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{

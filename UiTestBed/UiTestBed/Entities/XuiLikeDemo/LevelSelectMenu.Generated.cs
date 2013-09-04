@@ -16,6 +16,8 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
+using UiTestBed.Entities.Games.RpgDemo;
+using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
@@ -181,8 +183,6 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			this.AfterSelectedGridSpacingSet += OnAfterSelectedGridSpacingSet;
-			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			
 			PostInitialize();
 			if (addToManagers)
@@ -234,6 +234,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
+			this.AfterSelectedGridSpacingSet += OnAfterSelectedGridSpacingSet;
+			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			CurrentState = LevelSelectMenu.VariableState.Inactive;
 			SelectedGridSpacing = 0f;
 			OverallAlpha = 0f;
@@ -455,6 +457,14 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			if (setOverallAlpha)
 			{
 				OverallAlpha = OverallAlphaFirstValue * (1 - interpolationValue) + OverallAlphaSecondValue * interpolationValue;
+			}
+			if (interpolationValue < 1)
+			{
+				mCurrentState = (int)firstState;
+			}
+			else
+			{
+				mCurrentState = (int)secondState;
 			}
 		}
 		public static void PreloadStateContent (VariableState state, string contentManagerName)

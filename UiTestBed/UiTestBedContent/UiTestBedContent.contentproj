@@ -48,6 +48,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Entities\Games\RpgDemo\HealthIndicator\Animations.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>Animations</Name>
+    </None>
+    <None Include="Entities\Games\RpgDemo\HealthIndicator\Frame.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>Frame</Name>
+    </None>
+    <None Include="Entities\Games\RpgDemo\HealthIndicator\HealthBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>HealthBackground</Name>
+    </None>
+    <None Include="Entities\Games\RpgDemo\HealthIndicator\HealthFill.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>HealthFill</Name>
+    </None>
     <None Include="Entities\XuiLikeDemo\MainMenu\arrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>arrow</Name>

@@ -16,6 +16,8 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
+using UiTestBed.Entities.Games.RpgDemo;
+using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
@@ -214,9 +216,6 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
 			ArrowSprite = new FlatRedBall.Sprite();
-			this.BeforeIsActiveSet += OnBeforeIsActiveSet;
-			this.AfterIsActiveSet += OnAfterIsActiveSet;
-			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			
 			PostInitialize();
 			if (addToManagers)
@@ -268,6 +267,9 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
+			this.BeforeIsActiveSet += OnBeforeIsActiveSet;
+			this.AfterIsActiveSet += OnAfterIsActiveSet;
+			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			ArrowSprite.PixelSize = 0.5f;
 			ArrowSprite.Texture = arrow;
 			ArrowSprite.Visible = false;
@@ -454,6 +456,14 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			{
 				OverallAlpha = OverallAlphaFirstValue * (1 - interpolationValue) + OverallAlphaSecondValue * interpolationValue;
 			}
+			if (interpolationValue < 1)
+			{
+				mCurrentState = (int)firstState;
+			}
+			else
+			{
+				mCurrentState = (int)secondState;
+			}
 		}
 		public Instruction InterpolateToState (ChosenMenuOption stateToInterpolateTo, double secondsToTake)
 		{
@@ -517,6 +527,14 @@ namespace UiTestBed.Entities.XuiLikeDemo
 					break;
 				case  ChosenMenuOption.None:
 					break;
+			}
+			if (interpolationValue < 1)
+			{
+				mCurrentChosenMenuOptionState = (int)firstState;
+			}
+			else
+			{
+				mCurrentChosenMenuOptionState = (int)secondState;
 			}
 		}
 		public static void PreloadStateContent (VariableState state, string contentManagerName)
