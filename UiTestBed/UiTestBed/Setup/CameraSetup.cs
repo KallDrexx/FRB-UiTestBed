@@ -12,11 +12,16 @@ namespace UiTestBed
 {
 	internal static class CameraSetup
 	{
-		internal static void SetupCamera(Camera cameraToSetUp, GraphicsDeviceManager graphicsDeviceManager)
-		{
+			internal static void SetupCamera (Camera cameraToSetUp, GraphicsDeviceManager graphicsDeviceManager)
+			{
+			}
+			internal static void ResetCamera (Camera cameraToReset)
+			{
+				cameraToReset.X = 0;
+				cameraToReset.Y = 0;
+				cameraToReset.XVelocity = 0;
+				cameraToReset.YVelocity = 0;
+			}
 
-
-
-		}
 	}
 }

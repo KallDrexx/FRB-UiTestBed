@@ -1,14 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using FlatRedBall.AI.Pathfinding;
-using FlatRedBall.Graphics.Model;
 
-using FlatRedBall.Input;
-using FlatRedBall.Utilities;
-
-using FlatRedBall.Instructions;
-using FlatRedBall.Math.Splines;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
@@ -22,6 +12,9 @@ using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
 using FlatRedBall;
 using FlatRedBall.Screens;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 #if XNA4 || WINDOWS_8
 using Color = Microsoft.Xna.Framework.Color;
@@ -134,8 +127,6 @@ namespace UiTestBed.Entities.Tutorial
 		}
 		public int MaxVolumeLevel = 10;
 		public float MaxVolumeBarHeight = 15f;
-		public int Index { get; set; }
-		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
 
         public TutOptionsMenu(string contentManagerName) :
@@ -157,8 +148,6 @@ namespace UiTestBed.Entities.Tutorial
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			this.AfterVolumeLevelSet += OnAfterVolumeLevelSet;
-			this.AfterCurrentDifficultyStateSet += OnAfterCurrentDifficultyStateSet;
 			
 			PostInitialize();
 			if (addToManagers)
@@ -202,10 +191,8 @@ namespace UiTestBed.Entities.Tutorial
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			CurrentDifficultyState = TutOptionsMenu.Difficulty.Easy;
-			VolumeLevel = 3;
-			MaxVolumeLevel = 10;
-			MaxVolumeBarHeight = 15f;
+			this.AfterVolumeLevelSet += OnAfterVolumeLevelSet;
+			this.AfterCurrentDifficultyStateSet += OnAfterCurrentDifficultyStateSet;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -225,16 +212,16 @@ namespace UiTestBed.Entities.Tutorial
 			RotationX = 0;
 			RotationY = 0;
 			RotationZ = 0;
-			CurrentDifficultyState = TutOptionsMenu.Difficulty.Easy;
-			VolumeLevel = 3;
-			MaxVolumeLevel = 10;
-			MaxVolumeBarHeight = 15f;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
 			RotationX = oldRotationX;
 			RotationY = oldRotationY;
 			RotationZ = oldRotationZ;
+			CurrentDifficultyState = TutOptionsMenu.Difficulty.Easy;
+			VolumeLevel = 3;
+			MaxVolumeLevel = 10;
+			MaxVolumeBarHeight = 15f;
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
@@ -295,7 +282,7 @@ namespace UiTestBed.Entities.Tutorial
 			{
 			}
 		}
-		public Instruction InterpolateToState (Difficulty stateToInterpolateTo, double secondsToTake)
+		public FlatRedBall.Instructions.Instruction InterpolateToState (Difficulty stateToInterpolateTo, double secondsToTake)
 		{
 			switch(stateToInterpolateTo)
 			{
@@ -306,8 +293,8 @@ namespace UiTestBed.Entities.Tutorial
 				case  Difficulty.Hard:
 					break;
 			}
-			var instruction = new DelegateInstruction<Difficulty>(StopStateInterpolation, stateToInterpolateTo);
-			instruction.TimeToExecute = TimeManager.CurrentTime + secondsToTake;
+			var instruction = new FlatRedBall.Instructions.DelegateInstruction<Difficulty>(StopStateInterpolation, stateToInterpolateTo);
+			instruction.TimeToExecute = FlatRedBall.TimeManager.CurrentTime + secondsToTake;
 			this.Instructions.Add(instruction);
 			return instruction;
 		}
@@ -350,11 +337,18 @@ namespace UiTestBed.Entities.Tutorial
 				case  Difficulty.Hard:
 					break;
 			}
+			if (interpolationValue < 1)
+			{
+				mCurrentDifficultyState = (int)firstState;
+			}
+			else
+			{
+				mCurrentDifficultyState = (int)secondState;
+			}
 		}
 		public static void PreloadStateContent (Difficulty state, string contentManagerName)
 		{
 			ContentManagerName = contentManagerName;
-			object throwaway;
 			switch(state)
 			{
 				case  Difficulty.Easy:
@@ -379,16 +373,16 @@ namespace UiTestBed.Entities.Tutorial
 			return null;
 		}
 		protected bool mIsPaused;
-		public override void Pause (InstructionList instructions)
+		public override void Pause (FlatRedBall.Instructions.InstructionList instructions)
 		{
 			base.Pause(instructions);
 			mIsPaused = true;
 		}
 		public virtual void SetToIgnorePausing ()
 		{
-			InstructionManager.IgnorePausingFor(this);
+			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(this);
 		}
-		public void MoveToLayer (Layer layerToMoveTo)
+		public virtual void MoveToLayer (Layer layerToMoveTo)
 		{
 			LayerProvidedByContainer = layerToMoveTo;
 		}

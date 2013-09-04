@@ -1,13 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using FlatRedBall.Math.Geometry;
-using FlatRedBall.AI.Pathfinding;
-using FlatRedBall.Input;
-using FlatRedBall.IO;
-using FlatRedBall.Instructions;
-using FlatRedBall.Math.Splines;
-using FlatRedBall.Utilities;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 
 using Cursor = FlatRedBall.Gui.Cursor;
@@ -29,11 +19,15 @@ using Microsoft.Xna.Framework.Media;
 #endif
 
 // Generated Usings
+using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
 using FlatRedBall;
 using FlatRedBall.Screens;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace UiTestBed.Screens
 {
@@ -125,6 +119,7 @@ namespace UiTestBed.Screens
 		}
 		public virtual void AddToManagersBottomUp ()
 		{
+			CameraSetup.ResetCamera(SpriteManager.Camera);
 			BeefBallScoreHudInstance.AddToManagers(mLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()

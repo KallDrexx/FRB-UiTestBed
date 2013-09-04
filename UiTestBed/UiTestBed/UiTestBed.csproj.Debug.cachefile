@@ -1,6 +1,11 @@
 Content\Entities\XuiLikeDemo\MainMenu\arrow.png
 Content\GlobalContent\button-idle.png
 Content\GlobalContent\Button1.achx
+Content\GlobalContent\GameContent\Slider\dialog_box.png
+Content\GlobalContent\GameContent\Slider\GridBackground.achx
+Content\GlobalContent\GameContent\Slider\SelectedButton.png
+Content\GlobalContent\GameContent\Slider\SliderButton.achx
+Content\GlobalContent\GameContent\Slider\StandardButton.png
 Content\GlobalContent\MenuDemo\arrow.png
 Content\GlobalContent\MenuDemo\button_x.png
 Content\GlobalContent\MenuDemo\dialog_box.png

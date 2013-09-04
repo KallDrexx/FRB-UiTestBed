@@ -42,7 +42,7 @@ namespace UiTestBed.Entities.Games.SlidePuzzle
 		    _grid = UiControlManager.Instance.CreateControl<GridLayout>();
 		    _grid.Spacing = 10;
 		    _grid.Margin = 20;
-		    _grid.BackgroundAnimationChains = GlobalContent.GlobalContent_GameContent_Slider_GridBackground;
+		    _grid.BackgroundAnimationChains = GlobalContent.GameContent_Slider_GridBackground;
 		    _grid.CurrentAnimationChainName = "Idle";
 
 		    for (int x = 0; x < (GridSize*GridSize); x++)
@@ -92,7 +92,7 @@ namespace UiTestBed.Entities.Games.SlidePuzzle
             var lastIndex = (GridSize * GridSize) - 1;
             if (index < lastIndex)
             {
-                btn.AnimationChains = GlobalContent.GlobalContent_GameContent_Slider_SliderButton;
+                btn.AnimationChains = GlobalContent.GameContent_Slider_SliderButton;
                 btn.StandardAnimationChainName = "Idle";
                 btn.FocusedAnimationChainName = "Focused";
                 btn.Text = (index + 1).ToString();

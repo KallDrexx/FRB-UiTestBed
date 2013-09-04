@@ -2,6 +2,10 @@
 <GlueProjectSave xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Screens>
     <ScreenSave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <Name>Screens\BeefBallHud</Name>
       <NamedObjects>
         <NamedObjectSave>
@@ -9,12 +13,15 @@
           <SourceClassType>Entities\Tutorial\BeefBallScoreHud</SourceClassType>
           <InstanceName>BeefBallScoreHudInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
     </ScreenSave>
     <ScreenSave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <Name>Screens\ButtonTestScreen1</Name>
       <NamedObjects>
         <NamedObjectSave>
@@ -22,22 +29,37 @@
           <SourceClassType>Layer</SourceClassType>
           <InstanceName>UiLayer</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
           <Is2D>true</Is2D>
         </NamedObjectSave>
       </NamedObjects>
     </ScreenSave>
     <ScreenSave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <Name>Screens\CenteredBoxLayoutTest</Name>
     </ScreenSave>
     <ScreenSave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <Name>Screens\DebugScratchpad</Name>
     </ScreenSave>
     <ScreenSave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <Name>Screens\GridButtons</Name>
     </ScreenSave>
     <ScreenSave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <Name>Screens\MenuDemo</Name>
       <NamedObjects>
         <NamedObjectSave>
@@ -50,7 +72,6 @@
           <SourceClassType>Entities\XuiLikeDemo\LevelSelectMenu</SourceClassType>
           <InstanceName>LevelSelectMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
         <NamedObjectSave>
@@ -63,7 +84,6 @@
           <SourceClassType>Entities\XuiLikeDemo\MainMenu</SourceClassType>
           <InstanceName>MainMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
         <NamedObjectSave>
@@ -76,7 +96,6 @@
           <SourceClassType>Entities\XuiLikeDemo\OptionsMenu</SourceClassType>
           <InstanceName>OptionsMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
         <NamedObjectSave>
@@ -89,15 +108,22 @@
           <SourceClassType>Entities\XuiLikeDemo\LoadingScreen</SourceClassType>
           <InstanceName>LoadingScreenInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
     </ScreenSave>
     <ScreenSave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <Name>Screens\Screen2</Name>
     </ScreenSave>
     <ScreenSave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <Name>Screens\SlidePuzzleScreen</Name>
       <NamedObjects>
         <NamedObjectSave>
@@ -105,12 +131,15 @@
           <SourceClassType>Entities\Games\SlidePuzzle\SlidePuzzleGrid</SourceClassType>
           <InstanceName>SlidePuzzleGridInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
     </ScreenSave>
     <ScreenSave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <Name>Screens\Tutorial</Name>
       <NamedObjects>
         <NamedObjectSave>
@@ -123,7 +152,6 @@
           <SourceClassType>Entities\Tutorial\TutMainMenu</SourceClassType>
           <InstanceName>TutMainMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
         <NamedObjectSave>
@@ -131,7 +159,6 @@
           <SourceClassType>Entities\Tutorial\TutOptionsMenu</SourceClassType>
           <InstanceName>TutOptionsMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
@@ -139,6 +166,10 @@
   </Screens>
   <Entities>
     <EntitySave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <CustomVariables>
         <CustomVariable>
           <Properties>
@@ -200,6 +231,10 @@
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <ImplementsIVisible>true</ImplementsIVisible>
       <ImplementsIWindow>true</ImplementsIWindow>
       <Name>Entities\Test1</Name>
@@ -219,17 +254,24 @@
           <SourceClassType>SpriteFrame</SourceClassType>
           <InstanceName>SpriteFrameInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <Name>Entities\Tutorial\BeefBallScoreHud</Name>
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <States>
         <StateSave>
           <InstructionSaves>
@@ -295,20 +337,19 @@
       <NamedObjects>
         <NamedObjectSave>
           <CustomProperty>
-            <Type>float</Type>
-            <Member>PixelSize</Member>
-            <ValueAsFloat>0.5</ValueAsFloat>
-          </CustomProperty>
-          <CustomProperty>
             <Type>Texture2D</Type>
             <Member>Texture</Member>
             <ValueAsString>arrow</ValueAsString>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>PixelSize</Member>
+            <ValueAsFloat>0.5</ValueAsFloat>
           </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
           <SourceClassType>Sprite</SourceClassType>
           <InstanceName>MenuArrow</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
@@ -330,6 +371,10 @@
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <StateCategoryList>
         <StateSaveCategory>
           <States>
@@ -416,6 +461,10 @@
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <States>
         <StateSave>
           <InstructionSaves>
@@ -582,6 +631,10 @@
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <States>
         <StateSave>
           <InstructionSaves>
@@ -681,6 +734,10 @@
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <States>
         <StateSave>
           <InstructionSaves>
@@ -794,14 +851,14 @@
       <NamedObjects>
         <NamedObjectSave>
           <CustomProperty>
-            <Type>float</Type>
-            <Member>PixelSize</Member>
-            <ValueAsFloat>0.5</ValueAsFloat>
-          </CustomProperty>
-          <CustomProperty>
             <Type>Texture2D</Type>
             <Member>Texture</Member>
             <ValueAsString>arrow</ValueAsString>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>PixelSize</Member>
+            <ValueAsFloat>0.5</ValueAsFloat>
           </CustomProperty>
           <CustomProperty>
             <Type>bool</Type>
@@ -812,7 +869,6 @@
           <SourceClassType>Sprite</SourceClassType>
           <InstanceName>ArrowSprite</InstanceName>
           <AttachToContainer>false</AttachToContainer>
-          <AddToManagers>true</AddToManagers>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
@@ -846,6 +902,10 @@
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
       <States>
         <StateSave>
           <InstructionSaves>
@@ -1049,7 +1109,7 @@
     <RecordLockContention>false</RecordLockContention>
   </GlobalContentSettingsSave>
   <SyncedProjects />
-  <StartUpScreen>Screens\Tutorial</StartUpScreen>
+  <StartUpScreen>Screens\MenuDemo</StartUpScreen>
   <In2D>false</In2D>
   <SetResolution>false</SetResolution>
   <ResolutionWidth>800</ResolutionWidth>
@@ -1066,4 +1126,5 @@
   <CustomClasses />
   <TranslatedFiles />
   <ApplyToFixedResolutionPlatforms>true</ApplyToFixedResolutionPlatforms>
+  <ExternallyBuiltFileDirectory>../../</ExternallyBuiltFileDirectory>
 </GlueProjectSave>

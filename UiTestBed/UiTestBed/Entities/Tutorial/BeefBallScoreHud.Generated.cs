@@ -1,14 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using FlatRedBall.AI.Pathfinding;
-using FlatRedBall.Graphics.Model;
 
-using FlatRedBall.Input;
-using FlatRedBall.Utilities;
-
-using FlatRedBall.Instructions;
-using FlatRedBall.Math.Splines;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
@@ -16,11 +6,15 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
+using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
 using FlatRedBall;
 using FlatRedBall.Screens;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 #if XNA4 || WINDOWS_8
 using Color = Microsoft.Xna.Framework.Color;
@@ -59,8 +53,6 @@ namespace UiTestBed.Entities.Tutorial
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
 		
-		public int Index { get; set; }
-		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
 
         public BeefBallScoreHud(string contentManagerName) :
@@ -224,16 +216,16 @@ namespace UiTestBed.Entities.Tutorial
 			return null;
 		}
 		protected bool mIsPaused;
-		public override void Pause (InstructionList instructions)
+		public override void Pause (FlatRedBall.Instructions.InstructionList instructions)
 		{
 			base.Pause(instructions);
 			mIsPaused = true;
 		}
 		public virtual void SetToIgnorePausing ()
 		{
-			InstructionManager.IgnorePausingFor(this);
+			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(this);
 		}
-		public void MoveToLayer (Layer layerToMoveTo)
+		public virtual void MoveToLayer (Layer layerToMoveTo)
 		{
 			LayerProvidedByContainer = layerToMoveTo;
 		}

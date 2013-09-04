@@ -1,14 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using FlatRedBall.AI.Pathfinding;
-using FlatRedBall.Graphics.Model;
 
-using FlatRedBall.Input;
-using FlatRedBall.Utilities;
-
-using FlatRedBall.Instructions;
-using FlatRedBall.Math.Splines;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
@@ -22,6 +12,9 @@ using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
 using FlatRedBall;
 using FlatRedBall.Screens;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 #if XNA4 || WINDOWS_8
 using Color = Microsoft.Xna.Framework.Color;
@@ -65,8 +58,6 @@ namespace UiTestBed.Entities.Games.SlidePuzzle
 		public float SlideSeconds = 0.5f;
 		public int MoveCount = 0;
 		public bool HasWon = false;
-		public int Index { get; set; }
-		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
 
         public SlidePuzzleGrid(string contentManagerName) :
@@ -131,11 +122,6 @@ namespace UiTestBed.Entities.Games.SlidePuzzle
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			GridSize = 4;
-			ButtonSize = 25f;
-			SlideSeconds = 0.5f;
-			MoveCount = 0;
-			HasWon = false;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -155,17 +141,17 @@ namespace UiTestBed.Entities.Games.SlidePuzzle
 			RotationX = 0;
 			RotationY = 0;
 			RotationZ = 0;
-			GridSize = 4;
-			ButtonSize = 25f;
-			SlideSeconds = 0.5f;
-			MoveCount = 0;
-			HasWon = false;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
 			RotationX = oldRotationX;
 			RotationY = oldRotationY;
 			RotationZ = oldRotationZ;
+			GridSize = 4;
+			ButtonSize = 25f;
+			SlideSeconds = 0.5f;
+			MoveCount = 0;
+			HasWon = false;
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
@@ -240,16 +226,16 @@ namespace UiTestBed.Entities.Games.SlidePuzzle
 			return null;
 		}
 		protected bool mIsPaused;
-		public override void Pause (InstructionList instructions)
+		public override void Pause (FlatRedBall.Instructions.InstructionList instructions)
 		{
 			base.Pause(instructions);
 			mIsPaused = true;
 		}
 		public virtual void SetToIgnorePausing ()
 		{
-			InstructionManager.IgnorePausingFor(this);
+			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(this);
 		}
-		public void MoveToLayer (Layer layerToMoveTo)
+		public virtual void MoveToLayer (Layer layerToMoveTo)
 		{
 			LayerProvidedByContainer = layerToMoveTo;
 		}

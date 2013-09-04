@@ -1,14 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using FlatRedBall.AI.Pathfinding;
-using FlatRedBall.Graphics.Model;
 
-using FlatRedBall.Input;
-using FlatRedBall.Utilities;
-
-using FlatRedBall.Instructions;
-using FlatRedBall.Math.Splines;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
@@ -17,11 +7,15 @@ using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
 using FlatRedBall.Gui;
+using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
 using FlatRedBall;
 using FlatRedBall.Screens;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using FlatRedBall.ManagedSpriteGroups;
 
 #if XNA4 || WINDOWS_8
@@ -62,8 +56,6 @@ namespace UiTestBed.Entities
 		static List<string> LoadedContentManagers = new List<string>();
 		
 		private FlatRedBall.ManagedSpriteGroups.SpriteFrame SpriteFrameInstance;
-		public int Index { get; set; }
-		public bool Used { get; set; }
 		public event EventHandler BeforeVisibleSet;
 		public event EventHandler AfterVisibleSet;
 		protected bool mVisible = true;
@@ -236,6 +228,7 @@ namespace UiTestBed.Entities
 		{
 			this.ForceUpdateDependenciesDeep();
 			SpriteManager.ConvertToManuallyUpdated(this);
+			SpriteManager.ConvertToManuallyUpdated(SpriteFrameInstance);
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -654,17 +647,17 @@ namespace UiTestBed.Entities
 			return cursor.PrimaryClick && HasCursorOver(cursor);
 		}
 		protected bool mIsPaused;
-		public override void Pause (InstructionList instructions)
+		public override void Pause (FlatRedBall.Instructions.InstructionList instructions)
 		{
 			base.Pause(instructions);
 			mIsPaused = true;
 		}
 		public virtual void SetToIgnorePausing ()
 		{
-			InstructionManager.IgnorePausingFor(this);
-			InstructionManager.IgnorePausingFor(SpriteFrameInstance);
+			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(this);
+			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(SpriteFrameInstance);
 		}
-		public void MoveToLayer (Layer layerToMoveTo)
+		public virtual void MoveToLayer (Layer layerToMoveTo)
 		{
 			if (LayerProvidedByContainer != null)
 			{

@@ -1,14 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using FlatRedBall.AI.Pathfinding;
-using FlatRedBall.Graphics.Model;
 
-using FlatRedBall.Input;
-using FlatRedBall.Utilities;
-
-using FlatRedBall.Instructions;
-using FlatRedBall.Math.Splines;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
@@ -16,11 +6,15 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
+using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
 using FlatRedBall;
 using FlatRedBall.Screens;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 #if XNA4 || WINDOWS_8
 using Color = Microsoft.Xna.Framework.Color;
@@ -158,8 +152,6 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		public float SecondsToFade = 1f;
 		public bool MenuExited;
 		public string LevelToLoad;
-		public int Index { get; set; }
-		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
 
         public LevelSelectMenu(string contentManagerName) :
@@ -181,8 +173,6 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			this.AfterSelectedGridSpacingSet += OnAfterSelectedGridSpacingSet;
-			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			
 			PostInitialize();
 			if (addToManagers)
@@ -234,10 +224,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			CurrentState = LevelSelectMenu.VariableState.Inactive;
-			SelectedGridSpacing = 0f;
-			OverallAlpha = 0f;
-			SecondsToFade = 1f;
+			this.AfterSelectedGridSpacingSet += OnAfterSelectedGridSpacingSet;
+			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -257,16 +245,16 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			RotationX = 0;
 			RotationY = 0;
 			RotationZ = 0;
-			CurrentState = LevelSelectMenu.VariableState.Inactive;
-			SelectedGridSpacing = 0f;
-			OverallAlpha = 0f;
-			SecondsToFade = 1f;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
 			RotationX = oldRotationX;
 			RotationY = oldRotationY;
 			RotationZ = oldRotationZ;
+			CurrentState = LevelSelectMenu.VariableState.Inactive;
+			SelectedGridSpacing = 0f;
+			OverallAlpha = 0f;
+			SecondsToFade = 1f;
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
@@ -339,7 +327,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 				mLoadingState = value;
 			}
 		}
-		public Instruction InterpolateToState (VariableState stateToInterpolateTo, double secondsToTake)
+		public FlatRedBall.Instructions.Instruction InterpolateToState (VariableState stateToInterpolateTo, double secondsToTake)
 		{
 			switch(stateToInterpolateTo)
 			{
@@ -356,8 +344,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
 					OverallAlphaVelocity = (0f - OverallAlpha) / (float)secondsToTake;
 					break;
 			}
-			var instruction = new DelegateInstruction<VariableState>(StopStateInterpolation, stateToInterpolateTo);
-			instruction.TimeToExecute = TimeManager.CurrentTime + secondsToTake;
+			var instruction = new FlatRedBall.Instructions.DelegateInstruction<VariableState>(StopStateInterpolation, stateToInterpolateTo);
+			instruction.TimeToExecute = FlatRedBall.TimeManager.CurrentTime + secondsToTake;
 			this.Instructions.Add(instruction);
 			return instruction;
 		}
@@ -456,11 +444,18 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			{
 				OverallAlpha = OverallAlphaFirstValue * (1 - interpolationValue) + OverallAlphaSecondValue * interpolationValue;
 			}
+			if (interpolationValue < 1)
+			{
+				mCurrentState = (int)firstState;
+			}
+			else
+			{
+				mCurrentState = (int)secondState;
+			}
 		}
 		public static void PreloadStateContent (VariableState state, string contentManagerName)
 		{
 			ContentManagerName = contentManagerName;
-			object throwaway;
 			switch(state)
 			{
 				case  VariableState.WorldSelected:
@@ -485,16 +480,16 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			return null;
 		}
 		protected bool mIsPaused;
-		public override void Pause (InstructionList instructions)
+		public override void Pause (FlatRedBall.Instructions.InstructionList instructions)
 		{
 			base.Pause(instructions);
 			mIsPaused = true;
 		}
 		public virtual void SetToIgnorePausing ()
 		{
-			InstructionManager.IgnorePausingFor(this);
+			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(this);
 		}
-		public void MoveToLayer (Layer layerToMoveTo)
+		public virtual void MoveToLayer (Layer layerToMoveTo)
 		{
 			LayerProvidedByContainer = layerToMoveTo;
 		}

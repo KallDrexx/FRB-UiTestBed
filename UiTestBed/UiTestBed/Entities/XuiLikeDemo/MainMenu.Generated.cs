@@ -1,14 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using FlatRedBall.AI.Pathfinding;
-using FlatRedBall.Graphics.Model;
 
-using FlatRedBall.Input;
-using FlatRedBall.Utilities;
-
-using FlatRedBall.Instructions;
-using FlatRedBall.Math.Splines;
 using BitmapFont = FlatRedBall.Graphics.BitmapFont;
 using Cursor = FlatRedBall.Gui.Cursor;
 using GuiManager = FlatRedBall.Gui.GuiManager;
@@ -16,11 +6,15 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using UiTestBed.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
+using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
 using UiTestBed.Entities.XuiLikeDemo;
 using FlatRedBall;
 using FlatRedBall.Screens;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 
 #if XNA4 || WINDOWS_8
@@ -141,7 +135,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		static object mLockObject = new object();
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
-		private static Microsoft.Xna.Framework.Graphics.Texture2D arrow;
+		protected static Microsoft.Xna.Framework.Graphics.Texture2D arrow;
 		
 		private FlatRedBall.Sprite ArrowSprite;
 		public event EventHandler BeforeIsActiveSet;
@@ -190,8 +184,6 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		}
 		public float OverallAlphaVelocity = 0;
 		public float SecondsToFade = 1f;
-		public int Index { get; set; }
-		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
 
         public MainMenu(string contentManagerName) :
@@ -214,9 +206,6 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
 			ArrowSprite = new FlatRedBall.Sprite();
-			this.BeforeIsActiveSet += OnBeforeIsActiveSet;
-			this.AfterIsActiveSet += OnAfterIsActiveSet;
-			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			
 			PostInitialize();
 			if (addToManagers)
@@ -268,14 +257,12 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			ArrowSprite.PixelSize = 0.5f;
+			this.BeforeIsActiveSet += OnBeforeIsActiveSet;
+			this.AfterIsActiveSet += OnAfterIsActiveSet;
+			this.AfterOverallAlphaSet += OnAfterOverallAlphaSet;
 			ArrowSprite.Texture = arrow;
+			ArrowSprite.PixelSize = 0.5f;
 			ArrowSprite.Visible = false;
-			IsActive = false;
-			OverallAlpha = 1f;
-			SecondsToFade = 1f;
-			CurrentState = MainMenu.VariableState.Deactivated;
-			CurrentChosenMenuOptionState = MainMenu.ChosenMenuOption.None;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -296,20 +283,20 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			RotationY = 0;
 			RotationZ = 0;
 			SpriteManager.AddToLayer(ArrowSprite, layerToAddTo);
-			ArrowSprite.PixelSize = 0.5f;
 			ArrowSprite.Texture = arrow;
+			ArrowSprite.PixelSize = 0.5f;
 			ArrowSprite.Visible = false;
-			IsActive = false;
-			OverallAlpha = 1f;
-			SecondsToFade = 1f;
-			CurrentState = MainMenu.VariableState.Deactivated;
-			CurrentChosenMenuOptionState = MainMenu.ChosenMenuOption.None;
 			X = oldX;
 			Y = oldY;
 			Z = oldZ;
 			RotationX = oldRotationX;
 			RotationY = oldRotationY;
 			RotationZ = oldRotationZ;
+			IsActive = false;
+			OverallAlpha = 1f;
+			SecondsToFade = 1f;
+			CurrentState = MainMenu.VariableState.Deactivated;
+			CurrentChosenMenuOptionState = MainMenu.ChosenMenuOption.None;
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
@@ -392,7 +379,7 @@ namespace UiTestBed.Entities.XuiLikeDemo
 				mLoadingState = value;
 			}
 		}
-		public Instruction InterpolateToState (VariableState stateToInterpolateTo, double secondsToTake)
+		public FlatRedBall.Instructions.Instruction InterpolateToState (VariableState stateToInterpolateTo, double secondsToTake)
 		{
 			switch(stateToInterpolateTo)
 			{
@@ -403,8 +390,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
 					OverallAlphaVelocity = (0f - OverallAlpha) / (float)secondsToTake;
 					break;
 			}
-			var instruction = new DelegateInstruction<VariableState>(StopStateInterpolation, stateToInterpolateTo);
-			instruction.TimeToExecute = TimeManager.CurrentTime + secondsToTake;
+			var instruction = new FlatRedBall.Instructions.DelegateInstruction<VariableState>(StopStateInterpolation, stateToInterpolateTo);
+			instruction.TimeToExecute = FlatRedBall.TimeManager.CurrentTime + secondsToTake;
 			this.Instructions.Add(instruction);
 			return instruction;
 		}
@@ -454,8 +441,16 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			{
 				OverallAlpha = OverallAlphaFirstValue * (1 - interpolationValue) + OverallAlphaSecondValue * interpolationValue;
 			}
+			if (interpolationValue < 1)
+			{
+				mCurrentState = (int)firstState;
+			}
+			else
+			{
+				mCurrentState = (int)secondState;
+			}
 		}
-		public Instruction InterpolateToState (ChosenMenuOption stateToInterpolateTo, double secondsToTake)
+		public FlatRedBall.Instructions.Instruction InterpolateToState (ChosenMenuOption stateToInterpolateTo, double secondsToTake)
 		{
 			switch(stateToInterpolateTo)
 			{
@@ -468,8 +463,8 @@ namespace UiTestBed.Entities.XuiLikeDemo
 				case  ChosenMenuOption.None:
 					break;
 			}
-			var instruction = new DelegateInstruction<ChosenMenuOption>(StopStateInterpolation, stateToInterpolateTo);
-			instruction.TimeToExecute = TimeManager.CurrentTime + secondsToTake;
+			var instruction = new FlatRedBall.Instructions.DelegateInstruction<ChosenMenuOption>(StopStateInterpolation, stateToInterpolateTo);
+			instruction.TimeToExecute = FlatRedBall.TimeManager.CurrentTime + secondsToTake;
 			this.Instructions.Add(instruction);
 			return instruction;
 		}
@@ -518,11 +513,18 @@ namespace UiTestBed.Entities.XuiLikeDemo
 				case  ChosenMenuOption.None:
 					break;
 			}
+			if (interpolationValue < 1)
+			{
+				mCurrentChosenMenuOptionState = (int)firstState;
+			}
+			else
+			{
+				mCurrentChosenMenuOptionState = (int)secondState;
+			}
 		}
 		public static void PreloadStateContent (VariableState state, string contentManagerName)
 		{
 			ContentManagerName = contentManagerName;
-			object throwaway;
 			switch(state)
 			{
 				case  VariableState.Activated:
@@ -534,7 +536,6 @@ namespace UiTestBed.Entities.XuiLikeDemo
 		public static void PreloadStateContent (ChosenMenuOption state, string contentManagerName)
 		{
 			ContentManagerName = contentManagerName;
-			object throwaway;
 			switch(state)
 			{
 				case  ChosenMenuOption.Quit:
@@ -576,17 +577,17 @@ namespace UiTestBed.Entities.XuiLikeDemo
 			return null;
 		}
 		protected bool mIsPaused;
-		public override void Pause (InstructionList instructions)
+		public override void Pause (FlatRedBall.Instructions.InstructionList instructions)
 		{
 			base.Pause(instructions);
 			mIsPaused = true;
 		}
 		public virtual void SetToIgnorePausing ()
 		{
-			InstructionManager.IgnorePausingFor(this);
-			InstructionManager.IgnorePausingFor(ArrowSprite);
+			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(this);
+			FlatRedBall.Instructions.InstructionManager.IgnorePausingFor(ArrowSprite);
 		}
-		public void MoveToLayer (Layer layerToMoveTo)
+		public virtual void MoveToLayer (Layer layerToMoveTo)
 		{
 			if (LayerProvidedByContainer != null)
 			{
