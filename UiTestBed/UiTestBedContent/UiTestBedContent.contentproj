@@ -48,6 +48,54 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Entities\XmlTests\XmlMainMenu\arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>arrow</Name>
+    </None>
+    <None Include="Entities\XmlTests\XmlMainMenu\dialog_box.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>dialog_box</Name>
+    </None>
+    <None Include="Entities\XmlTests\XmlMainMenu\LoadingAnimation.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>LoadingAnimation</Name>
+    </None>
+    <None Include="Entities\XmlTests\XmlMainMenu\MenuArrow.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>MenuArrow</Name>
+    </None>
+    <None Include="Entities\XmlTests\XmlMainMenu\MenuBackground.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>MenuBackground</Name>
+    </None>
+    <None Include="Entities\XmlTests\XmlMainMenu\MenuButtonAnimations.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>MenuButtonAnimations</Name>
+    </None>
+    <None Include="Entities\XmlTests\XmlMainMenu\MenuVolumeBar.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>MenuVolumeBar</Name>
+    </None>
+    <None Include="Entities\XmlTests\XmlMainMenu\qubodup-loading1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>qubodup-loading1</Name>
+    </None>
+    <None Include="Entities\XmlTests\XmlMainMenu\SelectedButton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>SelectedButton</Name>
+    </None>
+    <None Include="Entities\XmlTests\XmlMainMenu\StandardButton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>StandardButton</Name>
+    </None>
+    <None Include="Entities\XmlTests\XmlMainMenu\ui.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>ui</Name>
+    </None>
+    <None Include="Entities\XmlTests\XmlMainMenu\VolumeBar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>VolumeBar</Name>
+    </None>
     <None Include="Entities\XuiLikeDemo\MainMenu\arrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>arrow</Name>

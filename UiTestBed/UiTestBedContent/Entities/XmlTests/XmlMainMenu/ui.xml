@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserInterfacePackage>
+  <Controls>
+    <BoxLayout Name="MenuLayout" CurrentDirection="Down" Spacing="40" Margin="50" BackgroundAchxFile="menubackground.achx" 
+               StandardAnimationChainName="Idle" BackgroundAlpha="1">
+      <Children>
+        <BoxLayoutChild>
+          <Button Name="LevelSelectButton" AchxFile="menubuttonanimations.achx" StandardAnimationChainName="Idle" 
+                  FocusedAnimationChainName="Selected" Text="Select Level" ScaleX="100" ScaleY="19.7" IgnoreCursorEvents="true" />
+        </BoxLayoutChild>
+        <BoxLayoutChild>
+          <Button Name="OptionsButton" AchxFile="menubuttonanimations.achx" StandardAnimationChainName="Idle"
+                  FocusedAnimationChainName="Selected" Text="Options" ScaleX="100" ScaleY="19.7" IgnoreCursorEvents="true" />
+        </BoxLayoutChild>
+        <BoxLayoutChild>
+          <Button Name="QuitButton" AchxFile="menubuttonanimations.achx" StandardAnimationChainName="Idle"
+                  FocusedAnimationChainName="Selected" Text="Quit" ScaleX="100" ScaleY="19.7" IgnoreCursorEvents="true" />
+        </BoxLayoutChild>
+      </Children>
+    </BoxLayout>
+  </Controls>
+</UserInterfacePackage>

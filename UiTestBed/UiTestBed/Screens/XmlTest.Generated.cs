@@ -29,21 +29,20 @@ using FlatRedBall.Screens;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using FlatRedBall.Graphics;
 
 namespace UiTestBed.Screens
 {
-	public partial class ButtonTestScreen1 : Screen
+	public partial class XmlTest : Screen
 	{
 		// Generated Fields
 		#if DEBUG
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		
-		private FlatRedBall.Graphics.Layer UiLayer;
+		private UiTestBed.Entities.XmlTests.XmlMainMenu XmlMainMenuInstance;
 
-		public ButtonTestScreen1()
-			: base("ButtonTestScreen1")
+		public XmlTest()
+			: base("XmlTest")
 		{
 		}
 
@@ -51,8 +50,8 @@ namespace UiTestBed.Screens
         {
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			UiLayer = new FlatRedBall.Graphics.Layer();
-			UiLayer.Name = "UiLayer";
+			XmlMainMenuInstance = new UiTestBed.Entities.XmlTests.XmlMainMenu(ContentManagerName, false);
+			XmlMainMenuInstance.Name = "XmlMainMenuInstance";
 			
 			
 			PostInitialize();
@@ -67,13 +66,6 @@ namespace UiTestBed.Screens
 // Generated AddToManagers
 		public override void AddToManagers ()
 		{
-			SpriteManager.AddLayer(UiLayer);
-			UiLayer.UsePixelCoordinates();
-			if (SpriteManager.Camera.Orthogonal)
-			{
-				UiLayer.LayerCameraSettings.OrthogonalWidth = FlatRedBall.SpriteManager.Camera.OrthogonalWidth;
-				UiLayer.LayerCameraSettings.OrthogonalHeight = FlatRedBall.SpriteManager.Camera.OrthogonalHeight;
-			}
 			base.AddToManagers();
 			AddToManagersBottomUp();
 			CustomInitialize();
@@ -86,6 +78,7 @@ namespace UiTestBed.Screens
 			if (!IsPaused)
 			{
 				
+				XmlMainMenuInstance.Activity();
 			}
 			else
 			{
@@ -106,9 +99,10 @@ namespace UiTestBed.Screens
 		{
 			// Generated Destroy
 			
-			if (UiLayer != null)
+			if (XmlMainMenuInstance != null)
 			{
-				SpriteManager.RemoveLayer(UiLayer);
+				XmlMainMenuInstance.Destroy();
+				XmlMainMenuInstance.Detach();
 			}
 
 			base.Destroy();
@@ -127,9 +121,11 @@ namespace UiTestBed.Screens
 		public virtual void AddToManagersBottomUp ()
 		{
 			CameraSetup.ResetCamera(SpriteManager.Camera);
+			XmlMainMenuInstance.AddToManagers(mLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
+			XmlMainMenuInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -147,6 +143,7 @@ namespace UiTestBed.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
+			UiTestBed.Entities.XmlTests.XmlMainMenu.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

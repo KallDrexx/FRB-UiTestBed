@@ -16,6 +16,7 @@ using FlatRedBall.Screens;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using FlatRedBall.Graphics.Animation;
 
 #if XNA4 || WINDOWS_8
 using Color = Microsoft.Xna.Framework.Color;
@@ -35,9 +36,9 @@ using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 using Model = Microsoft.Xna.Framework.Graphics.Model;
 #endif
 
-namespace UiTestBed.Entities.Tutorial
+namespace UiTestBed.Entities.XmlTests
 {
-	public partial class TutOptionsMenu : PositionedObject, IDestroyable
+	public partial class XmlMainMenu : PositionedObject, IDestroyable
 	{
         // This is made global so that static lazy-loaded content can access it.
         public static string ContentManagerName
@@ -50,93 +51,24 @@ namespace UiTestBed.Entities.Tutorial
 		#if DEBUG
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
-		public enum Difficulty
-		{
-			Uninitialized = 0, //This exists so that the first set call actually does something
-			Unknown = 1, //This exists so that if the entity is actually a child entity and has set a child state, you will get this
-			Easy = 2, 
-			Normal = 3, 
-			Hard = 4
-		}
-		protected int mCurrentDifficultyState = 0;
-		public Difficulty CurrentDifficultyState
-		{
-			get
-			{
-				if (Enum.IsDefined(typeof(Difficulty), mCurrentDifficultyState))
-				{
-					return (Difficulty)mCurrentDifficultyState;
-				}
-				else
-				{
-					return Difficulty.Unknown;
-				}
-			}
-			set
-			{
-				if (BeforeCurrentDifficultyStateSet != null)
-				{
-					BeforeCurrentDifficultyStateSet(this, null);
-				}
-				mCurrentDifficultyState = (int)value;
-				switch(CurrentDifficultyState)
-				{
-					case  Difficulty.Uninitialized:
-						break;
-					case  Difficulty.Unknown:
-						break;
-					case  Difficulty.Easy:
-						break;
-					case  Difficulty.Normal:
-						break;
-					case  Difficulty.Hard:
-						break;
-				}
-				if (AfterCurrentDifficultyStateSet != null)
-				{
-					AfterCurrentDifficultyStateSet(this, null);
-				}
-			}
-		}
 		static object mLockObject = new object();
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
+		protected static FlatRedBall.Graphics.Animation.AnimationChainList LoadingAnimation;
+		protected static FlatRedBall.Graphics.Animation.AnimationChainList MenuArrow;
+		protected static FlatRedBall.Graphics.Animation.AnimationChainList MenuBackground;
+		protected static FlatRedBall.Graphics.Animation.AnimationChainList MenuButtonAnimations;
+		protected static FlatRedBall.Graphics.Animation.AnimationChainList MenuVolumeBar;
 		
-		public event EventHandler BeforeCurrentDifficultyStateSet;
-		public event EventHandler AfterCurrentDifficultyStateSet;
-		public event EventHandler BeforeVolumeLevelSet;
-		public event EventHandler AfterVolumeLevelSet;
-		int mVolumeLevel = 3;
-		public int VolumeLevel
-		{
-			set
-			{
-				if (BeforeVolumeLevelSet != null)
-				{
-					BeforeVolumeLevelSet(this, null);
-				}
-				mVolumeLevel = value;
-				if (AfterVolumeLevelSet != null)
-				{
-					AfterVolumeLevelSet(this, null);
-				}
-			}
-			get
-			{
-				return mVolumeLevel;
-			}
-		}
-		public int MaxVolumeLevel = 10;
-		public float MaxVolumeBarHeight = 15f;
 		protected Layer LayerProvidedByContainer = null;
 
-        public TutOptionsMenu(string contentManagerName) :
+        public XmlMainMenu(string contentManagerName) :
             this(contentManagerName, true)
         {
         }
 
 
-        public TutOptionsMenu(string contentManagerName, bool addToManagers) :
+        public XmlMainMenu(string contentManagerName, bool addToManagers) :
 			base()
 		{
 			// Don't delete this:
@@ -192,8 +124,6 @@ namespace UiTestBed.Entities.Tutorial
 		{
 			bool oldShapeManagerSuppressAdd = FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = true;
-			this.AfterVolumeLevelSet += OnAfterVolumeLevelSet;
-			this.AfterCurrentDifficultyStateSet += OnAfterCurrentDifficultyStateSet;
 			FlatRedBall.Math.Geometry.ShapeManager.SuppressAddingOnVisibilityTrue = oldShapeManagerSuppressAdd;
 		}
 		public virtual void AddToManagersBottomUp (Layer layerToAddTo)
@@ -219,10 +149,6 @@ namespace UiTestBed.Entities.Tutorial
 			RotationX = oldRotationX;
 			RotationY = oldRotationY;
 			RotationZ = oldRotationZ;
-			CurrentDifficultyState = TutOptionsMenu.Difficulty.Easy;
-			VolumeLevel = 3;
-			MaxVolumeLevel = 10;
-			MaxVolumeBarHeight = 15f;
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
@@ -254,10 +180,35 @@ namespace UiTestBed.Entities.Tutorial
 				{
 					if (!mRegisteredUnloads.Contains(ContentManagerName) && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 					{
-						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("TutOptionsMenuStaticUnload", UnloadStaticContent);
+						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("XmlMainMenuStaticUnload", UnloadStaticContent);
 						mRegisteredUnloads.Add(ContentManagerName);
 					}
 				}
+				if (!FlatRedBallServices.IsLoaded<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/entities/xmltests/xmlmainmenu/loadinganimation.achx", ContentManagerName))
+				{
+					registerUnload = true;
+				}
+				LoadingAnimation = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/entities/xmltests/xmlmainmenu/loadinganimation.achx", ContentManagerName);
+				if (!FlatRedBallServices.IsLoaded<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/entities/xmltests/xmlmainmenu/menuarrow.achx", ContentManagerName))
+				{
+					registerUnload = true;
+				}
+				MenuArrow = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/entities/xmltests/xmlmainmenu/menuarrow.achx", ContentManagerName);
+				if (!FlatRedBallServices.IsLoaded<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/entities/xmltests/xmlmainmenu/menubackground.achx", ContentManagerName))
+				{
+					registerUnload = true;
+				}
+				MenuBackground = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/entities/xmltests/xmlmainmenu/menubackground.achx", ContentManagerName);
+				if (!FlatRedBallServices.IsLoaded<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/entities/xmltests/xmlmainmenu/menubuttonanimations.achx", ContentManagerName))
+				{
+					registerUnload = true;
+				}
+				MenuButtonAnimations = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/entities/xmltests/xmlmainmenu/menubuttonanimations.achx", ContentManagerName);
+				if (!FlatRedBallServices.IsLoaded<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/entities/xmltests/xmlmainmenu/menuvolumebar.achx", ContentManagerName))
+				{
+					registerUnload = true;
+				}
+				MenuVolumeBar = FlatRedBallServices.Load<FlatRedBall.Graphics.Animation.AnimationChainList>(@"content/entities/xmltests/xmlmainmenu/menuvolumebar.achx", ContentManagerName);
 			}
 			if (registerUnload && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 			{
@@ -265,7 +216,7 @@ namespace UiTestBed.Entities.Tutorial
 				{
 					if (!mRegisteredUnloads.Contains(ContentManagerName) && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 					{
-						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("TutOptionsMenuStaticUnload", UnloadStaticContent);
+						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("XmlMainMenuStaticUnload", UnloadStaticContent);
 						mRegisteredUnloads.Add(ContentManagerName);
 					}
 				}
@@ -281,96 +232,78 @@ namespace UiTestBed.Entities.Tutorial
 			}
 			if (LoadedContentManagers.Count == 0)
 			{
-			}
-		}
-		public FlatRedBall.Instructions.Instruction InterpolateToState (Difficulty stateToInterpolateTo, double secondsToTake)
-		{
-			switch(stateToInterpolateTo)
-			{
-				case  Difficulty.Easy:
-					break;
-				case  Difficulty.Normal:
-					break;
-				case  Difficulty.Hard:
-					break;
-			}
-			var instruction = new FlatRedBall.Instructions.DelegateInstruction<Difficulty>(StopStateInterpolation, stateToInterpolateTo);
-			instruction.TimeToExecute = FlatRedBall.TimeManager.CurrentTime + secondsToTake;
-			this.Instructions.Add(instruction);
-			return instruction;
-		}
-		public void StopStateInterpolation (Difficulty stateToStop)
-		{
-			switch(stateToStop)
-			{
-				case  Difficulty.Easy:
-					break;
-				case  Difficulty.Normal:
-					break;
-				case  Difficulty.Hard:
-					break;
-			}
-			CurrentDifficultyState = stateToStop;
-		}
-		public void InterpolateBetween (Difficulty firstState, Difficulty secondState, float interpolationValue)
-		{
-			#if DEBUG
-			if (float.IsNaN(interpolationValue))
-			{
-				throw new Exception("interpolationValue cannot be NaN");
-			}
-			#endif
-			switch(firstState)
-			{
-				case  Difficulty.Easy:
-					break;
-				case  Difficulty.Normal:
-					break;
-				case  Difficulty.Hard:
-					break;
-			}
-			switch(secondState)
-			{
-				case  Difficulty.Easy:
-					break;
-				case  Difficulty.Normal:
-					break;
-				case  Difficulty.Hard:
-					break;
-			}
-			if (interpolationValue < 1)
-			{
-				mCurrentDifficultyState = (int)firstState;
-			}
-			else
-			{
-				mCurrentDifficultyState = (int)secondState;
-			}
-		}
-		public static void PreloadStateContent (Difficulty state, string contentManagerName)
-		{
-			ContentManagerName = contentManagerName;
-			switch(state)
-			{
-				case  Difficulty.Easy:
-					break;
-				case  Difficulty.Normal:
-					break;
-				case  Difficulty.Hard:
-					break;
+				if (LoadingAnimation != null)
+				{
+					LoadingAnimation= null;
+				}
+				if (MenuArrow != null)
+				{
+					MenuArrow= null;
+				}
+				if (MenuBackground != null)
+				{
+					MenuBackground= null;
+				}
+				if (MenuButtonAnimations != null)
+				{
+					MenuButtonAnimations= null;
+				}
+				if (MenuVolumeBar != null)
+				{
+					MenuVolumeBar= null;
+				}
 			}
 		}
 		[System.Obsolete("Use GetFile instead")]
 		public static object GetStaticMember (string memberName)
 		{
+			switch(memberName)
+			{
+				case  "LoadingAnimation":
+					return LoadingAnimation;
+				case  "MenuArrow":
+					return MenuArrow;
+				case  "MenuBackground":
+					return MenuBackground;
+				case  "MenuButtonAnimations":
+					return MenuButtonAnimations;
+				case  "MenuVolumeBar":
+					return MenuVolumeBar;
+			}
 			return null;
 		}
 		public static object GetFile (string memberName)
 		{
+			switch(memberName)
+			{
+				case  "LoadingAnimation":
+					return LoadingAnimation;
+				case  "MenuArrow":
+					return MenuArrow;
+				case  "MenuBackground":
+					return MenuBackground;
+				case  "MenuButtonAnimations":
+					return MenuButtonAnimations;
+				case  "MenuVolumeBar":
+					return MenuVolumeBar;
+			}
 			return null;
 		}
 		object GetMember (string memberName)
 		{
+			switch(memberName)
+			{
+				case  "LoadingAnimation":
+					return LoadingAnimation;
+				case  "MenuArrow":
+					return MenuArrow;
+				case  "MenuBackground":
+					return MenuBackground;
+				case  "MenuButtonAnimations":
+					return MenuButtonAnimations;
+				case  "MenuVolumeBar":
+					return MenuVolumeBar;
+			}
 			return null;
 		}
 		protected bool mIsPaused;
@@ -392,7 +325,7 @@ namespace UiTestBed.Entities.Tutorial
 	
 	
 	// Extra classes
-	public static class TutOptionsMenuExtensionMethods
+	public static class XmlMainMenuExtensionMethods
 	{
 	}
 	
