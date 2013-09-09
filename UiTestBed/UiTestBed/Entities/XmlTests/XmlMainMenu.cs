@@ -10,6 +10,7 @@ using FlatRedBall.Graphics.Particle;
 
 #if FRB_XNA || SILVERLIGHT
 using FrbUi.Layouts;
+using FrbUi.SelectableGroupings;
 using FrbUi.Xml;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
@@ -27,18 +28,25 @@ namespace UiTestBed.Entities.XmlTests
 	public partial class XmlMainMenu
 	{
 	    private UserInterfacePackage _userInterface;
+	    private SequentialSelectableGroup _buttonGroup;
 
 		private void CustomInitialize()
 		{
             _userInterface = new UserInterfacePackage("Content/Entities/XmlTests/XmlMainMenu/ui.xml", ContentManagerName);
 		    var mainLayout = _userInterface.GetNamedControl<BoxLayout>("MenuLayout");
             mainLayout.AttachTo(this, false);
+
+		    _buttonGroup = _userInterface.GetNamedSelectableGroup<SequentialSelectableGroup>("Buttons");
 		}
 
 		private void CustomActivity()
 		{
-
-
+            if (InputManager.Keyboard.KeyPushed(Keys.Down))
+                _buttonGroup.FocusNextControl();
+            else if (InputManager.Keyboard.KeyPushed(Keys.Up))
+                _buttonGroup.FocusPreviousControl();
+            else if (InputManager.Keyboard.KeyPushed(Keys.Enter))
+                _buttonGroup.ClickFocusedControl();
 		}
 
 		private void CustomDestroy()
