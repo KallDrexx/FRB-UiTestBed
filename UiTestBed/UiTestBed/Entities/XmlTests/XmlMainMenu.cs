@@ -9,6 +9,7 @@ using FlatRedBall.Graphics.Animation;
 using FlatRedBall.Graphics.Particle;
 
 #if FRB_XNA || SILVERLIGHT
+using FrbUi.Controls;
 using FrbUi.Layouts;
 using FrbUi.SelectableGroupings;
 using FrbUi.Xml;
@@ -37,6 +38,15 @@ namespace UiTestBed.Entities.XmlTests
             mainLayout.AttachTo(this, false);
 
 		    _buttonGroup = _userInterface.GetNamedSelectableGroup<SequentialSelectableGroup>("Buttons");
+
+            // Setup events
+		    _userInterface.GetNamedControl<Button>("LevelSelectButton").OnFocused = sender => OnFocused("LevelSelectArrow");
+            _userInterface.GetNamedControl<Button>("OptionsButton").OnFocused = sender => OnFocused("OptionsArrow");
+            _userInterface.GetNamedControl<Button>("QuitButton").OnFocused = sender => OnFocused("QuitArrow");
+
+            _userInterface.GetNamedControl<Button>("LevelSelectButton").OnFocusLost = sender => OnFocusLost("LevelSelectArrow");
+            _userInterface.GetNamedControl<Button>("OptionsButton").OnFocusLost = sender => OnFocusLost("OptionsArrow");
+            _userInterface.GetNamedControl<Button>("QuitButton").OnFocusLost = sender => OnFocusLost("QuitArrow");
 		}
 
 		private void CustomActivity()
@@ -59,6 +69,16 @@ namespace UiTestBed.Entities.XmlTests
         {
 
 
+        }
+
+        private void OnFocused(string arrowName)
+        {
+            _userInterface.GetNamedControl<LayoutableSprite>(arrowName).Visible = true;
+        }
+
+        private void OnFocusLost(string arrowName)
+        {
+            _userInterface.GetNamedControl<LayoutableSprite>(arrowName).Visible = false;
         }
 	}
 }

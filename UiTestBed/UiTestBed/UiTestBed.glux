@@ -172,8 +172,8 @@
       <NamedObjects>
         <NamedObjectSave>
           <SourceType>Entity</SourceType>
-          <SourceClassType>Entities\XmlTests\XmlLevelSelect</SourceClassType>
-          <InstanceName>XmlLevelSelectInstance</InstanceName>
+          <SourceClassType>Entities\XmlTests\XmlMainMenu</SourceClassType>
+          <InstanceName>XmlMainMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>

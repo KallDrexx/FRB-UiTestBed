@@ -6,22 +6,57 @@
                StandardAnimationChainName="Idle" BackgroundAlpha="1">
       <Children>
         <BoxLayoutChild>
-          <Button Name="LevelSelectButton" AchxFile="menubuttonanimations.achx" 
-                  StandardAnimationChainName="Idle" 
-                  FocusedAnimationChainName="Selected" Text="Select Level" 
+          <BoxLayout CurrentDirection="Right" Spacing="20">
+            <Children>
+              <BoxLayoutChild ItemAlignment="Centered">
+                <LayoutableSprite Name="LevelSelectArrow" AchxName="MenuArrow.achx" Visible="false"
+                                  InitialAnimationChainName="Idle" RelativeRotationZDegrees="90"/>
+              </BoxLayoutChild>
+              <BoxLayoutChild>
+                <Button Name="LevelSelectButton" AchxFile="menubuttonanimations.achx"
+                  StandardAnimationChainName="Idle"
+                  FocusedAnimationChainName="Selected" Text="Select Level"
                   ScaleX="100" ScaleY="19.7" IgnoreCursorEvents="false" />
+              </BoxLayoutChild>
+            </Children>
+          </BoxLayout>
         </BoxLayoutChild>
         <BoxLayoutChild>
-          <Button Name="OptionsButton" AchxFile="menubuttonanimations.achx" 
+          <BoxLayout CurrentDirection="Right" Spacing="20">
+            <Children>
+              <!-- Dummy placeholder for alignment purposes -->
+              <BoxLayoutChild ItemAlignment="Centered">
+                <LayoutableSprite AchxName="MenuArrow.achx" Visible="false"
+                                  InitialAnimationChainName="Idle" RelativeRotationZDegrees="90"/>
+              </BoxLayoutChild>
+              <BoxLayoutChild>
+                <Button Name="OptionsButton" AchxFile="menubuttonanimations.achx"
                   StandardAnimationChainName="Idle"
-                  FocusedAnimationChainName="Selected" Text="Options" 
+                  FocusedAnimationChainName="Selected" Text="Options"
                   ScaleX="100" ScaleY="19.7" IgnoreCursorEvents="false" />
+              </BoxLayoutChild>
+              <BoxLayoutChild ItemAlignment="Centered">
+                <LayoutableSprite Name="OptionsArrow" AchxName="MenuArrow.achx" Visible="false"
+                                  InitialAnimationChainName="Idle" RelativeRotationZDegrees="-90"/>
+              </BoxLayoutChild>
+            </Children>
+          </BoxLayout>
         </BoxLayoutChild>
         <BoxLayoutChild>
-          <Button Name="QuitButton" AchxFile="menubuttonanimations.achx" 
+          <BoxLayout CurrentDirection="Right" Spacing="20">
+            <Children>
+              <BoxLayoutChild ItemAlignment="Centered">
+                <LayoutableSprite Name="QuitArrow" AchxName="MenuArrow.achx"  Visible="false"
+                                  InitialAnimationChainName="Idle" RelativeRotationZDegrees="90"/>
+              </BoxLayoutChild>
+              <BoxLayoutChild>
+                <Button Name="QuitButton" AchxFile="menubuttonanimations.achx"
                   StandardAnimationChainName="Idle"
-                  FocusedAnimationChainName="Selected" Text="Quit" 
+                  FocusedAnimationChainName="Selected" Text="Quit"
                   ScaleX="100" ScaleY="19.7" IgnoreCursorEvents="false" />
+              </BoxLayoutChild>
+            </Children>
+          </BoxLayout>
         </BoxLayoutChild>
       </Children>
     </BoxLayout>
