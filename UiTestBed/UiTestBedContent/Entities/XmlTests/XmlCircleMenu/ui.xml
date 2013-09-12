@@ -1,0 +1,33 @@
+<UserInterfacePackage>
+  <Controls>
+    <CircularLayout Name="MainLayout" Radius="100" ArrangementMode="EvenlySpaced" StartingDegrees="0">
+      <Children>
+        <CircularLayoutChild>
+          <Button ScaleX="25" ScaleY="25" AchxFile="MenuButtonAnimations.achx" Text="1"
+                        FocusedAnimationChainName="Selected" IgnoreCursorEvents="true"
+                        StandardAnimationChainName="Idle" Name="Level1" />
+        </CircularLayoutChild>
+        <CircularLayoutChild>
+          <Button ScaleX="25" ScaleY="25" AchxFile="MenuButtonAnimations.achx" Text="2"
+                        FocusedAnimationChainName="Selected" IgnoreCursorEvents="true"
+                        StandardAnimationChainName="Idle" Name="Level2" />
+        </CircularLayoutChild>
+        <CircularLayoutChild>
+          <Button ScaleX="25" ScaleY="25" AchxFile="MenuButtonAnimations.achx" Text="3"
+                        FocusedAnimationChainName="Selected" IgnoreCursorEvents="true"
+                        StandardAnimationChainName="Idle" Name="Level3" />
+        </CircularLayoutChild>
+        <CircularLayoutChild>
+          <Button ScaleX="25" ScaleY="25" AchxFile="MenuButtonAnimations.achx" Text="4"
+                        FocusedAnimationChainName="Selected" IgnoreCursorEvents="true"
+                        StandardAnimationChainName="Idle" Name="Level4" />
+        </CircularLayoutChild>
+        <CircularLayoutChild>
+          <Button ScaleX="25" ScaleY="25" AchxFile="MenuButtonAnimations.achx" Text="5"
+                        FocusedAnimationChainName="Selected" IgnoreCursorEvents="true"
+                        StandardAnimationChainName="Idle" Name="Level5" />
+        </CircularLayoutChild>
+      </Children>
+    </CircularLayout>
+  </Controls>
+</UserInterfacePackage>

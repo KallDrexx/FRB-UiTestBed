@@ -145,6 +145,10 @@
     <Compile Include="Entities\Tutorial\TutOptionsMenu.Generated.Event.cs">
       <DependentUpon>TutOptionsMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\XmlTests\XmlCircleMenu.cs" />
+    <Compile Include="Entities\XmlTests\XmlCircleMenu.Generated.cs">
+      <DependentUpon>XmlCircleMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\XmlTests\XmlLevelSelect.cs" />
     <Compile Include="Entities\XmlTests\XmlLevelSelect.Generated.cs">
       <DependentUpon>XmlLevelSelect.cs</DependentUpon>

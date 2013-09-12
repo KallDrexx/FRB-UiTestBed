@@ -172,8 +172,8 @@
       <NamedObjects>
         <NamedObjectSave>
           <SourceType>Entity</SourceType>
-          <SourceClassType>Entities\XmlTests\XmlMainMenu</SourceClassType>
-          <InstanceName>XmlMainMenuInstance</InstanceName>
+          <SourceClassType>Entities\XmlTests\XmlCircleMenu</SourceClassType>
+          <InstanceName>XmlCircleMenuInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
@@ -474,6 +474,46 @@
           <DelegateType />
         </EventResponseSave>
       </Events>
+      <Is2D>true</Is2D>
+    </EntitySave>
+    <EntitySave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
+      <Name>Entities\XmlTests\XmlCircleMenu</Name>
+      <ReferencedFiles>
+        <ReferencedFileSave>
+          <Name>Entities/XmlTests/XmlCircleMenu/ui.xml</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <LoadedAtRuntime>false</LoadedAtRuntime>
+        </ReferencedFileSave>
+        <ReferencedFileSave>
+          <Name>Entities/XmlTests/XmlCircleMenu/LoadingAnimation.achx</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <RuntimeType>FlatRedBall.Graphics.Animation.AnimationChainList</RuntimeType>
+        </ReferencedFileSave>
+        <ReferencedFileSave>
+          <Name>Entities/XmlTests/XmlCircleMenu/MenuArrow.achx</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <RuntimeType>FlatRedBall.Graphics.Animation.AnimationChainList</RuntimeType>
+        </ReferencedFileSave>
+        <ReferencedFileSave>
+          <Name>Entities/XmlTests/XmlCircleMenu/MenuBackground.achx</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <RuntimeType>FlatRedBall.Graphics.Animation.AnimationChainList</RuntimeType>
+        </ReferencedFileSave>
+        <ReferencedFileSave>
+          <Name>Entities/XmlTests/XmlCircleMenu/MenuButtonAnimations.achx</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <RuntimeType>FlatRedBall.Graphics.Animation.AnimationChainList</RuntimeType>
+        </ReferencedFileSave>
+        <ReferencedFileSave>
+          <Name>Entities/XmlTests/XmlCircleMenu/MenuVolumeBar.achx</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <RuntimeType>FlatRedBall.Graphics.Animation.AnimationChainList</RuntimeType>
+        </ReferencedFileSave>
+      </ReferencedFiles>
       <Is2D>true</Is2D>
     </EntitySave>
     <EntitySave>
@@ -1220,7 +1260,16 @@
   </PerformanceSettingsSave>
   <IgnoredDirectories />
   <CustomClasses />
-  <TranslatedFiles />
+  <TranslatedFiles>
+    <TranslatedFileSave>
+      <FileName>Entities/XmlTests/XmlCircleMenu.cs</FileName>
+      <TranslationStyle>PerformTranslate</TranslationStyle>
+    </TranslatedFileSave>
+    <TranslatedFileSave>
+      <FileName>Entities/XmlTests/XmlCircleMenu.Generated.cs</FileName>
+      <TranslationStyle>PerformTranslate</TranslationStyle>
+    </TranslatedFileSave>
+  </TranslatedFiles>
   <ApplyToFixedResolutionPlatforms>true</ApplyToFixedResolutionPlatforms>
   <ExternallyBuiltFileDirectory>../../</ExternallyBuiltFileDirectory>
 </GlueProjectSave>

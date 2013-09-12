@@ -39,7 +39,7 @@ namespace UiTestBed.Screens
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		
-		private UiTestBed.Entities.XmlTests.XmlMainMenu XmlMainMenuInstance;
+		private UiTestBed.Entities.XmlTests.XmlCircleMenu XmlCircleMenuInstance;
 
 		public XmlTest()
 			: base("XmlTest")
@@ -50,8 +50,8 @@ namespace UiTestBed.Screens
         {
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			XmlMainMenuInstance = new UiTestBed.Entities.XmlTests.XmlMainMenu(ContentManagerName, false);
-			XmlMainMenuInstance.Name = "XmlMainMenuInstance";
+			XmlCircleMenuInstance = new UiTestBed.Entities.XmlTests.XmlCircleMenu(ContentManagerName, false);
+			XmlCircleMenuInstance.Name = "XmlCircleMenuInstance";
 			
 			
 			PostInitialize();
@@ -78,7 +78,7 @@ namespace UiTestBed.Screens
 			if (!IsPaused)
 			{
 				
-				XmlMainMenuInstance.Activity();
+				XmlCircleMenuInstance.Activity();
 			}
 			else
 			{
@@ -99,10 +99,10 @@ namespace UiTestBed.Screens
 		{
 			// Generated Destroy
 			
-			if (XmlMainMenuInstance != null)
+			if (XmlCircleMenuInstance != null)
 			{
-				XmlMainMenuInstance.Destroy();
-				XmlMainMenuInstance.Detach();
+				XmlCircleMenuInstance.Destroy();
+				XmlCircleMenuInstance.Detach();
 			}
 
 			base.Destroy();
@@ -121,11 +121,11 @@ namespace UiTestBed.Screens
 		public virtual void AddToManagersBottomUp ()
 		{
 			CameraSetup.ResetCamera(SpriteManager.Camera);
-			XmlMainMenuInstance.AddToManagers(mLayer);
+			XmlCircleMenuInstance.AddToManagers(mLayer);
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
-			XmlMainMenuInstance.ConvertToManuallyUpdated();
+			XmlCircleMenuInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -143,7 +143,7 @@ namespace UiTestBed.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
-			UiTestBed.Entities.XmlTests.XmlMainMenu.LoadStaticContent(contentManagerName);
+			UiTestBed.Entities.XmlTests.XmlCircleMenu.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

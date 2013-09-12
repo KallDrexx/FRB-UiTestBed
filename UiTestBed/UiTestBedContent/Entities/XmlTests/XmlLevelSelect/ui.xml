@@ -1,6 +1,6 @@
 <UserInterfacePackage>
   <Controls>
-    <BoxLayout Name="OverallLayout" CurrentDirection="Right" Spacing="25">
+    <BoxLayout Name="OverallLayout" Direction="Right" Spacing="25">
       <Children>
         <BoxLayoutChild>
           <GridLayout Name="World1" BackgroundAchxFile="MenuBackground.achx" 
