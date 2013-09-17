@@ -172,8 +172,8 @@
       <NamedObjects>
         <NamedObjectSave>
           <SourceType>Entity</SourceType>
-          <SourceClassType>Entities\XmlTests\XmlCircleMenu</SourceClassType>
-          <InstanceName>XmlCircleMenuInstance</InstanceName>
+          <SourceClassType>Entities\XmlTests\XmlSimpleLayoutTest</SourceClassType>
+          <InstanceName>XmlSimpleLayoutTestInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
@@ -1193,6 +1193,21 @@
           <DelegateType />
         </EventResponseSave>
       </Events>
+      <Is2D>true</Is2D>
+    </EntitySave>
+    <EntitySave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
+      <Name>Entities\XmlTests\XmlSimpleLayoutTest</Name>
+      <ReferencedFiles>
+        <ReferencedFileSave>
+          <Name>Entities/XmlTests/XmlSimpleLayoutTest/ui.xml</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <LoadedAtRuntime>false</LoadedAtRuntime>
+        </ReferencedFileSave>
+      </ReferencedFiles>
       <Is2D>true</Is2D>
     </EntitySave>
   </Entities>

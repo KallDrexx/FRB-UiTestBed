@@ -34,6 +34,7 @@ Content\Entities\XmlTests\XmlMainMenu\SelectedButton.png
 Content\Entities\XmlTests\XmlMainMenu\StandardButton.png
 Content\Entities\XmlTests\XmlMainMenu\ui.xml
 Content\Entities\XmlTests\XmlMainMenu\VolumeBar.png
+Content\Entities\XmlTests\XmlSimpleLayoutTest\ui.xml
 Content\Entities\XuiLikeDemo\MainMenu\arrow.png
 Content\GlobalContent\button-idle.png
 Content\GlobalContent\Button1.achx

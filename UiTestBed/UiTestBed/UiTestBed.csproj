@@ -157,6 +157,10 @@
     <Compile Include="Entities\XmlTests\XmlMainMenu.Generated.cs">
       <DependentUpon>XmlMainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\XmlTests\XmlSimpleLayoutTest.cs" />
+    <Compile Include="Entities\XmlTests\XmlSimpleLayoutTest.Generated.cs">
+      <DependentUpon>XmlSimpleLayoutTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\XuiLikeDemo\LevelSelectMenu.cs" />
     <Compile Include="Entities\XuiLikeDemo\LevelSelectMenu.Event.cs">
       <DependentUpon>LevelSelectMenu.cs</DependentUpon>

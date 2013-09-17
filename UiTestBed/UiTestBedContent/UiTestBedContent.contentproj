@@ -91,6 +91,7 @@
     <None Include="Entities\XmlTests\XmlCircleMenu\ui.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>ui</Name>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Entities\XmlTests\XmlCircleMenu\VolumeBar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -191,6 +192,10 @@
     <None Include="Entities\XmlTests\XmlMainMenu\VolumeBar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>VolumeBar</Name>
+    </None>
+    <None Include="Entities\XmlTests\XmlSimpleLayoutTest\ui.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>ui</Name>
     </None>
     <None Include="Entities\XuiLikeDemo\MainMenu\arrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
