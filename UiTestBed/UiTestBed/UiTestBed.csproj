@@ -145,6 +145,22 @@
     <Compile Include="Entities\Tutorial\TutOptionsMenu.Generated.Event.cs">
       <DependentUpon>TutOptionsMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\XmlTests\XmlCircleMenu.cs" />
+    <Compile Include="Entities\XmlTests\XmlCircleMenu.Generated.cs">
+      <DependentUpon>XmlCircleMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\XmlTests\XmlLevelSelect.cs" />
+    <Compile Include="Entities\XmlTests\XmlLevelSelect.Generated.cs">
+      <DependentUpon>XmlLevelSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\XmlTests\XmlMainMenu.cs" />
+    <Compile Include="Entities\XmlTests\XmlMainMenu.Generated.cs">
+      <DependentUpon>XmlMainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\XmlTests\XmlSimpleLayoutTest.cs" />
+    <Compile Include="Entities\XmlTests\XmlSimpleLayoutTest.Generated.cs">
+      <DependentUpon>XmlSimpleLayoutTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\XuiLikeDemo\LevelSelectMenu.cs" />
     <Compile Include="Entities\XuiLikeDemo\LevelSelectMenu.Event.cs">
       <DependentUpon>LevelSelectMenu.cs</DependentUpon>
@@ -227,6 +243,10 @@
     <Compile Include="Screens\Tutorial.cs" />
     <Compile Include="Screens\Tutorial.Generated.cs">
       <DependentUpon>Tutorial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\XmlTest.cs" />
+    <Compile Include="Screens\XmlTest.Generated.cs">
+      <DependentUpon>XmlTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Setup\CameraSetup.cs" />
   </ItemGroup>

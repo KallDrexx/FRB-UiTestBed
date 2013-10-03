@@ -1,0 +1,17 @@
+<UserInterfacePackage>
+  <Controls>
+    <SimpleLayout IsFullScreen="true" Name="MenuLayout">
+      <Children>
+        <SimpleLayoutChild HorizontalOffsetFromLeft="0" VerticalOffsetFromTop="0" Origin="TopLeft">
+          <LayoutableText Text="TopLeft"/>
+        </SimpleLayoutChild>
+        <SimpleLayoutChild HorizontalOffsetFromCenter="0" VerticalOffsetFromTop="-10" Origin="Center">
+          <LayoutableText Text="Top"/>
+        </SimpleLayoutChild>
+        <SimpleLayoutChild HorizontalOffsetFromLeft="0" VerticalOffsetFromTop="0" Origin="TopRight">
+          <LayoutableText Text="TopRight"/>
+        </SimpleLayoutChild>
+      </Children>
+    </SimpleLayout>
+  </Controls>
+</UserInterfacePackage>

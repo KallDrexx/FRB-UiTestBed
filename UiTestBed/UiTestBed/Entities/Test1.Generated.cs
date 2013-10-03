@@ -10,6 +10,7 @@ using FlatRedBall.Gui;
 using UiTestBed.Entities.Games.SlidePuzzle;
 using UiTestBed.Entities;
 using UiTestBed.Entities.Tutorial;
+using UiTestBed.Entities.XmlTests;
 using UiTestBed.Entities.XuiLikeDemo;
 using FlatRedBall;
 using FlatRedBall.Screens;
